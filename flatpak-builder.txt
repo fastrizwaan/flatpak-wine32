@@ -1,0 +1,26 @@
+sudo flatpak install runtime/org.freedesktop.Sdk/x86_64/20.08 org.freedesktop.Platform/x86_64/20.08 org.electronjs.Electron2.BaseApp/x86_64/20.08 runtime/org.freedesktop.Sdk.Compat.i386/x86_64/20.08 runtime/org.freedesktop.Sdk.Extension.toolchain-i386/x86_64/20.08
+
+flatpak-builder --force-clean build-dir/ io.github.flatpak-wine32.yml
+flatpak-builder --install --user --force-clean build-dir/ io.github.flatpak-wine32.yml 
+
+# now use wine 6.00 from flatpak to run windows exe
+# or install software
+flatpak run --command=bash io.github.flatpak-wine32
+
+# Create flatpak
+flatpak-builder --repo="repo" --force-clean build-dir/ io.github.flatpak-wine32.yml 
+
+# from inside flatpak
+# Download 32 bit installer
+WINEPREFIX=~/.var/app/figtcade/.wine wine ~/Downloads/npp.7.9.3.Installer.exe
+
+#or
+WINEPREFIX=~/.wine-npp wine ~/Downloads/npp.7.9.3.Installer.exe
+
+flatpak --user remote-add --no-gpg-verify "flatpak-wine32" "repo"
+
+flatpak build-bundle "repo" "flatpak-wine32.flatpak" io.github.flatpak-wine32 --runtime-repo="https://flathub.org/repo/flathub.flatpakrepo"
+
+flatpak install --user flatpak-wine32.flatpak 
+
+
