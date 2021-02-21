@@ -23,4 +23,8 @@ flatpak build-bundle "repo" "flatpak-wine32.flatpak" io.github.flatpak-wine32 --
 
 flatpak install --user flatpak-wine32.flatpak 
 
+flatpak run io.github.flatpak-wine32  ~/Downloads/npp.7.9.3.Installer.exe 
 
+# to install in a separate wine prefix (here replace .TTT with your own)
+
+WINEPREFIX=~/.TTT flatpak run io.github.flatpak-wine32 ~/Downloads/npp.7.9.3.Installer.exe
