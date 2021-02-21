@@ -1,0 +1,119 @@
+app-id: io.github.flatpak-wine32
+base-version: '20.08'
+runtime: org.freedesktop.Platform
+runtime-version: '20.08'
+sdk: org.freedesktop.Sdk
+command: wine
+
+# Support 32-bit at runtime
+add-extensions:
+  org.freedesktop.Platform.Compat.i386:
+    directory: lib/i386-linux-gnu
+    version: '20.08'
+
+  org.gnome.Platform.Compat.i386.Debug:
+    directory: lib/debug/lib/i386-linux-gnu
+    version: '20.08'
+    #no-autodownload: true
+
+  org.freedesktop.Platform.GL32:
+    directory: lib/i386-linux-gnu/GL
+    version: '20.08'
+    subdirectories: true
+    #no-autodownload: true
+    autodelete: false
+    add-ld-path: lib
+    merge-dirs: vulkan/icd.d;glvnd/egl_vendor.d
+    download-if: active-gl-driver
+    enable-if: active-gl-driver
+
+# Support 32-bit at buildtime
+sdk-extensions:
+  - org.freedesktop.Sdk.Compat.i386
+  - org.freedesktop.Sdk.Extension.toolchain-i386
+
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --share=network
+  - --socket=pulseaudio
+  - --allow=multiarch
+  - --talk-name=org.freedesktop.Notifications
+  - --filesystem=host
+  - --device=all
+  # Persist Wineprefix as ~/.var/app/{fightcade}/.wine
+  - --persist=.wine
+  # Skip Gecko and Mono popups when creating Wine prefix
+  - --env=WINEDLLOVERRIDES=mscoree,mshtml=
+  # Support 32-bit runtime
+  - --env=LD_LIBRARY_PATH=/app/lib:/app/lib32
+
+modules:
+  # Create 32-bit directories
+  - name: compat
+    buildsystem: simple
+    build-commands:
+      - mkdir -p /app/lib/i386-linux-gnu /app/lib/debug/lib/i386-linux-gnu
+
+  - name: wine32
+    builddir: true
+    build-options:
+      prefix: /app
+      prepend-path: /app/bin
+      ldflags: -L/app/lib32
+      append-path: /usr/lib/sdk/toolchain-i386/bin
+      env:
+        CC: i686-unknown-linux-gnu-gcc
+        CXX: i686-unknown-linux-gnu-g++
+      libdir: /app/lib32
+      strip: true
+      
+      config-opts:
+      - "--libdir=/app/lib"
+      - "--disable-win16"
+      - "--with-x"
+      - "--without-cups"
+      - "--without-curses"
+      - "--without-capi"
+      - "--without-glu"
+      - "--without-gphoto"
+      - "--without-gsm"
+      - "--without-hal"
+      - "--without-ldap"
+      - "--without-netapi"
+      cleanup:
+      - "/bin/function_grep.pl"
+      - "/bin/msiexec"
+      - "/bin/widl"
+      - "/bin/wine64-preloader"
+      - "/bin/winebuild"
+      - "/bin/wineconsole"
+      - "/bin/winedbg"
+      - "/bin/winefile"
+      - "/bin/winegcc"
+      - "/bin/winemine"
+      - "/bin/wrc"
+      - "/bin/msidb"
+      - "/bin/notepad"
+      - "/bin/regsvr32"
+      - "/bin/wineboot"
+      - "/bin/winecfg"
+      - "/bin/winecpp"
+      - "/bin/winedump"
+      - "/bin/wineg++"
+      - "/bin/winemaker"
+      - "/bin/winepath"
+      - "/bin/wmc"
+      - "/include"
+      - "/share/man"
+      - "/share/applications"
+  
+    make-install-args:
+      - LDCONFIG=/bin/true
+      - STRIP=/bin/true
+      - UPDATE_DESKTOP_DATABASE=/bin/true
+    sources:
+      - type: archive
+        url: https://dl.winehq.org/wine/source/6.0/wine-6.0.tar.xz
+        sha256: b493065f2f83ee429c62e2ec58698a3cf63ef78722e1b20765823152e8582c56
+        
