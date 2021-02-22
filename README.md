@@ -1,4 +1,4 @@
-# Quick run wine 32bit apps using flatpak in Centos 7 or any distro with flatpak support:
+# Run wine 32bit apps using flatpak in Centos 7 or any distro with flatpak support:
 ```
 wget https://github.com/fastrizwaan/flatpak-wine32/raw/main/io.github.flatpak-wine32.flatpak
 sha256sum io.github.flatpak-wine32.flatpak ; #check sum below
@@ -7,10 +7,30 @@ flatpak --user install io.github.flatpak-wine32.flatpak -y
 
 flatpak run io.github.flatpak-wine32 game.exe ; #replace game.exe with your exe
 ```
+By Default, all programs are installed in ~/.wine, use ` WINEPREFIX=~/.mywine flatpak run io.github.flatpak-wine32 Setup.exe ` to install in ` ~/.mywine ` directory.
 
 ### sha256sum io.github.flatpak-wine32.flatpak
 ```
 9e29310c527df99e816737ffac7885c0e7f78210ebf524dc79f3b22a153489af  io.github.flatpak-wine32.flatpak
+```
+
+
+# winetricks
+### Two ways to run wintricks in flatpak-wine32
+#### 1. run from flatpak
+```
+flatpak run --command=bash io.github.flatpak-wine32
+winetricks <whatever>
+```
+#### 2. run directly from shell
+```
+flatpak run --command=winetricks io.github.flatpak-wine32 ; #for winetricks GUI
+
+flatpak run --command=winetricks io.github.flatpak-wine32 d3dx9; #for winetricks directx
+flatpak run --command=winetricks io.github.flatpak-wine32 xna31; #for winetricks xna framework
+flatpak run --command=winetricks io.github.flatpak-wine32 xinput; #for winetricks xinput xbox joystick support
+flatpak run --command=winetricks io.github.flatpak-wine32 vcrun2008; #for winetricks vcruntime
+
 ```
 
 # flatpak-wine32
@@ -44,7 +64,7 @@ flatpak run --command=bash io.github.flatpak-wine32
 which wine
 wine ~/Downloads/npp.7.9.3.Installer.exe
 ```
-### Download 32 bit installer
+### install notepadpp 32 bit installer from inside flatpak runtime
 `WINEPREFIX=~/.wine-npp wine ~/Downloads/npp.7.9.3.Installer.exe`
 
 
