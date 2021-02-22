@@ -8,7 +8,12 @@ sudo flatpak install \
 runtime/org.freedesktop.Sdk/x86_64/20.08                           \
 org.freedesktop.Platform/x86_64/20.08                              \
 runtime/org.freedesktop.Sdk.Compat.i386/x86_64/20.08               \
-runtime/org.freedesktop.Sdk.Extension.toolchain-i386/x86_64/20.08
+runtime/org.freedesktop.Sdk.Extension.toolchain-i386/x86_64/20.08  \
+org.freedesktop.Platform.GL.default/x86_64/20.08                   \
+org.freedesktop.Platform.VAAPI.Intel/x86_64/20.08                  \
+org.freedesktop.Platform.openh264/x86_64/2.0                       
+
+flatpak install flathub org.freedesktop.Platform.Compat.i386/x86_64/20.08 org.freedesktop.Platform.GL32.default/x86_64/20.08
 
 flatpak-builder --force-clean build-dir/ io.github.flatpak-wine32.yml
 flatpak-builder --install --user --force-clean build-dir/ io.github.flatpak-wine32.yml 
