@@ -1,4 +1,4 @@
-# Quick run wine 32bit apps using flatpak:
+# Quick run wine 32bit apps using flatpak in Centos 7 or any distro with flatpak support:
 ```
 wget https://github.com/fastrizwaan/flatpak-wine32/raw/main/io.github.flatpak-wine32.flatpak
 sha256sum io.github.flatpak-wine32.flatpak ; #check sum below
