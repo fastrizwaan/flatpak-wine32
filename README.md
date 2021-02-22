@@ -9,7 +9,9 @@ flatpak run io.github.flatpak-wine32 game.exe ; #replace game.exe with your exe
 ```
 
 ### sha256sum io.github.flatpak-wine32.flatpak
+```
 9e29310c527df99e816737ffac7885c0e7f78210ebf524dc79f3b22a153489af  io.github.flatpak-wine32.flatpak
+```
 
 # flatpak-wine32
 wine build with runtime 20.08 i386, provides wine to Centos like distros
