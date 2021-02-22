@@ -52,9 +52,9 @@ echo 'alias wine32="flatpak run io.github.flatpak-wine32"' >> ~/.bash_aliases
 
 ```
 flatpak-builder --repo="repo" --force-clean build-dir/ io.github.flatpak-wine32.yml 
-flatpak --user remote-add --no-gpg-verify "flatpak-wine32" "repo"
-flatpak build-bundle "repo" "flatpak-wine32.flatpak" io.github.flatpak-wine32 --runtime-repo="https://flathub.org/repo/flathub.flatpakrepo"
+flatpak --user remote-add --no-gpg-verify "io.github.flatpak-wine32" "repo"
+flatpak build-bundle "repo" "io.github.flatpak-wine32.flatpak" io.github.flatpak-wine32 --runtime-repo="https://flathub.org/repo/flathub.flatpakrepo"
 ```
 
 ## Install flatpak
-` flatpak install --user flatpak-wine32.flatpak `
+` flatpak install --user io.github.flatpak-wine32.flatpak `
