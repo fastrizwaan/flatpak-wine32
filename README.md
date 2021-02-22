@@ -63,3 +63,13 @@ flatpak build-bundle "repo" "io.github.flatpak-wine32.flatpak" io.github.flatpak
 
 ## Install flatpak
 ` flatpak install --user io.github.flatpak-wine32.flatpak `
+
+
+## For Nvidia Users, install your version of Nvidia drivers
+```
+flatpak remote-ls flathub | grep nvidia
+
+#flatpak install flathub org.freedesktop.Platform.GL32.nvidia-MAJORVERSION-MINORVERSION
+flatpak install flathub org.freedesktop.Platform.GL32.nvidia-460-39
+
+```
