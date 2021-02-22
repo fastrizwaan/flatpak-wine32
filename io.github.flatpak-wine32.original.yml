@@ -18,8 +18,7 @@ add-extensions:
 
   org.freedesktop.Platform.GL32:
     directory: lib/i386-linux-gnu/GL
-    versions: "20.08;1.4"
-    version: '1.4'
+    version: '20.08'
     subdirectories: true
     no-autodownload: false
     autodelete: false
@@ -27,12 +26,6 @@ add-extensions:
     merge-dirs: vulkan/icd.d;glvnd/egl_vendor.d;OpenCL/vendors;lib/dri;lib/d3d;vulkan/explicit_layer.d
     download-if: active-gl-driver
     enable-if: active-gl-driver
-    
-  org.freedesktop.Platform.VAAPI.Intel:
-      directory: lib/dri/intel-vaapi-driver
-      autodelete: false
-      no-autodownload: true
-      download-if: have-intel-gpu
 
 # Support 32-bit at buildtime
 sdk-extensions:
@@ -51,8 +44,7 @@ finish-args:
   # Persist Wineprefix as ~/.var/app/{fightcade}/.wine
   - --persist=.wine
   # Skip Gecko and Mono popups when creating Wine prefix
-  #~ - --env=WINEDLLOVERRIDES=mscoree,mshtml=
-  
+  - --env=WINEDLLOVERRIDES=mscoree,mshtml=
   # Support 32-bit runtime
   - --env=LD_LIBRARY_PATH=/app/lib:/app/lib32
 
@@ -89,32 +81,32 @@ modules:
       - "--without-hal"
       - "--without-ldap"
       - "--without-netapi"
-      #~ cleanup:
-      #~ - "/bin/function_grep.pl"
-      #~ - "/bin/msiexec"
-      #~ - "/bin/widl"
-      #~ - "/bin/wine64-preloader"
-      #~ - "/bin/winebuild"
-      #~ - "/bin/wineconsole"
-      #~ - "/bin/winedbg"
-      #~ - "/bin/winefile"
-      #~ - "/bin/winegcc"
-      #~ - "/bin/winemine"
-      #~ - "/bin/wrc"
-      #~ - "/bin/msidb"
-      #~ - "/bin/notepad"
-      #~ - "/bin/regsvr32"
-      #~ - "/bin/wineboot"
-      #~ - "/bin/winecfg"
-      #~ - "/bin/winecpp"
-      #~ - "/bin/winedump"
-      #~ - "/bin/wineg++"
-      #~ - "/bin/winemaker"
-      #~ - "/bin/winepath"
-      #~ - "/bin/wmc"
-      #~ - "/include"
-      #~ - "/share/man"
-      #~ - "/share/applications"
+      cleanup:
+      - "/bin/function_grep.pl"
+      - "/bin/msiexec"
+      - "/bin/widl"
+      - "/bin/wine64-preloader"
+      - "/bin/winebuild"
+      - "/bin/wineconsole"
+      - "/bin/winedbg"
+      - "/bin/winefile"
+      - "/bin/winegcc"
+      - "/bin/winemine"
+      - "/bin/wrc"
+      - "/bin/msidb"
+      - "/bin/notepad"
+      - "/bin/regsvr32"
+      - "/bin/wineboot"
+      - "/bin/winecfg"
+      - "/bin/winecpp"
+      - "/bin/winedump"
+      - "/bin/wineg++"
+      - "/bin/winemaker"
+      - "/bin/winepath"
+      - "/bin/wmc"
+      - "/include"
+      - "/share/man"
+      - "/share/applications"
   
     make-install-args:
       - LDCONFIG=/bin/true
@@ -125,26 +117,3 @@ modules:
         url: https://dl.winehq.org/wine/source/6.0/wine-6.0.tar.xz
         sha256: b493065f2f83ee429c62e2ec58698a3cf63ef78722e1b20765823152e8582c56
         
-  - name: winetricks
-    buildsystem: simple
-    build-commands:
-    - make
-    - make PREFIX=/app install
-    - chmod +x /app/bin/winetricks
-    sources:
-    - type: archive
-      url: https://github.com/Winetricks/winetricks/releases/download/20210206/20210206.tar.gz
-      sha256: 705421798b28696f577104ebdf03b068b9343ab096754150f47a6ec06fa8ae65
-  - name: cabextract
-    buildsystem: autotools
-    sources:
-    - type: archive
-      url: https://www.cabextract.org.uk/cabextract-1.6.tar.gz
-      sha256: cee661b56555350d26943c5e127fc75dd290b7f75689d5ebc1f04957c4af55fb
-  
-  - name: wget
-    buildsystem: autotools
-    sources:
-    - type: archive
-      url: https://ftp.gnu.org/gnu/wget/wget-1.19.4.tar.gz
-      sha256: 93fb96b0f48a20ff5be0d9d9d3c4a986b469cb853131f9d5fe4cc9cecbc8b5b5
