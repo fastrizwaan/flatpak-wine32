@@ -106,5 +106,6 @@ flatpak remote-ls flathub | grep nvidia
 
 #flatpak install flathub org.freedesktop.Platform.GL32.nvidia-MAJORVERSION-MINORVERSION
 flatpak install flathub org.freedesktop.Platform.GL32.nvidia-460-39
-
+#or
+flatpak install flathub org.freedesktop.Platform.GL32
 ```
