@@ -11,7 +11,8 @@ By Default, all programs are installed in ~/.wine, use ` WINEPREFIX=~/.mywine fl
 
 ### sha256sum io.github.flatpak-wine32.flatpak
 ```
-9e29310c527df99e816737ffac7885c0e7f78210ebf524dc79f3b22a153489af  io.github.flatpak-wine32.flatpak
+acea31fb709f601d6ff5dde6929beec12d012edf9adeb084dfce9da77555fcc7  io.github.flatpak-wine32.flatpak
+
 ```
 
 
