@@ -94,7 +94,10 @@ wine ~/Downloads/npp.7.9.3.Installer.exe
 
 ```
 alias wine32="flatpak run io.github.flatpak-wine32"
+alias winetricks="flatpak run --command=winetricks io.github.flatpak-wine32"
 echo 'alias wine32="flatpak run io.github.flatpak-wine32"' >> ~/.bash_aliases
+echo 'alias winetricks="flatpak run --command=winetricks io.github.flatpak-wine32"' >> ~/.bash_aliases 
+
 ```
 ### with the alias command
 
