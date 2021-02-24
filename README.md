@@ -42,7 +42,12 @@ flatpak run --command=winetricks io.github.flatpak-wine32 xinput; #for winetrick
 flatpak run --command=winetricks io.github.flatpak-wine32 vcrun2008; #for winetricks vcruntime
 
 ```
-
+#### 3. by aliasing winetricks
+```
+alias winetricks="flatpak run --command=winetricks io.github.flatpak-wine32"
+echo 'alias winetricks="flatpak run --command=winetricks io.github.flatpak-wine32"' >> ~/.bash_aliases 
+winetricks xinput ;#now flaptak winetricks is run
+```
 # flatpak-wine32
 wine build with runtime 20.08 i386, provides wine to Centos like distros
 
