@@ -3,6 +3,15 @@
 wget https://github.com/fastrizwaan/flatpak-wine32/raw/main/io.github.flatpak-wine32.flatpak
 sha256sum io.github.flatpak-wine32.flatpak ; #check sum below
 
+# Install required runtime, see bottom for nvidia GPU
+sudo flatpak install                                               \
+org.freedesktop.Platform/x86_64/20.08                              \
+org.freedesktop.Platform.GL.default/x86_64/20.08                   \
+org.freedesktop.Platform.VAAPI.Intel/x86_64/20.08                  \
+org.freedesktop.Platform.openh264/x86_64/2.0                       \
+runtime/org.freedesktop.Platform.Compat.i386/x86_64/20.08          \
+org.freedesktop.Platform.GL32.default/x86_64/20.08 -y
+
 flatpak --user install io.github.flatpak-wine32.flatpak -y
 
 flatpak run io.github.flatpak-wine32 game.exe ; #replace game.exe with your exe
@@ -40,6 +49,7 @@ wine build with runtime 20.08 i386, provides wine to Centos like distros
 a big thanks to https://github.com/Pobega for making his fightcade flatpak manifest with i386 compat
 
 ```
+# Install runtime and Sdk to build flatpak
 sudo flatpak install \
 runtime/org.freedesktop.Sdk/x86_64/20.08                           \
 org.freedesktop.Platform/x86_64/20.08                              \
@@ -50,8 +60,6 @@ org.freedesktop.Platform.VAAPI.Intel/x86_64/20.08                  \
 org.freedesktop.Platform.openh264/x86_64/2.0                       \
 runtime/org.freedesktop.Platform.Compat.i386/x86_64/20.08          \
 org.freedesktop.Platform.GL32.default/x86_64/20.08
-
-#flatpak install flathub org.freedesktop.Platform.Compat.i386/x86_64/20.08 org.freedesktop.Platform.GL32.default/x86_64/20.08
 
 flatpak-builder --force-clean build-dir/ io.github.flatpak-wine32.yml
 flatpak-builder --install --user --force-clean build-dir/ io.github.flatpak-wine32.yml 
