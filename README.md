@@ -26,7 +26,7 @@ acea31fb709f601d6ff5dde6929beec12d012edf9adeb084dfce9da77555fcc7  io.github.flat
 
 
 # winetricks
-### Two ways to run wintricks in flatpak-wine32
+### Three ways to run wintricks in flatpak-wine32
 #### 1. run from flatpak
 ```
 flatpak run --command=bash io.github.flatpak-wine32
