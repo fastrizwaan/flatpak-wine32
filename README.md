@@ -15,6 +15,8 @@ org.freedesktop.Platform.GL32.default/x86_64/20.08 -y
 flatpak --user install io.github.flatpak-wine32.flatpak -y
 
 flatpak run io.github.flatpak-wine32 game.exe ; #replace game.exe with your exe
+
+# if you have nvidia gpu, and the game complains about D3D or Opengl or GL install nvidia drivers see bottom for Nvidia Section
 ```
 By Default, all programs are installed in ~/.wine, use ` WINEPREFIX=~/.mywine flatpak run io.github.flatpak-wine32 Setup.exe ` to install in ` ~/.mywine ` directory.
 
@@ -122,11 +124,12 @@ flatpak build-bundle "repo" "io.github.flatpak-wine32.flatpak" io.github.flatpak
 
 
 ## For Nvidia Users, install your version of Nvidia drivers
+check you nvidia drivers version from nvidia-settings app and install accordingly
 ```
 flatpak remote-ls flathub | grep nvidia
 
 #flatpak install flathub org.freedesktop.Platform.GL32.nvidia-MAJORVERSION-MINORVERSION
-flatpak install flathub org.freedesktop.Platform.GL32.nvidia-460-39
+sudo flatpak install flathub org.freedesktop.Platform.GL32.nvidia-460-39
 #or
-flatpak install flathub org.freedesktop.Platform.GL32
+sudo flatpak install flathub org.freedesktop.Platform.GL32
 ```
