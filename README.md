@@ -125,7 +125,7 @@ echo 'alias winetricks="flatpak run --command=winetricks io.github.flatpak-wine3
 ```
 flatpak-builder --repo="repo" --force-clean build-dir/ io.github.flatpak-wine32.yml 
 flatpak --user remote-add --no-gpg-verify "io.github.flatpak-wine32" "repo"
-flatpak build-bundle "repo" "io.github.flatpak-wine32.flatpak" io.github.flatpak-wine32 --runtime-repo="https://flathub.org/repo/flathub.flatpakrepo"
+flatpak build-bundle "repo" "io.github.flatpak-wine32.flatpak" io.github.flatpak-wine32 stable --runtime-repo="https://flathub.org/repo/flathub.flatpakrepo"
 ```
 
 ## Install flatpak
