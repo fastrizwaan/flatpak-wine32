@@ -1,3 +1,6 @@
+![](https://raw.githubusercontent.com/fastrizwaan/flatpak-wine32/main/Screenshots/right-click.png)
+
+
 # Run wine 32bit apps using flatpak in Centos 7 or any distro with flatpak support:
 ```
 wget https://github.com/fastrizwaan/flatpak-wine32/raw/main/io.github.flatpak-wine32.flatpak
@@ -32,7 +35,7 @@ acea31fb709f601d6ff5dde6929beec12d012edf9adeb084dfce9da77555fcc7  io.github.flat
 
 ```
 
-
+![](https://raw.githubusercontent.com/fastrizwaan/flatpak-wine32/main/Screenshots/winetricks_availabe.png)
 # winetricks
 ### Three ways to run wintricks in flatpak-wine32
 #### 1. run from flatpak
