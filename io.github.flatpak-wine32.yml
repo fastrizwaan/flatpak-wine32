@@ -7,6 +7,9 @@ command: wine
 default-branch: stable
 separate-locales: false
 
+rename-desktop-file: wine.desktop
+
+
 # Support 32-bit at runtime
 add-extensions:
   org.freedesktop.Platform.Compat.i386:
@@ -144,7 +147,30 @@ modules:
     - type: archive
       url: https://ftp.gnu.org/gnu/wget/wget-1.19.4.tar.gz
       sha256: 93fb96b0f48a20ff5be0d9d9d3c4a986b469cb853131f9d5fe4cc9cecbc8b5b5
-
+      
+  - name: winedesktop
+    buildsystem: simple
+    build-commands:
+    - install -Dm644 wine.svg /app/share/icons/hicolor/scalable/apps/io.github.flatpak-wine32.svg 
+    - desktop-file-edit --set-icon=io.github.flatpak-wine32 /app/share/applications/wine.desktop
+    - desktop-file-edit --set-name=flatpak-wine32 /app/share/applications/wine.desktop
+    
+    - desktop-file-edit --set-name=flatpak-wine32-winetricks 
+                        /app/share/applications/winetricks.desktop
+    - desktop-file-edit --set-icon=io.github.flatpak-wine32-winetricks
+                        /app/share/applications/winetricks.desktop
+    
+    - install -Dm644 /app/share/applications/winetricks.desktop 
+                     /app/share/applications/io.github.flatpak-wine32-winetricks.desktop
+    - install -Dm644
+      /app/share/icons/hicolor/scalable/apps/winetricks.svg
+      /app/share/icons/hicolor/scalable/apps/io.github.flatpak-wine32-winetricks.svg
+      
+    sources:
+    - type: file
+      path: wine.svg
+      
+      
 cleanup:
  - /lib/debug
  - /bin/extresso
@@ -153,3 +179,4 @@ cleanup:
  - /bin/wrestool
  - /share/man
  - /include 
+ - /share/applications/winetricks.desktop
