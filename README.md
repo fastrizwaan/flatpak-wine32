@@ -5,7 +5,11 @@
 ```
 wget https://github.com/fastrizwaan/flatpak-wine32/raw/main/io.github.flatpak-wine32.flatpak
 sha256sum io.github.flatpak-wine32.flatpak ; #check sum below
+```
 
+`de17b8ac36d89a26aabb68ee407f57bb257a1f72a9176cfb7a1566c040ea75f4  io.github.flatpak-wine32.flatpak`
+
+```
 # Install required runtime, see bottom for nvidia GPU
 sudo flatpak install                                               \
 org.freedesktop.Platform/x86_64/20.08                              \
@@ -20,7 +24,7 @@ flatpak --user install io.github.flatpak-wine32.flatpak -y
 flatpak run io.github.flatpak-wine32 game.exe ; #replace game.exe with your exe
 ```
 
-#### if you have nvidia gpu, and the game complains about D3D or Opengl or GL install nvidia drivers see bottom for Nvidia Section
+#### Nvidia gpu 32 bit drivers need to be installed, if game complains about D3D or Opengl or GL install nvidia drivers see bottom for Nvidia Section
 ```
 NVERSION=$(nvidia-settings -q all |grep OpenGLVersion|grep NVIDIA|sed 's/.*NVIDIA \(.*\) /nvidia-\1/g'|sed 's/\./-/g')
 
@@ -29,14 +33,9 @@ sudo flatpak install flathub org.freedesktop.Platform.GL32.$NVERSION -y
 ```
 By Default, all programs are installed in ~/.wine, use ` WINEPREFIX=~/.mywine flatpak run io.github.flatpak-wine32 Setup.exe ` to install in ` ~/.mywine ` directory.
 
-### sha256sum io.github.flatpak-wine32.flatpak
-```
-acea31fb709f601d6ff5dde6929beec12d012edf9adeb084dfce9da77555fcc7  io.github.flatpak-wine32.flatpak
-
-```
-
-![](https://raw.githubusercontent.com/fastrizwaan/flatpak-wine32/main/Screenshots/winetricks_availabe.png)
 # winetricks
+![](https://raw.githubusercontent.com/fastrizwaan/flatpak-wine32/main/Screenshots/winetricks_availabe.png)
+
 ### Three ways to run wintricks in flatpak-wine32
 #### 1. run from flatpak
 ```
