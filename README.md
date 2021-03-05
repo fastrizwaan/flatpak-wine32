@@ -64,7 +64,7 @@ a big thanks to https://github.com/Pobega for making his fightcade flatpak manif
 ## Build flatpak-wine32.flatpak on your own
 
 ```
-https://github.com/fastrizwaan/flatpak-wine32.git
+git clone https://github.com/fastrizwaan/flatpak-wine32.git
 cd flatpak-wine32;
 
 # Install runtime and Sdk to build flatpak
