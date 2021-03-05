@@ -4,6 +4,8 @@ runtime: org.freedesktop.Platform
 runtime-version: '20.08'
 sdk: org.freedesktop.Sdk
 command: wine
+default-branch: stable
+separate-locales: false
 
 # Support 32-bit at runtime
 add-extensions:
@@ -55,6 +57,8 @@ finish-args:
   
   # Support 32-bit runtime
   - --env=LD_LIBRARY_PATH=/app/lib:/app/lib32
+  
+  - --env=WINE_RESOLUTION=1920x1080
 
 modules:
   # Create 32-bit directories
@@ -76,46 +80,38 @@ modules:
       libdir: /app/lib32
       strip: true
       
-      config-opts:
-      - "--libdir=/app/lib32"
-      - "--disable-win16"
-      - "--with-x"
-      - "--without-cups"
-      - "--without-curses"
-      - "--without-capi"
-      - "--without-glu"
-      - "--without-gphoto"
-      - "--without-gsm"
-      - "--without-hal"
-      - "--without-ldap"
-      - "--without-netapi"
-      #~ cleanup:
-      #~ - "/bin/function_grep.pl"
-      #~ - "/bin/msiexec"
-      #~ - "/bin/widl"
-      #~ - "/bin/wine64-preloader"
-      #~ - "/bin/winebuild"
-      #~ - "/bin/wineconsole"
-      #~ - "/bin/winedbg"
-      #~ - "/bin/winefile"
-      #~ - "/bin/winegcc"
-      #~ - "/bin/winemine"
-      #~ - "/bin/wrc"
-      #~ - "/bin/msidb"
-      #~ - "/bin/notepad"
-      #~ - "/bin/regsvr32"
-      #~ - "/bin/wineboot"
-      #~ - "/bin/winecfg"
-      #~ - "/bin/winecpp"
-      #~ - "/bin/winedump"
-      #~ - "/bin/wineg++"
-      #~ - "/bin/winemaker"
-      #~ - "/bin/winepath"
-      #~ - "/bin/wmc"
-      #~ - "/include"
-      #~ - "/share/man"
-      #~ - "/share/applications"
-  
+      
+    config-opts:
+      - --libdir=/app/lib32
+      - --disable-win16
+      - --disable-tests
+      #- --without-gphoto2
+      #- --without-gphoto
+      - --without-test
+      - --with-x
+
+    cleanup:
+      - "*.a"
+      - "*.la"
+      - /include
+      - /lib/pkgconfig
+      - /lib64/pkgconfig
+      - /lib/cmake
+      - /lib64/cmake
+      - /share/man
+      - /bin/function_grep.pl
+      - /bin/widl
+      - /bin/winebuild
+      - /bin/winecpp
+      - /bin/winedump
+      - /bin/wineg++
+      - /bin/winegcc
+      - /bin/winemaker
+      - /bin/wmc
+      - /bin/wrc
+      - /lib/wine/*.def
+      - /lib64/wine/*.def
+      
     make-install-args:
       - LDCONFIG=/bin/true
       - STRIP=/bin/true
@@ -148,4 +144,12 @@ modules:
     - type: archive
       url: https://ftp.gnu.org/gnu/wget/wget-1.19.4.tar.gz
       sha256: 93fb96b0f48a20ff5be0d9d9d3c4a986b469cb853131f9d5fe4cc9cecbc8b5b5
-      
+
+cleanup:
+ - /lib/debug
+ - /bin/extresso
+ - /bin/genresscript
+ - /bin/icotool
+ - /bin/wrestool
+ - /share/man
+ - /include 
