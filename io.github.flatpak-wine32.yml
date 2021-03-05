@@ -180,3 +180,5 @@ cleanup:
  - /share/man
  - /include 
  - /share/applications/winetricks.desktop
+ - /app/share/icons/hicolor/scalable/apps/winetricks.svg
+ - /app/share/applications/winetricks.desktop
