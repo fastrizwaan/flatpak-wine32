@@ -10,7 +10,7 @@ wget https://github.com/fastrizwaan/flatpak-wine32/raw/main/io.github.flatpak-wi
 sha256sum io.github.flatpak-wine32.flatpak ; #check sum below
 ```
 
-`de17b8ac36d89a26aabb68ee407f57bb257a1f72a9176cfb7a1566c040ea75f4  io.github.flatpak-wine32.flatpak`
+`209878a1a9b58fa147d49e639499cb0f1fcde398eafbbbfe98af97dceb8d3397  io.github.flatpak-wine32.flatpak`
 
 ```
 # Install required runtime, see bottom for nvidia GPU
