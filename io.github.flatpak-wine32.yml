@@ -1,3 +1,4 @@
+# main branch - mono installs on demand by winetricks
 app-id: io.github.flatpak-wine32
 base-version: '20.08'
 runtime: org.freedesktop.Platform
