@@ -50,13 +50,14 @@ finish-args:
   - --share=network
   - --socket=pulseaudio
   - --allow=multiarch
+  - --allow=devel
   - --talk-name=org.freedesktop.Notifications
   - --filesystem=host
   - --device=all
   # Persist Wineprefix as ~/.var/app/{fightcade}/.wine
   - --persist=.wine
   # Skip Gecko and Mono popups when creating Wine prefix
-  - --env=WINEDLLOVERRIDES=mscoree=d,mshtml=d
+  - --env=WINEDLLOVERRIDES="mscoree,mshtml="
   
   # Support 32-bit runtime
   - --env=LD_LIBRARY_PATH=/app/lib:/app/lib32
@@ -73,6 +74,7 @@ modules:
   - name: wine32
     builddir: true
     build-options:
+      make-args: -j2
       prefix: /app
       prepend-path: /app/bin
       ldflags: -L/app/lib32
@@ -87,33 +89,40 @@ modules:
     config-opts:
       - --libdir=/app/lib32
       - --disable-win16
-      - --disable-tests
-      #- --without-gphoto2
-      #- --without-gphoto
-      - --without-test
       - --with-x
+      - --without-cups
+      - --without-curses
+      - --without-capi
+      - --without-glu
+      - --without-gphoto
+      - --without-gsm
+      - --without-hal
+      - --without-ldap
+      - --without-netapi
+      - --without-mono
+      - --without-test
 
-    cleanup:
-      - "*.a"
-      - "*.la"
-      - /include
-      - /lib/pkgconfig
-      - /lib64/pkgconfig
-      - /lib/cmake
-      - /lib64/cmake
-      - /share/man
-      - /bin/function_grep.pl
-      - /bin/widl
-      - /bin/winebuild
-      - /bin/winecpp
-      - /bin/winedump
-      - /bin/wineg++
-      - /bin/winegcc
-      - /bin/winemaker
-      - /bin/wmc
-      - /bin/wrc
-      - /lib/wine/*.def
-      - /lib64/wine/*.def
+#    cleanup:
+#      - "*.a"
+#      - "*.la"
+#      - /include
+#      - /lib/pkgconfig
+#      - /lib64/pkgconfig
+#      - /lib/cmake
+#      - /lib64/cmake
+#      - /share/man
+#      - /bin/function_grep.pl
+#      - /bin/widl
+#      - /bin/winebuild
+#      - /bin/winecpp
+#      - /bin/winedump
+#      - /bin/wineg++
+#      - /bin/winegcc
+#      - /bin/winemaker
+#      - /bin/wmc
+#      - /bin/wrc
+#      - /lib/wine/*.def
+#      - /lib64/wine/*.def
       
     make-install-args:
       - LDCONFIG=/bin/true
@@ -151,7 +160,10 @@ modules:
   - name: winedesktop
     buildsystem: simple
     build-commands:
-    - install -Dm644 wine.svg /app/share/icons/hicolor/scalable/apps/io.github.flatpak-wine32.svg 
+    - install -Dm644 
+      /app/share/icons/hicolor/scalable/apps/winetricks.svg
+      /app/share/icons/hicolor/scalable/apps/io.github.flatpak-wine32.svg 
+
     - desktop-file-edit --set-icon=io.github.flatpak-wine32 /app/share/applications/wine.desktop
     - desktop-file-edit --set-name=flatpak-wine32 /app/share/applications/wine.desktop
     
@@ -165,10 +177,6 @@ modules:
     - install -Dm644
       /app/share/icons/hicolor/scalable/apps/winetricks.svg
       /app/share/icons/hicolor/scalable/apps/io.github.flatpak-wine32-winetricks.svg
-      
-    sources:
-    - type: file
-      path: wine.svg
       
       
 cleanup:
