@@ -1,14 +1,9 @@
 ![](https://raw.githubusercontent.com/fastrizwaan/flatpak-wine32/main/Screenshots/right-click.png)
 
+This mono branch is flatpak-wine32 with wine 6.3 staging and mono and gecko installers included for dotnet and wintricks installations. Wine version is 6.3. Winetricks installs dotnet35, xna31, xinput needed for Kung fu Strike Warrior's rise.
 
-# Run wine 32bit apps using flatpak in Centos 7 or any distro with flatpak support:
-```
-wget https://github.com/fastrizwaan/flatpak-wine32/raw/main/io.github.flatpak-wine32.flatpak
-sha256sum io.github.flatpak-wine32.flatpak ; #check sum below
-```
 
-`de17b8ac36d89a26aabb68ee407f57bb257a1f72a9176cfb7a1566c040ea75f4  io.github.flatpak-wine32.flatpak`
-
+### BUILD
 ```
 # Install required runtime, see bottom for nvidia GPU
 sudo flatpak install                                               \
@@ -19,18 +14,16 @@ org.freedesktop.Platform.openh264/x86_64/2.0                       \
 runtime/org.freedesktop.Platform.Compat.i386/x86_64/20.08          \
 org.freedesktop.Platform.GL32.default/x86_64/20.08 -y
 
-flatpak --user install io.github.flatpak-wine32.flatpak -y
-
-flatpak run io.github.flatpak-wine32 game.exe ; #replace game.exe with your exe
 ```
 
-#### Nvidia gpu 32 bit drivers need to be installed, if game complains about D3D or Opengl or GL install nvidia drivers see bottom for Nvidia Section
+#### For Nvidia gpus, 32 bit drivers need to be installed, if game complains about D3D or Opengl or GL install nvidia drivers see bottom for Nvidia Section
 ```
 NVERSION=$(nvidia-settings -q all |grep OpenGLVersion|grep NVIDIA|sed 's/.*NVIDIA \(.*\) /nvidia-\1/g'|sed 's/\./-/g')
 
 sudo flatpak install flathub org.freedesktop.Platform.GL32.$NVERSION -y
 
 ```
+
 By Default, all programs are installed in ~/.wine, use ` WINEPREFIX=~/.mywine flatpak run io.github.flatpak-wine32 Setup.exe ` to install in ` ~/.mywine ` directory.
 
 # winetricks
@@ -66,7 +59,7 @@ a big thanks to https://github.com/Pobega for making his fightcade flatpak manif
 ## Build flatpak-wine32.flatpak on your own
 
 ```
-git clone https://github.com/fastrizwaan/flatpak-wine32.git
+git clone https://github.com/fastrizwaan/flatpak-wine32.git -b mono
 cd flatpak-wine32;
 
 # Install runtime and Sdk to build flatpak
@@ -126,7 +119,7 @@ echo 'alias winetricks="flatpak run --command=winetricks io.github.flatpak-wine3
 
 ```
 flatpak-builder --repo="repo" --force-clean build-dir/ io.github.flatpak-wine32.yml 
-flatpak --user remote-add --no-gpg-verify "io.github.flatpak-wine32" "repo"
+flatpak --user remote-add --no-gpg-verify "io.github.flatpak-wine32" "repo" ; #this may throw error, ignore it.
 flatpak build-bundle "repo" "io.github.flatpak-wine32.flatpak" io.github.flatpak-wine32 stable --runtime-repo="https://flathub.org/repo/flathub.flatpakrepo"
 ```
 
