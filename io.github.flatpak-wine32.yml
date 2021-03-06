@@ -1,3 +1,7 @@
+# Flatpak-wine32 with mono and gecko included
+# Dotnet 2, 3, 3.5 xna31 all work fine with this
+# using winetricks
+
 app-id: io.github.flatpak-wine32
 base-version: '20.08'
 runtime: org.freedesktop.Platform
@@ -50,17 +54,19 @@ finish-args:
   - --share=network
   - --socket=pulseaudio
   - --allow=multiarch
+  - --allow=devel
   - --talk-name=org.freedesktop.Notifications
   - --filesystem=host
+#  - --filesystem=~/.local/share/applications/wine:create
   - --device=all
-  # Persist Wineprefix as ~/.var/app/{fightcade}/.wine
+  # Persist Wineprefix ~/.wine
   - --persist=.wine
   # Skip Gecko and Mono popups when creating Wine prefix
-  - --env=WINEDLLOVERRIDES=mscoree=d,mshtml=d
-  
+  - --env=WINEDLLOVERRIDES=mscoree,mshtml=
+#  - --env="WINEPREFIX=~/.flatpak-wine32"
   # Support 32-bit runtime
   - --env=LD_LIBRARY_PATH=/app/lib:/app/lib32
-  
+  - --env=WINEARCH=win32
   - --env=WINE_RESOLUTION=1920x1080
 
 modules:
@@ -73,6 +79,7 @@ modules:
   - name: wine32
     builddir: true
     build-options:
+    # make-args: -j1
       prefix: /app
       prepend-path: /app/bin
       ldflags: -L/app/lib32
@@ -87,33 +94,40 @@ modules:
     config-opts:
       - --libdir=/app/lib32
       - --disable-win16
-      - --disable-tests
-      #- --without-gphoto2
-      #- --without-gphoto
-      - --without-test
       - --with-x
+      - --without-cups
+      - --without-curses
+      - --without-capi
+      - --without-glu
+      - --without-gphoto
+      - --without-gsm
+      - --without-hal
+      - --without-ldap
+      - --without-netapi
+#      - --without-mono
+      - --without-test
 
-    cleanup:
-      - "*.a"
-      - "*.la"
-      - /include
-      - /lib/pkgconfig
-      - /lib64/pkgconfig
-      - /lib/cmake
-      - /lib64/cmake
-      - /share/man
-      - /bin/function_grep.pl
-      - /bin/widl
-      - /bin/winebuild
-      - /bin/winecpp
-      - /bin/winedump
-      - /bin/wineg++
-      - /bin/winegcc
-      - /bin/winemaker
-      - /bin/wmc
-      - /bin/wrc
-      - /lib/wine/*.def
-      - /lib64/wine/*.def
+#    cleanup:
+#      - "*.a"
+#      - "*.la"
+#      - /include
+#      - /lib/pkgconfig
+#      - /lib64/pkgconfig
+#      - /lib/cmake
+#      - /lib64/cmake
+#      - /share/man
+#      - /bin/function_grep.pl
+#      - /bin/widl
+#      - /bin/winebuild
+#      - /bin/winecpp
+#      - /bin/winedump
+#      - /bin/wineg++
+#      - /bin/winegcc
+#      - /bin/winemaker
+#      - /bin/wmc
+#      - /bin/wrc
+#      - /lib/wine/*.def
+#      - /lib64/wine/*.def
       
     make-install-args:
       - LDCONFIG=/bin/true
@@ -121,8 +135,29 @@ modules:
       - UPDATE_DESKTOP_DATABASE=/bin/true
     sources:
       - type: archive
-        url: https://dl.winehq.org/wine/source/6.0/wine-6.0.tar.xz
-        sha256: b493065f2f83ee429c62e2ec58698a3cf63ef78722e1b20765823152e8582c56
+        url: https://dl.winehq.org/wine/source/6.x/wine-6.3.tar.xz
+        sha512: 20108ea5036d612e8dd61fe9254d67cad02d757ede87174ed27774e4e3537e0d1f4d67156fd430f1d01d5c68b899cb0c7b4be298d897a1ce823913efef822242
+
+  - name: wine-gecko
+    buildsystem: simple
+    build-commands:
+    - install -D wine-gecko-2.47.2-x86.msi /app/share/wine/gecko/wine-gecko-2.47.2-x86.msi
+    no-make-install: true
+    sources:
+    - type: file
+      url: http://dl.winehq.org/wine/wine-gecko/2.47.2/wine-gecko-2.47.2-x86.msi
+      sha256: e520ce7336cd420cd09c91337d87e74bb420300fd5cbc6f724c1802766b6a61d
+
+  - name: wine-mono
+    buildsystem: simple
+    build-commands:
+    - install -D wine-mono-6.0.0-x86.msi /app/share/wine/mono/wine-mono-6.0.0-x86.msi
+    no-make-install: true
+    sources:
+    - type: file
+      url: https://dl.winehq.org/wine/wine-mono/6.0.0/wine-mono-6.0.0-x86.msi
+      sha256: 5c7af5976d101be359a77045c9cc8fc40feac028263d00e731578864e8b183d0
+
         
   - name: winetricks
     buildsystem: simple
@@ -151,7 +186,10 @@ modules:
   - name: winedesktop
     buildsystem: simple
     build-commands:
-    - install -Dm644 wine.svg /app/share/icons/hicolor/scalable/apps/io.github.flatpak-wine32.svg 
+    - install -Dm644 
+      /app/share/icons/hicolor/scalable/apps/winetricks.svg
+      /app/share/icons/hicolor/scalable/apps/io.github.flatpak-wine32.svg 
+
     - desktop-file-edit --set-icon=io.github.flatpak-wine32 /app/share/applications/wine.desktop
     - desktop-file-edit --set-name=flatpak-wine32 /app/share/applications/wine.desktop
     
@@ -165,10 +203,6 @@ modules:
     - install -Dm644
       /app/share/icons/hicolor/scalable/apps/winetricks.svg
       /app/share/icons/hicolor/scalable/apps/io.github.flatpak-wine32-winetricks.svg
-      
-    sources:
-    - type: file
-      path: wine.svg
       
       
 cleanup:
