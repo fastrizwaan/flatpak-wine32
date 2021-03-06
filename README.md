@@ -1,5 +1,8 @@
 ![](https://raw.githubusercontent.com/fastrizwaan/flatpak-wine32/main/Screenshots/right-click.png)
 
+Main branch does not include mono and gecko msi files to save space.
+
+winetricks when asked to install (as described below in wintricks section) will prompt for installing wine-mono, you should install it then, to install dotnet35, xna31 etc.
 
 # Run wine 32bit apps using flatpak in Centos 7 or any distro with flatpak support:
 ```
