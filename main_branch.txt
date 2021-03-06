@@ -1,0 +1,1 @@
+just the main branch without mono inside flatpak-wine32 flatpak
