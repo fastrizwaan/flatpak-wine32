@@ -24,13 +24,12 @@ Run windows 32bit/64bit games easily.
 
 #### launching wine loads winefile / explorer for easier access to exe files
 ![](https://github.com/fastrizwaan/flatpak-wine/raw/main/Screenshots/03.png)
-##### There are 3 packages:
+
+##### There are 2 packages:
 ```
-wine-x86_64           - run both 32 bit and 64 bit apps and games
-old/wine_x86          - 32 bit wine, use this for 32 bit apps and games.
-old/wine_x64          - 64 bit wine, use this for 64 bit apps and games.
-old/flatpak-proton-v61-ge-2   - WoW64 proton can run both 32 and 64 bit but 
-                            compatibility is not that high compared to the above.
+org.winehq.wine-x86-64      - vanilla wine 6.0 inside flatpak. This should do for most 32 bit and 64 bit apps and games
+org.winehq.Proton-64-GE-1   - WoW64 proton wine-6.4 can run both 32 and 64 bit
+                              
 ```
 
 ### Install Runtime dependencies 
