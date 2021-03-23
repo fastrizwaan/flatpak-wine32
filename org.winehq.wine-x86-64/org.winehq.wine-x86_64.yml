@@ -9,7 +9,6 @@ separate-locales: false
 
 rename-desktop-file: wine.desktop
 
-
 # Support 32-bit at runtime
 add-extensions:
   org.freedesktop.Platform.Compat.i386:
@@ -446,7 +445,16 @@ modules:
     - type: file
       path: wine-x86_64.sh
       
-
+  - name: wine-kill-program
+    buildsystem: simple
+    build-commands:
+    - install -Dm644 wine-kill-program.desktop 
+      /app/share/applications/winetricks.desktop
+    
+    sources:
+    - type: file
+      path: wine-x86_64.sh
+      
 cleanup:
  - "*.a"
  - /lib/debug
