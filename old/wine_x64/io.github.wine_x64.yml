@@ -1,0 +1,163 @@
+# main branch - mono installs on demand by winetricks
+app-id: io.github.wine_x64
+base-version: '20.08'
+runtime: org.freedesktop.Platform
+runtime-version: '20.08'
+sdk: org.freedesktop.Sdk
+command: run.sh
+default-branch: stable
+separate-locales: false
+
+rename-desktop-file: wine.desktop
+
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --share=network
+  - --socket=pulseaudio
+  - --allow=multiarch
+  - --allow=devel
+  - --talk-name=org.freedesktop.Notifications
+  - --filesystem=host
+  - --filesystem=~/.wine-wine_x64:create
+  - --device=all
+  # Persist Wineprefix as ~/.var/app/{fightcade}/.wine
+  - --persist=~/.wine-wine_x64
+  # Skip Gecko and Mono popups when creating Wine prefix
+  - --env=WINEDLLOVERRIDES=mscoree,mshtml=
+  
+  # Support 32-bit runtime
+  - --env=LD_LIBRARY_PATH=/app/lib:/app/lib32
+  - --env=WINE_RESOLUTION=1920x1080
+
+modules:
+
+  - name: faudio32
+    buildsystem: cmake-ninja
+    build-options:
+      strip: true
+      no-debuginfo: true
+      
+    config-opts:
+      - -DGSTREAMER=ON
+    sources:
+      - type: archive
+        url: https://github.com/FNA-XNA/FAudio/archive/20.12.tar.gz
+        sha256: d5a1656ec79cd2878dddabc07d7f7848c11844595c76033aed929b10d922c009
+        
+        
+  - name: wine64
+    builddir: true
+    build-options:
+      make-args: -j4
+      strip: true
+      no-debuginfo: true
+      
+    config-opts:
+      - --disable-win16
+      - --disable-tests
+      - --enable-win64
+      - --with-x
+      - --with-pulse
+      - --without-cups
+      - --without-curses
+      - --without-capi
+      - --without-glu
+      - --without-gphoto
+      - --without-gsm
+      - --without-hal
+      - --without-ldap
+      - --without-netapi
+      - --without-opencl
+      - --without-pcap
+      - --without-udev
+      - --without-v4l
+      - --with-dbus
+      - --without-oss
+      - --with-faudio
+
+      
+    make-install-args:
+      - LDCONFIG=/bin/true
+      - STRIP=/bin/true
+      - UPDATE_DESKTOP_DATABASE=/bin/true
+    sources:
+      - type: archive
+        url: https://dl.winehq.org/wine/source/6.x/wine-6.4.tar.xz
+        sha512: f190e1b97defb4620e33d1a4e2afffd475f6b3998153c67c6d06840b4f3b93a50f88c6844de15e7f54ca712330f6fea857310861a78b961feb7f64a4869f3fe1
+        
+  - name: winetricks
+    buildsystem: simple
+    build-commands:
+    - make
+    - make PREFIX=/app install
+    - chmod +x /app/bin/winetricks
+    sources:
+    - type: archive
+      url: https://github.com/Winetricks/winetricks/releases/download/20210206/20210206.tar.gz
+      sha256: 705421798b28696f577104ebdf03b068b9343ab096754150f47a6ec06fa8ae65
+  - name: cabextract
+    buildsystem: autotools
+    sources:
+    - type: archive
+      url: https://www.cabextract.org.uk/cabextract-1.6.tar.gz
+      sha256: cee661b56555350d26943c5e127fc75dd290b7f75689d5ebc1f04957c4af55fb
+  
+  - name: wget
+    buildsystem: autotools
+    sources:
+    - type: archive
+      url: https://ftp.gnu.org/gnu/wget/wget-1.19.4.tar.gz
+      sha256: 93fb96b0f48a20ff5be0d9d9d3c4a986b469cb853131f9d5fe4cc9cecbc8b5b5
+      
+  - name: winedesktop
+    buildsystem: simple
+    build-commands:
+    - ln -sf /app/bin/wine64 /app/bin/wine
+    - install -Dm644 
+      /app/share/icons/hicolor/scalable/apps/winetricks.svg
+      /app/share/icons/hicolor/scalable/apps/io.github.wine_x64.svg 
+
+    - desktop-file-edit --set-icon=io.github.wine_x64 /app/share/applications/wine.desktop
+    - desktop-file-edit --set-name="wine_x64(flatpak)" /app/share/applications/wine.desktop
+    - desktop-file-edit --set-key="Exec" --set-value="run.sh %F" /app/share/applications/wine.desktop
+    - desktop-file-edit --set-key="NoDisplay" --set-value="false" 
+                        /app/share/applications/wine.desktop
+    - desktop-file-edit --set-key="MimeType" --set-value="application/x-ms-dos-executable;" 
+                        /app/share/applications/wine.desktop
+    
+    - desktop-file-edit --set-name="winetricks_x64(flatpak)"
+                        /app/share/applications/winetricks.desktop
+    - desktop-file-edit --set-icon=io.github.wine_x64-winetricks
+                        /app/share/applications/winetricks.desktop
+
+    - desktop-file-edit --set-key="Exec" --set-value="run.sh winetricks" 
+                        /app/share/applications/winetricks.desktop
+        
+    - install -Dm644    /app/share/applications/winetricks.desktop 
+                        /app/share/applications/io.github.wine_x64-winetricks.desktop
+    - install -Dm644
+      /app/share/icons/hicolor/scalable/apps/winetricks.svg
+      /app/share/icons/hicolor/scalable/apps/io.github.wine_x64-winetricks.svg
+
+  - name: run.sh_wine
+    buildsystem: simple
+    build-commands:
+    - install -Dm755 run.sh /app/bin/run.sh
+    
+    sources:
+    - type: file
+      path: run.sh
+      
+      
+cleanup:
+ - /lib/debug
+ - /bin/extresso
+ - /bin/genresscript
+ - /bin/icotool
+ - /bin/wrestool
+ - /share/man
+ - /include 
+ - /share/applications/winetricks.desktop
+ - /app/share/icons/hicolor/scalable/apps/winetricks.svg
+ - /app/share/applications/winetricks.desktop
