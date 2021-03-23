@@ -1,0 +1,87 @@
+# flatpaked wine-x86_64 (32 and 64 bit wine using flatpak sandbox)
+#### Renamed to wine-x86_64 for readability and typing
+Run windows 32bit/64bit games easily.
+1. WINEPREFIX=~/.wine-x86_64
+2. winetricks also included as gui app, or use CLI to install, e.g., **flatpak run io.github.wine-x86_64 winetricks d3dx9 corefonts xinput**
+3. commandline **flatpak run io.github.wine-x86_64 <exe file>**
+
+
+### Screenshots
+#### Application is visible in Menu
+![](https://github.com/fastrizwaan/flatpak-wine/raw/main/Screenshots/wine_00.png)
+#### .exe files can be opened with Right-Click Open with menu in file manager
+![](https://github.com/fastrizwaan/flatpak-wine/raw/main/Screenshots/wine_01.png)
+
+#### wine and winetricks use WINEPREFIX ~/.wine-wine_x86-64
+![](https://github.com/fastrizwaan/flatpak-wine/raw/main/Screenshots/wine_02.png)
+
+#### launching wine loads winefile / explorer for easier access to exe files
+![](https://github.com/fastrizwaan/flatpak-wine/raw/main/Screenshots/03.png)
+##### There are 3 packages:
+```
+wine-x86_64           - run both 32 bit and 64 bit apps and games
+old/wine_x86          - 32 bit wine, use this for 32 bit apps and games.
+old/wine_x64          - 64 bit wine, use this for 64 bit apps and games.
+old/flatpak-proton-v61-ge-2   - WoW64 proton can run both 32 and 64 bit but 
+                            compatibility is not that high compared to the above.
+```
+
+### Install Runtime dependencies 
+```
+sudo flatpak --system remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+sudo flatpak update -y
+sudo flatpak -y --system install org.freedesktop.Platform/x86_64/20.08 \
+                org.freedesktop.Platform.Compat.i386/x86_64/20.08 \
+                org.freedesktop.Platform.GL32.default/x86_64/20.08 \
+                org.freedesktop.Platform.VAAPI.Intel.i386/x86_64/20.08 \
+                org.freedesktop.Platform.VAAPI.Intel/x86_64/20.08
+                
+NVERSION=$(nvidia-settings -q all |grep OpenGLVersion|grep NVIDIA|sed 's/.*NVIDIA \(.*\) /nvidia-\1/g'|sed 's/\./-/g')				
+sudo flatpak install flathub org.freedesktop.Platform.GL32.$NVERSION -y                
+
+```
+
+### Install flatpaks directly and run.
+```
+wget -c https://github.com/fastrizwaan/flatpak-wine/raw/main/wine-x86_64/io.github.wine-x86_64.flatpak
+flatpak --user install io.github.wine-x86_64.flatpak -y
+```
+
+#### Test
+```
+flatpak run io.github.wine-x86_64 --version
+wine-6.0
+```
+without any argument/parameters, we launch explorer/winefile so that we could run exe/setup easily
+```
+flatpak run io.github.wine-x86_64
+No arguments supplied
+launching explorer
+```
+
+### Build on your own
+
+#### install SDK for building
+```
+sudo flatpak --system remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+sudo flatpak -y --system install org.freedesktop.Sdk/x86_64/20.08 \
+                org.freedesktop.Platform/x86_64/20.08 \
+                org.freedesktop.Sdk.Compat.i386 \
+                org.freedesktop.Sdk.Extension.toolchain-i386 \
+                org.freedesktop.Platform.Compat.i386/x86_64/20.08 \
+                org.freedesktop.Platform.GL32.default/x86_64/20.08 \
+                org.freedesktop.Platform.VAAPI.Intel.i386/x86_64/20.08 \
+                org.freedesktop.Platform.VAAPI.Intel/x86_64/20.08
+                
+NVERSION=$(nvidia-settings -q all |grep OpenGLVersion|grep NVIDIA|sed 's/.*NVIDIA \(.*\) /nvidia-\1/g'|sed 's/\./-/g')				
+sudo flatpak install flathub org.freedesktop.Platform.GL32.$NVERSION -y   
+```
+
+#### Build
+```
+git clone https://github.com/fastrizwaan/flatpak-wine.git
+cd wine-x86_64
+sh ./build_stable_x86_install.sh
+
+```
+
