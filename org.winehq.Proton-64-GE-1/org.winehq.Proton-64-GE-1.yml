@@ -120,7 +120,7 @@ modules:
     - desktop-file-edit --set-name=flatpak-Proton-64-GE-1 /app/share/applications/wine.desktop
     - desktop-file-edit --set-icon=org.winehq.Proton-64-GE-1 /app/share/applications/wine.desktop
     - desktop-file-edit --set-name=flatpak-Proton-64-GE-1 /app/share/applications/wine.desktop
-    - desktop-file-edit --set-key="Exec" --set-value="Proton-64-GE-1.sh" /app/share/applications/wine.desktop
+    - desktop-file-edit --set-key="Exec" --set-value="Proton-64-GE-1.sh %F" /app/share/applications/wine.desktop
     - desktop-file-edit --set-key="MimeType" --set-value="application/x-ms-dos-executable;" 
                         /app/share/applications/wine.desktop
     - desktop-file-edit --set-key="NoDisplay" --set-value="false" 
