@@ -394,9 +394,9 @@ modules:
     
     sources:
     - type: file
-      path: wine-create-shortcut.sh 
+      path: resources/wine-create-shortcut.sh 
     - type: file
-      path: wine-create-shortcut.desktop
+      path: resources/wine-create-shortcut.desktop
     
               
   - name: winedesktop
@@ -437,18 +437,21 @@ modules:
     
     sources:
     - type: file
-      path: wine-x86_64.sh
+      path: resources/wine-x86_64.sh
       
-  - name: wine-kill-program
-    buildsystem: simple
-    build-commands:
-    - install -Dm644 wine-kill-program.desktop 
-      /app/share/applications/org.winehq.wine-x86_64-wine-kill-program.desktop
+#  - name: wine-kill-program
+#    buildsystem: simple
+#    build-commands:
+#    - install -Dm644 wine-kill-program.desktop 
+#      /app/share/applications/org.winehq.wine-x86_64-wine-kill-program.desktop
+#    - install -Dm755 killall.sh /app/bin/killall.sh
     
-    sources:
-    - type: file
-      path: wine-kill-program.desktop
-      
+#    sources:
+#    - type: file
+#      path: resources/wine-kill-program.desktop
+#    - type: file
+#      path: resources/killall.sh
+
 cleanup:
  - "*.a"
  - /lib/debug
