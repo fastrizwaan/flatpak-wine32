@@ -2,8 +2,15 @@
 #### Renamed to wine-x86_64 for readability and typing
 Run windows 32bit/64bit games easily.
 1. WINEPREFIX=~/.wine-x86_64
-2. winetricks also included as gui app, or use CLI to install, e.g., **flatpak run io.github.wine-x86_64 winetricks d3dx9 corefonts xinput**
-3. commandline **flatpak run io.github.wine-x86_64 <exe file>**
+2. winetricks also included as gui app, or use CLI to install, e.g., **flatpak run org.winehq.wine-x86_64 winetricks d3dx9 corefonts xinput**
+3. commandline **flatpak run org.winehq.wine-x86_64 <exe file>**
+
+####Features
+1. Run EXE file from anywhere
+2. Create EXE Desktop Shortcut using Right-click 
+3. Install d3dx9 xna31 xinput etc. using winetricks 
+4. Applications/Games are installed at ~/.wine-x86_64 directory
+
 
 
 ### Screenshots
@@ -43,18 +50,18 @@ sudo flatpak install flathub org.freedesktop.Platform.GL32.$NVERSION -y
 
 ### Install flatpaks directly and run.
 ```
-wget -c https://github.com/fastrizwaan/flatpak-wine/raw/main/wine-x86_64/io.github.wine-x86_64.flatpak
-flatpak --user install io.github.wine-x86_64.flatpak -y
+wget -c https://github.com/fastrizwaan/flatpak-wine/raw/main/org.winehq.wine-x86-64/org.winehq.wine-x86_64.flatpak
+flatpak --user install org.winehq.wine-x86_64.flatpak -y
 ```
 
 #### Test
 ```
-flatpak run io.github.wine-x86_64 --version
+flatpak run org.winehq.wine-x86_64 --version
 wine-6.0
 ```
 without any argument/parameters, we launch explorer/winefile so that we could run exe/setup easily
 ```
-flatpak run io.github.wine-x86_64
+flatpak run org.winehq.wine-x86_64
 No arguments supplied
 launching explorer
 ```
@@ -80,8 +87,8 @@ sudo flatpak install flathub org.freedesktop.Platform.GL32.$NVERSION -y
 #### Build
 ```
 git clone https://github.com/fastrizwaan/flatpak-wine.git
-cd wine-x86_64
-sh ./build_stable_x86_install.sh
+cd flatpak-wine/org.winehq.wine-x86-64/
+sh ./install.sh
 
 ```
 
