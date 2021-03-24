@@ -50,7 +50,8 @@ $category;"\\n"Icon="$myFile.icon.png""
     echo "Keywords=flatpak; wine;" >> "$myFile".desktop
     
     # link the launcher  file to a shortcut on applications menu.
-    ln -s "$myFile.desktop" "$HOME/.local/share/applications/$myBaseName.desktop"
+    mkdir -p "$HOME/.local/share/applications/wine-x86_64/"
+    ln -s "$myFile.desktop" "$HOME/.local/share/applications/wine-x86_64/$myBaseName.desktop"
     # Test if the app link was created sucessfully on applications menu 
     if [ $? -eq 0 ]; then
     	echo "Shortcut created sucessfuly on applications menu."
