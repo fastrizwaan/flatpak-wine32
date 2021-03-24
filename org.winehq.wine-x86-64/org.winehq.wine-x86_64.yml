@@ -231,7 +231,7 @@ modules:
   - name: org.winehq.wine-x86_64
     builddir: true
     build-options:
-      make-args: -j2
+      make-args: -j8
       prefix: /app
       prepend-path: /app/bin
       ldflags: -L/app/lib64 -L/app/lib32
@@ -256,7 +256,6 @@ modules:
       ../configure 
       --prefix="/app" 
       --disable-win16
-      --disable-tests
       --enable-shared      
       --disable-static      
       --with-x
@@ -270,10 +269,8 @@ modules:
       --with-ldap
       --with-faudio
       --without-netapi
-      --without-mono
-      --without-test
       --enable-win64 &&  
-      make -j2
+      make -j8
 
     # 2. Build wine32 twice
     - export CC=i686-unknown-linux-gnu-gcc  &&
@@ -282,7 +279,6 @@ modules:
       ../configure 
       --prefix="/app" 
       --disable-win16
-      --disable-tests
       --enable-shared
       --disable-static
       --with-x
@@ -295,10 +291,8 @@ modules:
       --without-hal
       --with-ldap
       --with-faudio
-      --without-netapi
-      --without-mono
-      --without-test &&
-      make -j2
+      --without-netapi &&
+      make -j8
 
     # 3. Build 32bit second time and 
     # install 32 bit and 64 bit wine
@@ -310,7 +304,6 @@ modules:
       --with-wine-tools=../wine32-tools
       --prefix="/app" 
       --disable-win16
-      --disable-tests
       --enable-shared      
       --disable-static
       --with-x
@@ -323,10 +316,8 @@ modules:
       --without-hal
       --with-ldap
       --with-faudio
-      --without-netapi
-      --without-mono
-      --without-test     &&
-      make -j2           && 
+      --without-netapi   &&
+      make -j8           && 
       make install       && 
       cd ../wine64-build && 
       make install
