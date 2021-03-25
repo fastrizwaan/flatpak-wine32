@@ -25,10 +25,14 @@ rm *.flatpak repo/ -r 2>/dev/null
 # Build
 flatpak-builder --force-clean build-dir org.winehq.wine-x86_64.yml 
 
+#save flatpak with current date name
+date=$(date +%F)
+
 # Create flatpak
 flatpak-builder --repo="repo" --force-clean build-dir/ org.winehq.wine-x86_64.yml 
 flatpak --user remote-add --no-gpg-verify "org.winehq.wine-x86_64" "repo"
-flatpak build-bundle "repo" "org.winehq.wine-x86_64.flatpak" org.winehq.wine-x86_64 stable --runtime-repo="https://flathub.org/repo/flathub.flatpakrepo"
+#flatpak build-bundle "repo" "org.winehq.wine-x86_64_$date.flatpak" org.winehq.wine-x86_64 stable --runtime-repo="https://flathub.org/repo/flathub.flatpakrepo"
+flatpak build-bundle "repo" "org.winehq.wine-x86_64_$date.flatpak" org.winehq.wine-x86_64 stable
 
 # Install
-flatpak --user install org.winehq.wine-x86_64.flatpak -y
+flatpak --user install org.winehq.wine-x86_64_$date.flatpak -y
