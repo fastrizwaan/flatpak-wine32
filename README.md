@@ -1,4 +1,4 @@
-# Wine 6.0 Vanilla and Proton-6.4-GE-1 inside flatpak apps
+# flatpak-wine: Wine 6.0 Vanilla and Proton-6.4-GE-1 inside flatpak apps
 ## Play 32 and 64 bit wine games from your disk using wine inside flatpak
 ### Only Requirements is flathub and its runtimes
 
