@@ -99,8 +99,8 @@ sudo flatpak -y --system install                                          \
                 org.freedesktop.Sdk.Extension.toolchain-i386/x86_64/20.08 \
                 org.freedesktop.Platform.Compat.i386/x86_64/20.08         \
                 org.freedesktop.Platform.GL32.default/x86_64/20.08        \
-            		org.freedesktop.Platform.VAAPI.Intel.i386/x86_64/20.08    \
-		            org.freedesktop.Platform.VAAPI.Intel/x86_64/20.08
+                org.freedesktop.Platform.VAAPI.Intel.i386/x86_64/20.08    \
+                org.freedesktop.Platform.VAAPI.Intel/x86_64/20.08
 
                 
 NVERSION=$(nvidia-settings -q all |grep OpenGLVersion|grep NVIDIA|sed 's/.*NVIDIA \(.*\) /nvidia-\1/g'|sed 's/\./-/g')				
