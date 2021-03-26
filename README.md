@@ -59,6 +59,7 @@ sudo flatpak install flathub org.freedesktop.Platform.GL32.$NVERSION -y
 
 ### Screenshots
 #### Proton-64-GE-1 open Uninstaller, as winefile is not available in Proton
+##### Select filetype: *.exe and open the program you want to run
 ![](https://github.com/fastrizwaan/flatpak-wine/raw/main/Screenshots/proton_01.png)
 #### Application is visible in Menu
 ![](https://github.com/fastrizwaan/flatpak-wine/raw/main/Screenshots/wine_00.png)
