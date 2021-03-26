@@ -28,11 +28,11 @@ Keywords=flatpak; wine; kill;
 ' > ~/.local/share/applications/Proton-64-GE-1/killall_proton.desktop
 
 
-# if no argument passed then launch winefile (from wine.desktop)
+# if no argument passed then launch UNINSTALLER (from wine.desktop)
 if [ $# -eq 0 ];  then
     echo "No arguments supplied"
     echo "launching explorer"
-    /app/bin/winefile
+    $WINEEXE uninstaller
 
 elif   [ "$1" == "winecfg" ] ; then
 	/app/bin/winecfg
