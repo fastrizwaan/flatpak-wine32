@@ -31,6 +31,7 @@ org.winehq.wine-x86-64      - vanilla wine 6.0 inside flatpak. This should do fo
 org.winehq.Proton-64-GE-1   - WoW64 proton wine-6.4 can run both 32 and 64 bit
                               
 ```
+### Install Proton-v6.4-GE-1 which works with most games
 ```
 wget -c https://github.com/fastrizwaan/flatpak-wine/raw/main/org.winehq.Proton-64-GE-1/org.winehq.Proton-64-GE-1.flatpak
 flatpak --user install org.winehq.Proton-64-GE-1.flatpak
@@ -51,7 +52,7 @@ sudo flatpak install flathub org.freedesktop.Platform.GL32.$NVERSION -y
 
 ```
 
-### Install flatpaks directly and run.
+### Install vanilla wine 6.0 stable flatpaks directly and run.
 ```
 wget -c https://github.com/fastrizwaan/flatpak-wine/raw/main/org.winehq.wine-x86-64/org.winehq.wine-x86_64_2021-03-26.flatpak
 flatpak --user install org.winehq.wine-x86_64_2021-03-26.flatpak -y
