@@ -110,6 +110,39 @@ modules:
     - type: archive
       url: https://ftp.gnu.org/gnu/wget/wget-1.19.4.tar.gz
       sha256: 93fb96b0f48a20ff5be0d9d9d3c4a986b469cb853131f9d5fe4cc9cecbc8b5b5
+
+  - name: icoutils
+    buildsystem: autotools
+    sources:
+      - type: archive
+        url: http://savannah.nongnu.org/download/icoutils/icoutils-0.32.3.tar.bz2
+        sha256: 17abe02d043a253b68b47e3af69c9fc755b895db68fdc8811786125df564c6e0
+
+  - name: ImageMagick
+    config-opts:
+      - --enable-shared
+      - --disable-static
+      - --disable-docs
+      - --with-modules
+      - --with-threads
+      - --with-png
+    sources:
+      - type: archive
+        url: https://github.com/ImageMagick/ImageMagick/archive/7.0.9-13.tar.gz
+        sha256: 4d488abe5bd4c2294d71074eccc238f4b4cf63b8ee2f07abbc40bde7f99c21ff        
+
+  - name: create-proton-shortcut
+    buildsystem: simple
+    build-commands:
+    - install -Dm755 proton-create-shortcut.sh /app/bin/proton-create-shortcut.sh
+    - install -Dm655 proton-create-shortcut.desktop 
+      /app/share/applications/org.winehq.Proton-64-GE-1-proton-create-shortcut.desktop
+    
+    sources:
+    - type: file
+      path: resources/proton-create-shortcut.sh 
+    - type: file
+      path: resources/proton-create-shortcut.desktop
       
   - name: winedesktop
     buildsystem: simple
@@ -117,9 +150,9 @@ modules:
     - install -Dm644 
       /app/share/icons/hicolor/scalable/apps/winetricks.svg
       /app/share/icons/hicolor/scalable/apps/org.winehq.Proton-64-GE-1.svg 
-    - desktop-file-edit --set-name=flatpak-Proton-64-GE-1 /app/share/applications/wine.desktop
+    - desktop-file-edit --set-name=Proton-64-GE-1 /app/share/applications/wine.desktop
     - desktop-file-edit --set-icon=org.winehq.Proton-64-GE-1 /app/share/applications/wine.desktop
-    - desktop-file-edit --set-name=flatpak-Proton-64-GE-1 /app/share/applications/wine.desktop
+    - desktop-file-edit --set-name=Proton-64-GE-1 /app/share/applications/wine.desktop
     - desktop-file-edit --set-key="Exec" --set-value="Proton-64-GE-1.sh %F" /app/share/applications/wine.desktop
     - desktop-file-edit --set-key="MimeType" --set-value="application/x-ms-dos-executable;" 
                         /app/share/applications/wine.desktop
@@ -127,7 +160,7 @@ modules:
                         /app/share/applications/wine.desktop
     
     
-    - desktop-file-edit --set-name=flatpak-Proton-64-GE-1-winetricks 
+    - desktop-file-edit --set-name=Proton-64-GE-1-winetricks 
                         /app/share/applications/winetricks.desktop
     - desktop-file-edit --set-icon=org.winehq.Proton-64-GE-1-winetricks
                         /app/share/applications/winetricks.desktop
