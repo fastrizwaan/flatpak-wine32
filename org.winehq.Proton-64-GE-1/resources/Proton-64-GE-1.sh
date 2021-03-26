@@ -15,6 +15,18 @@ export dire=$(dirname $1)
 
 #echo $base >> ~/Documents/debug.txt
 #echo $dire >> ~/Documents/debug.txt
+# Create kill shortcut for convenience
+
+echo '
+[Desktop Entry]
+Exec=flatpak kill org.winehq.Proton-64-GE-1 
+Name=Killall Proton-64-GE-1 instances
+Type=Application
+Categories=Application;;
+Icon=org.winehq.Proton-64-GE-1
+Keywords=flatpak; wine; kill;
+' > ~/.local/share/applications/Proton-64-GE-1/killall_proton.desktop
+
 
 # if no argument passed then launch winefile (from wine.desktop)
 if [ $# -eq 0 ];  then
