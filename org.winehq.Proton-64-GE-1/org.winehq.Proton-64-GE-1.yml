@@ -181,7 +181,7 @@ modules:
     
     sources:
     - type: file
-      path: Proton-64-GE-1.sh
+      path: resources/Proton-64-GE-1.sh
       
       
 cleanup:
