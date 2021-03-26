@@ -29,13 +29,18 @@ Run windows 32bit/64bit games easily.
 ##### There are 2 packages:
 ```
 org.winehq.wine-x86-64      - vanilla wine 6.0 inside flatpak. This should do for most 32 bit and 64 bit apps and games
+                              (https://dl.winehq.org/wine/source/6.0/)
 org.winehq.Proton-64-GE-1   - WoW64 proton wine-6.4 can run both 32 and 64 bit
-                              
+                              (https://github.com/GloriousEggroll/proton-ge-custom/releases)
+
 ```
 ### Install Proton-v6.4-GE-1 which works with most games
 ```
 wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/20210326/org.winehq.Proton-64-GE-1.flatpak
 flatpak --user install org.winehq.Proton-64-GE-1.flatpak
+wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/20210326/org.winehq.wine-x86_64.flatpak
+flatpak --user install org.winehq.wine-x86_64.flatpak
+
 ```
 
 ### Also install these Runtime dependencies 
@@ -57,10 +62,15 @@ sudo flatpak install flathub org.freedesktop.Platform.GL32.$NVERSION -y
 ```
 flatpak run org.winehq.Proton-64-GE-1 --version
 wine-6.4
+flatpak run org.winehq.wine-x86_64 --version
+wine-6.0
 ```
 without any argument/parameters, we launch explorer/winefile so that we could run exe/setup easily
 ```
 flatpak run org.winehq.Proton-64-GE-1
+(or)
+flatpak run org.winehq.wine-x86_64
+
 No arguments supplied
 launching explorer
 ```
