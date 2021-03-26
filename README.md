@@ -1,30 +1,23 @@
-# flatpaked wine-x86_64 (32 and 64 bit wine using flatpak sandbox)
-#### Renamed to wine-x86_64 for readability and typing
+# Wine 6.0 Vanilla and Proton-6.4-GE-1 inside flatpak apps
+## Play 32 and 64 bit wine games from your disk using wine inside flatpak)
+### Only Requirements is flathub and its runtimes
+
 Run windows 32bit/64bit games easily.
-1. WINEPREFIX=~/.Proton-64-GE-1
+1. uses WINEPREFIX=~/.Proton-64-GE-1 and WINEPREFIX=~/.wine-x86_64
 2. winetricks also included as gui app, or use CLI to install, e.g., **flatpak run org.winehq.wine-x86_64 winetricks d3dx9 corefonts xinput**
 3. commandline **flatpak run org.winehq.wine-x86_64 <exe file>**
 
-####Features
-1. Run EXE file from anywhere
-2. Create EXE Desktop Shortcut using Right-click 
-3. On 1st run, Killall Proton-64-GE-1 shortcut is created
+#### Features
+1. Run EXE file from anywhere in the filesystem
+2. Create EXE Desktop Shortcut using Right-click from anywhere in the filesystem
+3. Killall Proton-64-GE-1 shortcut is created, to kill running instances, run `flatpak kill org.winehq.wine-x86; flatpak kill org.winehq.Proton-64-GE-1`
 4. Install d3dx9 xna31 xinput etc. using winetricks 
-5. Applications/Games are installed at ~/.Proton-64-GE-1/ directory
-
-
-
-### Screenshots
-#### Application is visible in Menu
-![](https://github.com/fastrizwaan/flatpak-wine/raw/main/Screenshots/wine_00.png)
-#### .exe files can be opened with Right-Click Open with menu in file manager
-![](https://github.com/fastrizwaan/flatpak-wine/raw/main/Screenshots/wine_01.png)
-
-#### wine and winetricks use WINEPREFIX ~/.wine-wine_x86-64
-![](https://github.com/fastrizwaan/flatpak-wine/raw/main/Screenshots/wine_02.png)
-
-#### launching wine loads winefile / explorer for easier access to exe files
-![](https://github.com/fastrizwaan/flatpak-wine/raw/main/Screenshots/03.png)
+5. WINEARCH defaults to win64 bit 
+6. to Create win32 arch and install winetricks apps/dlls
+```
+WINEPREFIX=~/.wine32arch WINEARCH=win32 flatpak run --command=winetricks org.winehq.Proton-64-GE-1 dotnet35 xna31 corefonts xinput d3dx9
+WINEPREFIX=~/.wine32arch WINEARCH=win32 flatpak run --command=wine org.winehq.Proton-64-GE-1 <exe> ; to run a program
+```
 
 ##### There are 2 packages:
 ```
@@ -36,6 +29,7 @@ org.winehq.Proton-64-GE-1   - WoW64 proton wine-6.4 can run both 32 and 64 bit
 ```
 ### Install Proton-v6.4-GE-1 which works with most games
 download: 
+
 https://github.com/fastrizwaan/flatpak-wine/releases/download/20210326/org.winehq.Proton-64-GE-1.flatpak
 https://github.com/fastrizwaan/flatpak-wine/releases/download/20210326/org.winehq.wine-x86_64.flatpak
 
@@ -61,6 +55,16 @@ NVERSION=$(nvidia-settings -q all |grep OpenGLVersion|grep NVIDIA|sed 's/.*NVIDI
 sudo flatpak install flathub org.freedesktop.Platform.GL32.$NVERSION -y                
 
 ```
+
+
+### Screenshots
+#### Application is visible in Menu
+![](https://github.com/fastrizwaan/flatpak-wine/raw/main/Screenshots/wine_00.png)
+#### .exe files can be opened with Right-Click Open with menu in file manager
+![](https://github.com/fastrizwaan/flatpak-wine/raw/main/Screenshots/wine_01.png)
+
+#### wine and winetricks use WINEPREFIX ~/.wine-wine_x86-64
+![](https://github.com/fastrizwaan/flatpak-wine/raw/main/Screenshots/wine_02.png)
 
 #### Test
 ```
