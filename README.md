@@ -3,7 +3,7 @@
 ### Only Requirements is flathub and its runtimes
 
 Run windows 32bit/64bit games easily.
-1. uses WINEPREFIX=~/.Proton-64-GE-1 and WINEPREFIX=~/.wine-x86_64
+1. uses WINEPREFIX=\~/.Proton-64-GE-1 and WINEPREFIX=\~/.wine-x86_64
 2. winetricks also included as gui app, or use CLI to install, e.g., **flatpak run org.winehq.wine-x86_64 winetricks d3dx9 corefonts xinput**
 3. commandline **flatpak run org.winehq.wine-x86_64 <exe file>**
 
@@ -58,6 +58,8 @@ sudo flatpak install flathub org.freedesktop.Platform.GL32.$NVERSION -y
 
 
 ### Screenshots
+#### Proton-64-GE-1 open Uninstaller, as winefile is not available in Proton
+![](https://github.com/fastrizwaan/flatpak-wine/raw/main/Screenshots/proton_01.png)
 #### Application is visible in Menu
 ![](https://github.com/fastrizwaan/flatpak-wine/raw/main/Screenshots/wine_00.png)
 #### .exe files can be opened with Right-Click Open with menu in file manager
