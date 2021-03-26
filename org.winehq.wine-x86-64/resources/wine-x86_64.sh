@@ -16,6 +16,7 @@ export dire=$(dirname $1)
 #echo $base >> ~/Documents/debug.txt
 #echo $dire >> ~/Documents/debug.txt
 # Create kill shortcut for convenience
+mkdir -p ~/.local/share/applications/wine-x86_64/
 echo '
 [Desktop Entry]
 Exec=flatpak kill org.winehq.wine-x86_64 

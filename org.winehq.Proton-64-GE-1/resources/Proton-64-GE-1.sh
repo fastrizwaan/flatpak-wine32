@@ -16,7 +16,7 @@ export dire=$(dirname $1)
 #echo $base >> ~/Documents/debug.txt
 #echo $dire >> ~/Documents/debug.txt
 # Create kill shortcut for convenience
-
+mkdir -p ~/.local/share/applications/Proton-64-GE-1/
 echo '
 [Desktop Entry]
 Exec=flatpak kill org.winehq.Proton-64-GE-1 
