@@ -473,6 +473,16 @@ modules:
     - type: file
       path: org.winehq.wine-x86_64.yml
 
+  - name: explorer++
+    buildsystem: simple
+    build-commands:
+    - unzip explorer++_1.3.5_x86.zip -d /app/explorer++/
+    
+    sources:
+    - type: file
+      path: explorer++_1.3.5_x86.zip
+
+
 #  - name: wine-kill-program
 #    buildsystem: simple
 #    build-commands:
@@ -496,5 +506,5 @@ cleanup:
  - /share/applications/winetricks.desktop
  - /app/share/icons/hicolor/scalable/apps/winetricks.svg
  - /app/share/applications/winetricks.desktop
- 
+ - /app/explorer++/*.txt
  

@@ -30,8 +30,8 @@ Keywords=flatpak; wine; kill;
 # if no argument passed then launch winefile (from wine.desktop)
 if [ $# -eq 0 ];  then
     echo "No arguments supplied"
-    echo "launching explorer"
-    /app/bin/winefile
+    echo "launching explorer++"
+    /app/bin/wine /app/explorer++/Explorer++.exe
 
 elif   [ "$1" == "winecfg" ] ; then
 	/app/bin/winecfg
