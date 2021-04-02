@@ -27,16 +27,10 @@ org.winehq.Proton-64-GE-1   - WoW64 proton wine-6.4 can run both 32 and 64 bit
                               (https://github.com/GloriousEggroll/proton-ge-custom/releases)
 
 ```
-### Install Proton-v6.4-GE-1 which works with most games
-download: 
-
-https://github.com/fastrizwaan/flatpak-wine/releases/download/20210326/org.winehq.Proton-64-GE-1.flatpak
-https://github.com/fastrizwaan/flatpak-wine/releases/download/20210326/org.winehq.wine-x86_64.flatpak
-
+### Downloads
+https://github.com/fastrizwaan/flatpak-wine/releases
 ```
-wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/20210326/org.winehq.Proton-64-GE-1.flatpak
-flatpak --user install org.winehq.Proton-64-GE-1.flatpak
-wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/20210326/org.winehq.wine-x86_64.flatpak
+# for example
 flatpak --user install org.winehq.wine-x86_64.flatpak
 
 ```
