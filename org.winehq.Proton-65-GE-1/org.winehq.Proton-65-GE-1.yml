@@ -1,0 +1,213 @@
+# main branch - mono installs on demand by winetricks
+app-id: org.winehq.Proton-65-GE-1
+base-version: '20.08'
+runtime: org.freedesktop.Platform
+runtime-version: '20.08'
+sdk: org.freedesktop.Sdk
+command: Proton-65-GE-1.sh
+default-branch: stable
+separate-locales: false
+
+rename-desktop-file: wine.desktop
+
+
+# Support 32-bit at runtime
+add-extensions:
+  org.freedesktop.Platform.Compat.i386:
+    directory: lib/i386-linux-gnu
+    version: '20.08'
+
+  org.gnome.Platform.Compat.i386.Debug:
+    directory: lib/debug/lib/i386-linux-gnu
+    version: '20.08'
+    no-autodownload: false
+
+  org.freedesktop.Platform.GL32:
+    directory: lib/i386-linux-gnu/GL
+    versions: "20.08;1.4"
+    version: '1.4'
+    subdirectories: true
+    no-autodownload: false
+    autodelete: false
+    add-ld-path: lib
+    merge-dirs: vulkan/icd.d;glvnd/egl_vendor.d;OpenCL/vendors;lib/dri;lib/d3d;vulkan/explicit_layer.d
+    download-if: active-gl-driver
+    enable-if: active-gl-driver
+    
+  org.freedesktop.Platform.VAAPI.Intel:
+      directory: lib/dri/intel-vaapi-driver
+      autodelete: false
+      no-autodownload: true
+      download-if: have-intel-gpu
+
+# Support 32-bit at buildtime
+sdk-extensions:
+  - org.freedesktop.Sdk.Compat.i386
+  - org.freedesktop.Sdk.Extension.toolchain-i386
+
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --share=network
+  - --socket=pulseaudio
+  - --allow=multiarch
+  - --allow=devel
+  - --talk-name=org.freedesktop.Notifications
+  - --filesystem=host
+  - --device=all
+  # Persist Wineprefix as ~/.var/app/{fightcade}/.wine
+  - --persist=.wine
+  # Skip Gecko and Mono popups when creating Wine prefix
+  - --env=WINEDLLOVERRIDES="mscoree,mshtml="
+  
+  # Support 32-bit runtime
+  - --env=LD_LIBRARY_PATH=/app/lib:/app/lib32
+  
+  - --env=WINE_RESOLUTION=1920x1080
+
+modules:
+  # Create 32-bit directories
+  - name: compat
+    buildsystem: simple
+    build-commands:
+      - mkdir -p /app/lib/i386-linux-gnu /app/lib/debug/lib/i386-linux-gnu
+
+        
+  - name: Proton-6.1-GE-2
+    buildsystem: simple
+    build-commands:
+      - mkdir -p /app/bin /app/lib /app/lib64 /app/share
+      - rm -rf dist/share/wine/gecko
+      - rm -rf dist/share/wine/mono
+      - cp -rdvf dist/* /app
+
+    sources:
+      - type: archive
+        url: https://github.com/GloriousEggroll/proton-ge-custom/releases/download/6.5-GE-1/Proton-6.5-GE-1.tar.gz
+        sha256: 4c7da2c5eeef8e84f076b4fe7f6f700d970626d4ec854cedcfa17f80ac3bc8bb
+        
+  - name: winetricks
+    buildsystem: simple
+    build-commands:
+    - make
+    - make PREFIX=/app install
+    - chmod +x /app/bin/winetricks
+    sources:
+    - type: archive
+      url: https://github.com/Winetricks/winetricks/releases/download/20210206/20210206.tar.gz
+      sha256: 705421798b28696f577104ebdf03b068b9343ab096754150f47a6ec06fa8ae65
+
+  - name: cabextract
+    buildsystem: autotools
+    sources:
+    - type: archive
+      url: https://www.cabextract.org.uk/cabextract-1.6.tar.gz
+      sha256: cee661b56555350d26943c5e127fc75dd290b7f75689d5ebc1f04957c4af55fb
+
+  - name: wget
+    buildsystem: autotools
+    sources:
+    - type: archive
+      url: https://ftp.gnu.org/gnu/wget/wget-1.19.4.tar.gz
+      sha256: 93fb96b0f48a20ff5be0d9d9d3c4a986b469cb853131f9d5fe4cc9cecbc8b5b5
+
+  - name: icoutils
+    buildsystem: autotools
+    sources:
+      - type: archive
+        url: http://savannah.nongnu.org/download/icoutils/icoutils-0.32.3.tar.bz2
+        sha256: 17abe02d043a253b68b47e3af69c9fc755b895db68fdc8811786125df564c6e0
+
+  - name: ImageMagick
+    config-opts:
+      - --enable-shared
+      - --disable-static
+      - --disable-docs
+      - --with-modules
+      - --with-threads
+      - --with-png
+    sources:
+      - type: archive
+        url: https://github.com/ImageMagick/ImageMagick/archive/7.0.9-13.tar.gz
+        sha256: 4d488abe5bd4c2294d71074eccc238f4b4cf63b8ee2f07abbc40bde7f99c21ff        
+
+  - name: create-proton-shortcut
+    buildsystem: simple
+    build-commands:
+    - install -Dm755 proton-create-shortcut.sh /app/bin/proton-create-shortcut.sh
+    - install -Dm655 proton-create-shortcut.desktop 
+      /app/share/applications/org.winehq.Proton-65-GE-1-proton-create-shortcut.desktop
+    
+    sources:
+    - type: file
+      path: resources/proton-create-shortcut.sh 
+    - type: file
+      path: resources/proton-create-shortcut.desktop
+      
+  - name: winedesktop
+    buildsystem: simple
+    build-commands:
+    - install -Dm644 
+      /app/share/icons/hicolor/scalable/apps/winetricks.svg
+      /app/share/icons/hicolor/scalable/apps/org.winehq.Proton-65-GE-1.svg 
+    - desktop-file-edit --set-name=Proton-65-GE-1 /app/share/applications/wine.desktop
+    - desktop-file-edit --set-icon=org.winehq.Proton-65-GE-1 /app/share/applications/wine.desktop
+    - desktop-file-edit --set-name=Proton-65-GE-1 /app/share/applications/wine.desktop
+    - desktop-file-edit --set-key="Exec" --set-value="Proton-65-GE-1.sh %F" /app/share/applications/wine.desktop
+    - desktop-file-edit --set-key="MimeType" --set-value="application/x-ms-dos-executable;" 
+                        /app/share/applications/wine.desktop
+    - desktop-file-edit --set-key="NoDisplay" --set-value="false" 
+                        /app/share/applications/wine.desktop
+    
+    
+    - desktop-file-edit --set-name=Proton-65-GE-1-winetricks 
+                        /app/share/applications/winetricks.desktop
+    - desktop-file-edit --set-icon=org.winehq.Proton-65-GE-1-winetricks
+                        /app/share/applications/winetricks.desktop
+
+    - desktop-file-edit --set-key="Exec" --set-value="Proton-65-GE-1.sh winetricks --gui" /app/share/applications/winetricks.desktop
+        
+    - install -Dm644    /app/share/applications/winetricks.desktop 
+                        /app/share/applications/org.winehq.Proton-65-GE-1-winetricks.desktop
+    - install -Dm644
+      /app/share/icons/hicolor/scalable/apps/winetricks.svg
+      /app/share/icons/hicolor/scalable/apps/org.winehq.Proton-65-GE-1-winetricks.svg
+
+
+  - name: Proton-65-GE-1.sh_wine
+    buildsystem: simple
+    build-commands:
+    - install -Dm755 Proton-65-GE-1.sh /app/bin/Proton-65-GE-1.sh
+    
+    sources:
+    - type: file
+      path: resources/Proton-65-GE-1.sh
+
+  - name: xna31-fix-sha256sum
+    buildsystem: simple
+    build-commands:
+    - sed 's/187e7e6b08fe35428d945612a7d258bfed25fad53cc54882983abdc73fe60f91/409173b3a4f4ee6ff4e6910eece26f95af8073efae2c9fa4c0f8dad24f7774de/g' -i /app/bin/winetricks
+    
+  - name: include_manifest_and_install_scripts
+    buildsystem: simple
+    build-commands:
+    - mkdir /app/manifest_and_build_script
+    - install -Dm644 org.winehq.Proton-65-GE-1.yml /app/manifest_and_build_script
+    - install -Dm644 install.sh /app/manifest_and_build_script
+
+    sources:
+    - type: file
+      path: install.sh
+    - type: file
+      path: org.winehq.Proton-65-GE-1.yml
+          
+      
+cleanup:
+ - /lib/debug
+ - /lib32/debug
+ - /lib64/debug
+ - /share/man
+ - /include 
+ - /share/applications/winetricks.desktop
+ - /app/share/icons/hicolor/scalable/apps/winetricks.svg
+ - /app/share/applications/winetricks.desktop
