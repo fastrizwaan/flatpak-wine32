@@ -4,6 +4,7 @@ Name=wine-x86_64 KILL program (flatpak)
 Exec=killall.sh
 #MimeType=application/x-ms-dos-executable;
 Icon=org.winehq.wine-x86_64
+Categories=Emulator;
 NoDisplay=false
 StartupNotify=true
 X-Desktop-File-Install-Version=0.26

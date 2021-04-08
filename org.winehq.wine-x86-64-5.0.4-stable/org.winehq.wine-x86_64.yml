@@ -420,20 +420,27 @@ modules:
     - install -Dm644 
       /app/share/icons/hicolor/scalable/apps/winetricks.svg
       /app/share/icons/hicolor/scalable/apps/org.winehq.wine-x86_64.svg 
-    - desktop-file-edit --set-name="wine-x86_64 (flatpak)" 
+    - desktop-file-edit --set-name="wine-x86_64 [5.0.4] (flatpak)" 
                         /app/share/applications/wine.desktop
     - desktop-file-edit --set-icon=org.winehq.wine-x86_64 
                         /app/share/applications/wine.desktop
     - desktop-file-edit --set-key="Exec" --set-value="wine-x86_64.sh %F" 
                         /app/share/applications/wine.desktop
+                        
+    - desktop-file-edit --set-key="Categories" --set-value="Categories=Emulator;" 
+                        /app/share/applications/wine.desktop
+                        
     - desktop-file-edit --set-key="MimeType" --set-value="application/x-ms-dos-executable;" 
                         /app/share/applications/wine.desktop
     - desktop-file-edit --set-key="NoDisplay" --set-value="false" 
                         /app/share/applications/wine.desktop
     
-    - desktop-file-edit --set-name="winetricks-x86_64 (flatpak)"
+    - desktop-file-edit --set-name="winetricks-x86_64 [5.0.4] (flatpak)"
                         /app/share/applications/winetricks.desktop
     - desktop-file-edit --set-icon=org.winehq.wine-x86_64-winetricks
+                        /app/share/applications/winetricks.desktop
+
+    - desktop-file-edit --set-key="Categories" --set-value="Categories=Emulator;" 
                         /app/share/applications/winetricks.desktop
 
     - desktop-file-edit --set-key="Exec" --set-value="wine-x86_64.sh winetricks" 
