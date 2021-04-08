@@ -427,7 +427,7 @@ modules:
     - desktop-file-edit --set-key="Exec" --set-value="wine-x86_64.sh %F" 
                         /app/share/applications/wine.desktop
                         
-    - desktop-file-edit --set-key="Categories" --set-value="Categories=Emulator;" 
+    - desktop-file-edit --set-key="Categories" --set-value="Emulator;" 
                         /app/share/applications/wine.desktop
                         
     - desktop-file-edit --set-key="MimeType" --set-value="application/x-ms-dos-executable;" 
@@ -440,7 +440,7 @@ modules:
     - desktop-file-edit --set-icon=org.winehq.wine-x86_64-winetricks
                         /app/share/applications/winetricks.desktop
 
-    - desktop-file-edit --set-key="Categories" --set-value="Categories=Emulator;" 
+    - desktop-file-edit --set-key="Categories" --set-value="Emulator;" 
                         /app/share/applications/winetricks.desktop
 
     - desktop-file-edit --set-key="Exec" --set-value="wine-x86_64.sh winetricks" 
