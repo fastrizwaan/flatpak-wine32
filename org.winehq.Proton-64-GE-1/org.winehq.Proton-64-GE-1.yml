@@ -150,17 +150,21 @@ modules:
     - install -Dm644 
       /app/share/icons/hicolor/scalable/apps/winetricks.svg
       /app/share/icons/hicolor/scalable/apps/org.winehq.Proton-64-GE-1.svg 
-    - desktop-file-edit --set-name=Proton-64-GE-1 /app/share/applications/wine.desktop
-    - desktop-file-edit --set-icon=org.winehq.Proton-64-GE-1 /app/share/applications/wine.desktop
-    - desktop-file-edit --set-name=Proton-64-GE-1 /app/share/applications/wine.desktop
-    - desktop-file-edit --set-key="Exec" --set-value="Proton-64-GE-1.sh %F" /app/share/applications/wine.desktop
+    - desktop-file-edit --set-name=Proton-64-GE-1             
+                        /app/share/applications/wine.desktop
+    - desktop-file-edit --set-icon=org.winehq.Proton-64-GE-1  
+                        /app/share/applications/wine.desktop
+    - desktop-file-edit --set-name=Proton-64-GE-1             
+                        /app/share/applications/wine.desktop
+    - desktop-file-edit --set-key="Exec" --set-value="Proton-64-GE-1.sh %F" 
+                        /app/share/applications/wine.desktop
     - desktop-file-edit --set-key="MimeType" --set-value="application/x-ms-dos-executable;" 
                         /app/share/applications/wine.desktop
     - desktop-file-edit --set-key="NoDisplay" --set-value="false" 
                         /app/share/applications/wine.desktop
     
     
-    - desktop-file-edit --set-name=Proton-64-GE-1 winetricks 
+    - desktop-file-edit --set-name="Proton-64-GE-1 winetricks" 
                         /app/share/applications/winetricks.desktop
     - desktop-file-edit --set-icon=org.winehq.Proton-64-GE-1-winetricks
                         /app/share/applications/winetricks.desktop
