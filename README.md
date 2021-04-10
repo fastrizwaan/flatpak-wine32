@@ -1,10 +1,12 @@
-# flatpak-wine: Wine 6.0 Vanilla and Proton-6.4-GE-1 inside flatpak apps
+# flatpak-wine: Wine 5.0.x Vanilla and Proton-6.4-GE-1 inside flatpak apps
+Most games work with 5.0.4 and rest will run with Proton. So, install both.
+
 ## Play 32 and 64 bit wine games from your disk using wine inside flatpak
 ### Only Requirements is flathub and its runtimes
 
 Run windows 32bit/64bit games easily.
 1. uses WINEPREFIX=\~/.Proton-64-GE-1 and WINEPREFIX=\~/.wine-x86_64
-2. winetricks also included as gui app, or use CLI to install, e.g., **flatpak run org.winehq.wine-x86_64 winetricks d3dx9 corefonts xinput**
+2. winetricks also included as gui app, or use CLI to install, e.g., **flatpak run org.winehq.wine-x86_64 winetricks d3dx9 xna31 allcodecs corefonts xinput**
 3. commandline **flatpak run org.winehq.wine-x86_64 <exe file>**
 
 #### Features
@@ -21,8 +23,8 @@ WINEPREFIX=~/.wine32arch WINEARCH=win32 flatpak run --command=wine org.winehq.Pr
 
 ##### There are 2 packages:
 ```
-org.winehq.wine-x86-64      - vanilla wine 6.0 inside flatpak. This should do for most 32 bit and 64 bit apps and games
-                              (https://dl.winehq.org/wine/source/6.0/)
+org.winehq.wine-x86-64      - vanilla wine 5.0.4 inside flatpak. This should do for most 32 bit and 64 bit apps and games
+                              (https://dl.winehq.org/wine/source/5.0/)
 org.winehq.Proton-64-GE-1   - WoW64 proton wine-6.4 can run both 32 and 64 bit
                               (https://github.com/GloriousEggroll/proton-ge-custom/releases)
 
@@ -52,7 +54,6 @@ sudo flatpak install --system flathub org.freedesktop.Platform.GL.$NVERSION org.
 
 
 ### Screenshots
-#### Proton-64-GE-1 open Uninstaller, as winefile is not available in Proton
 ##### Select filetype: *.exe and open the program you want to run
 ![](https://github.com/fastrizwaan/flatpak-wine/raw/main/Screenshots/proton_01.png)
 #### Application is visible in Menu
@@ -68,9 +69,9 @@ sudo flatpak install --system flathub org.freedesktop.Platform.GL.$NVERSION org.
 flatpak run org.winehq.Proton-64-GE-1 --version
 wine-6.4
 flatpak run org.winehq.wine-x86_64 --version
-wine-6.0
+wine-5.0.4
 ```
-without any argument/parameters, we launch explorer/winefile so that we could run exe/setup easily
+without any argument/parameters, we launch explorer++ so that we could run exe/setup easily
 ```
 flatpak run org.winehq.Proton-64-GE-1
 (or)
