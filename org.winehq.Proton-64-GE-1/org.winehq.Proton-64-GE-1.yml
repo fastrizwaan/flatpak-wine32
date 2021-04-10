@@ -162,12 +162,18 @@ modules:
                         /app/share/applications/wine.desktop
     - desktop-file-edit --set-key="NoDisplay" --set-value="false" 
                         /app/share/applications/wine.desktop
-    
+
+   - desktop-file-edit --set-key="Categories" --set-value="Emulator;" 
+                        /app/share/applications/wine.desktop    
     
     - desktop-file-edit --set-name="Proton-64-GE-1 winetricks" 
                         /app/share/applications/winetricks.desktop
     - desktop-file-edit --set-icon=org.winehq.Proton-64-GE-1-winetricks
                         /app/share/applications/winetricks.desktop
+                        
+
+    - desktop-file-edit --set-key="Categories" --set-value="Emulator;" 
+                        /app/share/applications/winetricks.desktop                        
 
     - desktop-file-edit --set-key="Exec" --set-value="Proton-64-GE-1.sh winetricks --gui" /app/share/applications/winetricks.desktop
         
