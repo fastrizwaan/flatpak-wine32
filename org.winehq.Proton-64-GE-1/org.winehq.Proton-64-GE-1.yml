@@ -163,7 +163,7 @@ modules:
     - desktop-file-edit --set-key="NoDisplay" --set-value="false" 
                         /app/share/applications/wine.desktop
 
-   - desktop-file-edit --set-key="Categories" --set-value="Emulator;" 
+    - desktop-file-edit --set-key="Categories" --set-value="Emulator;" 
                         /app/share/applications/wine.desktop    
     
     - desktop-file-edit --set-name="Proton-64-GE-1 winetricks" 
