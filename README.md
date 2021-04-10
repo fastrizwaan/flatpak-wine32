@@ -47,8 +47,7 @@ sudo flatpak -y --system install                                       \
                 org.freedesktop.Platform.VAAPI.Intel/x86_64/20.08
                 
 NVERSION=$(nvidia-settings -q all |grep OpenGLVersion|grep NVIDIA|sed 's/.*NVIDIA \(.*\) /nvidia-\1/g'|sed 's/\./-/g')				
-sudo flatpak install flathub org.freedesktop.Platform.GL32.$NVERSION -y                
-
+sudo flatpak install --system flathub org.freedesktop.Platform.GL.$NVERSION org.freedesktop.Platform.GL32.$NVERSION -y   
 ```
 
 
@@ -98,7 +97,7 @@ sudo flatpak -y --system install                                          \
 
                 
 NVERSION=$(nvidia-settings -q all |grep OpenGLVersion|grep NVIDIA|sed 's/.*NVIDIA \(.*\) /nvidia-\1/g'|sed 's/\./-/g')				
-sudo flatpak install flathub org.freedesktop.Platform.GL32.$NVERSION -y   
+sudo flatpak install --system flathub org.freedesktop.Platform.GL.$NVERSION org.freedesktop.Platform.GL32.$NVERSION -y   
 ```
 
 #### Build
