@@ -160,7 +160,7 @@ modules:
                         /app/share/applications/wine.desktop
     
     
-    - desktop-file-edit --set-name=Proton-64-GE-1-winetricks 
+    - desktop-file-edit --set-name=Proton-64-GE-1 winetricks 
                         /app/share/applications/winetricks.desktop
     - desktop-file-edit --set-icon=org.winehq.Proton-64-GE-1-winetricks
                         /app/share/applications/winetricks.desktop
@@ -201,6 +201,14 @@ modules:
     - type: file
       path: org.winehq.Proton-64-GE-1.yml
           
+  - name: explorer++
+    buildsystem: simple
+    build-commands:
+    - unzip explorer++_1.3.5_x86.zip -d /app/explorer++/
+    
+    sources:
+    - type: file
+      path: explorer++_1.3.5_x86.zip
       
 cleanup:
  - /lib/debug

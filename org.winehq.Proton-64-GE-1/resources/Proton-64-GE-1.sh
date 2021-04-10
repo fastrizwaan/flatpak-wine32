@@ -32,7 +32,7 @@ Keywords=flatpak; wine; kill;
 if [ $# -eq 0 ];  then
     echo "No arguments supplied"
     echo "launching explorer"
-    $WINEEXE uninstaller
+    /app/bin/wine /app/explorer++/Explorer++.exe
 
 elif   [ "$1" == "winecfg" ] ; then
 	/app/bin/winecfg
@@ -49,7 +49,7 @@ elif [ "$1" == "bash" ] ; then
 	
 else
 #	$WINEEXE "$EXE" $@
-        cd $dire ;#go to the exe directory then run
+        cd $dire 2>/dev/null ;#go to the exe directory then run
         #echo $PWD - pwd >> ~/Documents/debug.txt
         #echo now at $dire >> ~/Documents/debug.txt
 
