@@ -20,7 +20,7 @@ mkdir -p ~/.local/share/applications/wine-x86_64/
 echo '
 [Desktop Entry]
 Exec=flatpak kill org.winehq.wine-x86_64 
-Name=Killall wine-x86_64 instances
+Name=Kill wine-x86_64 [5.0.4] instances
 Type=Application
 Categories=Application;;
 Icon=org.winehq.wine-x86_64
