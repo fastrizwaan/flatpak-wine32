@@ -19,7 +19,7 @@ https://dl.winehq.org/wine/source/5.0/
 1. this flatpak (from Releases, see Downloads below)
 2. install flatpak dependencies, see Runtime Dependencies below
 
-### Downloads
+### Downloads 
 https://github.com/fastrizwaan/flatpak-wine/releases
 ```
 # for example
