@@ -28,6 +28,7 @@ flatpak --user install org.winehq.wine-x86_64.flatpak
 ```
 
 ### Runtime dependencies [copy paste the below into gnome-terminal / konsole / XFCE4-Terminal ]
+
 ```
 sudo flatpak --system remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 sudo flatpak update -y
@@ -65,15 +66,19 @@ wine-5.0.4
 
 
 #### Advanced Usage 
+
 1. Kill running instances, run `flatpak kill org.winehq.wine-x86`
 2. To Create win32 arch and install winetricks apps/dlls
+
 ```
 WINEPREFIX=~/.wine32arch WINEARCH=win32 flatpak run --command=winetricks org.winehq.wine-x86_64  xact xact_x64 dotnet35 xna31 corefonts xinput d3dx9
 ```
 
 ### Build on your own
 
+
 #### install SDK for building
+
 ```
 sudo flatpak --system remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 sudo flatpak -y --system install                                          \
@@ -88,6 +93,7 @@ sudo flatpak -y --system install                                          \
 ```
 
 #### Build
+
 ```
 cd ../flatpak-wine/org.winehq.wine-x86-64/
 sh ./install.sh ; #builds in 1-2 hours as wine is compiled 3 times
@@ -96,6 +102,5 @@ sh ./install.sh ; #builds in 1-2 hours as wine is compiled 3 times
 git clone https://github.com/fastrizwaan/flatpak-wine.git
 cd flatpak-wine/Others/org.winehq.Proton-64-GE-1
 sh ./install.sh ; #builds in 10 minutes
-
 ```
 
