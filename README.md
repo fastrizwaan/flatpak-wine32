@@ -95,6 +95,7 @@ sudo flatpak -y --system install                                          \
 #### Build
 
 ```
+git clone https://github.com/fastrizwaan/flatpak-wine.git
 cd ../flatpak-wine/org.winehq.wine-x86-64/
 sh ./install.sh ; #builds in 1-2 hours as wine is compiled 3 times
 
