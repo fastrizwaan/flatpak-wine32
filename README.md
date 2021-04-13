@@ -16,7 +16,7 @@ E.g.,
 https://dl.winehq.org/wine/source/5.0/
 
 ### Requirements:
-1. this flatpak (from Releases, see Downlaods below)
+1. this flatpak (from Releases, see Downloads below)
 2. install flatpak dependencies, see Runtime Dependencies below
 
 ### Downloads
