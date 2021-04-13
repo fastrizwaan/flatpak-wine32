@@ -105,3 +105,6 @@ cd flatpak-wine/Others/org.winehq.Proton-64-GE-1
 sh ./install.sh ; #builds in 10 minutes
 ```
 
+### Step by Step Install Instructions:
+[![Step by Step Insllation of flatpak-wine](https://i9.ytimg.com/vi/x4PUObpG8sI/mqdefault.jpg?time=1618300200000&sqp=CKia1YMG&rs=AOn4CLBjLq4Ne3KC8cCvR31FQH3QEOTMLg)](https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)
+
