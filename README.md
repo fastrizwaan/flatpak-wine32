@@ -16,7 +16,7 @@ E.g.,
 https://dl.winehq.org/wine/source/5.0/
 
 ### Requirements:
-1. this flatpak (from Releases, see Downlaods below)
+1. this flatpak (from Releases, see Downloads below)
 2. install flatpak dependencies, see Runtime Dependencies below
 
 ### Downloads
@@ -58,9 +58,11 @@ sudo flatpak install --system flathub org.freedesktop.Platform.GL.$NVERSION org.
 ```
 flatpak run org.winehq.wine-x86_64 --version
 wine-5.0.4
+
 ```
-without any argument/parameters, we launch explorer++ so that we could run exe/setup easily
-```
+
+##### without any argument/parameters, we launch explorer++ so that we could run exe/setup easily
+
 
 #### Advanced Usage 
 1. Kill running instances, run `flatpak kill org.winehq.wine-x86`
