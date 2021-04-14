@@ -163,7 +163,7 @@ $category;"\\n"Icon="$myFile.icon.png""
     
     # link the launcher  file to a shortcut on applications menu.
     mkdir -p "$HOME/.local/share/applications/wine-x86_64/"
-    ln -s "$myFile.desktop" "$HOME/.local/share/applications/wine-x86_64/$myBaseName.desktop"
+    ln -s "$myFile.desktop" "~/.local/share/applications/wine-x86_64/$myBaseName.desktop"
     # Test if the app link was created sucessfully on applications menu 
     if [ $? -eq 0 ]; then
         gtk-update-icon-cache 
