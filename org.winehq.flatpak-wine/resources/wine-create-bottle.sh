@@ -142,7 +142,7 @@ rm -f "$myFile.desktop"
 rm -f "$myFile.icon.png"
 rm -f ~/.wine-x86_64-bottles/"$myBaseNamePrefix.sh"
 else
-WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=wine org.winehq.flatpak-wine '$myFile'
+WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=wine-x86_64.sh org.winehq.flatpak-wine '$myFile'
 fi
 EOF
 ###############################################
