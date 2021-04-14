@@ -62,6 +62,7 @@ choice=\$(zenity --title "$myBaseNamePrefix: Choose!" --width=240 --height=300 \
                  --list \
                  --radiolist --column " " \
                  --column "Action" \
+                          0 "My_Dlls_install" \                 
                           0 "Install_DLLs" \
                           TRUE "Launch $myBaseNamePrefix" \
                           0 "Winetricks" \
@@ -77,25 +78,51 @@ choice=\$(zenity --title "$myBaseNamePrefix: Choose!" --width=240 --height=300 \
 if [ \$choice = "Winetricks" ]; then  
    WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --gui
 
-elif [ $choice = "Install_DLLs" ]; then
+elif [ \$choice = "Install_DLLs" ]; then
 dlls=(xact xact_x64 xinput xna31 vcrun6 vcrun6sp6 vcrun2003 vcrun2005 vcrun2008 vcrun2010 vcrun2012 vcrun2013 vcrun2015 vcrun2017 vcrun2019 corefonts d3dx9 allcodecs)
 
-size=${#dlls[*]}
-step=$(expr 100 / $size)
-prog=$(echo $step)
-echo $size $step ${dlls[*]}
+size=\${#dlls[*]}
+step=\$(expr 100 / \$size)
+prog=\$(echo \$step)
 
-	( for i in ${dlls[*]};
+
+	( for i in \${dlls[*]};
 	  do
-    	echo $prog
-	    echo "# Installing $i..."
-	    WINEPREFIX=~/.wine-x86_64 winetricks --unattended  $i
+    	echo \$prog
+	    echo "# Installing \$i..."
+	    WINEPREFIX=~/.wine-x86_64 winetricks --unattended  \$i
       
-        prog=$(expr $prog + $step)
+        prog=\$(expr \$prog + \$step)
 	  done
 	  echo 100
 	  echo "# Done!"
 	) | zenity --width=340 --title "Installing DLLs with Winetricks" --progress --auto-kill
+
+
+    # My_Dlls_install
+	elif [ \$choice = "My_Dlls_install" ]; then
+	mydlls=\$(zenity --title "Install custom dlls" --text "paste winetricks (e.g., xna31 d3dx9 xinput faudio)" --entry)
+    if [ ! \$mydlls ]; #if no dlls are given
+       then         
+       mydlls=(xact xact_x64 xinput xna31 vcrun2003 vcrun2005 faudio)
+    fi
+    
+size=\${#mydlls[*]}
+step=\$(expr 100 / \$size)
+prog=\$(echo \$step)
+
+	( for i in \${mydlls[*]};
+	  do
+    	echo \$prog
+	    echo "# Installing \$i..."
+	    WINEPREFIX=~/.wine-x86_64 winetricks --unattended  \$i
+      
+        prog=\$(expr \$prog + \$step)
+	  done
+	  echo 100
+	  echo "# Done!"
+	) | zenity --width=340 --title "Installing Custom DLLs with Winetricks" --progress --auto-kill
+
 
 elif [ \$choice = "Winecfg" ]; then
    WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winecfg org.winehq.flatpak-wine

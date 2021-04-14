@@ -71,6 +71,7 @@ echo $size $step ${dlls[*]}
 	  echo "# Done!"
 	) | zenity --width=340 --title "Installing DLLs with Winetricks" --progress --auto-kill
 
+    # mydlls
 	elif [ $choice = "My_Dlls_install" ]; then
 	mydlls=$(zenity --title "Install custom dlls" --text "paste winetricks (e.g., xna31 d3dx9 xinput faudio)" --entry)
     if [ ! $mydlls ]; #if no dlls are given
@@ -95,6 +96,7 @@ echo $size $step ${mydlls[*]}
 	  echo "# Done!"
 	) | zenity --width=340 --title "Installing Custom DLLs with Winetricks" --progress --auto-kill
 	
+	# winecfg
 	elif [ $choice = "Winecfg" ]; then
 	   WINEPREFIX=~/.wine-x86_64 winecfg
 
