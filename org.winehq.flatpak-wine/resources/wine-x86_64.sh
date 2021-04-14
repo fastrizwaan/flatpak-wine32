@@ -38,7 +38,7 @@ if [ $# -eq 0 ];  then
 					 --radiolist --column " " \
 					 --column "Action" \
 							  0 "Winetricks" \
-							  0 "My_Dlls_install"
+							  0 "My_Dlls_install" \
 							  0 "Install_DLLs" \
 							  0 "Winecfg" \
 						   TRUE "Explore" \
@@ -52,7 +52,7 @@ if [ $# -eq 0 ];  then
 	   WINEPREFIX=~/.wine-x86_64 winetricks --gui
 
 	elif [ $choice = "Install_DLLs" ]; then
-dlls=(xact xact_x64 xinput xna31 vcrun6 vcrun6sp6 vcrun2003 vcrun2005 vcrun2008 vcrun2010 vcrun2012 vcrun2013 vcrun2015 vcrun2017 vcrun2019 corefonts d3dx9 allcodecs)
+dlls=(xact xact_x64 xinput xna31 vcrun6 vcrun6sp6 vcrun2003 vcrun2005 vcrun2008 vcrun2010 vcrun2012 vcrun2013 vcrun2015 vcrun2017 vcrun2019 corefonts d3dx9 allcodecs faudio)
 
 size=${#dlls[*]}
 step=$(expr 100 / $size)
@@ -72,18 +72,18 @@ echo $size $step ${dlls[*]}
 	) | zenity --width=340 --title "Installing DLLs with Winetricks" --progress --auto-kill
 
 	elif [ $choice = "My_Dlls_install" ]; then
-	dlls=$(zenity --title "Install custom dlls" --text "paste winetricks (e.g., xna31 d3dx9 xinput)" --entry)
+	mydlls=$(zenity --title "Install custom dlls" --text "paste winetricks (e.g., xna31 d3dx9 xinput faudio)" --entry)
     if [ ! $dlls ]; #if no dlls are given
        then         
-       dlls=(xact xact_x64 xinput xna31 vcrun2003 vcrun2005)
+       mydlls=(xact xact_x64 xinput xna31 vcrun2003 vcrun2005 faudio)
     fi
     
-size=${#dlls[*]}
+size=${#mydlls[*]}
 step=$(expr 100 / $size)
 prog=$(echo $step)
-echo $size $step ${dlls[*]}
+echo $size $step ${mydlls[*]}
 
-	( for i in ${dlls[*]};
+	( for i in ${mydlls[*]};
 	  do
     	echo $prog
 	    echo "# Installing $i..."
