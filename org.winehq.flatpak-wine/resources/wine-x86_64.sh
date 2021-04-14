@@ -135,7 +135,7 @@ elif [ "$1" == "bash" ] ; then
 	
 else
 #	$WINEEXE "$EXE" $@
-     cd $dire 2>/dev/null;#go to the exe directory then run
+     cd "$dire" 2>/dev/null;#go to the exe directory then run
      #echo $PWD - pwd >> ~/Documents/debug.txt
      #echo now at $dire >> ~/Documents/debug.txt
 
