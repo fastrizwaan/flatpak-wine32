@@ -159,11 +159,11 @@ $appName"\\n"Path=$myPath"\\n"Type=Application"\\n"Categories=$appCategory;\
 $category;"\\n"Icon="$myFile.icon.png""
     # Create a .desktop file and add desktop entries in it.
     echo -e $deskEntry >"$myFile".desktop
-    echo "Keywords=flatpak; wine;" >> "$myFile".desktop
+    echo "Keywords=flatpak; wine;" >> "$myFile.desktop"
     
     # link the launcher  file to a shortcut on applications menu.
-    mkdir -p "$HOME/.local/share/applications/wine-x86_64/"
-    ln -s "$myFile.desktop" "~/.local/share/applications/wine-x86_64/$myBaseName.desktop"
+    mkdir -p "~/.local/share/applications/wine-x86_64/"
+    ln -sf "$myFile.desktop" "~/.local/share/applications/wine-x86_64/$myBaseName.desktop"
     # Test if the app link was created sucessfully on applications menu 
     if [ $? -eq 0 ]; then
         gtk-update-icon-cache 
