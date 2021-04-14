@@ -57,6 +57,10 @@ myBaseNamePrefix=$(echo $myBaseName|tr ' ' '_');
 
 ###############################################
 cat << EOF > ~/.wine-x86_64-bottles/$myBaseNamePrefix.sh
+#!/bin/bash
+export WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix
+export WINEARCH=win64
+export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:/app/lib:/app/lib32:/app/lib/wine:/app/lib32/wine:/app/lib/i386-linux-gnu:/app/lib/debug/lib/i386-linux-gnu
 
 choice=\$(zenity --title "$myBaseNamePrefix: Choose!" --width=240 --height=300 \
                  --list \
@@ -76,7 +80,7 @@ choice=\$(zenity --title "$myBaseNamePrefix: Choose!" --width=240 --height=300 \
 [[ -z "\$choice" ]] && exit 1
 
 if [ "\$choice" = "Winetricks" ]; then  
-   WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --gui
+   flatpak run --command=winetricks org.winehq.flatpak-wine --gui
 
 elif [ "\$choice" = "Install_DLLs" ]; then
 
@@ -94,7 +98,7 @@ prog=\$(echo \$step)
 	  do
     	echo \$prog
 	    echo "# Installing \$i..."
-	    WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --unattended  \$i
+	    flatpak run --command=winetricks org.winehq.flatpak-wine --unattended  \$i
       
         prog=\$(expr \$prog + \$step)
 	  done
@@ -120,7 +124,7 @@ prog=\$(echo \$step)
 	  do
     	echo \$prog
 	    echo "# Installing \$i..."
-	    WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --unattended \$i
+	    flatpak run --command=winetricks org.winehq.flatpak-wine --unattended \$i
       
         prog=\$(expr \$prog + \$step)
 	  done
@@ -130,19 +134,19 @@ prog=\$(echo \$step)
 
 
 elif [ "\$choice" = "Winecfg" ]; then
-   WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winecfg org.winehq.flatpak-wine
+   flatpak run --command=winecfg org.winehq.flatpak-wine
 elif [ "\$choice" = "Explore" ]; then
-   WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=wine org.winehq.flatpak-wine /app/explorer++/Explorer++.exe
+   flatpak run --command=wine org.winehq.flatpak-wine /app/explorer++/Explorer++.exe
 elif [ "\$choice" = "Shell" ]; then   
- gnome-terminal -- bash -c "WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=bash org.winehq.flatpak-wine"
+ gnome-terminal -- bash -c "flatpak run --command=bash org.winehq.flatpak-wine"
 elif [ "\$choice" = "Delete_Bottle" ]; then
 rm -rfv ~/.wine-x86_64-bottles/$myBaseNamePrefix; 
-rm -f "$HOME/.local/share/applications/wine-x86_64/$myBaseName.desktop"
+rm -f "~/.local/share/applications/wine-x86_64/$myBaseName.desktop"
 rm -f "$myFile.desktop" 
 rm -f "$myFile.icon.png"
 rm -f ~/.wine-x86_64-bottles/"$myBaseNamePrefix.sh"
 else
-WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=wine-x86_64.sh org.winehq.flatpak-wine '$myFile'
+flatpak run --command=wine org.winehq.flatpak-wine '$myFile'
 fi
 EOF
 ###############################################
