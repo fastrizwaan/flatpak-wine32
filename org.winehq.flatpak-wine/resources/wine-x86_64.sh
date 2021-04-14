@@ -73,7 +73,7 @@ echo $size $step ${dlls[*]}
 
 	elif [ $choice = "My_Dlls_install" ]; then
 	mydlls=$(zenity --title "Install custom dlls" --text "paste winetricks (e.g., xna31 d3dx9 xinput faudio)" --entry)
-    if [ ! $dlls ]; #if no dlls are given
+    if [ ! $mydlls ]; #if no dlls are given
        then         
        mydlls=(xact xact_x64 xinput xna31 vcrun2003 vcrun2005 faudio)
     fi
