@@ -81,9 +81,9 @@ echo $size $step ${dlls[*]}
     if [ -z $mydlls ]; #if no dlls are given
        then         
        mydlls=(xact xact_x64 xinput xna31 vcrun2003 vcrun2005 d3dx9 faudio)
-    fi
-    
+    else   
     mydlls=( $mydlls ) ; #convert string to array
+    fi
     
 size=${#mydlls[*]}
 step=$(expr 100 / $size)
