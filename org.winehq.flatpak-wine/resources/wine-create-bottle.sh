@@ -62,7 +62,7 @@ choice=\$(zenity --title "$myBaseNamePrefix: Choose!" --width=240 --height=300 \
                  --list \
                  --radiolist --column " " \
                  --column "Action" \
-                          0 "My_Dlls_install" \                 
+                          0 "My_Dlls_install" \
                           0 "Install_DLLs" \
                           TRUE "Launch $myBaseNamePrefix" \
                           0 "Winetricks" \
