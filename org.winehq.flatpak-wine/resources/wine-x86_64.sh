@@ -46,12 +46,12 @@ if [ $# -eq 0 ];  then
 					 --text "Select Action for ~/.wine-x86_64 " )
 
    # exit when Cancel is clicked
-   [[ -z "$choice" ]] && exit 1
+   [[ -z $choice ]] && exit 1
    
-	if [ "$choice" = "Winetricks" ]; then  
+	if [ $choice = "Winetricks" ]; then  
 	   WINEPREFIX=~/.wine-x86_64 winetricks --gui
 
-	elif [ "$choice" = "Install_DLLs" ]; then
+	elif [ $choice = "Install_DLLs" ]; then
 	
     #recommeded https://www.youtube.com/watch?v=aDuysgB35YY
     dlls=(xna31 quartz vcrun2005 vcrun2008 vcrun2010 wininet xact xact_x64 xinput d3dx10_43 d3dx10 d3dx11_42 d3dx11_43 d3dx9_24 d3dx9_25 d3dx9_26 d3dx9_27 d3dx9_28 d3dx9_29 d3dx9_30 d3dx9_31 d3dx9_32 d3dx9_33 d3dx9_34 d3dx9_35 d3dx9_36 d3dx9_37 d3dx9_38 d3dx9_39 d3dx9_40 d3dx9_41 d3dx9_42 d3dx9_43 d3dx9 d3dxof corefonts faudio directplay directmusic)
@@ -76,7 +76,7 @@ echo $size $step ${dlls[*]}
 	) | zenity --width=340 --title "Installing DLLs with Winetricks" --progress --auto-kill
 
     # mydlls
-	elif [ "$choice" = "My_Dlls_install" ]; then
+	elif [ $choice = "My_Dlls_install" ]; then
 	mydlls=$(zenity --title "Install custom dlls" --text "paste winetricks (e.g., xna31 d3dx9 xinput faudio)" --entry)
     if [ -z $mydlls ]; #if no dlls are given
        then         
@@ -103,14 +103,14 @@ echo $size $step ${mydlls[*]}
 	) | zenity --width=340 --title "Installing Custom DLLs with Winetricks" --progress --auto-kill
 	
 	# winecfg
-	elif [ "$choice" = "Winecfg" ]; then
+	elif [ $choice = "Winecfg" ]; then
 	   WINEPREFIX=~/.wine-x86_64 winecfg
 
-	elif [ "$choice" = "Delete_Bottle" ]; then
+	elif [ $choice = "Delete_Bottle" ]; then
 	   rm -rfv ~/.wine-x86_64; 
        rm ~/.local/share/applications/wine-x86_64/killall_wine-5.0.4.desktop
 
-	elif [ "$choice" = "Explore" ]; then
+	elif [ $choice = "Explore" ]; then
 	   WINEPREFIX=~/.wine-x86_64 wine /app/explorer++/Explorer++.exe
 	   
 	else
