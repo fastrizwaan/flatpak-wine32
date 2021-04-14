@@ -104,7 +104,7 @@ prog=\$(echo \$step)
 	  done
 	  echo 100
 	  echo "# Done!"
-	) | zenity --width=340 --title "Installing DLLs with Winetricks" --progress --auto-kill
+	) | zenity --width=340 --title "$myBaseNamePrefix: Installing DLLs with Winetricks" --progress --auto-kill
 
 
     # My_Dlls_install
@@ -130,7 +130,7 @@ prog=\$(echo \$step)
 	  done
 	  echo 100
 	  echo "# Done!"
-	) | zenity --width=340 --title "Installing Custom DLLs with Winetricks" --progress --auto-kill
+	) | zenity --width=340 --title "$myBaseNamePrefix: Installing Custom DLLs with Winetricks" --progress --auto-kill
 
 
 elif [ "\$choice" = "Winecfg" ]; then
