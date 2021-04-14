@@ -46,7 +46,7 @@ if [ $# -eq 0 ];  then
 					 --text "Select Action for ~/.wine-x86_64 " )
 
    # exit when Cancel is clicked
-   [[ "$?" != "0" ]] && exit 1
+   [[ -z $choice ]] && exit 1
    
 	if [ $choice = "Winetricks" ]; then  
 	   WINEPREFIX=~/.wine-x86_64 winetricks --gui

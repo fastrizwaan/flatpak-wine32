@@ -73,7 +73,7 @@ choice=\$(zenity --title "$myBaseNamePrefix: Choose!" --width=240 --height=300 \
                  --text "Select Action..." )
 
 
-[[ "\$?" != "0" ]] && exit 1
+[[ -z \$choice ]] && exit 1
 
 if [ \$choice = "Winetricks" ]; then  
    WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --gui
