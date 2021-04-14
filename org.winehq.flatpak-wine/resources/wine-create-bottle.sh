@@ -110,6 +110,7 @@ prog=\$(echo \$step)
        then         
        mydlls=(xact xact_x64 xinput xna31 vcrun2003 vcrun2005 d3dx9 faudio)
     fi
+    mydlls=( \$mydlls ) ; #convert string to array
     
 size=\${#mydlls[*]}
 step=\$(expr 100 / \$size)
