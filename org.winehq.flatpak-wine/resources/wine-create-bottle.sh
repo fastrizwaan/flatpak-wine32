@@ -90,7 +90,7 @@ prog=\$(echo \$step)
 	  do
     	echo \$prog
 	    echo "# Installing \$i..."
-	    WINEPREFIX=~/.wine-x86_64 winetricks --unattended  \$i
+	    WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --unattended  \$i
       
         prog=\$(expr \$prog + \$step)
 	  done
@@ -115,7 +115,7 @@ prog=\$(echo \$step)
 	  do
     	echo \$prog
 	    echo "# Installing \$i..."
-	    WINEPREFIX=~/.wine-x86_64 winetricks --unattended  \$i
+	    WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine  \$i
       
         prog=\$(expr \$prog + \$step)
 	  done
