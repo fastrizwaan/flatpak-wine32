@@ -76,43 +76,80 @@ choice=\$(zenity --title "$myBaseNamePrefix: Choose!" --width=240 --height=300 \
 
 if [ \$choice = "Winetricks" ]; then  
    WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --gui
-elif [ \$choice = "Install_DLLs" ]; then
-(
-  echo 10
-  echo "# Installing xact..."
-  WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --unattended xact xact_x64
 
-  echo 20
-  echo "# Installing xinput..."
-  WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --unattended xinput
+elif [ $choice = "Install_DLLs" ]; then
+	(
+	  echo 5
+	  echo "# Installing xact..."
+	  WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --unattended xact xact_x64
 
-  echo 40
-  echo "# Installing XNA31..."
-  WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --unattended xna31
+	  echo 10
+	  echo "# Installing xinput..."
+	  WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --unattended xinput
 
-  echo 50
-  echo "# Installing vcrun 2005..."
-  WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --unattended vcrun2005 
+	  echo 15
+	  echo "# Installing xna31..."
+	  WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --unattended xna31
 
-  echo 60
-  echo "# Installing vcrun 2008..."
-  WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --unattended vcrun2008
+	  echo 20
+	  echo "# Installing vcrun6..."
+	  WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --unattended vcrun6
 
-  echo 70
-  echo "# Installing corefonts..."
-  WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --unattended vcrun2008
+	  echo 25
+	  echo "# Installing vcrun6sp6..."
+	  WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --unattended vcrun6sp6
 
-  echo 80
-  echo "# Installing d3dx9..."
-  WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --unattended d3dx9
+	  echo 30
+	  echo "# Installing vcrun 2003..."
+	  WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --unattended vcrun2003 
 
-  echo 90
-  echo "# Installing allcodecs..."
-  WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --unattended allcodecs
-  
-  echo 100
-  echo "# Done!"
-) | zenity --title "Installing DLLs with Winetricks" --progress --auto-kill
+	  echo 35
+	  echo "# Installing vcrun 2005..."
+	  WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --unattended vcrun2005 
+
+	  echo 40
+	  echo "# Installing vcrun 2008..."
+	  WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --unattended vcrun2008
+
+	  echo 45
+	  echo "# Installing vcrun 2010..."
+	  WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --unattended vcrun2010
+	  
+	  echo 50
+	  echo "# Installing vcrun 2012..."
+	  WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --unattended vcrun2012
+
+	  echo 55
+	  echo "# Installing vcrun 2013..."
+	  WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --unattended vcrun2013 	  
+
+	  echo 60
+	  echo "# Installing vcrun 2015..."
+	  WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --unattended vcrun2015
+
+	  echo 65
+	  echo "# Installing vcrun 2017..."
+	  WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --unattended vcrun2017
+	  
+	  echo 70
+	  echo "# Installing vcrun 2019..."
+	  WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --unattended vcrun2019
+	  
+	  echo 75
+	  echo "# Installing corefonts..."
+	  WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --unattended corefonts	  
+
+	  echo 80
+	  echo "# Installing d3dx9..."
+	  WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --unattended d3dx9
+
+	  echo 90
+	  echo "# Installing allcodecs..."
+	  WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --unattended allcodecs
+	  
+	  echo 100
+	  echo "# Done!"
+	) | zenity --title "Installing DLLs with Winetricks" --progress --auto-kill
 
 elif [ \$choice = "Winecfg" ]; then
    WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winecfg org.winehq.flatpak-wine

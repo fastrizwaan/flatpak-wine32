@@ -52,29 +52,65 @@ if [ $# -eq 0 ];  then
 
 	elif [ $choice = "Install_DLLs" ]; then
 	(
-	  echo 10
+	  echo 5
 	  echo "# Installing xact..."
 	  WINEPREFIX=~/.wine-x86_64 winetricks --unattended xact xact_x64
 
-	  echo 20
+	  echo 10
 	  echo "# Installing xinput..."
 	  WINEPREFIX=~/.wine-x86_64 winetricks --unattended xinput
 
-	  echo 40
-	  echo "# Installing XNA31..."
+	  echo 15
+	  echo "# Installing xna31..."
 	  WINEPREFIX=~/.wine-x86_64 winetricks --unattended xna31
 
-	  echo 50
+	  echo 20
+	  echo "# Installing vcrun6..."
+	  WINEPREFIX=~/.wine-x86_64 winetricks --unattended vcrun6
+
+	  echo 25
+	  echo "# Installing vcrun6sp6..."
+	  WINEPREFIX=~/.wine-x86_64 winetricks --unattended vcrun6sp6
+
+	  echo 30
+	  echo "# Installing vcrun 2003..."
+	  WINEPREFIX=~/.wine-x86_64 winetricks --unattended vcrun2003 
+
+	  echo 35
 	  echo "# Installing vcrun 2005..."
 	  WINEPREFIX=~/.wine-x86_64 winetricks --unattended vcrun2005 
 
-	  echo 60
+	  echo 40
 	  echo "# Installing vcrun 2008..."
 	  WINEPREFIX=~/.wine-x86_64 winetricks --unattended vcrun2008
 
+	  echo 45
+	  echo "# Installing vcrun 2010..."
+	  WINEPREFIX=~/.wine-x86_64 winetricks --unattended vcrun2010
+	  
+	  echo 50
+	  echo "# Installing vcrun 2012..."
+	  WINEPREFIX=~/.wine-x86_64 winetricks --unattended vcrun2012
+
+	  echo 55
+	  echo "# Installing vcrun 2013..."
+	  WINEPREFIX=~/.wine-x86_64 winetricks --unattended vcrun2013 	  
+
+	  echo 60
+	  echo "# Installing vcrun 2015..."
+	  WINEPREFIX=~/.wine-x86_64 winetricks --unattended vcrun2015
+
+	  echo 65
+	  echo "# Installing vcrun 2017..."
+	  WINEPREFIX=~/.wine-x86_64 winetricks --unattended vcrun2017
+	  
 	  echo 70
+	  echo "# Installing vcrun 2019..."
+	  WINEPREFIX=~/.wine-x86_64 winetricks --unattended vcrun2019
+	  
+	  echo 75
 	  echo "# Installing corefonts..."
-	  WINEPREFIX=~/.wine-x86_64 winetricks --unattended vcrun2008
+	  WINEPREFIX=~/.wine-x86_64 winetricks --unattended corefonts	  
 
 	  echo 80
 	  echo "# Installing d3dx9..."
