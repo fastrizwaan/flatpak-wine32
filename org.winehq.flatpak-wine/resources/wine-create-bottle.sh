@@ -148,8 +148,8 @@ rm -f ~/.wine-x86_64-bottles/"$myBaseNamePrefix.sh"
 else
 export base=\$(basename "$myFile")
 export dire=\$(dirname "$myFile")
-cd '$dire'
-WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=wine org.winehq.flatpak-wine '$myFile'
+cd "\$dire"
+WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=wine org.winehq.flatpak-wine "\$base"
 fi
 EOF
 
