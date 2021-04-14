@@ -54,7 +54,7 @@ if [ $# -eq 0 ];  then
 	elif [ $choice = "Install_DLLs" ]; then
 	
     #recommeded https://www.youtube.com/watch?v=aDuysgB35YY
-    dlls=(dotnet35 xna31 quartz vcrun2005 vcrun2008 vcrun2010 wininet xact xact_x64 xinput d3dx10_43 d3dx10 d3dx11_42 d3dx11_43 d3dx9_24 d3dx9_25 d3dx9_26 d3dx9_27 d3dx9_28 d3dx9_29 d3dx9_30 d3dx9_31 d3dx9_32 d3dx9_33 d3dx9_34 d3dx9_35 d3dx9_36 d3dx9_37 d3dx9_38 d3dx9_39 d3dx9_40 d3dx9_41 d3dx9_42 d3dx9_43 d3dx9 d3dxof corefonts)
+    dlls=(xna31 quartz vcrun2005 vcrun2008 vcrun2010 wininet xact xact_x64 xinput d3dx10_43 d3dx10 d3dx11_42 d3dx11_43 d3dx9_24 d3dx9_25 d3dx9_26 d3dx9_27 d3dx9_28 d3dx9_29 d3dx9_30 d3dx9_31 d3dx9_32 d3dx9_33 d3dx9_34 d3dx9_35 d3dx9_36 d3dx9_37 d3dx9_38 d3dx9_39 d3dx9_40 d3dx9_41 d3dx9_42 d3dx9_43 d3dx9 d3dxof corefonts faudio directplay directmusic)
 	
 #dlls=(xact xact_x64 xinput xna31 vcrun6 vcrun6sp6 vcrun2003 vcrun2005 vcrun2008 vcrun2010 vcrun2012 vcrun2013 vcrun2015 vcrun2017 vcrun2019 corefonts d3dx9 allcodecs faudio)
 
