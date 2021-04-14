@@ -80,7 +80,7 @@ choice=\$(zenity --title "$myBaseNamePrefix: Choose!" --width=240 --height=300 \
 [[ -z "\$choice" ]] && exit 1
 
 if [ "\$choice" = "Winetricks" ]; then  
-   flatpak run --command=winetricks org.winehq.flatpak-wine --gui
+   WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --gui
 
 elif [ "\$choice" = "Install_DLLs" ]; then
 
@@ -98,7 +98,7 @@ prog=\$(echo \$step)
 	  do
     	echo \$prog
 	    echo "# Installing \$i..."
-	    flatpak run --command=winetricks org.winehq.flatpak-wine --unattended  \$i
+	    WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --unattended  \$i
       
         prog=\$(expr \$prog + \$step)
 	  done
@@ -124,7 +124,7 @@ prog=\$(echo \$step)
 	  do
     	echo \$prog
 	    echo "# Installing \$i..."
-	    flatpak run --command=winetricks org.winehq.flatpak-wine --unattended \$i
+	    WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --unattended \$i
       
         prog=\$(expr \$prog + \$step)
 	  done
@@ -134,9 +134,9 @@ prog=\$(echo \$step)
 
 
 elif [ "\$choice" = "Winecfg" ]; then
-   flatpak run --command=winecfg org.winehq.flatpak-wine
+   WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winecfg org.winehq.flatpak-wine
 elif [ "\$choice" = "Explore" ]; then
-   flatpak run --command=wine org.winehq.flatpak-wine /app/explorer++/Explorer++.exe
+   WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=wine org.winehq.flatpak-wine /app/explorer++/Explorer++.exe
 elif [ "\$choice" = "Shell" ]; then   
  gnome-terminal -- bash -c "flatpak run --command=bash org.winehq.flatpak-wine"
 elif [ "\$choice" = "Delete_Bottle" ]; then
@@ -146,7 +146,7 @@ rm -f "$myFile.desktop"
 rm -f "$myFile.icon.png"
 rm -f ~/.wine-x86_64-bottles/"$myBaseNamePrefix.sh"
 else
-flatpak run --command=wine org.winehq.flatpak-wine '$myFile'
+WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=wine org.winehq.flatpak-wine '$myFile'
 fi
 EOF
 
