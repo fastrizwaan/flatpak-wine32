@@ -106,9 +106,9 @@ prog=\$(echo \$step)
     # My_Dlls_install
 	elif [ \$choice = "My_Dlls_install" ]; then
 	mydlls=\$(zenity --title "Install custom dlls" --text "paste winetricks (e.g., xna31 d3dx9 xinput faudio)" --entry)
-    if [ ! \$mydlls ]; #if no dlls are given
+    if [ -z \$mydlls ]; #if no dlls are given
        then         
-       mydlls=(xact xact_x64 xinput xna31 vcrun2003 vcrun2005 faudio)
+       mydlls=(xact xact_x64 xinput xna31 vcrun2003 vcrun2005 d3dx9 faudio)
     fi
     
 size=\${#mydlls[*]}
