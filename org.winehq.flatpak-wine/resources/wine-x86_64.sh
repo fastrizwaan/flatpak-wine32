@@ -54,7 +54,7 @@ if [ $# -eq 0 ];  then
 dlls=(xact xact_x64 xinput xna31 vcrun6 vcrun6sp6 vcrun2003 vcrun2005 vcrun2008 vcrun2010 vcrun2012 vcrun2013 vcrun2015 vcrun2017 vcrun2019 corefonts d3dx9 allcodecs)
 
 size=${#dlls[*]}
-step=$(echo 100/$size|bc)
+step=$(expr 100 / $size)
 prog=$(echo $step)
 echo $size $step ${dlls[*]}
 
@@ -64,7 +64,7 @@ echo $size $step ${dlls[*]}
 	    echo "# Installing $i..."
 	    WINEPREFIX=~/.wine-x86_64 winetricks --unattended  $i
       
-        prog=$(echo $prog+$step|bc)
+        prog=$(expr $prog + $step)
 	  done
 	  echo 100
 	  echo "# Done!"
