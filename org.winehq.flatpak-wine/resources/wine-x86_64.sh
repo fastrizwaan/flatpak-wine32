@@ -51,79 +51,25 @@ if [ $# -eq 0 ];  then
 	   WINEPREFIX=~/.wine-x86_64 winetricks --gui
 
 	elif [ $choice = "Install_DLLs" ]; then
-	(
-	  echo 5
-	  echo "# Installing xact..."
-	  WINEPREFIX=~/.wine-x86_64 winetricks --unattended xact xact_x64
+dlls=(xact xact_x64 xinput xna31 vcrun6 vcrun6sp6 vcrun2003 vcrun2005 vcrun2008 vcrun2010 vcrun2012 vcrun2013 vcrun2015 vcrun2017 vcrun2019 corefonts d3dx9 allcodecs)
 
-	  echo 10
-	  echo "# Installing xinput..."
-	  WINEPREFIX=~/.wine-x86_64 winetricks --unattended xinput
+size=${#dlls[*]}
+step=$(echo 100/$size|bc)
+prog=$(echo $step)
+echo $size $step ${dlls[*]}
 
-	  echo 15
-	  echo "# Installing xna31..."
-	  WINEPREFIX=~/.wine-x86_64 winetricks --unattended xna31
-
-	  echo 20
-	  echo "# Installing vcrun6..."
-	  WINEPREFIX=~/.wine-x86_64 winetricks --unattended vcrun6
-
-	  echo 25
-	  echo "# Installing vcrun6sp6..."
-	  WINEPREFIX=~/.wine-x86_64 winetricks --unattended vcrun6sp6
-
-	  echo 30
-	  echo "# Installing vcrun 2003..."
-	  WINEPREFIX=~/.wine-x86_64 winetricks --unattended vcrun2003 
-
-	  echo 35
-	  echo "# Installing vcrun 2005..."
-	  WINEPREFIX=~/.wine-x86_64 winetricks --unattended vcrun2005 
-
-	  echo 40
-	  echo "# Installing vcrun 2008..."
-	  WINEPREFIX=~/.wine-x86_64 winetricks --unattended vcrun2008
-
-	  echo 45
-	  echo "# Installing vcrun 2010..."
-	  WINEPREFIX=~/.wine-x86_64 winetricks --unattended vcrun2010
-	  
-	  echo 50
-	  echo "# Installing vcrun 2012..."
-	  WINEPREFIX=~/.wine-x86_64 winetricks --unattended vcrun2012
-
-	  echo 55
-	  echo "# Installing vcrun 2013..."
-	  WINEPREFIX=~/.wine-x86_64 winetricks --unattended vcrun2013 	  
-
-	  echo 60
-	  echo "# Installing vcrun 2015..."
-	  WINEPREFIX=~/.wine-x86_64 winetricks --unattended vcrun2015
-
-	  echo 65
-	  echo "# Installing vcrun 2017..."
-	  WINEPREFIX=~/.wine-x86_64 winetricks --unattended vcrun2017
-	  
-	  echo 70
-	  echo "# Installing vcrun 2019..."
-	  WINEPREFIX=~/.wine-x86_64 winetricks --unattended vcrun2019
-	  
-	  echo 75
-	  echo "# Installing corefonts..."
-	  WINEPREFIX=~/.wine-x86_64 winetricks --unattended corefonts	  
-
-	  echo 80
-	  echo "# Installing d3dx9..."
-	  WINEPREFIX=~/.wine-x86_64 winetricks --unattended d3dx9
-
-	  echo 90
-	  echo "# Installing allcodecs..."
-	  WINEPREFIX=~/.wine-x86_64 winetricks --unattended allcodecs
-	  
+	( for i in ${dlls[*]};
+	  do
+    	echo $prog
+	    echo "# Installing $i..."
+	    WINEPREFIX=~/.wine-x86_64 winetricks --unattended  $i
+      
+        prog=$(echo $prog+$step|bc)
+	  done
 	  echo 100
 	  echo "# Done!"
-	) | zenity --title "Installing DLLs with Winetricks" --progress --auto-kill
-
+	) | zenity --width=340 --title "Installing DLLs with Winetricks" --progress --auto-kill
+	
 	elif [ $choice = "Winecfg" ]; then
 	   WINEPREFIX=~/.wine-x86_64 winecfg
 
