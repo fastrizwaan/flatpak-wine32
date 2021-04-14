@@ -30,8 +30,8 @@ flatpak-builder --force-clean build-dir org.winehq.flatpak-wine.yml
 flatpak-builder --repo="repo" --force-clean build-dir/ org.winehq.flatpak-wine.yml 
 flatpak-builder --user --install --force-clean build-dir/ org.winehq.flatpak-wine.yml 
 flatpak --user remote-add --no-gpg-verify "org.winehq.flatpak-wine" "repo"
-flatpak build-bundle "repo" "org.winehq.flatpak-wine_$date.flatpak" org.winehq.flatpak-wine stable --runtime-repo="https://flathub.org/repo/flathub.flatpakrepo"
-#flatpak build-bundle "repo" "org.winehq.flatpak-wine.flatpak" org.winehq.flatpak-wine stable
+#flatpak build-bundle "repo" "org.winehq.flatpak-wine_$date.flatpak" org.winehq.flatpak-wine stable --runtime-repo="https://flathub.org/repo/flathub.flatpakrepo"
+flatpak build-bundle "repo" "org.winehq.flatpak-wine.flatpak" org.winehq.flatpak-wine stable
 
 # Install
 flatpak --user install org.winehq.flatpak-wine.flatpak -y
