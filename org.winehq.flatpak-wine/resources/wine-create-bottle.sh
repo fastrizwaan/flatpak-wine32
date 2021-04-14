@@ -141,7 +141,7 @@ elif [ \$choice = "Shell" ]; then
  gnome-terminal -- bash -c "flatpak run --command=bash org.winehq.flatpak-wine"
 elif [ \$choice = "Delete_Bottle" ]; then
 rm -rfv ~/.wine-x86_64-bottles/$myBaseNamePrefix; 
-rm -f "~/.local/share/applications/wine-x86_64/$myBaseName.desktop"
+rm -f "$HOME/.local/share/applications/wine-x86_64/$myBaseName.desktop"
 rm -f "$myFile.desktop" 
 rm -f "$myFile.icon.png"
 rm -f ~/.wine-x86_64-bottles/"$myBaseNamePrefix.sh"
@@ -163,13 +163,13 @@ $category;"\\n"Icon="$myFile.icon.png""
     echo "Keywords=flatpak; wine;" >> "$myFile".desktop
     
     # link the launcher  file to a shortcut on applications menu.
-    mkdir -p "~/.local/share/applications/wine-x86_64/"
+    mkdir -p "$HOME/.local/share/applications/wine-x86_64/"
     
-    ln -sf "$myFile".desktop  ~/.local/share/applications/wine-x86_64/"$myBaseName".desktop
+    ln -sf "$myFile".desktop  $HOME/.local/share/applications/wine-x86_64/"$myBaseName".desktop
     # Test if the app link was created sucessfully on applications menu 
     if [ $? -eq 0 ]; then
         gtk-update-icon-cache 
-        update-desktop-database ~/.local/share/applications 
+        update-desktop-database $HOME/.local/share/applications 
         update-desktop-database "$myPath"
     	echo "Shortcut created sucessfuly on applications menu."
     	zenity --info --title="Shortcut created sucessfuly " --text="$myBaseName.desktop"
