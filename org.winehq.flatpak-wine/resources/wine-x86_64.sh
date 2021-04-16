@@ -81,7 +81,7 @@ echo $size $step ${mydlls[*]}
 	elif [ "$choice" = "Launch Winecfg..." ]; then
 	   WINEPREFIX=~/.wine-x86_64 winecfg
 
-	elif [ "$choice" = "Delete Bottle [~/.wine-x86_64]" ]; then
+	elif [ "$choice" = "Delete Bottle" ]; then
 	   rm -rfv ~/.wine-x86_64; 
        rm ~/.local/share/applications/wine-x86_64/killall_wine-5.0.4.desktop
 
