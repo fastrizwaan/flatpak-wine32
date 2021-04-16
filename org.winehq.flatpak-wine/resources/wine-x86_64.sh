@@ -37,46 +37,21 @@ if [ $# -eq 0 ];  then
 					 --list \
 					 --radiolist --column " " \
 					 --column "Action" \
-							  0 "Winetricks" \
-							  0 "My_Dlls_install" \
-							  0 "Install_DLLs" \
-							  0 "Winecfg" \
-						   TRUE "Explore" \
-							  0 "Delete_Bottle" \
+							  0 "Run Winetricks..." \
+							  0 "Install Custom DLLs..." \
+							  0 "Launch Winecfg" \
+						   TRUE "Open Explorer++" \
+							  0 "Delete Bottle [~/.wine-x86_64]" \
 					 --text "Select Action for ~/.wine-x86_64 " )
 
    # exit when Cancel is clicked
    [[ -z "$choice" ]] && exit 1
    
-	if [ "$choice" = "Winetricks" ]; then  
+	if [ "$choice" = "Run Winetricks..." ]; then  
 	   WINEPREFIX=~/.wine-x86_64 winetricks --gui
 
-	elif [ "$choice" = "Install_DLLs" ]; then
-	
-    #recommeded https://www.youtube.com/watch?v=aDuysgB35YY
-    dlls=(xna31 quartz vcrun2005 vcrun2008 vcrun2010 vcrun2012 wininet xact xact_x64 xinput d3dx10_43 d3dx10 d3dx11_42 d3dx11_43 d3dx9_24 d3dx9_25 d3dx9_26 d3dx9_27 d3dx9_28 d3dx9_29 d3dx9_30 d3dx9_31 d3dx9_32 d3dx9_33 d3dx9_34 d3dx9_35 d3dx9_36 d3dx9_37 d3dx9_38 d3dx9_39 d3dx9_40 d3dx9_41 d3dx9_42 d3dx9_43 d3dx9 d3dxof corefonts faudio directplay directmusic corefonts)
-	
-#dlls=(xact xact_x64 xinput xna31 vcrun6 vcrun6sp6 vcrun2003 vcrun2005 vcrun2008 vcrun2010 vcrun2012 vcrun2013 vcrun2015 vcrun2017 vcrun2019 corefonts d3dx9 allcodecs faudio)
-
-size=${#dlls[*]}
-step=$(expr 100 / $size)
-prog=$(echo $step)
-echo $size $step ${dlls[*]}
-
-	( for i in ${dlls[*]};
-	  do
-    	echo $prog
-	    echo "# Installing $i..."
-	    WINEPREFIX=~/.wine-x86_64 winetricks --unattended  $i
-      
-        prog=$(expr $prog + $step)
-	  done
-	  echo 100
-	  echo "# Done!"
-	) | zenity --width=340 --title "Installing DLLs with Winetricks" --progress --auto-kill
-
     # mydlls
-	elif [ "$choice" = "My_Dlls_install" ]; then
+	elif [ "$choice" = "Install Custom DLLs..." ]; then
 	mydlls=$(zenity --title "Install custom dlls" --text "paste winetricks (e.g., xna31 d3dx9 xinput faudio)" --entry)
     if [ -z $mydlls ]; #if no dlls are given
        then         
@@ -103,14 +78,14 @@ echo $size $step ${mydlls[*]}
 	) | zenity --width=340 --title "Installing Custom DLLs with Winetricks" --progress --auto-kill
 	
 	# winecfg
-	elif [ "$choice" = "Winecfg" ]; then
+	elif [ "$choice" = "Launch Winecfg" ]; then
 	   WINEPREFIX=~/.wine-x86_64 winecfg
 
-	elif [ "$choice" = "Delete_Bottle" ]; then
+	elif [ "$choice" = "Delete Bottle [~/.wine-x86_64]" ]; then
 	   rm -rfv ~/.wine-x86_64; 
        rm ~/.local/share/applications/wine-x86_64/killall_wine-5.0.4.desktop
 
-	elif [ "$choice" = "Explore" ]; then
+	elif [ "$choice" = "Open Explorer++" ]; then
 	   WINEPREFIX=~/.wine-x86_64 wine /app/explorer++/Explorer++.exe
 	   
 	else
@@ -120,13 +95,13 @@ echo $size $step ${mydlls[*]}
     # /for GUI Dialog
 
 # For commandline
-elif   [ "$1" == "winecfg" ] ; then
+elif   [ "$1" == "Launch Winecfg" ] ; then
 	/app/bin/winecfg
 	
 elif [ "$1" == "regedit" ] ; then
 	$WINEEXE regedit
 
-elif [ "$1" == "winetricks" ] ; then
+elif [ "$1" == "Run Winetricks..." ] ; then
 	ARGV=$(echo $ARGV|sed 's/winetricks//g')
 	$WINETRICKS $ARGV
 	
