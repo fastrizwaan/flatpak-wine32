@@ -66,50 +66,24 @@ choice=\$(zenity --title "$myBaseNamePrefix: Choose!" --width=240 --height=300 \
                  --list \
                  --radiolist --column " " \
                  --column "Action" \
-                          0 "My_Dlls_install" \
-                          0 "Install_DLLs" \
+                          0 "Install Custom DLLs..." \
                           TRUE "Launch $myBaseNamePrefix" \
-                          0 "Winetricks" \
-                          0 "Winecfg" \
-                          0 "Explore" \
-                          0 "Shell" \
-                          0 "Delete_Bottle" \
+                          0 "Run Winetricks..." \
+                          0 "Launch Winecfg..." \
+                          0 "Open Explorer++..." \
+                          0 "Open Shell..." \
+                          0 "Delete Bottle: $myBaseNamePrefix" \
                  --text "Select Action..." )
 
 
 [[ -z "\$choice" ]] && exit 1
 
-if [ "\$choice" = "Winetricks" ]; then  
+if [ "\$choice" = "Run Winetricks..." ]; then  
    WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --gui
 
-elif [ "\$choice" = "Install_DLLs" ]; then
-
-#recommeded https://www.youtube.com/watch?v=aDuysgB35YY
-dlls=(xna31 quartz vcrun2005 vcrun2008 vcrun2010 vcrun2012 wininet xact xact_x64 xinput d3dx10_43 d3dx10 d3dx11_42 d3dx11_43 d3dx9_24 d3dx9_25 d3dx9_26 d3dx9_27 d3dx9_28 d3dx9_29 d3dx9_30 d3dx9_31 d3dx9_32 d3dx9_33 d3dx9_34 d3dx9_35 d3dx9_36 d3dx9_37 d3dx9_38 d3dx9_39 d3dx9_40 d3dx9_41 d3dx9_42 d3dx9_43 d3dx9 d3dxof corefonts faudio directplay directmusic corefonts)
-
-#dlls=(xact xact_x64 xinput xna31 vcrun6 vcrun6sp6 vcrun2003 vcrun2005 vcrun2008 vcrun2010 vcrun2012 vcrun2013 vcrun2015 vcrun2017 vcrun2019 corefonts d3dx9 allcodecs)
-
-size=\${#dlls[*]}
-step=\$(expr 100 / \$size)
-prog=\$(echo \$step)
-
-
-	( for i in \${dlls[*]};
-	  do
-    	echo \$prog
-	    echo "# Installing \$i..."
-	    WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --unattended  \$i
-      
-        prog=\$(expr \$prog + \$step)
-	  done
-	  echo 100
-	  echo "# Done!"
-	) | zenity --width=340 --title "$myBaseNamePrefix: Installing DLLs with Winetricks" --progress --auto-kill
-
-
     # My_Dlls_install
-	elif [ "\$choice" = "My_Dlls_install" ]; then
-	mydlls=\$(zenity --title "Install custom dlls" --text "paste winetricks (e.g., xna31 d3dx9 xinput faudio)" --entry)
+	elif [ "\$choice" = "Install Custom DLLs..." ]; then
+	mydlls=\$(zenity --title "Install custom dlls" --text "paste winetricks (e.g. dv9k dxvk xna31 d3dx9 xinput faudio)" --entry)
     if [ -z \$mydlls ]; #if no dlls are given
        then         
        mydlls=(xact xact_x64 xinput xna31 vcrun2003 vcrun2005 vcrun2008 vcrun2010 vcrun2012 d3dx9 faudio)
@@ -133,13 +107,13 @@ prog=\$(echo \$step)
 	) | zenity --width=340 --title "$myBaseNamePrefix: Installing Custom DLLs with Winetricks" --progress --auto-kill
 
 
-elif [ "\$choice" = "Winecfg" ]; then
+elif [ "\$choice" = "Launch Winecfg..." ]; then
    WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=winecfg org.winehq.flatpak-wine
-elif [ "\$choice" = "Explore" ]; then
+elif [ "\$choice" = "Open Explorer++..." ]; then
    WINEPREFIX=~/.wine-x86_64-bottles/$myBaseNamePrefix flatpak run --command=wine org.winehq.flatpak-wine /app/explorer++/Explorer++.exe
-elif [ "\$choice" = "Shell" ]; then   
+elif [ "\$choice" = "Open Shell..." ]; then   
  gnome-terminal -- bash -c "flatpak run --command=bash org.winehq.flatpak-wine"
-elif [ "\$choice" = "Delete_Bottle" ]; then
+elif [ "\$choice" = "Delete Bottle: $myBaseNamePrefix" ]; then
 rm -rfv ~/.wine-x86_64-bottles/$myBaseNamePrefix; 
 rm -f "$HOME/.local/share/applications/wine-x86_64/$myBaseName.desktop"
 rm -f "$myFile.desktop" 

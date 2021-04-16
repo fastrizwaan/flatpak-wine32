@@ -39,9 +39,9 @@ if [ $# -eq 0 ];  then
 					 --column "Action" \
 							  0 "Run Winetricks..." \
 							  0 "Install Custom DLLs..." \
-							  0 "Launch Winecfg" \
+							  0 "Launch Winecfg..." \
 						   TRUE "Open Explorer++" \
-							  0 "Delete Bottle [~/.wine-x86_64]" \
+							  0 "Delete Bottle" \
 					 --text "Select Action for ~/.wine-x86_64 " )
 
    # exit when Cancel is clicked
@@ -52,7 +52,7 @@ if [ $# -eq 0 ];  then
 
     # mydlls
 	elif [ "$choice" = "Install Custom DLLs..." ]; then
-	mydlls=$(zenity --title "Install custom dlls" --text "paste winetricks (e.g., xna31 d3dx9 xinput faudio)" --entry)
+	mydlls=$(zenity --title "Install custom dlls" --text "paste winetricks (e.g. dv9k dxvk xna31 d3dx9 xinput faudio)" --entry)
     if [ -z $mydlls ]; #if no dlls are given
        then         
        mydlls=(xact xact_x64 xinput xna31 vcrun2003 vcrun2005 vcrun2008 vcrun2010 vcrun2012 d3dx9 faudio)
@@ -78,7 +78,7 @@ echo $size $step ${mydlls[*]}
 	) | zenity --width=340 --title "Installing Custom DLLs with Winetricks" --progress --auto-kill
 	
 	# winecfg
-	elif [ "$choice" = "Launch Winecfg" ]; then
+	elif [ "$choice" = "Launch Winecfg..." ]; then
 	   WINEPREFIX=~/.wine-x86_64 winecfg
 
 	elif [ "$choice" = "Delete Bottle [~/.wine-x86_64]" ]; then
@@ -95,7 +95,7 @@ echo $size $step ${mydlls[*]}
     # /for GUI Dialog
 
 # For commandline
-elif   [ "$1" == "Launch Winecfg" ] ; then
+elif   [ "$1" == "winecfg" ] ; then
 	/app/bin/winecfg
 	
 elif [ "$1" == "regedit" ] ; then
