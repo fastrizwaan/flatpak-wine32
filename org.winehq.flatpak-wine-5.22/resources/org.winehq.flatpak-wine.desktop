@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Name=flatpak-wine (5.0.4)
+Name=flatpak-wine (5.22)
 Exec=wine-x86_64.sh %F
 MimeType=application/x-ms-dos-executable;
 Icon=org.winehq.flatpak-wine
