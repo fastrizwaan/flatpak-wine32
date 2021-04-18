@@ -1,5 +1,5 @@
 #!/bin/bash
-export WINEPREFIX=~/.wine-x86_64
+export WINEPREFIX=~/.local/share/flatpak-wine/default
 export WINEARCH=win64
 #export WINEDLLOVERRIDES="mscoree,mshtml="
 export LD_LIBRARY_PATH=$(pwd):$LD_LIBRARY_PATH:/app/lib:/app/lib32:/app/$NAME:/app/lib/wine:/app/lib32/wine:/app/lib/i386-linux-gnu:/app/lib/debug/lib/i386-linux-gnu
@@ -16,7 +16,7 @@ export dire=$(dirname "$1")
 #echo $base >> ~/Documents/debug.txt
 #echo $dire >> ~/Documents/debug.txt
 # Create kill shortcut for convenience
-mkdir -p ~/.local/share/applications/wine-x86_64/
+mkdir -p ~/.local/share/applications/flatpak-wine/
 echo '
 [Desktop Entry]
 Exec=flatpak kill org.winehq.flatpak-wine
@@ -25,7 +25,7 @@ Type=Application
 Categories=Application;;
 Icon=org.winehq.flatpak-wine-kill
 Keywords=flatpak; wine; kill;
-' > ~/.local/share/applications/wine-x86_64/killall_wine-5.0.5.desktop
+' > ~/.local/share/applications/flatpak-wine/killall_wine-5.0.5.desktop
 
 # if no argument passed then show a dialog with choices
 if [ $# -eq 0 ];  then
@@ -42,13 +42,13 @@ if [ $# -eq 0 ];  then
 							  0 "Launch Winecfg..." \
 						   TRUE "Open Explorer++" \
 							  0 "Delete Bottle" \
-					 --text "Select Action for ~/.wine-x86_64 " )
+					 --text "Select Action for ~/.local/share/flatpak-wine/default " )
 
    # exit when Cancel is clicked
    [[ -z "$choice" ]] && exit 1
    
 	if [ "$choice" = "Run Winetricks..." ]; then  
-	   WINEPREFIX=~/.wine-x86_64 winetricks --gui
+	   WINEPREFIX=~/.local/share/flatpak-wine/default winetricks --gui
 
     # mydlls
 	elif [ "$choice" = "Install Custom DLLs..." ]; then
@@ -69,7 +69,7 @@ echo $size $step ${mydlls[*]}
 	  do
     	echo $prog
 	    echo "# Installing $i..."
-	    WINEPREFIX=~/.wine-x86_64 winetricks --unattended  $i
+	    WINEPREFIX=~/.local/share/flatpak-wine/default winetricks --unattended  $i
       
         prog=$(expr $prog + $step)
 	  done
@@ -79,17 +79,17 @@ echo $size $step ${mydlls[*]}
 	
 	# winecfg
 	elif [ "$choice" = "Launch Winecfg..." ]; then
-	   WINEPREFIX=~/.wine-x86_64 winecfg
+	   WINEPREFIX=~/.local/share/flatpak-wine/default winecfg
 
 	elif [ "$choice" = "Delete Bottle" ]; then
-	   rm -rfv ~/.wine-x86_64; 
-       rm ~/.local/share/applications/wine-x86_64/killall_wine-5.0.5.desktop
+	   rm -rfv ~/.local/share/flatpak-wine/default; 
+       rm ~/.local/share/applications/flatpak-wine/killall_wine-5.0.5.desktop
 
 	elif [ "$choice" = "Open Explorer++" ]; then
-	   WINEPREFIX=~/.wine-x86_64 wine /app/explorer++/Explorer++.exe
+	   WINEPREFIX=~/.local/share/flatpak-wine/default wine /app/explorer++/Explorer++.exe
 	   
 	else
-	   WINEPREFIX=~/.wine-x86_64 wine /app/explorer++/Explorer++.exe
+	   WINEPREFIX=~/.local/share/flatpak-wine/default wine /app/explorer++/Explorer++.exe
 
 	fi
     # /for GUI Dialog
