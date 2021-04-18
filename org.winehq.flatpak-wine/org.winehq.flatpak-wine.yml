@@ -328,8 +328,8 @@ modules:
 
     sources:
       - type: archive
-        url: https://dl.winehq.org/wine/source/5.0/wine-5.0.4.tar.xz
-        sha512: 6ece6e2eda95f960c876577c9303ea53703975db60af2150ed6583082a2ad700a0bcd92d51190843fcb39d701b215e035376ff401fe822db5bee9650cb7f4d00
+        url: https://dl.winehq.org/wine/source/5.0/wine-5.0.5.tar.xz
+        sha512: 3cf0ccb2eac0868f700296a62aeea9b856522ac63861beb49deed50136a334c450f2d1172f9d0195b4fe0bbf8f808f7350a79122726da1cbf5d21161f6dfca36
 
 # Added mono
 #  - name: wine-gecko

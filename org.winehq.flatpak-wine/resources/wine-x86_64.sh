@@ -20,12 +20,12 @@ mkdir -p ~/.local/share/applications/wine-x86_64/
 echo '
 [Desktop Entry]
 Exec=flatpak kill org.winehq.flatpak-wine
-Name=flatpak-wine kill (5.0.4)
+Name=flatpak-wine kill (5.0.5)
 Type=Application
 Categories=Application;;
 Icon=org.winehq.flatpak-wine-kill
 Keywords=flatpak; wine; kill;
-' > ~/.local/share/applications/wine-x86_64/killall_wine-5.0.4.desktop
+' > ~/.local/share/applications/wine-x86_64/killall_wine-5.0.5.desktop
 
 # if no argument passed then show a dialog with choices
 if [ $# -eq 0 ];  then
@@ -33,7 +33,7 @@ if [ $# -eq 0 ];  then
    echo "launching explorer++"
    
    # for GUI Dialog
-   choice=$(zenity --title "flatpak-wine (5.0.4)" --width=240 --height=300 \
+   choice=$(zenity --title "flatpak-wine (5.0.5)" --width=240 --height=300 \
 					 --list \
 					 --radiolist --column " " \
 					 --column "Action" \
@@ -83,7 +83,7 @@ echo $size $step ${mydlls[*]}
 
 	elif [ "$choice" = "Delete Bottle" ]; then
 	   rm -rfv ~/.wine-x86_64; 
-       rm ~/.local/share/applications/wine-x86_64/killall_wine-5.0.4.desktop
+       rm ~/.local/share/applications/wine-x86_64/killall_wine-5.0.5.desktop
 
 	elif [ "$choice" = "Open Explorer++" ]; then
 	   WINEPREFIX=~/.wine-x86_64 wine /app/explorer++/Explorer++.exe
