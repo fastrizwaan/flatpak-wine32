@@ -4,7 +4,7 @@
 # installed with wine.
 # Autor: Thiago silva
 # Contact: thiagos.dasilva@gmail.com
-# URL: https://github.com/thiggy01/proton-create-shortcut
+# URL: https://github.com/thiggy01/wine-create-shortcut
 # ============================================================================ #
 
 # Check if an application argument was submited.
@@ -34,15 +34,15 @@ if [[ $(file --mime-type -b "$1") = application/* ]]; then
     cp "$(ls -S -1 "/tmp/$myBaseName"*".png"  | head -n 1)" "$myFile.icon.png"
 
     # Get the app category and shortcut name inputs from the user.
-    appCategory=$(zenity --title "proton-create-shortcut" --height=450 --list \
+    appCategory=$(zenity --title "flatpak-wine-217-midi-create-shortcut" --height=450 --list \
 --radiolist --column " " --column "Categories" 0 AudioVideo 0 Audio 0 Video 0 \
 Development 0 Education TRUE Game 0 Graphics 0 Network 0 Office 0 Settings 0 \
 System 0 Utility  --text "Select a Category:" 2> /dev/null)
     VerInst zenity
-    appName=$(zenity --title "proton-create-shortcut" --text "Enter a name for your \
+    appName=$(zenity --title "flatpak-wine-217-midi-create-shortcut" --text "Enter a name for your \
 shortcut" --entry)
     # Generate desktop entry specifications to be added to the application launcher.
-    deskEntry="[Desktop Entry]"\\n"Exec=flatpak run org.winehq.Proton-65-GE-2 \""$myFile"\""\\n"Name=\
+    deskEntry="[Desktop Entry]"\\n"Exec=flatpak run org.winehq.flatpak-wine-217-midi \""$myFile"\""\\n"Name=\
 $appName"\\n"Path=$myPath"\\n"Type=Application"\\n"Categories=Application;\
 $category;"\\n"Icon="$myFile.icon.png""
     # Create a .desktop file and add desktop entries in it.
@@ -50,8 +50,8 @@ $category;"\\n"Icon="$myFile.icon.png""
     echo "Keywords=flatpak; wine;" >> "$myFile".desktop
     
     # link the launcher  file to a shortcut on applications menu.
-    mkdir -p "$HOME/.local/share/applications/Proton-65-GE-2/"
-    ln -s "$myFile.desktop" "$HOME/.local/share/applications/Proton-65-GE-2/$myBaseName.desktop"
+    mkdir -p "$HOME/.local/share/applications/flatpak-wine-217-midi/"
+    ln -s "$myFile.desktop" "$HOME/.local/share/applications/flatpak-wine-217-midi/$myBaseName.desktop"
     # Test if the app link was created sucessfully on applications menu 
     if [ $? -eq 0 ]; then
     	echo "Shortcut created sucessfuly on applications menu."
@@ -62,7 +62,7 @@ else
 
 # If no application was submited, show this message.
 	echo Please, submit a windows application file. 
-	echo Usage: ./proton-create-shortcut path/to/app.exe 
+	echo Usage: ./flatpak-wine-217-midi-create-shortcut path/to/app.exe 
 	zenity --info --title="Select an EXE to create shortcut" --text="in Filemanager, right-click on an exe and select this!"
 
 fi
