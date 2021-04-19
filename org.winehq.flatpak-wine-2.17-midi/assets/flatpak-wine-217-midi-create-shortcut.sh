@@ -41,6 +41,12 @@ System 0 Utility  --text "Select a Category:" 2> /dev/null)
     VerInst zenity
     appName=$(zenity --title "flatpak-wine-217-midi-create-shortcut" --text "Enter a name for your \
 shortcut" --entry)
+
+    if [ ! $appName ]; #if no name is given use filename
+       then         
+       appName=$(echo "$myBaseName");     
+    fi
+
     # Generate desktop entry specifications to be added to the application launcher.
     deskEntry="[Desktop Entry]"\\n"Exec=flatpak run org.winehq.flatpak-wine-217-midi \""$myFile"\""\\n"Name=\
 $appName"\\n"Path=$myPath"\\n"Type=Application"\\n"Categories=Application;\
