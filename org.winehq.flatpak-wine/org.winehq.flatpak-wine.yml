@@ -55,16 +55,10 @@ finish-args:
   - --filesystem=host
   - --filesystem=~/.local/share/flatpak-wine/:create
   - --device=all
-  # Persist Wineprefix as ~/.var/app/{fightcade}/.wine
+  # wineprefixes are created here
   - --persist=~/.local/share/flatpak-wine/
-  # Skipping Gecko and Mono popups when creating Wine prefix
-  # causes dotnet based games to not to work
-  # with mscoree.dll not found
-#  - --env=WINEDLLOVERRIDES="mscoree,mshtml="
-  
   # Support 32-bit runtime
   - --env=LD_LIBRARY_PATH=/app/lib:/app/lib:/app/lib32:/app/lib64:/app/lib/i386-linux-gnu:/app/lib/wine:/app/lib64/wine:$(pwd)
-  - --env=WINE_RESOLUTION=1920x1080
 
 modules:
 
@@ -129,63 +123,6 @@ modules:
           - type: archive
             url: "https://github.com/KhronosGroup/SPIRV-Headers/archive/1.5.4.tar.gz"
             sha256: fc026b6566167f6db03dc48779f0f986f9ff8c93ed651a557f28cfbe2dff4ede
-
-      
-# for game
-  - name: openldap
-    config-opts: 
-      - --disable-static
-      - --enable-shared
-      - --disable-slapd
-      - --disable-slurpd
-      - --disable-bdb
-      - --disable-hdb
-    cleanup: 
-      - /bin
-        
-    build-options:
-      prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
-      ldflags: -L/app/lib32
-      prepend-path: /usr/lib/sdk/toolchain-i386/bin
-      env:
-        CC: i686-unknown-linux-gnu-gcc
-        CXX: i686-unknown-linux-gnu-g++
-      libdir: /app/lib32
-      strip: true
-      no-debuginfo: true
-
-    sources:
-      - type: archive
-        url: https://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-2.4.55.tgz
-        sha256: 97357bd6ba8ff73d204c1f8208c5e6ab97d60c9e779f989057aa1229bbe98434
-
-# openldap 64bit
-  - name: openldap64
-    config-opts: 
-      - --disable-static
-      - --enable-shared  
-      - --disable-slapd
-      - --disable-slurpd
-      - --disable-bdb
-      - --disable-hdb
-    cleanup: 
-      - /bin
-        
-    build-options:
-#      prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
- #     ldflags: -L/app/lib32
- #     prepend-path: /usr/lib/sdk/toolchain-i386/bin
- #     env:
- #       CC: i686-unknown-linux-gnu-gcc
- #       CXX: i686-unknown-linux-gnu-g++
- #     libdir: /app/lib32
-      strip: true
-      no-debuginfo: true
-
-    sources:
-      - type: archive
-        url: https://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-2.4.55.tgz
-        sha256: 97357bd6ba8ff73d204c1f8208c5e6ab97d60c9e779f989057aa1229bbe98434
 
 ######
 
@@ -263,8 +200,6 @@ modules:
       --without-gphoto
       --without-gsm
       --without-hal
-      --with-ldap
-      --with-faudio
       --without-netapi
       --enable-win64 &&  
       make -j8
@@ -285,8 +220,6 @@ modules:
       --without-gphoto
       --without-gsm
       --without-hal
-      --with-ldap
-      --with-faudio
       --without-netapi &&
       make -j8
 
@@ -309,8 +242,6 @@ modules:
       --without-gphoto
       --without-gsm
       --without-hal
-      --with-ldap
-      --with-faudio
       --without-netapi   &&
       make -j8           && 
       make install       && 
@@ -321,27 +252,6 @@ modules:
       - type: archive
         url: https://dl.winehq.org/wine/source/5.0/wine-5.0.5.tar.xz
         sha512: 3cf0ccb2eac0868f700296a62aeea9b856522ac63861beb49deed50136a334c450f2d1172f9d0195b4fe0bbf8f808f7350a79122726da1cbf5d21161f6dfca36
-
-# Added mono
-#  - name: wine-gecko
-#    buildsystem: simple
-#    build-commands:
-#    - install -D wine-gecko-2.47.2-x86.msi /app/share/wine/gecko/wine-gecko-2.47.2-x86.msi
-#    no-make-install: true
-#    sources:
-#    - type: file
-#      url: http://dl.winehq.org/wine/wine-gecko/2.47.2/wine-gecko-2.47.2-x86.msi
-#      sha256: e520ce7336cd420cd09c91337d87e74bb420300fd5cbc6f724c1802766b6a61d
-
-#  - name: wine-mono
-#    buildsystem: simple
-#    build-commands:
-#    - install -D wine-mono-6.1.0-x86.msi /app/share/wine/mono/wine-mono-6.1.0-x86.msi
-#    no-make-install: true
-#    sources:
-#    - type: file
-#      url: https://github.com/madewokherd/wine-mono/releases/download/wine-mono-6.1.0/wine-mono-6.1.0-x86.msi
-#      sha256: e430d054a14e6859ca3e4f849187ddb8d01032f8305f07684d3b27f0f870ce4a
 
         
   - name: winetricks
@@ -381,7 +291,6 @@ modules:
   - name: ImageMagick
     config-opts:
       - --enable-shared
-      #- --disable-static
       - --disable-docs
       - --with-modules
       - --with-threads
@@ -429,13 +338,10 @@ modules:
         /app/share/applications/org.winehq.flatpak-wine.desktop
 
     # Shell scripts        
-#    - install -Dm755 flatpak-wine.sh /app/bin/org.winehq.flatpak-wine.sh
     - install -Dm755 flatpak-wine.sh     /app/bin/flatpak-wine.sh
     - install -Dm755 flatpak-wine-gui.sh /app/bin/flatpak-wine-gui.sh
     
     sources:
-#    - type: file
-#      path: assets/org.winehq.flatpak-wine.sh 
     - type: file
       path: assets/org.winehq.flatpak-wine.desktop
     - type: file
@@ -476,24 +382,7 @@ modules:
       path: assets/explorer++_1.3.5_x86.zip
 
 
-#  - name: wine-kill-program
-#    buildsystem: simple
-#    build-commands:
-#    - install -Dm644 wine-kill-program.desktop 
-#      /app/share/applications/org.winehq.flatpak-wine-wine-kill-program.desktop
-#    - install -Dm755 killall.sh /app/bin/killall.sh
-    
-#    sources:
-#    - type: file
-#      path: assets/wine-kill-program.desktop
-#    - type: file
-#      path: assets/killall.sh
-
 cleanup:
-
-# disable mono and gecko install wizard by removing component
- - /app/lib/wine/fakedlls/appwiz.cpl
- - /app/lib64/wine/fakedlls/appwiz.cpl
 
  - "*.a"
  - /lib/debug
