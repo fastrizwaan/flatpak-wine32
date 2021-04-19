@@ -39,7 +39,7 @@ elif   [ "$1" == "winecfg" ] ; then
 elif [ "$1" == "regedit" ] ; then
 	$WINEEXE regedit
 
-elif [ "$1" == "Run Winetricks..." ] ; then
+elif [ "$1" == "winetricks" ] ; then
 	ARGV=$(echo $ARGV|sed 's/winetricks//g')
 	$WINETRICKS $ARGV
 	

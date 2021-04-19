@@ -230,7 +230,7 @@ modules:
 
  # Required by some 8/16-bit emulators
 
-  - name: fluidsynth
+  - name: fluidsynth-64bit
     buildsystem: cmake-ninja
     config-opts:
       - -Denable-pulseaudio:BOOL=ON
@@ -241,6 +241,29 @@ modules:
       - type: archive
         url: "https://github.com/FluidSynth/fluidsynth/archive/v2.1.5.tar.gz"
         sha256: b539b7c65a650b56f01cd60a4e83c6125c217c5a63c0c214ef6274894a677d00
+
+  - name: fluidsynth-32bit
+    buildsystem: cmake-ninja
+    build-options:
+      prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
+      ldflags: -L/app/lib32
+      prepend-path: /usr/lib/sdk/toolchain-i386/bin
+      env:
+        CC: i686-unknown-linux-gnu-gcc
+        CXX: i686-unknown-linux-gnu-g++
+      libdir: /app/lib32
+      strip: true
+      no-debuginfo: true    
+    config-opts:
+      - -Denable-pulseaudio:BOOL=ON
+      - -Denable-alsa:BOOL=OFF
+      - -Denable-oss:BOOL=OFF
+      - -DLIB_SUFFIX=
+    sources:
+      - type: archive
+        url: "https://github.com/FluidSynth/fluidsynth/archive/v2.1.5.tar.gz"
+        sha256: b539b7c65a650b56f01cd60a4e83c6125c217c5a63c0c214ef6274894a677d00
+
 
   - name: fluid-soundfont
     buildsystem: simple
