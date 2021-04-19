@@ -86,6 +86,7 @@ echo $size $step ${mydlls[*]}
 	fi
     # /for GUI Dialog
 else
+cd "$dire" 2>/dev/null;#go to the exe directory then run
 WINEPREFIX=~/.local/share/flatpak-wine/default $WINEEXE "$@"
 fi
 
