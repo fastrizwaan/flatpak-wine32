@@ -1,4 +1,3 @@
-# main branch - mono installs on demand by winetricks
 app-id: org.winehq.flatpak-wine-217-midi
 base-version: '20.08'
 runtime: org.freedesktop.Platform
@@ -33,7 +32,7 @@ add-extensions:
     merge-dirs: vulkan/icd.d;glvnd/egl_vendor.d;OpenCL/vendors;lib/dri;lib/d3d;vulkan/explicit_layer.d
     download-if: active-gl-driver
     enable-if: active-gl-driver
-    
+
   org.freedesktop.Platform.VAAPI.Intel:
       directory: lib/dri/intel-vaapi-driver
       autodelete: false
@@ -59,10 +58,11 @@ finish-args:
   - --persist=~/.flatpak-wine-217-midi
   # Skip Gecko and Mono popups when creating Wine prefix
   - --env=WINEDLLOVERRIDES="mscoree,mshtml="
-  
+
   # Support 32-bit runtime
   - --env=LD_LIBRARY_PATH=/app/lib:/app/lib32
-#  - --env=WINE_RESOLUTION=1920x1080
+
+  - --env=WINE_RESOLUTION=1920x1080
 
 modules:
   # Create 32-bit directories
@@ -71,7 +71,7 @@ modules:
     build-commands:
       - mkdir -p /app/lib/i386-linux-gnu /app/lib/debug/lib/i386-linux-gnu
 
-        
+
   - name: flatpak-wine-217-midi
     buildsystem: simple
     build-commands:
@@ -82,53 +82,8 @@ modules:
     sources:
       - type: file
         path: assets/wine-2.17.tar.xz
-        
-        
-        
-        
-        
-
-########
 
 
-
-  - name: glu-64bit
-    build-options:
-      strip: true
-      no-debuginfo: true
-  
-    config-opts:
-      - --disable-static
-    sources: 
-      - type: archive
-        url: "https://mesa.freedesktop.org/archive/glu/glu-9.0.1.tar.xz"
-        sha256: fb5a4c2dd6ba6d1c21ab7c05129b0769544e1d68e1e3b0ffecb18e73c93055bc
-        
-  - name: glu-32bit
-    build-options:
-      prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
-      ldflags: -L/app/lib32
-      prepend-path: /usr/lib/sdk/toolchain-i386/bin
-      env:
-        CC: i686-unknown-linux-gnu-gcc
-        CXX: i686-unknown-linux-gnu-g++
-      libdir: /app/lib32
-      strip: true
-      no-debuginfo: true
-  
-    config-opts: 
-      - --disable-static
-    sources: 
-      - type: archive
-        url: "https://mesa.freedesktop.org/archive/glu/glu-9.0.1.tar.xz"
-        sha256: fb5a4c2dd6ba6d1c21ab7c05129b0769544e1d68e1e3b0ffecb18e73c93055bc        
-        
-
-######
-
-
-
-        
   - name: winetricks
     buildsystem: simple
     build-commands:
@@ -180,13 +135,13 @@ modules:
     - install -Dm755 flatpak-wine-217-midi-create-shortcut.sh /app/bin/flatpak-wine-217-midi-create-shortcut.sh
     - install -Dm655 flatpak-wine-217-midi-create-shortcut.desktop 
       /app/share/applications/org.winehq.flatpak-wine-217-midi-flatpak-wine-217-midi-create-shortcut.desktop
-    
+
     sources:
     - type: file
       path: assets/flatpak-wine-217-midi-create-shortcut.sh 
     - type: file
       path: assets/flatpak-wine-217-midi-create-shortcut.desktop
-      
+
   - name: winedesktop
     buildsystem: simple
     build-commands:
@@ -201,15 +156,15 @@ modules:
                         /app/share/applications/wine.desktop
     - desktop-file-edit --set-key="NoDisplay" --set-value="false" 
                         /app/share/applications/wine.desktop
-    
-    
+
+
     - desktop-file-edit --set-name=flatpak-wine-217-midi-winetricks 
                         /app/share/applications/winetricks.desktop
     - desktop-file-edit --set-icon=org.winehq.flatpak-wine-217-midi-winetricks
                         /app/share/applications/winetricks.desktop
 
     - desktop-file-edit --set-key="Exec" --set-value="flatpak-wine-217-midi.sh winetricks --gui" /app/share/applications/winetricks.desktop
-        
+
     - install -Dm644    /app/share/applications/winetricks.desktop 
                         /app/share/applications/org.winehq.flatpak-wine-217-midi-winetricks.desktop
     - install -Dm644
@@ -221,7 +176,7 @@ modules:
     buildsystem: simple
     build-commands:
     - install -Dm755 flatpak-wine-217-midi.sh /app/bin/flatpak-wine-217-midi.sh
-    
+
     sources:
     - type: file
       path: assets/flatpak-wine-217-midi.sh
@@ -230,7 +185,7 @@ modules:
     buildsystem: simple
     build-commands:
     - sed 's/187e7e6b08fe35428d945612a7d258bfed25fad53cc54882983abdc73fe60f91/409173b3a4f4ee6ff4e6910eece26f95af8073efae2c9fa4c0f8dad24f7774de/g' -i /app/bin/winetricks
-    
+
   - name: include_manifest_and_install_scripts
     buildsystem: simple
     build-commands:
@@ -243,8 +198,8 @@ modules:
       path: install.sh
     - type: file
       path: org.winehq.flatpak-wine-217-midi.yml
-          
-      
+
+
 cleanup:
  - /lib/debug
  - /lib32/debug

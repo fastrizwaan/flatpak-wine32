@@ -124,6 +124,56 @@ modules:
             url: "https://github.com/KhronosGroup/SPIRV-Headers/archive/1.5.4.tar.gz"
             sha256: fc026b6566167f6db03dc48779f0f986f9ff8c93ed651a557f28cfbe2dff4ede
 
+# FluidSynth
+
+  - name: fluidsynth-64bit
+    buildsystem: cmake-ninja
+    build-options:  
+      strip: true
+      no-debuginfo: true      
+    config-opts:
+    - "-DLIB_SUFFIX="
+    cleanup:
+    - "/bin"
+    - "/include"
+    - "/lib/pkgconfig"
+    - "/share/man"
+    - "*.so"
+    sources:
+    - type: archive
+      url: https://github.com/FluidSynth/fluidsynth/archive/v2.1.8.tar.gz
+      sha256: a254efceff5d99f8d658d12d25318317f37307e6df852ec9baeb7da173496967
+
+
+  - name: fluidsynth-32bit
+    buildsystem: cmake-ninja
+    build-options:
+      prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
+      ldflags: -L/app/lib32
+      prepend-path: /usr/lib/sdk/toolchain-i386/bin
+      env:
+        CC: i686-unknown-linux-gnu-gcc
+        CXX: i686-unknown-linux-gnu-g++
+      libdir: /app/lib32
+      strip: true
+      no-debuginfo: true
+    config-opts:
+    - "-DLIB_SUFFIX="
+    cleanup:
+    - "/bin"
+    - "/include"
+    - "/lib/pkgconfig"
+    - "/share/man"
+    - "*.so"
+    sources:
+    - type: archive
+      url: https://github.com/FluidSynth/fluidsynth/archive/v2.1.8.tar.gz
+      sha256: a254efceff5d99f8d658d12d25318317f37307e6df852ec9baeb7da173496967
+
+
+# /FluidSynth
+
+
 ######
 
 
@@ -289,6 +339,9 @@ modules:
         sha256: 17abe02d043a253b68b47e3af69c9fc755b895db68fdc8811786125df564c6e0
 
   - name: ImageMagick
+    build-options:
+      strip: true
+      no-debuginfo: true  
     config-opts:
       - --enable-shared
       - --disable-docs
