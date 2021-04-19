@@ -62,7 +62,7 @@ finish-args:
 #  - --env=WINEDLLOVERRIDES="mscoree,mshtml="
   
   # Support 32-bit runtime
-  - --env=LD_LIBRARY_PATH=/app/lib:/app/lib32/:/app/lib64:/app/lib/i386-linux-gnu/:/app/lib/wine/:/app/lib64/wine
+  - --env=LD_LIBRARY_PATH=/app/lib:/app/lib:/app/lib32:/app/lib64:/app/lib/i386-linux-gnu:/app/lib/wine:/app/lib64/wine:$(pwd)
   - --env=WINE_RESOLUTION=1920x1080
 
 modules:
