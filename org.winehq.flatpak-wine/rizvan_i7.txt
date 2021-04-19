@@ -1,0 +1,1 @@
+49.79user 13.21system 34:29.01elapsed 3%CPU (0avgtext+0avgdata 67620maxresident)k

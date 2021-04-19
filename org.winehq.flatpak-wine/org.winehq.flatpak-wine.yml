@@ -62,8 +62,8 @@ finish-args:
 #  - --env=WINEDLLOVERRIDES="mscoree,mshtml="
   
   # Support 32-bit runtime
-  - --env=LD_LIBRARY_PATH=/app/lib:/app/lib32
-#  - --env=WINE_RESOLUTION=1920x1080
+  - --env=LD_LIBRARY_PATH=/app/lib:/app/lib32/:/app/lib64:/app/lib/i386-linux-gnu/:/app/lib/wine/:/app/lib64/wine
+  - --env=WINE_RESOLUTION=1920x1080
 
 modules:
 
@@ -232,7 +232,7 @@ modules:
   - name: org.winehq.wine_64bit
     builddir: true
     build-options:
-      make-args: -j5
+      make-args: -j8
       prefix: /app
       prepend-path: /app/bin
       ldflags: -L/app/lib64 -L/app/lib32
@@ -272,7 +272,7 @@ modules:
       --with-faudio
       --without-netapi
       --enable-win64 &&  
-      make -j5
+      make -j8
 
     # 2. Build wine32 twice
     - export CC=i686-unknown-linux-gnu-gcc  &&
@@ -295,7 +295,7 @@ modules:
       --with-ldap
       --with-faudio
       --without-netapi &&
-      make -j5
+      make -j8
 
     # 3. Build 32bit second time and 
     # install 32 bit and 64 bit wine
@@ -321,7 +321,7 @@ modules:
       --with-ldap
       --with-faudio
       --without-netapi   &&
-      make -j5           && 
+      make -j8           && 
       make install       && 
       cd ../wine64-build && 
       make install

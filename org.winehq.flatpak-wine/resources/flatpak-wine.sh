@@ -48,11 +48,11 @@ if [ $# -eq 0 ];  then
    [[ -z "$choice" ]] && exit 1
    
 	if [ "$choice" = "Run Winetricks..." ]; then  
-	   WINEPREFIX=~/.local/share/flatpak-wine/default winetricks --gui
+	   WINEPREFIX=~/.local/share/flatpak-wine/default $WINETRICKS --gui
 
     # mydlls
 	elif [ "$choice" = "Install Custom DLLs..." ]; then
-	mydlls=$(zenity --title "Install custom dlls" --text "paste winetricks (e.g. dv9k dxvk xna31 d3dx9 xinput faudio)" --entry)
+	mydlls=$(zenity --title "Install custom dlls" --text "Paste your list or Press enter to install (xact xinput xna31 vcrun2003-2012 d3dx9 faudio)" --entry)
     if [ -z $mydlls ]; #if no dlls are given
        then         
        mydlls=(xact xact_x64 xinput xna31 vcrun2003 vcrun2005 vcrun2008 vcrun2010 vcrun2012 d3dx9 faudio)
@@ -69,7 +69,7 @@ echo $size $step ${mydlls[*]}
 	  do
     	echo $prog
 	    echo "# Installing $i..."
-	    WINEPREFIX=~/.local/share/flatpak-wine/default winetricks --unattended  $i
+	    WINEPREFIX=~/.local/share/flatpak-wine/default $WINETRICKS --unattended  $i
       
         prog=$(expr $prog + $step)
 	  done
@@ -86,10 +86,10 @@ echo $size $step ${mydlls[*]}
        rm ~/.local/share/applications/flatpak-wine/killall_wine-5.0.5.desktop
 
 	elif [ "$choice" = "Open Explorer++" ]; then
-	   WINEPREFIX=~/.local/share/flatpak-wine/default wine /app/explorer++/Explorer++.exe
+	   WINEPREFIX=~/.local/share/flatpak-wine/default $WINEEXE /app/explorer++/Explorer++.exe
 	   
 	else
-	   WINEPREFIX=~/.local/share/flatpak-wine/default wine /app/explorer++/Explorer++.exe
+	   WINEPREFIX=~/.local/share/flatpak-wine/default $WINEEXE /app/explorer++/Explorer++.exe
 
 	fi
     # /for GUI Dialog
