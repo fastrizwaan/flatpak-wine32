@@ -62,8 +62,7 @@ finish-args:
   
   # Support 32-bit runtime
   - --env=LD_LIBRARY_PATH=/app/lib:/app/lib32
-  
-  - --env=WINE_RESOLUTION=1920x1080
+#  - --env=WINE_RESOLUTION=1920x1080
 
 modules:
   # Create 32-bit directories
