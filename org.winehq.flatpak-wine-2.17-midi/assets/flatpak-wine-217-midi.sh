@@ -10,8 +10,8 @@ export WINETRICKS="/app/bin/winetricks"
 
 
 # some games need to cd to the dir to work
-export base=$(basename $1)
-export dire=$(dirname $1)
+export base=$(basename "$1")
+export dire=$(dirname "$1")
 
 #echo $base >> ~/Documents/debug.txt
 #echo $dire >> ~/Documents/debug.txt
@@ -49,7 +49,7 @@ elif [ "$1" == "bash" ] ; then
 	
 else
 #	$WINEEXE "$EXE" $@
-        cd $dire ;#go to the exe directory then run
+        cd "$dire" ;#go to the exe directory then run
         #echo $PWD - pwd >> ~/Documents/debug.txt
         #echo now at $dire >> ~/Documents/debug.txt
 
