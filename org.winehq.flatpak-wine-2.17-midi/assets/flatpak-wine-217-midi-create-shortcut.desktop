@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=wine 217 Midi: Create EXE Shortcut (flatpak)
+Exec=flatpak-wine-217-midi-create-shortcut.sh %F
+MimeType=application/x-ms-dos-executable;
+Icon=org.winehq.flatpak-wine-217-midi
+NoDisplay=false
+StartupNotify=true
+X-Desktop-File-Install-Version=0.26
+
