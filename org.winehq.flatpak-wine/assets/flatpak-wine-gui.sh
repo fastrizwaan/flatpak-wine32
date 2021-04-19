@@ -13,7 +13,7 @@ export WINETRICKS="/app/bin/winetricks"
 
 # some games need to cd to the dir to work
 export base=$(basename "$1")
-export dire=$(dirname "$1")
+export dire=$(dirname  "$1")
 
 #echo $base >> ~/Documents/debug.txt
 #echo $dire >> ~/Documents/debug.txt
@@ -22,6 +22,9 @@ mkdir -p ~/.local/share/applications/flatpak-wine/
 
 # flatpak-wine-gui.sh
 # for GUI Dialog
+if [ $# -eq 0 ];  then
+   echo "No arguments supplied; use --help"
+ 
    choice=$(zenity --title "flatpak-wine (5.0.5)" --width=240 --height=300 \
 					 --list \
 					 --radiolist --column " " \
@@ -82,3 +85,7 @@ echo $size $step ${mydlls[*]}
 
 	fi
     # /for GUI Dialog
+else
+WINEPREFIX=~/.local/share/flatpak-wine/default $WINEEXE "$@"
+fi
+
