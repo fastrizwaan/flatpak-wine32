@@ -1,4 +1,6 @@
 #!/bin/bash
+
+#!/bin/bash
 export WINEPREFIX=~/.local/share/flatpak-wine/default
 export WINEARCH=win64
 #export WINEDLLOVERRIDES="mscoree,mshtml="
@@ -17,22 +19,9 @@ export dire=$(dirname "$1")
 #echo $dire >> ~/Documents/debug.txt
 # Create kill shortcut for convenience
 mkdir -p ~/.local/share/applications/flatpak-wine/
-echo '
-[Desktop Entry]
-Exec=flatpak kill org.winehq.flatpak-wine
-Name=flatpak-wine kill (5.0.5)
-Type=Application
-Categories=Application;;
-Icon=org.winehq.flatpak-wine-kill
-Keywords=flatpak; wine; kill;
-' > ~/.local/share/applications/flatpak-wine/killall_wine-5.0.5.desktop
 
-# if no argument passed then show a dialog with choices
-if [ $# -eq 0 ];  then
-   echo "No arguments supplied"
-   echo "launching explorer++"
-   
-   # for GUI Dialog
+# flatpak-wine-gui.sh
+# for GUI Dialog
    choice=$(zenity --title "flatpak-wine (5.0.5)" --width=240 --height=300 \
 					 --list \
 					 --radiolist --column " " \
@@ -93,27 +82,3 @@ echo $size $step ${mydlls[*]}
 
 	fi
     # /for GUI Dialog
-
-# For commandline
-elif   [ "$1" == "winecfg" ] ; then
-	/app/bin/winecfg
-	
-elif [ "$1" == "regedit" ] ; then
-	$WINEEXE regedit
-
-elif [ "$1" == "Run Winetricks..." ] ; then
-	ARGV=$(echo $ARGV|sed 's/winetricks//g')
-	$WINETRICKS $ARGV
-	
-elif [ "$1" == "bash" ] ; then
-	bash 
-	
-else
-#	$WINEEXE "$EXE" $@
-     cd "$dire" 2>/dev/null;#go to the exe directory then run
-     #echo $PWD - pwd >> ~/Documents/debug.txt
-     #echo now at $dire >> ~/Documents/debug.txt
-
-	$WINEEXE "$ARGV"
-	exit $?
-fi

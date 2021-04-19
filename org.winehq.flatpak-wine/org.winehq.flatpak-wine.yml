@@ -410,9 +410,9 @@ modules:
     
     sources:
     - type: file
-      path: resources/wine-create-bottle.sh 
+      path: assets/wine-create-bottle.sh 
     - type: file
-      path: resources/wine-create-bottle.desktop
+      path: assets/wine-create-bottle.desktop
 
 
         
@@ -439,18 +439,22 @@ modules:
 
     # Shell scripts        
 #    - install -Dm755 flatpak-wine.sh /app/bin/org.winehq.flatpak-wine.sh
-    - install -Dm755 flatpak-wine.sh /app/bin/flatpak-wine.sh
+    - install -Dm755 flatpak-wine.sh     /app/bin/flatpak-wine.sh
+    - install -Dm755 flatpak-wine-gui.sh /app/bin/flatpak-wine-gui.sh
+    
     sources:
 #    - type: file
-#      path: resources/org.winehq.flatpak-wine.sh 
+#      path: assets/org.winehq.flatpak-wine.sh 
     - type: file
-      path: resources/org.winehq.flatpak-wine.desktop
+      path: assets/org.winehq.flatpak-wine.desktop
     - type: file
-      path: resources/flatpak-wine.sh
+      path: assets/flatpak-wine.sh
     - type: file
-      path: resources/wine.svg
+      path: assets/flatpak-wine-gui.sh      
     - type: file
-      path: resources/kill.svg
+      path: assets/wine.svg
+    - type: file
+      path: assets/kill.svg
             
   - name: xna31-fix-sha256sum
     buildsystem: simple
@@ -478,7 +482,7 @@ modules:
     
     sources:
     - type: file
-      path: explorer++_1.3.5_x86.zip
+      path: assets/explorer++_1.3.5_x86.zip
 
 
 #  - name: wine-kill-program
@@ -490,9 +494,9 @@ modules:
     
 #    sources:
 #    - type: file
-#      path: resources/wine-kill-program.desktop
+#      path: assets/wine-kill-program.desktop
 #    - type: file
-#      path: resources/killall.sh
+#      path: assets/killall.sh
 
 cleanup:
 
