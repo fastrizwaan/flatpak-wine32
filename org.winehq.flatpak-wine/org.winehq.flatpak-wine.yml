@@ -51,6 +51,7 @@ finish-args:
   - --allow=multiarch
   - --allow=devel
   - --talk-name=org.freedesktop.Notifications
+  - --talk-name=org.gnome.Mutter.DisplayConfig
   - --filesystem=host
   - --filesystem=~/.local/share/flatpak-wine/:create
   - --device=all
@@ -187,18 +188,21 @@ modules:
         sha256: 97357bd6ba8ff73d204c1f8208c5e6ab97d60c9e779f989057aa1229bbe98434
 
 
-  - name: alsa-64bit
-#    buildsystem: cmake-ninja
+
+
+  - name: glu-64bit
     build-options:
       strip: true
-      no-debuginfo: true    
-    sources:
+      no-debuginfo: true
+  
+    config-opts:
+      - --disable-static
+    sources: 
       - type: archive
-        url: https://www.alsa-project.org/files/pub/lib/alsa-lib-1.2.4.tar.bz2
-        md5: 875184646a96e34bbe7a91925cd7b2ba
-
-  - name: alsa-32bit
-#    buildsystem: cmake-ninja
+        url: "https://mesa.freedesktop.org/archive/glu/glu-9.0.1.tar.xz"
+        sha256: fb5a4c2dd6ba6d1c21ab7c05129b0769544e1d68e1e3b0ffecb18e73c93055bc
+        
+  - name: glu-32bit
     build-options:
       prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
       ldflags: -L/app/lib32
@@ -209,14 +213,14 @@ modules:
       libdir: /app/lib32
       strip: true
       no-debuginfo: true
-
-    sources:
+  
+    config-opts: 
+      - --disable-static
+    sources: 
       - type: archive
-        url: https://www.alsa-project.org/files/pub/lib/alsa-lib-1.2.4.tar.bz2
-        md5: 875184646a96e34bbe7a91925cd7b2ba
-
-
-
+        url: "https://mesa.freedesktop.org/archive/glu/glu-9.0.1.tar.xz"
+        sha256: fb5a4c2dd6ba6d1c21ab7c05129b0769544e1d68e1e3b0ffecb18e73c93055bc        
+        
 
   - name: faudio32
     buildsystem: cmake-ninja
@@ -408,7 +412,6 @@ modules:
       --without-cups
       --without-curses
       --without-capi
-      --without-glu
       --without-gphoto
       --without-gsm
       --without-hal
@@ -431,7 +434,6 @@ modules:
       --without-cups
       --without-curses
       --without-capi
-      --without-glu
       --without-gphoto
       --without-gsm
       --without-hal
@@ -456,7 +458,6 @@ modules:
       --without-cups
       --without-curses
       --without-capi
-      --without-glu
       --without-gphoto
       --without-gsm
       --without-hal
@@ -532,7 +533,7 @@ modules:
   - name: ImageMagick
     config-opts:
       - --enable-shared
-      - --disable-static
+      #- --disable-static
       - --disable-docs
       - --with-modules
       - --with-threads
