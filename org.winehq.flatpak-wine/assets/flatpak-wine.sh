@@ -64,7 +64,7 @@ elif [ "$1" == "--help" ] || [ "$1" == "help" ]; then
 	echo "help      : this text message"
 else
 #	$WINEEXE "$EXE" $@
-     cd "$dire" ;#go to the exe directory then run
+     cd "$dire" 2>/dev/null ;#go to the exe directory then run
      #echo $PWD - pwd >> ~/Documents/debug.txt
      #echo now at $dire >> ~/Documents/debug.txt
 
