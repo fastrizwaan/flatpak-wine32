@@ -1,9 +1,9 @@
-app-id: org.winehq.flatpak-wine66
+app-id: org.winehq.flatpak-wine
 base-version: '20.08'
 runtime: org.freedesktop.Platform
 runtime-version: '20.08'
 sdk: org.freedesktop.Sdk
-command: flatpak-wine66.sh
+command: wine-x86_64.sh
 default-branch: stable
 separate-locales: false
 
@@ -51,15 +51,17 @@ finish-args:
   - --allow=multiarch
   - --allow=devel
   - --talk-name=org.freedesktop.Notifications
-  - --talk-name=org.gnome.Mutter.DisplayConfig
   - --filesystem=host
-  - --filesystem=~/.local/share/flatpak-wine66/:create
+  - --filesystem=~/.wine-x86_64:create
   - --device=all
-  # wineprefixes are created here
-  - --persist=~/.local/share/flatpak-wine66/
+  # Persist Wineprefix as ~/.var/app/{fightcade}/.wine
+  - --persist=~/.wine-x86_64
+  # Skip Gecko and Mono popups when creating Wine prefix
+  - --env=WINEDLLOVERRIDES=mscoree,mshtml=
+  
   # Support 32-bit runtime
-  # Testing for Driver San andreas- --env=LD_LIBRARY_PATH=/app/lib:/app/lib:/app/lib32:/app/lib64:/app/lib/i386-linux-gnu:/app/lib/wine:/app/lib64/wine:$(pwd)
-  - --env=LD_LIBRARY_PATH=/app/lib:/app/lib:/app/lib32:/app/lib64
+  - --env=LD_LIBRARY_PATH=/app/lib:/app/lib32
+  - --env=WINE_RESOLUTION=1920x1080
 
 modules:
 
@@ -67,59 +69,13 @@ modules:
   - name: compat
     buildsystem: simple
     build-commands:
-      - mkdir -p /app/lib/i386-linux-gnu 
-                 /app/lib/debug/lib/i386-linux-gnu 
-                 /app/lib/udev/rules.d/
-
-  - name: eudev-64bit
-    build-options:
-      strip: true
-      no-debuginfo: true
-    config-opts:
-      - --disable-static
-    cleanup:
-      - /bin
-      - /sbin
-      - /lib*/udev
-    post-install:
-      - udevadm hwdb --update
-    sources:
-      - type: archive
-        url: "https://github.com/gentoo/eudev/archive/v3.2.9.tar.gz"
-        sha256: 7d281276b480da3935d1acb239748c2c9db01a8043aad7e918ce57a223d8cd24
-        
-  - name: eudev-32bit
-    build-options:
-      prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
-      ldflags: -L/app/lib32
-      prepend-path: /usr/lib/sdk/toolchain-i386/bin
-      env:
-        CC: i686-unknown-linux-gnu-gcc
-        CXX: i686-unknown-linux-gnu-g++
-      libdir: /app/lib32
-      strip: true
-      no-debuginfo: true
-    config-opts:
-      - --disable-static
-    cleanup:
-      - /bin
-      - /sbin
-      - /lib*/udev
-    post-install:
-      - udevadm hwdb --update
-    sources:
-      - type: archive
-        url: "https://github.com/gentoo/eudev/archive/v3.2.9.tar.gz"
-        sha256: 7d281276b480da3935d1acb239748c2c9db01a8043aad7e918ce57a223d8cd24       
+      - mkdir -p /app/lib/i386-linux-gnu /app/lib/debug/lib/i386-linux-gnu
 
 # 64 bit
   - name: vkd3d
     config-opts: 
       - --disable-static
       - --enable-shared  
-    build-options:
-      strip: true
-      no-debuginfo: true      
     sources: 
       - type: archive
         url: "https://dl.winehq.org/vkd3d/source/vkd3d-1.2.tar.xz"
@@ -170,56 +126,20 @@ modules:
           - type: archive
             url: "https://github.com/KhronosGroup/SPIRV-Headers/archive/1.5.4.tar.gz"
             sha256: fc026b6566167f6db03dc48779f0f986f9ff8c93ed651a557f28cfbe2dff4ede
-### ALSA
 
-  - name: alsa-lib-64bit
-    build-options:
-      strip: true
-      no-debuginfo: true
-  
-    config-opts:
-      - --disable-static
-    sources: 
-      - type: archive
-        url: https://www.alsa-project.org/files/pub/lib/alsa-lib-1.2.4.tar.bz2
-        md5: 875184646a96e34bbe7a91925cd7b2ba
-        
-  - name: alsa-lib-32bit
-    build-options:
-      prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
-      ldflags: -L/app/lib32
-      prepend-path: /usr/lib/sdk/toolchain-i386/bin
-      env:
-        CC: i686-unknown-linux-gnu-gcc
-        CXX: i686-unknown-linux-gnu-g++
-      libdir: /app/lib32
-      strip: true
-      no-debuginfo: true
-  
+      
+# for game
+  - name: openldap
     config-opts: 
       - --disable-static
-    sources: 
-      - type: archive
-        url: https://www.alsa-project.org/files/pub/lib/alsa-lib-1.2.4.tar.bz2
-        md5: 875184646a96e34bbe7a91925cd7b2ba        
-
-
-  - name: alsa-utils-64bit
-    build-options:
-      strip: true
-      no-debuginfo: true
-  
-    config-opts:
-      - --disable-static
-      - --disable-alsaconf 
-      - --disable-bat
-      - --disable-xmlto
-    sources: 
-      - type: archive
-        url: https://www.alsa-project.org/files/pub/utils/alsa-utils-1.2.4.tar.bz2
-        md5: 39cde1fa4fde9f09366737fb089a9053
+      - --enable-shared
+      - --disable-slapd
+      - --disable-slurpd
+      - --disable-bdb
+      - --disable-hdb
+    cleanup: 
+      - /bin
         
-  - name: alsa-utils-32bit
     build-options:
       prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
       ldflags: -L/app/lib32
@@ -230,164 +150,43 @@ modules:
       libdir: /app/lib32
       strip: true
       no-debuginfo: true
-  
+
+    sources:
+      - type: archive
+        url: https://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-2.4.55.tgz
+        sha256: 97357bd6ba8ff73d204c1f8208c5e6ab97d60c9e779f989057aa1229bbe98434
+
+# openldap 64bit
+  - name: openldap64
     config-opts: 
       - --disable-static
-      - --disable-alsaconf 
-      - --disable-bat
-      - --disable-xmlto
-    sources: 
-      - type: archive
-        url: https://www.alsa-project.org/files/pub/utils/alsa-utils-1.2.4.tar.bz2
-        md5: 39cde1fa4fde9f09366737fb089a9053        
-
-
-
-### ALSA
-
-
-  - name: fluid-soundfont
-    buildsystem: simple
-    build-commands:
-      - install -Dm644 FluidR3_GS.sf2 -t /app/share/sounds/sf2/
-    sources:
-      - type: archive
-        url: "http://deb.debian.org/debian/pool/main/f/fluid-soundfont/fluid-soundfont_3.1.orig.tar.gz"
-        md5: 189bbdf70221018cbda536984b105dfa
-
-
-  - name: libinstpatch-64_bit
-    buildsystem: cmake-ninja  
-    build-options:
-      prepend-pkg-config-path: /app/lib64/pkgconfig:/app/lib64/pkgconfig
-      ldflags: -L/app/lib64 -L/app/lib
-      prepend-path: /usr/lib/sdk/toolchain-i386/bin
-      env:
-        CC: x86_64-unknown-linux-gnu-gcc
-        CXX: x86_64-unknown-linux-gnu-g++
-      libdir: /app/lib64   
-      strip: true
-      no-debuginfo: true
-    sources:
-      - type: archive
-        url: http://deb.debian.org/debian/pool/main/libi/libinstpatch/libinstpatch_1.1.6.orig.tar.gz
-        sha256: 8e9861b04ede275d712242664dab6ffa9166c7940fea3b017638681d25e10299
-
-######
-
-
-# FluidSynth
-
-  - name: fluidsynth-64_bit
-    buildsystem: cmake-ninja
-    build-options:
-      prepend-pkg-config-path: /app/lib64/pkgconfig:/app/lib64/pkgconfig
-      ldflags: -L/app/lib64 -L/app/lib
-      prepend-path: /usr/lib/sdk/toolchain-i386/bin
-      env:
-        CC: x86_64-unknown-linux-gnu-gcc
-        CXX: x86_64-unknown-linux-gnu-g++
-      libdir: /app/lib64   
-      strip: true
-      no-debuginfo: true      
-    config-opts:
-    - -Denable-pulseaudio:BOOL=ON
-    - -Denable-alsa:BOOL=ON
-    - "-DLIB_SUFFIX="
-    sources:
-    - type: archive
-      url: https://github.com/FluidSynth/fluidsynth/archive/v2.1.8.tar.gz
-      sha256: a254efceff5d99f8d658d12d25318317f37307e6df852ec9baeb7da173496967
-
-
-# libinstpatch 32
+      - --enable-shared  
+      - --disable-slapd
+      - --disable-slurpd
+      - --disable-bdb
+      - --disable-hdb
+    cleanup: 
+      - /bin
         
-  - name: libinstpatch-32bit
-    buildsystem: cmake-ninja    
     build-options:
-      prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
-      ldflags: -L/app/lib32
-      prepend-path: /usr/lib/sdk/toolchain-i386/bin
-      env:
-        CC: i686-unknown-linux-gnu-gcc
-        CXX: i686-unknown-linux-gnu-g++
-      libdir: /app/lib32
+#      prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
+ #     ldflags: -L/app/lib32
+ #     prepend-path: /usr/lib/sdk/toolchain-i386/bin
+ #     env:
+ #       CC: i686-unknown-linux-gnu-gcc
+ #       CXX: i686-unknown-linux-gnu-g++
+ #     libdir: /app/lib32
       strip: true
       no-debuginfo: true
+
     sources:
       - type: archive
-        url: http://deb.debian.org/debian/pool/main/libi/libinstpatch/libinstpatch_1.1.6.orig.tar.gz
-        sha256: 8e9861b04ede275d712242664dab6ffa9166c7940fea3b017638681d25e10299   
+        url: https://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-2.4.55.tgz
+        sha256: 97357bd6ba8ff73d204c1f8208c5e6ab97d60c9e779f989057aa1229bbe98434
 
 
 
-  - name: fluidsynth-32bit
-    buildsystem: cmake-ninja
-    build-options:
-      prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
-      ldflags: -L/app/lib32
-      prepend-path: /usr/lib/sdk/toolchain-i386/bin
-      env:
-        CC: i686-unknown-linux-gnu-gcc
-        CXX: i686-unknown-linux-gnu-g++
-      libdir: /app/lib32
-      strip: true
-      no-debuginfo: true
-    config-opts:
-    - -Denable-pulseaudio:BOOL=ON
-    - -Denable-alsa:BOOL=ON
-    - "-DLIB_SUFFIX="
-    sources:
-    - type: archive
-      url: https://github.com/FluidSynth/fluidsynth/archive/v2.1.8.tar.gz
-      sha256: a254efceff5d99f8d658d12d25318317f37307e6df852ec9baeb7da173496967
-
-
-# /FluidSynth
-
-
-
-  - name: glu-64bit
-    build-options:
-      prepend-pkg-config-path: /app/lib64/pkgconfig
-      ldflags: -L/app/lib64 -L/app/lib
-      prepend-path: /usr/lib/sdk/toolchain-i386/bin
-      env:
-        CC: x86_64-unknown-linux-gnu-gcc
-        CXX: x86_64-unknown-linux-gnu-g++
-      libdir: /app/lib64   
-      strip: true
-      no-debuginfo: true
-  
-    config-opts:
-      - --disable-static
-    sources: 
-      - type: archive
-        url: "https://mesa.freedesktop.org/archive/glu/glu-9.0.1.tar.xz"
-        sha256: fb5a4c2dd6ba6d1c21ab7c05129b0769544e1d68e1e3b0ffecb18e73c93055bc
-        
-  - name: glu-32bit
-    build-options:
-      prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
-      ldflags: -L/app/lib32
-      prepend-path: /usr/lib/sdk/toolchain-i386/bin
-      env:
-        CC: i686-unknown-linux-gnu-gcc
-        CXX: i686-unknown-linux-gnu-g++
-      libdir: /app/lib32
-      strip: true
-      no-debuginfo: true
-  
-    config-opts: 
-      - --disable-static
-    sources: 
-      - type: archive
-        url: "https://mesa.freedesktop.org/archive/glu/glu-9.0.1.tar.xz"
-        sha256: fb5a4c2dd6ba6d1c21ab7c05129b0769544e1d68e1e3b0ffecb18e73c93055bc        
-
-
-######
-  - name: faudio-32bit
+  - name: faudio32
     buildsystem: cmake-ninja
     build-options:
       prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
@@ -404,40 +203,37 @@ modules:
       - -DGSTREAMER=ON
     sources:
       - type: archive
-        url: https://github.com/FNA-XNA/FAudio/archive/21.03.05.tar.gz 
+        url: https://github.com/FNA-XNA/FAudio/archive/21.03.05.tar.gz
         sha256: c396c7c196e47bcb054cdc94cd3f7f39751fe27774de7eb9749a9608883ad5eb
         
 # faudio 64
-  - name: faudio-64bit
+  - name: faudio64
     buildsystem: cmake-ninja
     build-options:
-      prepend-pkg-config-path: /app/lib64/pkgconfig
-      ldflags: -L/app/lib64 -L/app/lib
-      prepend-path: /usr/lib/sdk/toolchain-i386/bin
-      env:
-        CC: x86_64-unknown-linux-gnu-gcc
-        CXX: x86_64-unknown-linux-gnu-g++
-      libdir: /app/lib64   
+#      prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
+#      ldflags: -L/app/lib32
+#      prepend-path: /usr/lib/sdk/toolchain-i386/bin
+#      env:
+#        CC: i686-unknown-linux-gnu-gcc
+#        CXX: i686-unknown-linux-gnu-g++
+#      libdir: /app/lib32
       strip: true
       no-debuginfo: true
     config-opts:
       - -DGSTREAMER=ON
     sources:
       - type: archive
-        url: https://github.com/FNA-XNA/FAudio/archive/21.03.05.tar.gz 
+        url: https://github.com/FNA-XNA/FAudio/archive/21.03.05.tar.gz
         sha256: c396c7c196e47bcb054cdc94cd3f7f39751fe27774de7eb9749a9608883ad5eb
         
-
-
-                
 # build wow64              
   - name: org.winehq.wine_64bit
     builddir: true
     build-options:
-      make-args: -j8
+      make-args: -j5
       prefix: /app
       prepend-path: /app/bin
-      ldflags: -L/app/lib64 -L/app/lib -L/app/lib32
+      ldflags: -L/app/lib64 -L/app/lib32
       append-path: /usr/lib/sdk/toolchain-i386/bin
       env:
         CC: i686-unknown-linux-gnu-gcc
@@ -458,6 +254,7 @@ modules:
       mkdir wine64-build && cd wine64-build   &&
       ../configure 
       --prefix="/app" 
+      --disable-win16
       --enable-shared      
       --disable-static
       --disable-tests          
@@ -465,12 +262,15 @@ modules:
       --without-cups
       --without-curses
       --without-capi
+      --without-glu
       --without-gphoto
       --without-gsm
       --without-hal
+      --with-ldap
+      --with-faudio
       --without-netapi
       --enable-win64 &&  
-      make -j8
+      make -j5
 
     # 2. Build wine32 twice
     - export CC=i686-unknown-linux-gnu-gcc  &&
@@ -478,6 +278,7 @@ modules:
       mkdir wine32-tools && cd wine32-tools &&
       ../configure 
       --prefix="/app" 
+      --disable-win16
       --enable-shared
       --disable-static
       --disable-tests          
@@ -485,11 +286,14 @@ modules:
       --without-cups
       --without-curses
       --without-capi
+      --without-glu
       --without-gphoto
       --without-gsm
       --without-hal
+      --with-ldap
+      --with-faudio
       --without-netapi &&
-      make -j8
+      make -j5
 
     # 3. Build 32bit second time and 
     # install 32 bit and 64 bit wine
@@ -500,6 +304,7 @@ modules:
       --with-wine64=../wine64-build
       --with-wine-tools=../wine32-tools
       --prefix="/app" 
+      --disable-win16
       --enable-shared      
       --disable-static
       --disable-tests          
@@ -507,19 +312,43 @@ modules:
       --without-cups
       --without-curses
       --without-capi
+      --without-glu
       --without-gphoto
       --without-gsm
       --without-hal
+      --with-ldap
+      --with-faudio
       --without-netapi   &&
-      make -j8           && 
+      make -j5           && 
       make install       && 
       cd ../wine64-build && 
       make install
 
     sources:
       - type: archive
-        url: https://dl.winehq.org/wine/source/6.x/wine-6.6.tar.xz
-        sha512: a5caabc5ff91a830fbdcd25a85ee32b6df98315325a929a3124521cd10cc873e5a585359b03eb0293bb2474e39a179cbe179c0611acda6a228861e06068c091e
+        url: https://dl.winehq.org/wine/source/5.0/wine-5.0.4.tar.xz
+        sha512: 6ece6e2eda95f960c876577c9303ea53703975db60af2150ed6583082a2ad700a0bcd92d51190843fcb39d701b215e035376ff401fe822db5bee9650cb7f4d00
+
+# Added mono
+#  - name: wine-gecko
+#    buildsystem: simple
+#    build-commands:
+#    - install -D wine-gecko-2.47.2-x86.msi /app/share/wine/gecko/wine-gecko-2.47.2-x86.msi
+#    no-make-install: true
+#    sources:
+#    - type: file
+#      url: http://dl.winehq.org/wine/wine-gecko/2.47.2/wine-gecko-2.47.2-x86.msi
+#      sha256: e520ce7336cd420cd09c91337d87e74bb420300fd5cbc6f724c1802766b6a61d
+
+#  - name: wine-mono
+#    buildsystem: simple
+#    build-commands:
+#    - install -D wine-mono-6.1.0-x86.msi /app/share/wine/mono/wine-mono-6.1.0-x86.msi
+#    no-make-install: true
+#    sources:
+#    - type: file
+#      url: https://github.com/madewokherd/wine-mono/releases/download/wine-mono-6.1.0/wine-mono-6.1.0-x86.msi
+#      sha256: e430d054a14e6859ca3e4f849187ddb8d01032f8305f07684d3b27f0f870ce4a
 
         
   - name: winetricks
@@ -550,9 +379,6 @@ modules:
       sha256: 93fb96b0f48a20ff5be0d9d9d3c4a986b469cb853131f9d5fe4cc9cecbc8b5b5
 
   - name: icoutils
-    build-options:
-      strip: true
-      no-debuginfo: true  
     buildsystem: autotools
     sources:
       - type: archive
@@ -560,11 +386,9 @@ modules:
         sha256: 17abe02d043a253b68b47e3af69c9fc755b895db68fdc8811786125df564c6e0
 
   - name: ImageMagick
-    build-options:
-      strip: true
-      no-debuginfo: true  
     config-opts:
       - --enable-shared
+      - --disable-static
       - --disable-docs
       - --with-modules
       - --with-threads
@@ -580,13 +404,13 @@ modules:
     build-commands:
     - install -Dm755 wine-create-bottle.sh /app/bin/wine-create-bottle.sh
     - install -Dm655 wine-create-bottle.desktop 
-      /app/share/applications/org.winehq.flatpak-wine66-wine-create-bottle.desktop
+      /app/share/applications/org.winehq.flatpak-wine-wine-create-bottle.desktop
     
     sources:
     - type: file
-      path: assets/wine-create-bottle.sh 
+      path: resources/wine-create-bottle.sh 
     - type: file
-      path: assets/wine-create-bottle.desktop
+      path: resources/wine-create-bottle.desktop
 
 
         
@@ -595,37 +419,31 @@ modules:
     buildsystem: simple
     build-commands:
     # icon
-    - install -Dm644 wine.svg
-      /app/share/icons/hicolor/scalable/apps/org.winehq.flatpak-wine66.svg 
-
+    - install -Dm644 
+      /app/share/icons/hicolor/scalable/apps/winetricks.svg
+      /app/share/icons/hicolor/scalable/apps/org.winehq.flatpak-wine.svg 
     - install -Dm644
       /app/share/icons/hicolor/scalable/apps/winetricks.svg
-      /app/share/icons/hicolor/scalable/apps/org.winehq.flatpak-wine66-create-bottle.svg
-
-    - install -Dm644 kill.svg
-      /app/share/icons/hicolor/scalable/apps/org.winehq.flatpak-wine66-kill.svg 
-    
+      /app/share/icons/hicolor/scalable/apps/org.winehq.flatpak-wine-winetricks.svg
 
     # Desktop file
     - mkdir -p /exports/share/applications
-    - install -Dm755 org.winehq.flatpak-wine66.desktop 
-        /app/share/applications/org.winehq.flatpak-wine66.desktop
+    - install -Dm755 org.winehq.flatpak-wine.desktop 
+        /app/share/applications/org.winehq.flatpak-wine.desktop
 
     # Shell scripts        
-    - install -Dm755 flatpak-wine66.sh     /app/bin/flatpak-wine66.sh
-    - install -Dm755 flatpak-wine66-gui.sh /app/bin/flatpak-wine66-gui.sh
-    
+#    - install -Dm755 org.winehq.flatpak-wine.sh /app/bin/org.winehq.flatpak-wine.sh
+    - install -Dm755 wine-x86_64.sh /app/bin/org.winehq.flatpak-wine.sh
+    - install -Dm755 wine-x86_64.sh /app/bin/wine-x86_64.sh
     sources:
+    
+#    - type: file
+#      path: resources/org.winehq.flatpak-wine.sh 
     - type: file
-      path: assets/org.winehq.flatpak-wine66.desktop
+      path: resources/org.winehq.flatpak-wine.desktop
     - type: file
-      path: assets/flatpak-wine66.sh
-    - type: file
-      path: assets/flatpak-wine66-gui.sh      
-    - type: file
-      path: assets/wine.svg
-    - type: file
-      path: assets/kill.svg
+      path: resources/wine-x86_64.sh
+
             
   - name: xna31-fix-sha256sum
     buildsystem: simple
@@ -637,14 +455,14 @@ modules:
     buildsystem: simple
     build-commands:
     - mkdir /app/manifest_and_build_script
-    - install -Dm644 org.winehq.flatpak-wine66.yml /app/manifest_and_build_script
+    - install -Dm644 org.winehq.flatpak-wine.yml /app/manifest_and_build_script
     - install -Dm644 install.sh /app/manifest_and_build_script
 
     sources:
     - type: file
       path: install.sh
     - type: file
-      path: org.winehq.flatpak-wine66.yml
+      path: org.winehq.flatpak-wine.yml
 
   - name: explorer++
     buildsystem: simple
@@ -653,11 +471,23 @@ modules:
     
     sources:
     - type: file
-      path: assets/explorer++_1.3.5_x86.zip
+      path: explorer++_1.3.5_x86.zip
 
+
+#  - name: wine-kill-program
+#    buildsystem: simple
+#    build-commands:
+#    - install -Dm644 wine-kill-program.desktop 
+#      /app/share/applications/org.winehq.flatpak-wine-wine-kill-program.desktop
+#    - install -Dm755 killall.sh /app/bin/killall.sh
+    
+#    sources:
+#    - type: file
+#      path: resources/wine-kill-program.desktop
+#    - type: file
+#      path: resources/killall.sh
 
 cleanup:
-
  - "*.a"
  - /lib/debug
  - /lib32/debug
@@ -665,6 +495,7 @@ cleanup:
  - /share/man
  - /include 
  - /share/applications/winetricks.desktop
+ - /app/share/icons/hicolor/scalable/apps/winetricks.svg
  - /app/share/applications/winetricks.desktop
  - /app/explorer++/"*.txt"
  
