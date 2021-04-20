@@ -23,11 +23,13 @@ rm *.flatpak repo/ -r 2>/dev/null
 
 
 # Build
-flatpak-builder --force-clean build-dir org.winehq.flatpak-wine.yml 
+flatpak-builder --force-clean build-dir org.winehq.flatpak-wine.yml && \
+flatpak remove org.winehq.flatpak-wine -y && echo "removed previous version"
 
 
 # Create flatpak
 flatpak-builder --repo="repo" --force-clean build-dir/ org.winehq.flatpak-wine.yml 
+
 flatpak-builder --user --install --force-clean build-dir/ org.winehq.flatpak-wine.yml 
 flatpak --user remote-add --no-gpg-verify "org.winehq.flatpak-wine" "repo"
 #flatpak build-bundle "repo" "org.winehq.flatpak-wine_$date.flatpak" org.winehq.flatpak-wine stable --runtime-repo="https://flathub.org/repo/flathub.flatpakrepo"
