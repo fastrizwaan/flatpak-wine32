@@ -10,8 +10,8 @@ export WINETRICKS="/app/bin/winetricks"
 
 
 # some games need to cd to the dir to work
-export base=$(basename "$1")
-export dire=$(dirname "$1")
+export base=$(basename $1)
+export dire=$(dirname $1)
 
 #echo $base >> ~/Documents/debug.txt
 #echo $dire >> ~/Documents/debug.txt
