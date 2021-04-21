@@ -76,6 +76,8 @@ modules:
     buildsystem: simple
     build-commands:
       - mkdir -p /app/lib/i386-linux-gnu /app/lib/debug/lib/i386-linux-gnu
+      
+# EUDEV udev      
   - name: eudev-64bit
     build-options:
       strip: true
@@ -109,6 +111,59 @@ modules:
         url: "https://github.com/gentoo/eudev/archive/v3.2.9.tar.gz"
         sha256: 7d281276b480da3935d1acb239748c2c9db01a8043aad7e918ce57a223d8cd24       
 
+# /EUDEV udev
+
+# ldap
+  - name: openldap
+    config-opts: 
+      - --disable-static
+      - --enable-shared
+      - --disable-slapd
+      - --disable-slurpd
+      - --disable-bdb
+      - --disable-hdb
+    cleanup: 
+      - /bin
+        
+    build-options:
+      prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
+      ldflags: -L/app/lib32
+      prepend-path: /usr/lib/sdk/toolchain-i386/bin
+      env:
+        CC: i686-unknown-linux-gnu-gcc
+        CXX: i686-unknown-linux-gnu-g++
+      libdir: /app/lib32
+      strip: true
+      no-debuginfo: true
+
+    sources:
+      - type: archive
+        url: https://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-2.4.55.tgz
+        sha256: 97357bd6ba8ff73d204c1f8208c5e6ab97d60c9e779f989057aa1229bbe98434
+
+# openldap 64bit
+  - name: openldap64
+    config-opts: 
+      - --disable-static
+      - --enable-shared  
+      - --disable-slapd
+      - --disable-slurpd
+      - --disable-bdb
+      - --disable-hdb
+    cleanup: 
+      - /bin
+        
+    build-options:
+      strip: true
+      no-debuginfo: true
+
+    sources:
+      - type: archive
+        url: https://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-2.4.55.tgz
+        sha256: 97357bd6ba8ff73d204c1f8208c5e6ab97d60c9e779f989057aa1229bbe98434
+
+
+# /ldap
 # 64 bit
   - name: vkd3d
     config-opts: 
