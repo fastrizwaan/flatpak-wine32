@@ -11,6 +11,14 @@ separate-locales: false
 
 # Support 32-bit at runtime
 add-extensions:
+  org.freedesktop.LinuxAudio.Plugins:
+    directory: extensions/Plugins
+    versions: '20.08;19.08'
+    add-ld-path: lib
+    merge-dirs: lxvst;vst3
+    subdirectories: true
+    no-autodownload: true
+    
   org.freedesktop.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
     version: '20.08'

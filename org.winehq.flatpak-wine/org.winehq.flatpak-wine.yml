@@ -11,6 +11,14 @@ separate-locales: false
 
 # Support 32-bit at runtime
 add-extensions:
+  org.freedesktop.LinuxAudio.Plugins:
+    directory: extensions/Plugins
+    versions: '20.08;19.08'
+    add-ld-path: lib
+    merge-dirs: lxvst;vst3
+    subdirectories: true
+    no-autodownload: true
+    
   org.freedesktop.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
     version: '20.08'
@@ -68,6 +76,38 @@ modules:
     buildsystem: simple
     build-commands:
       - mkdir -p /app/lib/i386-linux-gnu /app/lib/debug/lib/i386-linux-gnu
+  - name: eudev-64bit
+    build-options:
+      strip: true
+      no-debuginfo: true
+    config-opts:
+      - --disable-static
+    post-install:
+      - udevadm hwdb --update
+    sources:
+      - type: archive
+        url: "https://github.com/gentoo/eudev/archive/v3.2.9.tar.gz"
+        sha256: 7d281276b480da3935d1acb239748c2c9db01a8043aad7e918ce57a223d8cd24
+        
+  - name: eudev-32bit
+    build-options:
+      prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
+      ldflags: -L/app/lib32
+      prepend-path: /usr/lib/sdk/toolchain-i386/bin
+      env:
+        CC: i686-unknown-linux-gnu-gcc
+        CXX: i686-unknown-linux-gnu-g++
+      libdir: /app/lib32
+      strip: true
+      no-debuginfo: true
+    config-opts:
+      - --disable-static
+    post-install:
+      - udevadm hwdb --update
+    sources:
+      - type: archive
+        url: "https://github.com/gentoo/eudev/archive/v3.2.9.tar.gz"
+        sha256: 7d281276b480da3935d1acb239748c2c9db01a8043aad7e918ce57a223d8cd24       
 
 # 64 bit
   - name: vkd3d
@@ -127,26 +167,155 @@ modules:
           - type: archive
             url: "https://github.com/KhronosGroup/SPIRV-Headers/archive/1.5.4.tar.gz"
             sha256: fc026b6566167f6db03dc48779f0f986f9ff8c93ed651a557f28cfbe2dff4ede
+### ALSA
+
+  - name: alsa-lib-64bit
+    build-options:
+      strip: true
+      no-debuginfo: true
+  
+    config-opts:
+      - --disable-static
+    sources: 
+      - type: archive
+        url: https://www.alsa-project.org/files/pub/lib/alsa-lib-1.2.4.tar.bz2
+        md5: 875184646a96e34bbe7a91925cd7b2ba
+        
+  - name: alsa-lib-32bit
+    build-options:
+      prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
+      ldflags: -L/app/lib32
+      prepend-path: /usr/lib/sdk/toolchain-i386/bin
+      env:
+        CC: i686-unknown-linux-gnu-gcc
+        CXX: i686-unknown-linux-gnu-g++
+      libdir: /app/lib32
+      strip: true
+      no-debuginfo: true
+  
+    config-opts: 
+      - --disable-static
+    sources: 
+      - type: archive
+        url: https://www.alsa-project.org/files/pub/lib/alsa-lib-1.2.4.tar.bz2
+        md5: 875184646a96e34bbe7a91925cd7b2ba        
+
+
+  - name: alsa-utils-64bit
+    build-options:
+      strip: true
+      no-debuginfo: true
+  
+    config-opts:
+      - --disable-static
+      - --disable-alsaconf 
+      - --disable-bat
+      - --disable-xmlto
+    sources: 
+      - type: archive
+        url: https://www.alsa-project.org/files/pub/utils/alsa-utils-1.2.4.tar.bz2
+        md5: 39cde1fa4fde9f09366737fb089a9053
+        
+  - name: alsa-utils-32bit
+    build-options:
+      prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
+      ldflags: -L/app/lib32
+      prepend-path: /usr/lib/sdk/toolchain-i386/bin
+      env:
+        CC: i686-unknown-linux-gnu-gcc
+        CXX: i686-unknown-linux-gnu-g++
+      libdir: /app/lib32
+      strip: true
+      no-debuginfo: true
+  
+    config-opts: 
+      - --disable-static
+      - --disable-alsaconf 
+      - --disable-bat
+      - --disable-xmlto
+    sources: 
+      - type: archive
+        url: https://www.alsa-project.org/files/pub/utils/alsa-utils-1.2.4.tar.bz2
+        md5: 39cde1fa4fde9f09366737fb089a9053        
+
+
+
+### ALSA
+
+
+  - name: fluid-soundfont
+    buildsystem: simple
+    build-commands:
+      - install -Dm644 FluidR3_GS.sf2 -t /app/share/sounds/sf2/
+    sources:
+      - type: archive
+        url: "http://deb.debian.org/debian/pool/main/f/fluid-soundfont/fluid-soundfont_3.1.orig.tar.gz"
+        md5: 189bbdf70221018cbda536984b105dfa
+
+
+  - name: libinstpatch-64_bit
+    buildsystem: cmake-ninja  
+    build-options:
+      prepend-pkg-config-path: /app/lib64/pkgconfig:/app/lib/pkgconfig
+      ldflags: -L/app/lib64 -L/app/lib
+      prepend-path: /usr/lib/sdk/toolchain-i386/bin
+      env:
+        CC: x86_64-unknown-linux-gnu-gcc
+        CXX: x86_64-unknown-linux-gnu-g++
+      libdir: /app/lib64   
+      strip: true
+      no-debuginfo: true
+    sources:
+      - type: archive
+        url: http://deb.debian.org/debian/pool/main/libi/libinstpatch/libinstpatch_1.1.6.orig.tar.gz
+        sha256: 8e9861b04ede275d712242664dab6ffa9166c7940fea3b017638681d25e10299
+
+######
+
 
 # FluidSynth
 
-  - name: fluidsynth-64bit
+  - name: fluidsynth-64_bit
     buildsystem: cmake-ninja
-    build-options:  
+    build-options:
+      prepend-pkg-config-path: /app/lib64/pkgconfig:/app/lib/pkgconfig
+      ldflags: -L/app/lib64 -L/app/lib
+      prepend-path: /usr/lib/sdk/toolchain-i386/bin
+      env:
+        CC: x86_64-unknown-linux-gnu-gcc
+        CXX: x86_64-unknown-linux-gnu-g++
+      libdir: /app/lib64   
       strip: true
       no-debuginfo: true      
     config-opts:
+    - -Denable-pulseaudio:BOOL=ON
+    - -Denable-alsa:BOOL=ON
     - "-DLIB_SUFFIX="
-    cleanup:
-    - "/bin"
-    - "/include"
-    - "/lib/pkgconfig"
-    - "/share/man"
-    - "*.so"
     sources:
     - type: archive
       url: https://github.com/FluidSynth/fluidsynth/archive/v2.1.8.tar.gz
       sha256: a254efceff5d99f8d658d12d25318317f37307e6df852ec9baeb7da173496967
+
+
+# libinstpatch 32
+        
+  - name: libinstpatch-32bit
+    buildsystem: cmake-ninja    
+    build-options:
+      prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
+      ldflags: -L/app/lib32
+      prepend-path: /usr/lib/sdk/toolchain-i386/bin
+      env:
+        CC: i686-unknown-linux-gnu-gcc
+        CXX: i686-unknown-linux-gnu-g++
+      libdir: /app/lib32
+      strip: true
+      no-debuginfo: true
+    sources:
+      - type: archive
+        url: http://deb.debian.org/debian/pool/main/libi/libinstpatch/libinstpatch_1.1.6.orig.tar.gz
+        sha256: 8e9861b04ede275d712242664dab6ffa9166c7940fea3b017638681d25e10299   
+
 
 
   - name: fluidsynth-32bit
@@ -162,13 +331,9 @@ modules:
       strip: true
       no-debuginfo: true
     config-opts:
+    - -Denable-pulseaudio:BOOL=ON
+    - -Denable-alsa:BOOL=ON
     - "-DLIB_SUFFIX="
-    cleanup:
-    - "/bin"
-    - "/include"
-    - "/lib/pkgconfig"
-    - "/share/man"
-    - "*.so"
     sources:
     - type: archive
       url: https://github.com/FluidSynth/fluidsynth/archive/v2.1.8.tar.gz
@@ -178,11 +343,16 @@ modules:
 # /FluidSynth
 
 
-######
-
 
   - name: glu-64bit
     build-options:
+      prepend-pkg-config-path: /app/lib64/pkgconfig
+      ldflags: -L/app/lib64 -L/app/lib
+      prepend-path: /usr/lib/sdk/toolchain-i386/bin
+      env:
+        CC: x86_64-unknown-linux-gnu-gcc
+        CXX: x86_64-unknown-linux-gnu-g++
+      libdir: /app/lib64   
       strip: true
       no-debuginfo: true
   
@@ -214,7 +384,7 @@ modules:
 
 
 ######
-  - name: faudio32
+  - name: faudio-32bit
     buildsystem: cmake-ninja
     build-options:
       prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
@@ -231,20 +401,27 @@ modules:
       - -DGSTREAMER=ON
     sources:
       - type: archive
-        url: https://github.com/FNA-XNA/FAudio/archive/21.03.05.tar.gz
+        url: https://github.com/FNA-XNA/FAudio/archive/21.03.05.tar.gz 
         sha256: c396c7c196e47bcb054cdc94cd3f7f39751fe27774de7eb9749a9608883ad5eb
         
 # faudio 64
-  - name: faudio64
+  - name: faudio-64bit
     buildsystem: cmake-ninja
     build-options:
+      prepend-pkg-config-path: /app/lib64/pkgconfig
+      ldflags: -L/app/lib64 -L/app/lib
+      prepend-path: /usr/lib/sdk/toolchain-i386/bin
+      env:
+        CC: x86_64-unknown-linux-gnu-gcc
+        CXX: x86_64-unknown-linux-gnu-g++
+      libdir: /app/lib64   
       strip: true
       no-debuginfo: true
     config-opts:
       - -DGSTREAMER=ON
     sources:
       - type: archive
-        url: https://github.com/FNA-XNA/FAudio/archive/21.03.05.tar.gz
+        url: https://github.com/FNA-XNA/FAudio/archive/21.03.05.tar.gz 
         sha256: c396c7c196e47bcb054cdc94cd3f7f39751fe27774de7eb9749a9608883ad5eb
         
 
@@ -257,7 +434,7 @@ modules:
       make-args: -j8
       prefix: /app
       prepend-path: /app/bin
-      ldflags: -L/app/lib64 -L/app/lib32
+      ldflags: -L/app/lib64 -L/app/lib -L/app/lib32
       append-path: /usr/lib/sdk/toolchain-i386/bin
       env:
         CC: i686-unknown-linux-gnu-gcc
