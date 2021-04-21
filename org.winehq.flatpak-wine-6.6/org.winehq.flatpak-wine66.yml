@@ -77,10 +77,6 @@ modules:
       no-debuginfo: true
     config-opts:
       - --disable-static
-    cleanup:
-      - /bin
-      - /sbin
-      - /lib*/udev
     post-install:
       - udevadm hwdb --update
     sources:
@@ -101,10 +97,6 @@ modules:
       no-debuginfo: true
     config-opts:
       - --disable-static
-    cleanup:
-      - /bin
-      - /sbin
-      - /lib*/udev
     post-install:
       - udevadm hwdb --update
     sources:

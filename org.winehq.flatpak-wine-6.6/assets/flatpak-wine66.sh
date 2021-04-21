@@ -1,5 +1,5 @@
 #!/bin/bash
-export WINEPREFIX=~/.local/share/flatpak-wine/default
+export WINEPREFIX=~/.local/share/flatpak-wine66/default
 export WINEARCH=win64
 #export WINEDLLOVERRIDES="mscoree,mshtml="
 export LD_LIBRARY_PATH=/app/lib:/app/lib32:/app/lib64:/app/lib/i386-linux-gnu:/app/lib/wine:/app/lib64/wine:/app/$NAME:$(pwd)
