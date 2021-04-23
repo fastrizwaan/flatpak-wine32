@@ -512,6 +512,7 @@ modules:
       --prefix="/app" 
       --enable-shared      
       --disable-static
+      --disable-tests
       --with-x
       --without-cups
       --without-curses
@@ -531,6 +532,7 @@ modules:
       --prefix="/app" 
       --enable-shared
       --disable-static
+      --disable-tests
       --with-x
       --without-cups
       --without-curses
@@ -552,6 +554,7 @@ modules:
       --prefix="/app" 
       --enable-shared      
       --disable-static
+      --disable-tests
       --with-x
       --without-cups
       --without-curses
