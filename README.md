@@ -15,8 +15,8 @@ flatpak -y --user install flathub                              \
         org.freedesktop.Platform.GL.default/x86_64/20.08       \
         org.freedesktop.Platform.VAAPI.Intel.i386/x86_64/20.08 \
         org.freedesktop.Platform.VAAPI.Intel/x86_64/20.08      \
-        org.freedesktop.Platform.ffmpeg_full/x86_64/20.08      \
-        org.freedesktop.Platform.ffmpeg_full.i386/x86_64/20.08    
+        org.freedesktop.Platform.ffmpeg_full.i386/x86_64/20.08 \
+        org.freedesktop.Platform.ffmpeg-full/x86_64/20.08       
 
 #for Nvidia users
 if [ -f /proc/driver/nvidia/version ]; then
