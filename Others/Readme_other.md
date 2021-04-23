@@ -37,7 +37,7 @@ flatpak -y --user install org.winehq.flatpak-wine.flatpak
 
 
 ## What is flatpak wine?
-========================
+------------------------
 Flatpak-wine is simply wine and winetricks bundled in a flatpak file. 
 To make working with wine prefixes (or bottles), it includes bash scripts.
 These bash scripts can be used for:
@@ -68,7 +68,7 @@ Install your required dlls using winetricks
 
 
 ##### Commandline using terminal window:
-==================================
+----------------------------------------
 Default bottle:
 ---------------
 `flatpak run org.winehq.wine-x86_64 winetricks xact xact_x64 xinput xna31 xinput vcrun2005 vcrun2008 corefonts d3dx9 d9vk faudio`
@@ -85,13 +85,13 @@ In your desktop environment, from the menu (Game or Others submenu or which you 
 
 
 ### Why flatpak-wine when others (lutris, playonlinux, bottles, etc.) exist?
-========================================================================
+-----------------------------------------------------------------------------
 Lutris, Bottles, Phoenicis, PlayOnLinux, either does not work consistently and or have confusing frontend / interface. 
 Flatpak-wine is trying to be simple, and work as expected i.e., running exe from filemanager, and creating bottles from exe is easier in flatpak-wine.
 
 
 ### Why wine inside flatpak?
-========================
+----------------------------
 1. Upgrade breakage fix: Apps and games which work fine, will not be broken with distribution upgrades.
 2. Consistent Version  : wine within flatpak with a fixed version (5.0.x) works across all flatpak supported distributions (https://flatpak.org/setup/). 
 3. Availability        : Centos like distributions do not provide 32 bit wine in their repository. 
@@ -102,29 +102,29 @@ he advantage is that the shared libraries are consistent across all distribution
 
 
 ### Why wine 5.0.x why not 6.x?
-===========================
+-------------------------------
 Because it is difficult to manage many versions. Some games work nicely with 5.0.5 like Raji: An Ancient Tale. There's also flatpak-wine66 (wine 6.6) if you want to try. And flatpak-proton64 (Proton 6.4 GE 1 works than 65) which runs Crash Bandicoot 4: It's about time fully (videos play). See Releases. And for older games like "The Elder Scrolls III: Morrowind", there's flatpak-wine217 (wine 2.17 32 bit only)
 
 
 ### Can we make a flatpak bundle of Game + wine?
-============================================
+------------------------------------------------
 Yes, for that see winepak-x86_64 (https://github.com/fastrizwaan/winepak-x86_64). 
 The Drawback of winepak-x86_64 bundle is that creating bundle takes a lot of time 20 minutes to hours. and it is difficult to bundle all the runtime stuff for all the games. Some games and apps can be bundled easily with that. Bottles created with flatpak-wine is a simple solution.
 
 
 ### Usage (commandline):
-====================
+------------------------
 flatpak run org.winehq.flatpak-wine --version
 wine-5.0.5
 flatpak run org.winehq.flatpak-wine --help
 
 
 ### How to kill/stop stuck flatpak-wine game or application?
-========================================================
+------------------------------------------------------------
 from the terminal window run `flatpak kill org.winehq.flatpak-wine` or from your desktop environment's menu select "kill flatpak-wine (5.0.5)"
 
 ### How to build the same flatpak on my system?
-===========================================
+-----------------------------------------------
 It's simple:
 
 ```
