@@ -134,7 +134,7 @@ It's simple:
 ```
 git clone https://github.com/fastrizwaan/flatpak-wine.git
 cd flatpak-wine/org.winehq.flatpak-wine
-sh ./install.sh sdk ;# this will install sdk, run this only once sdk
+sh ./install.sh sdk ;# this will install sdk, run this only once for sdk
 ```
 
 this will create a flatpak and also install it (as --user)
