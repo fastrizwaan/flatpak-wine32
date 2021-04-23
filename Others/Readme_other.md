@@ -1,4 +1,4 @@
-# Flatpak Wine (5.0.5)
+## Flatpak Wine (5.0.5)
 
 Copyright: (C) GNU GPL3 Mohammed Asif Ali Rizvan 
 
@@ -37,7 +37,7 @@ flatpak -y --user install org.winehq.flatpak-wine.flatpak
 
 
 ## What is flatpak wine?
-### =====================
+========================
 Flatpak-wine is simply wine and winetricks bundled in a flatpak file. 
 To make working with wine prefixes (or bottles), it includes bash scripts.
 These bash scripts can be used for:
@@ -47,27 +47,27 @@ These bash scripts can be used for:
 It is not sandboxed or limited to few directories because, we need to access apps/games in different partitions or directories. But everything is official, there are no patches. 
 
 
-Default bottle:
+### Default bottle:
 ---------------
 whatever we install/run using terminal `flatpak run org.winehq.flatpak-wine` or (open-with from file manager) `flatpak-wine (5.0.5)` or from menu goes to the wineprefix: `~/.local/share/flatpak-wine/default` directory. This can be used to test/install softwares/games. The default bottle / wine prefix gets messed up by installing many apps/games or winetricks dlls. A "delete bottle" option is provided to delete `~/.local/share/flatpak-wine/default`. 
 
-Game.exe / app.exe bottles:
+### Game.exe / app.exe bottles:
 ---------------------------
 It would be good if we create and use separate bottles for each of our games/apps. And for that we can create game or app specific bottle. To do that right-click on an .exe file in the file manager (nautilus / dolphin / thunar) and choose "Create Bottle using flatpak-wine" from right-click menu of filemanager. It will ask for a name, if no name is given, "filename.exe" is used in the menu. 
 
 The game/app bottle creates a wineprefix and a launch script for that game/app at `~/.local/share/flatpak-wine/bottles/` and creates a shortcut at the Game/App directory which is symbolically linked (ln -s) to `~/.local/share/applications/flatpak-wine/`
 
 
-Customizing Bottles:
+### Customizing Bottles:
 --------------------
 Both default and app/game specific bottles provide some options to customize, like winetricks gui, winecfg etc. We can open flatpak sandbox shell from the options, and run winetricks, wine like we run from terminal window.
 
-customzing flatpak-wine or game bottle with winetricks:
+#### Customzing flatpak-wine or game bottle with winetricks:
 -------------------------------------------------------
 Install your required dlls using winetricks 
 
 
-Commandline using terminal window:
+##### Commandline using terminal window:
 ==================================
 Default bottle:
 ---------------
@@ -79,18 +79,18 @@ Game/App bottle:
 
 see your created bottles by `ls ~/.local/share/flatpak-wine/`
 
-How to access this app/wine bottle
+###### How to access this app/wine bottle
 ----------------------------------
 In your desktop environment, from the menu (Game or Others submenu or which you chose while creating bottle) or via command line, "~/.local/share/flatpak-wine/bottles/game.exe.sh". To check all available bottles: `ls ~/.local/share/flatpak-wine/bottles/*.sh`
 
 
-Why flatpak-wine when others (lutris, playonlinux, bottles, etc.) exist?
+### Why flatpak-wine when others (lutris, playonlinux, bottles, etc.) exist?
 ========================================================================
 Lutris, Bottles, Phoenicis, PlayOnLinux, either does not work consistently and or have confusing frontend / interface. 
 Flatpak-wine is trying to be simple, and work as expected i.e., running exe from filemanager, and creating bottles from exe is easier in flatpak-wine.
 
 
-Why wine inside flatpak?
+### Why wine inside flatpak?
 ========================
 1. Upgrade breakage fix: Apps and games which work fine, will not be broken with distribution upgrades.
 2. Consistent Version  : wine within flatpak with a fixed version (5.0.x) works across all flatpak supported distributions (https://flatpak.org/setup/). 
@@ -101,29 +101,29 @@ he advantage is that the shared libraries are consistent across all distribution
 6. Straight forward and quick launching of Windows programs and games.
 
 
-Why wine 5.0.x why not 6.x?
+### Why wine 5.0.x why not 6.x?
 ===========================
 Because it is difficult to manage many versions. Some games work nicely with 5.0.5 like Raji: An Ancient Tale. There's also flatpak-wine66 (wine 6.6) if you want to try. And flatpak-proton64 (Proton 6.4 GE 1 works than 65) which runs Crash Bandicoot 4: It's about time fully (videos play). See Releases. And for older games like "The Elder Scrolls III: Morrowind", there's flatpak-wine217 (wine 2.17 32 bit only)
 
 
-Can we make a flatpak bundle of Game + wine?
+### Can we make a flatpak bundle of Game + wine?
 ============================================
 Yes, for that see winepak-x86_64 (https://github.com/fastrizwaan/winepak-x86_64). 
 The Drawback of winepak-x86_64 bundle is that creating bundle takes a lot of time 20 minutes to hours. and it is difficult to bundle all the runtime stuff for all the games. Some games and apps can be bundled easily with that. Bottles created with flatpak-wine is a simple solution.
 
 
-Usage (commandline):
+### Usage (commandline):
 ====================
 flatpak run org.winehq.flatpak-wine --version
 wine-5.0.5
 flatpak run org.winehq.flatpak-wine --help
 
 
-How to kill/stop stuck flatpak-wine game or application?
+### How to kill/stop stuck flatpak-wine game or application?
 ========================================================
 from the terminal window run `flatpak kill org.winehq.flatpak-wine` or from your desktop environment's menu select "kill flatpak-wine (5.0.5)"
 
-How to build the same flatpak on my system?
+### How to build the same flatpak on my system?
 ===========================================
 It's simple:
 
@@ -134,3 +134,5 @@ sh ./install.sh sdk ;# this will install sdk, run this only once sdk
 ```
 
 this will create a flatpak and also install it (as --user)
+
+
