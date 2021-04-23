@@ -168,7 +168,13 @@ sh ./install.sh ; #builds in 10 minutes (depends on internet speed)
 
 ### Videos
 https://youtu.be/x4PUObpG8sI                (flatpak-wine version 1.0 install instructions) old version
+
 https://www.youtube.com/watch?v=6gmHe6faMS8 (raji game)
+
 https://youtu.be/7vTIGOXQYfw                (kungfu strike with flatpak-wine)
+
 https://youtu.be/IvZfBgg0Xy8                (New super lucky's tale)
+
 https://youtu.be/VT22Ii4-Wwg                (Friday Night Funkin)
+
+
