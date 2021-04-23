@@ -20,7 +20,7 @@ flatpak -y --user install flathub                              \
 
 #for Nvidia users
 if [ -f /proc/driver/nvidia/version ]; then
-    ver=$(grep -Eo '[0-9][0-9][0-9].[0-9][0-9]*' /proc/driver/nvidia/version|tr '.' '-')
+    ver=$(nvidia-settings -q all |grep OpenGLVersion|grep NVIDIA|sed 's/.*NVIDIA \(.*\) /nvidia-\1/g'|sed 's/\./-/g')
     flatpak -y --user install flathub                 \
         org.freedesktop.Platform.GL.nvidia-$ver   \
         org.freedesktop.Platform.GL32.nvidia-$ver
