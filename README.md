@@ -49,9 +49,9 @@ The wine prefixes or bottles, are handled with bash scripts.
 
 There are 2 wineprefixes/bottles:
 
-    default bottle 
-    
-    Game bottle (~/.local/share/flatpak-wine/bottles/game.exe/)
+   default bottle (`~/.local/share/flatpak-wine/default/`)
+   
+   Game bottle    (`~/.local/share/flatpak-wine/bottles/game.exe/`)
 
 flatpak wine is not sandboxed or limited to few directories because, we need to access apps/games in different partitions or directories. But everything is official, there are no patches. 
 
@@ -95,7 +95,7 @@ In your desktop environment, from the menu (Game or Others submenu or which you 
 
 
 ### Why flatpak-wine when others (lutris, playonlinux, bottles, etc.) exist?
--
+
 Lutris, Bottles, Phoenicis, PlayOnLinux, either does not work consistently and or have confusing frontend / interface. 
 Flatpak-wine is trying to be simple, and work as expected i.e., running exe from filemanager, and creating bottles from exe is easier in flatpak-wine.
 
