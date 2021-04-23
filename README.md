@@ -129,7 +129,7 @@ from the terminal window run `flatpak kill org.winehq.flatpak-wine` or from your
 
 ### How to build the same flatpak on my system?
 
-It's simple:
+It's simple: build takes up to 2 hours (50 minutes on i7 4th gen)
 
 ```
 git clone https://github.com/fastrizwaan/flatpak-wine.git
@@ -139,6 +139,13 @@ sh ./install.sh sdk ;# this will install sdk, run this only once for sdk
 
 this will create a flatpak and also install it (as --user)
 
+
+### Proton GE 6.4 (works with many games)
+```
+git clone https://github.com/fastrizwaan/flatpak-wine.git
+cd flatpak-wine/Others/org.winehq.Proton-64-GE-1
+sh ./install.sh ; #builds in 10 minutes (depends on internet speed)
+```
 
 ### Future plans
 
@@ -153,9 +160,15 @@ this will create a flatpak and also install it (as --user)
       e.g., 
 ```      
       "Full name of the Game",              "MD5sum  of the EXE file",           "Game.exe",          "runner",         "Winetricks"
-      "Raji: An Ancient Tale",              "3a1184d2af57d017907c07fda1f55ff5",  "Raji.exe",          "wine-5.0.5",     "vcrun2005 vcrun2008 vcrun2010 d9vk quartz d3dx9 xna31 xinput faudio"  
-      "Kung Fu Strike: The Warrior's Rise", "970c730243e9487d645cba8e6bbc5ee6",  "KungFuStrike.exe",  "wine-5.0.5",     "xna31 xinput d3dx9 d9vk faudio"
+      "Raji: An Ancient Tale",              "3a1184d2af57d017907c07fda1f55ff5",  "Raji.exe",          "wine-5.0.5",     "xact xact_x64 vcrun2005 vcrun2008 vcrun2010 d9vk quartz d3dx9 xna31 xinput faudio"  
+      "Kung Fu Strike: The Warrior's Rise", "970c730243e9487d645cba8e6bbc5ee6",  "KungFuStrike.exe",  "wine-5.0.5",     "xact xact_x64 xna31 xinput d3dx9 d9vk faudio"
       "Friday Night Funkin",                "789315610829029a10f7a7f32c3886b2",  "Funkin.exe",        "proton-ge-64-1", ""
       "The Elder Scrolls III: Morrowind",   "acfcaaea0bb85efebe2352eb75aa99f9",  "Morrowind.exe",     "wine-2.17",      ""
 ```
 
+### Videos
+https://youtu.be/x4PUObpG8sI                (flatpak-wine version 1.0 install instructions) old version
+https://www.youtube.com/watch?v=6gmHe6faMS8 (raji game)
+https://youtu.be/7vTIGOXQYfw                (kungfu strike with flatpak-wine)
+https://youtu.be/IvZfBgg0Xy8                (New super lucky's tale)
+https://youtu.be/VT22Ii4-Wwg                (Friday Night Funkin)
