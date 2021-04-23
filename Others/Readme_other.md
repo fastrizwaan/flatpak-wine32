@@ -1,7 +1,9 @@
 # Flatpak Wine (5.0.5)
 
 Copyright: (C) GNU GPL3 Mohammed Asif Ali Rizvan 
+
 Email    : fast.rizwaan@gmail.com
+
 Github   : github.com/fastrizwaan
 
 ### For the impatient
