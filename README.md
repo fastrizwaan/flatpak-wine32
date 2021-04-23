@@ -22,8 +22,8 @@ flatpak -y --user install flathub                              \
 if [ -f /proc/driver/nvidia/version ]; then
     ver=$(nvidia-settings -q all |grep OpenGLVersion|grep NVIDIA|sed 's/.*NVIDIA \(.*\) /nvidia-\1/g'|sed 's/\./-/g')
     flatpak -y --user install flathub                 \
-        org.freedesktop.Platform.GL.nvidia-$ver   \
-        org.freedesktop.Platform.GL32.nvidia-$ver
+        org.freedesktop.Platform.GL.$ver   \
+        org.freedesktop.Platform.GL32.$ver
 fi
 
 #Install flatpak-wine bundle
