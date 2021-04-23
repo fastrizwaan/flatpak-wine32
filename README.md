@@ -42,12 +42,18 @@ some distros software app has flatpak support like gnome-software, that too can 
 ## What is flatpak wine?
 
 Flatpak-wine is simply wine and winetricks bundled in a flatpak file. 
-To make working with wine prefixes (or bottles), it includes bash scripts.
-These bash scripts can be used for:
-    default bottle 
-    Game/app bottle (~/.local/share/flatpak-wine/bottles/game.exe/)
 
-It is not sandboxed or limited to few directories because, we need to access apps/games in different partitions or directories. But everything is official, there are no patches. 
+It includes few bash script and uses zenity for GUI prompts similar to winetricks.
+
+The wine prefixes or bottles, are handled with bash scripts.
+
+There are 2 wineprefixes/bottles:
+
+    default bottle 
+    
+    Game bottle (~/.local/share/flatpak-wine/bottles/game.exe/)
+
+flatpak wine is not sandboxed or limited to few directories because, we need to access apps/games in different partitions or directories. But everything is official, there are no patches. 
 
 
 ### Default bottle:
@@ -59,7 +65,7 @@ whatever we install/run using terminal `flatpak run org.winehq.flatpak-wine` or 
 
 It would be good if we create and use separate bottles for each of our games/apps. And for that we can create game or app specific bottle. To do that right-click on an .exe file in the file manager (nautilus / dolphin / thunar) and choose "Create Bottle using flatpak-wine" from right-click menu of filemanager. It will ask for a name, if no name is given, "filename.exe" is used in the menu. 
 
-The game/app bottle creates a wineprefix and a launch script for that game/app at `~/.local/share/flatpak-wine/bottles/` and creates a shortcut at the Game/App directory which is symbolically linked (ln -s) to `~/.local/share/applications/flatpak-wine/`
+The game/app bottle creates a wineprefix and a launch script for that game/app at `~/.local/share/flatpak-wine/bottles/` and creates a shortcut and icon from the exe file in the same Game/App directory which is symbolically linked (ln -s) to `~/.local/share/applications/flatpak-wine/`. This shortcut (desktop file and icon) will be deleted when we delete the game bottle.
 
 
 ### Customizing Bottles:
