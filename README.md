@@ -4,7 +4,7 @@ Copyright: (C) GNU GPL3 Mohammed Asif Ali Rizvan
 
 Email    : fast.rizwaan@gmail.com
 
-Github   : github.com/fastrizwaan
+Github   : https://github.com/fastrizwaan
 
 ### For the impatient
 In a terminal window, copy paste these:
