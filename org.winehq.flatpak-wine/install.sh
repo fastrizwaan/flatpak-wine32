@@ -3,8 +3,8 @@
 if [ "$1" == "sdk" ]; then
 echo -n "Installing SDKs for build "
     sudo flatpak update -y
-    sudo flatpak --system remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-    sudo flatpak -y --system install flathub \
+    sudo flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    sudo flatpak -y --user install flathub \
 	                org.freedesktop.Sdk/x86_64/20.08 \
                     org.freedesktop.Platform/x86_64/20.08 \
                     org.freedesktop.Sdk.Compat.i386/x86_64/20.08 \
@@ -21,7 +21,7 @@ echo -n "Installing SDKs for build "
     # If nvidia drivers are installed 
 	if [ -f /proc/driver/nvidia/version ]; then
 		ver=$(nvidia-settings -q all |grep OpenGLVersion|grep NVIDIA|sed 's/.*NVIDIA \(.*\) /nvidia-\1/g'|sed 's/\./-/g')
-		flatpak -y --system install flathub    \
+		flatpak -y --user install flathub    \
 			org.freedesktop.Platform.GL.$ver   \
 			org.freedesktop.Platform.GL32.$ver
 	fi           
