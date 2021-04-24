@@ -1,9 +1,9 @@
-app-id: org.winehq.flatpak-wine66
+app-id: org.winehq.flatpak-wine67
 base-version: '20.08'
 runtime: org.freedesktop.Platform
 runtime-version: '20.08'
 sdk: org.freedesktop.Sdk
-command: flatpak-wine66.sh
+command: flatpak-wine67.sh
 default-branch: stable
 separate-locales: false
 
@@ -61,10 +61,10 @@ finish-args:
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.gnome.Mutter.DisplayConfig
   - --filesystem=host
-  - --filesystem=~/.local/share/flatpak-wine66/:create
+  - --filesystem=~/.local/share/flatpak-wine67/:create
   - --device=all
   # wineprefixes are created here
-  - --persist=~/.local/share/flatpak-wine66/
+  - --persist=~/.local/share/flatpak-wine67/
   # Support 32-bit runtime
   # Testing for Driver San andreas- --env=LD_LIBRARY_PATH=/app/lib:/app/lib:/app/lib32:/app/lib64:/app/lib/i386-linux-gnu:/app/lib/wine:/app/lib64/wine:$(pwd)
   - --env=LD_LIBRARY_PATH=/app/lib:/app/lib:/app/lib32:/app/lib64
@@ -345,8 +345,8 @@ modules:
 
     sources:
       - type: archive
-        url: https://dl.winehq.org/wine/source/6.x/wine-6.6.tar.xz
-        sha512: a5caabc5ff91a830fbdcd25a85ee32b6df98315325a929a3124521cd10cc873e5a585359b03eb0293bb2474e39a179cbe179c0611acda6a228861e06068c091e
+        url: https://dl.winehq.org/wine/source/6.x/wine-6.7.tar.xz
+        sha512: 42920921eaff5a483859fba2b9e866c6afad25427d030f971efe2136f9619b675d5eb1ddfffd54bba8caa172c3e91eb347d673cb16f45560f0ab40a184a34758
 
         
   - name: winetricks
@@ -407,7 +407,7 @@ modules:
     build-commands:
     - install -Dm755 wine-create-bottle.sh /app/bin/wine-create-bottle.sh
     - install -Dm655 wine-create-bottle.desktop 
-      /app/share/applications/org.winehq.flatpak-wine66-wine-create-bottle.desktop
+      /app/share/applications/org.winehq.flatpak-wine67-wine-create-bottle.desktop
     
     sources:
     - type: file
@@ -423,32 +423,32 @@ modules:
     build-commands:
     # icon
     - install -Dm644 wine.svg
-      /app/share/icons/hicolor/scalable/apps/org.winehq.flatpak-wine66.svg 
+      /app/share/icons/hicolor/scalable/apps/org.winehq.flatpak-wine67.svg 
 
     - install -Dm644
       /app/share/icons/hicolor/scalable/apps/winetricks.svg
-      /app/share/icons/hicolor/scalable/apps/org.winehq.flatpak-wine66-create-bottle.svg
+      /app/share/icons/hicolor/scalable/apps/org.winehq.flatpak-wine67-create-bottle.svg
 
     - install -Dm644 kill.svg
-      /app/share/icons/hicolor/scalable/apps/org.winehq.flatpak-wine66-kill.svg 
+      /app/share/icons/hicolor/scalable/apps/org.winehq.flatpak-wine67-kill.svg 
     
 
     # Desktop file
     - mkdir -p /exports/share/applications
-    - install -Dm755 org.winehq.flatpak-wine66.desktop 
-        /app/share/applications/org.winehq.flatpak-wine66.desktop
+    - install -Dm755 org.winehq.flatpak-wine67.desktop 
+        /app/share/applications/org.winehq.flatpak-wine67.desktop
 
     # Shell scripts        
-    - install -Dm755 flatpak-wine66.sh     /app/bin/flatpak-wine66.sh
-    - install -Dm755 flatpak-wine66-gui.sh /app/bin/flatpak-wine66-gui.sh
+    - install -Dm755 flatpak-wine67.sh     /app/bin/flatpak-wine67.sh
+    - install -Dm755 flatpak-wine67-gui.sh /app/bin/flatpak-wine67-gui.sh
     
     sources:
     - type: file
-      path: assets/org.winehq.flatpak-wine66.desktop
+      path: assets/org.winehq.flatpak-wine67.desktop
     - type: file
-      path: assets/flatpak-wine66.sh
+      path: assets/flatpak-wine67.sh
     - type: file
-      path: assets/flatpak-wine66-gui.sh      
+      path: assets/flatpak-wine67-gui.sh      
     - type: file
       path: assets/wine.svg
     - type: file
@@ -464,14 +464,14 @@ modules:
     buildsystem: simple
     build-commands:
     - mkdir /app/manifest_and_build_script
-    - install -Dm644 org.winehq.flatpak-wine66.yml /app/manifest_and_build_script
+    - install -Dm644 org.winehq.flatpak-wine67.yml /app/manifest_and_build_script
     - install -Dm644 install.sh /app/manifest_and_build_script
 
     sources:
     - type: file
       path: install.sh
     - type: file
-      path: org.winehq.flatpak-wine66.yml
+      path: org.winehq.flatpak-wine67.yml
 
   - name: explorer++
     buildsystem: simple

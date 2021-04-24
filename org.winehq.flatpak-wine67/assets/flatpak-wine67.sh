@@ -1,5 +1,5 @@
 #!/bin/bash
-export WINEPREFIX=~/.local/share/flatpak-wine66/default
+export WINEPREFIX=~/.local/share/flatpak-wine67/default
 export WINEARCH=win64
 #export WINEDLLOVERRIDES="mscoree,mshtml="
 export LD_LIBRARY_PATH=/app/lib:/app/lib32:/app/lib64:/app/lib/i386-linux-gnu:/app/lib/wine:/app/lib64/wine:/app/$NAME:$(pwd)
@@ -16,16 +16,16 @@ export dire=$(dirname $1)
 #echo $base >> ~/Documents/debug.txt
 #echo $dire >> ~/Documents/debug.txt
 # Create kill shortcut for convenience
-mkdir -p ~/.local/share/applications/flatpak-wine66/
+mkdir -p ~/.local/share/applications/flatpak-wine67/
 echo '
 [Desktop Entry]
-Exec=flatpak kill org.winehq.flatpak-wine66
+Exec=flatpak kill org.winehq.flatpak-wine67
 Name=flatpak-wine kill (6.6)
 Type=Application
 Categories=Application;;
-Icon=org.winehq.flatpak-wine66-kill
+Icon=org.winehq.flatpak-wine67-kill
 Keywords=flatpak; wine; kill;
-' > ~/.local/share/applications/flatpak-wine66/killall_wine-6.6.desktop
+' > ~/.local/share/applications/flatpak-wine67/killall_wine-6.6.desktop
 
 # if no argument passed then show a dialog with choices
 if [ $# -eq 0 ];  then
@@ -53,7 +53,7 @@ elif [ "$1" == "explorer" ]; then
 elif [ "$1" == "--help" ] || [ "$1" == "help" ]; then
     echo "flatpak-wine (6.6) - run wine applicatins/games"
 	echo " "
-	echo "flatpak run org.winehq.flatpak-wine66 <argument>"
+	echo "flatpak run org.winehq.flatpak-wine67 <argument>"
 	echo " "
 	echo "Arguments can be:"
 	echo "bash      : open flatpak-wine sandbox in shell"

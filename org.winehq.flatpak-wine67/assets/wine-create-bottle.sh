@@ -53,14 +53,14 @@ shortcut" --entry)
 
 
 # try to add wineprefix for the game
-mkdir -p ~/.local/share/flatpak-wine66/bottles/
+mkdir -p ~/.local/share/flatpak-wine67/bottles/
 
 myBaseNamePrefix=$(echo $myBaseName|tr ' ' '_');
 
 ###############################################
-cat << EOF > ~/.local/share/flatpak-wine66/bottles/$myBaseNamePrefix.sh
+cat << EOF > ~/.local/share/flatpak-wine67/bottles/$myBaseNamePrefix.sh
 #!/bin/bash
-export WINEPREFIX=~/.local/share/flatpak-wine66/bottles/$myBaseNamePrefix
+export WINEPREFIX=~/.local/share/flatpak-wine67/bottles/$myBaseNamePrefix
 export WINEARCH=win64
 export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:/app/lib:/app/lib32:/app/lib/wine:/app/lib32/wine:/app/lib/i386-linux-gnu:/app/lib/debug/lib/i386-linux-gnu
 
@@ -81,7 +81,7 @@ choice=\$(zenity --title "$myBaseNamePrefix: Choose!" --width=240 --height=300 \
 [[ -z "\$choice" ]] && exit 1
 
 if [ "\$choice" = "Run Winetricks..." ]; then  
-   WINEPREFIX=~/.local/share/flatpak-wine66/bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine66 --gui
+   WINEPREFIX=~/.local/share/flatpak-wine67/bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine67 --gui
 
     # My_Dlls_install
 	elif [ "\$choice" = "Install Custom DLLs..." ]; then
@@ -100,7 +100,7 @@ prog=\$(echo \$step)
 	  do
     	echo \$prog
 	    echo "# Installing \$i..."
-	    WINEPREFIX=~/.local/share/flatpak-wine66/bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine66 --unattended \$i
+	    WINEPREFIX=~/.local/share/flatpak-wine67/bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine67 --unattended \$i
       
         prog=\$(expr \$prog + \$step)
 	  done
@@ -110,31 +110,31 @@ prog=\$(echo \$step)
 
 
 elif [ "\$choice" = "Launch Winecfg..." ]; then
-   WINEPREFIX=~/.local/share/flatpak-wine66/bottles/$myBaseNamePrefix flatpak run --command=winecfg org.winehq.flatpak-wine66
+   WINEPREFIX=~/.local/share/flatpak-wine67/bottles/$myBaseNamePrefix flatpak run --command=winecfg org.winehq.flatpak-wine67
 elif [ "\$choice" = "Open Explorer++..." ]; then
-   WINEPREFIX=~/.local/share/flatpak-wine66/bottles/$myBaseNamePrefix flatpak run --command=wine org.winehq.flatpak-wine66 /app/explorer++/Explorer++.exe
+   WINEPREFIX=~/.local/share/flatpak-wine67/bottles/$myBaseNamePrefix flatpak run --command=wine org.winehq.flatpak-wine67 /app/explorer++/Explorer++.exe
 elif [ "\$choice" = "Open Shell..." ]; then   
- gnome-terminal -- bash -c "flatpak run --command=bash org.winehq.flatpak-wine66"
+ gnome-terminal -- bash -c "flatpak run --command=bash org.winehq.flatpak-wine67"
 elif [ "\$choice" = "Delete Bottle: $myBaseNamePrefix" ]; then
-rm -rfv ~/.local/share/flatpak-wine66/bottles/$myBaseNamePrefix; 
-rm -f "$HOME/.local/share/applications/flatpak-wine66/$myBaseName.desktop"
+rm -rfv ~/.local/share/flatpak-wine67/bottles/$myBaseNamePrefix; 
+rm -f "$HOME/.local/share/applications/flatpak-wine67/$myBaseName.desktop"
 rm -f "$myFile.desktop" 
 rm -f "$myFile.icon.png"
-rm -f ~/.local/share/flatpak-wine66/bottles/"$myBaseNamePrefix.sh"
+rm -f ~/.local/share/flatpak-wine67/bottles/"$myBaseNamePrefix.sh"
 elif [ "\$choice" = "Launch $myBaseNamePrefix" ]; then
 export base=\$(basename "$myFile")
 export dire=\$(dirname "$myFile")
 cd "\$dire"
-WINEPREFIX=~/.local/share/flatpak-wine66/bottles/$myBaseNamePrefix flatpak run --command=wine org.winehq.flatpak-wine66 "\$base"
+WINEPREFIX=~/.local/share/flatpak-wine67/bottles/$myBaseNamePrefix flatpak run --command=wine org.winehq.flatpak-wine67 "\$base"
 fi
 EOF
 
 ###############################################
-chmod +x ~/.local/share/flatpak-wine66/bottles/"$myBaseNamePrefix.sh"
-chmod +x ~/.local/share/flatpak-wine66/bottles/*.sh
+chmod +x ~/.local/share/flatpak-wine67/bottles/"$myBaseNamePrefix.sh"
+chmod +x ~/.local/share/flatpak-wine67/bottles/*.sh
     
     # Generate desktop entry specifications to be added to the application launcher.
-    deskEntry="[Desktop Entry]"\\n"Exec=bash -c ~/.local/share/flatpak-wine66/bottles/$myBaseNamePrefix.sh"\\n"Name=\
+    deskEntry="[Desktop Entry]"\\n"Exec=bash -c ~/.local/share/flatpak-wine67/bottles/$myBaseNamePrefix.sh"\\n"Name=\
 $appName"\\n"Path=$myPath"\\n"Type=Application"\\n"Categories=$appCategory;\
 $category;"\\n"Icon="$myFile.icon.png""
     # Create a .desktop file and add desktop entries in it.
@@ -142,9 +142,9 @@ $category;"\\n"Icon="$myFile.icon.png""
     echo "Keywords=flatpak; wine;" >> "$myFile".desktop
     
     # link the launcher  file to a shortcut on applications menu.
-    mkdir -p "$HOME/.local/share/applications/flatpak-wine66/"
+    mkdir -p "$HOME/.local/share/applications/flatpak-wine67/"
     
-    ln -sf "$myFile".desktop  $HOME/.local/share/applications/flatpak-wine66/"$myBaseName".desktop
+    ln -sf "$myFile".desktop  $HOME/.local/share/applications/flatpak-wine67/"$myBaseName".desktop
     # Test if the app link was created sucessfully on applications menu 
     if [ $? -eq 0 ]; then
         gtk-update-icon-cache 

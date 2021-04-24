@@ -1,9 +1,9 @@
 [Desktop Entry]
 Type=Application
-Name=Create Bottle: flatpak-wine (6.6)
+Name=Create Bottle: flatpak-wine (6.7)
 Exec=wine-create-bottle.sh %F
 MimeType=application/x-ms-dos-executable;
-Icon=org.winehq.flatpak-wine66-create-bottle
+Icon=org.winehq.flatpak-wine67-create-bottle
 Categories=Emulator;
 NoDisplay=false
 StartupNotify=true

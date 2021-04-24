@@ -33,28 +33,28 @@ fi
 rm *.flatpak repo/ -r 2>/dev/null
 echo "Removed old flatpak     [x]"
 echo "Removed old repo/ dir   [x]"
-#flatpak remove org.winehq.flatpak-wine66 -y 2>/dev/null
+#flatpak remove org.winehq.flatpak-wine67 -y 2>/dev/null
 
 echo "Starting flatpak build  [x]"
 
 # Build
-flatpak-builder --force-clean build-dir org.winehq.flatpak-wine66.yml && \
-flatpak remove org.winehq.flatpak-wine66 -y && echo "Removed old flatpak     [x]"
+flatpak-builder --force-clean build-dir org.winehq.flatpak-wine67.yml && \
+flatpak remove org.winehq.flatpak-wine67 -y && echo "Removed old flatpak     [x]"
 
 
 # Create flatpak
 echo "Creating flatpak repo   [x]"
-flatpak-builder --repo="repo" --force-clean build-dir/ org.winehq.flatpak-wine66.yml 
+flatpak-builder --repo="repo" --force-clean build-dir/ org.winehq.flatpak-wine67.yml 
 
-echo "Installing flatpak-wine66 [x]"
-flatpak-builder --user --install --force-clean build-dir/ org.winehq.flatpak-wine66.yml 
+echo "Installing flatpak-wine67 [x]"
+flatpak-builder --user --install --force-clean build-dir/ org.winehq.flatpak-wine67.yml 
 echo "Creating flatpak bundle [x]"
-flatpak --user remote-add --no-gpg-verify "org.winehq.flatpak-wine66" "repo" 2>/dev/null
-#flatpak build-bundle "repo" "org.winehq.flatpak-wine66_$date.flatpak" org.winehq.flatpak-wine66 stable --runtime-repo="https://flathub.org/repo/flathub.flatpakrepo"
-flatpak build-bundle "repo" "org.winehq.flatpak-wine66.flatpak" org.winehq.flatpak-wine66 stable
+flatpak --user remote-add --no-gpg-verify "org.winehq.flatpak-wine67" "repo" 2>/dev/null
+#flatpak build-bundle "repo" "org.winehq.flatpak-wine67_$date.flatpak" org.winehq.flatpak-wine67 stable --runtime-repo="https://flathub.org/repo/flathub.flatpakrepo"
+flatpak build-bundle "repo" "org.winehq.flatpak-wine67.flatpak" org.winehq.flatpak-wine67 stable
 
-echo "Installing flatpak-wine66 [x]"
+echo "Installing flatpak-wine67 [x]"
 # Install
-flatpak --user install org.winehq.flatpak-wine66.flatpak -y
+flatpak --user install org.winehq.flatpak-wine67.flatpak -y
 
 echo "Congratulations!!! [x]"
