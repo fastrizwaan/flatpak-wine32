@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Create Bottle: Proton-GE-6.4-1 (6.4)
+Exec=wine-create-bottle.sh %F
+MimeType=application/x-ms-dos-executable;
+Icon=org.winehq.proton-ge64-1-create-bottle
+Categories=Emulator;
+NoDisplay=false
+StartupNotify=true
+X-Desktop-File-Install-Version=0.26
+
