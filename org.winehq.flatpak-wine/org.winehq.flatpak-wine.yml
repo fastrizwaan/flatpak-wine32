@@ -67,7 +67,7 @@ finish-args:
   - --persist=~/.local/share/flatpak-wine/
   # Support 32-bit runtime
   # Testing for Driver San andreas- --env=LD_LIBRARY_PATH=/app/lib:/app/lib:/app/lib32:/app/lib64:/app/lib/i386-linux-gnu:/app/lib/wine:/app/lib64/wine:$(pwd)
-  - --env=LD_LIBRARY_PATH=/app/lib:/app/lib:/app/lib32:/app/lib64
+  - --env=LD_LIBRARY_PATH=/app/lib:/app/lib:/app/lib32:/app/lib64:/app/lib/i386-linux-gnu:/app/lib/wine:/app/lib64/wine
 
 modules:
 
@@ -76,162 +76,22 @@ modules:
     buildsystem: simple
     build-commands:
       - mkdir -p /app/lib/i386-linux-gnu 
-                 /app/lib/debug/lib/i386-linux-gnu
-                 /app/lib/udev/rules.d/
-                 /app/extensions/Plugins
-      
-# EUDEV udev      
-  - name: eudev-64bit
+      - mkdir -p /app/lib/debug/lib/i386-linux-gnu
+      - mkdir -p /app/lib/udev/rules.d
+      - mkdir -p /app/extensions/Plugins
+      - mkdir -p /app/lib64
+      - mkdir -p /app/lib32
+
+
+# vkd3d
+  - name: vkd3d-64bit
     build-options:
-      prepend-pkg-config-path: /app/lib64/pkgconfig:/app/lib/pkgconfig
-      ldflags: -L/app/lib64 -L/app/lib
-      prepend-path: /usr/lib/sdk/toolchain-i386/bin
-      env:
-        CC: x86_64-unknown-linux-gnu-gcc
-        CXX: x86_64-unknown-linux-gnu-g++
-      libdir: /app/lib64   
-      strip: true
-      no-debuginfo: true
-    config-opts: 
-      - --disable-static
-      - --enable-shared  
-    post-install:
-      - udevadm hwdb --update
-    sources:
-      - type: archive
-        url: "https://github.com/gentoo/eudev/archive/v3.2.9.tar.gz"
-        sha256: 7d281276b480da3935d1acb239748c2c9db01a8043aad7e918ce57a223d8cd24
-        
-  - name: eudev-32bit
-    build-options:
-      prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
-      ldflags: -L/app/lib32
-      prepend-path: /usr/lib/sdk/toolchain-i386/bin
-      env:
-        CC: i686-unknown-linux-gnu-gcc
-        CXX: i686-unknown-linux-gnu-g++
-      libdir: /app/lib32
-      strip: true
-      no-debuginfo: true
-    config-opts: 
-      - --disable-static
-      - --enable-shared  
-    post-install:
-      - udevadm hwdb --update
-    sources:
-      - type: archive
-        url: "https://github.com/gentoo/eudev/archive/v3.2.9.tar.gz"
-        sha256: 7d281276b480da3935d1acb239748c2c9db01a8043aad7e918ce57a223d8cd24       
 
-# /EUDEV udev
-
-# ldap
-  - name: openldap-32bit
-    config-opts: 
-      - --disable-static
-      - --enable-shared
-      - --disable-slapd
-      - --disable-slurpd
-      - --disable-bdb
-      - --disable-hdb
-    cleanup: 
-      - /bin
-        
-    build-options:
-      prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
-      ldflags: -L/app/lib32
-      prepend-path: /usr/lib/sdk/toolchain-i386/bin
-      env:
-        CC: i686-unknown-linux-gnu-gcc
-        CXX: i686-unknown-linux-gnu-g++
-      libdir: /app/lib32
-      strip: true
-      no-debuginfo: true
-
-    sources:
-      - type: archive
-        url: https://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-2.4.55.tgz
-        sha256: 97357bd6ba8ff73d204c1f8208c5e6ab97d60c9e779f989057aa1229bbe98434
-
-# openldap 64bit
-  - name: openldap-64bit
-    config-opts: 
-      - --disable-static
-      - --enable-shared  
-      - --disable-slapd
-      - --disable-slurpd
-      - --disable-bdb
-      - --disable-hdb
-    cleanup: 
-      - /bin
-        
-    build-options:
-      strip: true
-      no-debuginfo: true
-
-    sources:
-      - type: archive
-        url: https://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-2.4.55.tgz
-        sha256: 97357bd6ba8ff73d204c1f8208c5e6ab97d60c9e779f989057aa1229bbe98434
-
-
-# /ldap
-
-# libusb
-  - name: libusb-64bit
-    build-options:
-      prepend-pkg-config-path: /app/lib64/pkgconfig:/app/lib/pkgconfig
-      ldflags: -L/app/lib64 -L/app/lib
-      prepend-path: /usr/lib/sdk/toolchain-i386/bin
-      env:
-        CC: x86_64-unknown-linux-gnu-gcc
-        CXX: x86_64-unknown-linux-gnu-g++
-      libdir: /app/lib64   
       strip: true
       no-debuginfo: true  
     config-opts: 
       - --disable-static
-      - --enable-shared  
-    sources:
-      - type: archive
-        url: https://github.com/libusb/libusb/archive/v1.0.24.tar.gz
-        sha256: b7724c272dfc5713dce88ff717efd60f021ca5b7c8e30f08ebb2c42d2eea08ae
-    post-install:
-      - install -Dm644 COPYING /app/share/licenses/libusb/COPYING
-
-  - name: libusb-32bit
-    build-options:
-      prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
-      ldflags: -L/app/lib32
-      prepend-path: /usr/lib/sdk/toolchain-i386/bin
-      env:
-        CC: i686-unknown-linux-gnu-gcc
-        CXX: i686-unknown-linux-gnu-g++
-      libdir: /app/lib32
-      strip: true
-      no-debuginfo: true
-
-    config-opts: 
-      - --disable-static
-      - --enable-shared  
-    sources:
-      - type: archive
-        url: https://github.com/libusb/libusb/archive/v1.0.24.tar.gz
-        sha256: b7724c272dfc5713dce88ff717efd60f021ca5b7c8e30f08ebb2c42d2eea08ae
-    post-install:
-      - install -Dm644 COPYING /app/share/licenses/libusb/COPYING
-
-
-# /libusb
-
-# vkd3d
-  - name: vkd3d-64bit
-    config-opts: 
-      - --disable-static
-      - --enable-shared  
-    build-options:
-      strip: true
-      no-debuginfo: true      
+      - --enable-shared     
     sources: 
       - type: archive
         url: "https://dl.winehq.org/vkd3d/source/vkd3d-1.2.tar.xz"
@@ -255,7 +115,7 @@ modules:
       ldflags: -L/app/lib32
       prepend-path: /usr/lib/sdk/toolchain-i386/bin
       env:
-        CC: i686-unknown-linux-gnu-gcc
+        CC:  i686-unknown-linux-gnu-gcc
         CXX: i686-unknown-linux-gnu-g++
       libdir: /app/lib32
       strip: true
@@ -273,7 +133,7 @@ modules:
           ldflags: -L/app/lib32
           prepend-path: /usr/lib/sdk/toolchain-i386/bin
           env:
-            CC: i686-unknown-linux-gnu-gcc
+            CC:  i686-unknown-linux-gnu-gcc
             CXX: i686-unknown-linux-gnu-g++
           libdir: /app/lib32
           strip: true
@@ -287,18 +147,12 @@ modules:
 
   - name: glu-64bit
     build-options:
-      prepend-pkg-config-path: /app/lib64/pkgconfig
-      ldflags: -L/app/lib64 -L/app/lib
-      prepend-path: /usr/lib/sdk/toolchain-i386/bin
-      env:
-        CC: x86_64-unknown-linux-gnu-gcc
-        CXX: x86_64-unknown-linux-gnu-g++
-      libdir: /app/lib64   
+
       strip: true
-      no-debuginfo: true
-  
-    config-opts:
+      no-debuginfo: true  
+    config-opts: 
       - --disable-static
+      - --enable-shared  
     sources: 
       - type: archive
         url: "https://mesa.freedesktop.org/archive/glu/glu-9.0.1.tar.xz"
@@ -310,7 +164,7 @@ modules:
       ldflags: -L/app/lib32
       prepend-path: /usr/lib/sdk/toolchain-i386/bin
       env:
-        CC: i686-unknown-linux-gnu-gcc
+        CC:  i686-unknown-linux-gnu-gcc
         CXX: i686-unknown-linux-gnu-g++
       libdir: /app/lib32
       strip: true
@@ -332,7 +186,7 @@ modules:
       ldflags: -L/app/lib32
       prepend-path: /usr/lib/sdk/toolchain-i386/bin
       env:
-        CC: i686-unknown-linux-gnu-gcc
+        CC:  i686-unknown-linux-gnu-gcc
         CXX: i686-unknown-linux-gnu-g++
       libdir: /app/lib32
       strip: true
@@ -349,15 +203,8 @@ modules:
   - name: faudio-64bit
     buildsystem: cmake-ninja
     build-options:
-      prepend-pkg-config-path: /app/lib64/pkgconfig
-      ldflags: -L/app/lib64 -L/app/lib
-      prepend-path: /usr/lib/sdk/toolchain-i386/bin
-      env:
-        CC: x86_64-unknown-linux-gnu-gcc
-        CXX: x86_64-unknown-linux-gnu-g++
-      libdir: /app/lib64   
       strip: true
-      no-debuginfo: true
+      no-debuginfo: true  
     config-opts:
       - -DGSTREAMER=ON
     sources:
@@ -378,7 +225,7 @@ modules:
       ldflags: -L/app/lib64 -L/app/lib -L/app/lib32
       append-path: /usr/lib/sdk/toolchain-i386/bin
       env:
-        CC: i686-unknown-linux-gnu-gcc
+        CC:  i686-unknown-linux-gnu-gcc
         CXX: i686-unknown-linux-gnu-g++
       libdir: /app/lib32
       strip: true
@@ -458,7 +305,6 @@ modules:
       - type: archive
         url: https://dl.winehq.org/wine/source/5.0/wine-5.0.5.tar.xz
         sha512: 3cf0ccb2eac0868f700296a62aeea9b856522ac63861beb49deed50136a334c450f2d1172f9d0195b4fe0bbf8f808f7350a79122726da1cbf5d21161f6dfca36
-
         
   - name: winetricks
     buildsystem: simple
@@ -496,6 +342,7 @@ modules:
       - type: archive
         url: http://savannah.nongnu.org/download/icoutils/icoutils-0.32.3.tar.bz2
         sha256: 17abe02d043a253b68b47e3af69c9fc755b895db68fdc8811786125df564c6e0
+
 
   - name: ImageMagick
     build-options:
