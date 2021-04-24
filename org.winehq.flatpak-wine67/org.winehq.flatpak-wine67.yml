@@ -83,7 +83,7 @@ modules:
 # EUDEV udev      
   - name: eudev-64bit
     build-options:
-      prepend-pkg-config-path: /app/lib64/pkgconfig
+      prepend-pkg-config-path: /app/lib64/pkgconfig:/app/lib/pkgconfig
       ldflags: -L/app/lib64 -L/app/lib
       prepend-path: /usr/lib/sdk/toolchain-i386/bin
       env:
@@ -180,8 +180,8 @@ modules:
 # libusb
   - name: libusb-64bit
     build-options:
-      prepend-pkg-config-path: /app/lib64/pkgconfig
-      ldflags: -L/app/lib64 
+      prepend-pkg-config-path: /app/lib64/pkgconfig:/app/lib/pkgconfig
+      ldflags: -L/app/lib64 -L/app/lib
       prepend-path: /usr/lib/sdk/toolchain-i386/bin
       env:
         CC: x86_64-unknown-linux-gnu-gcc
@@ -223,6 +223,7 @@ modules:
 
 
 # /libusb
+
 
 # vkd3d
   - name: vkd3d-64bit
