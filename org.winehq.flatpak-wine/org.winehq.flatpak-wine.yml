@@ -224,8 +224,8 @@ modules:
 
 # /libusb
 
-# 64 bit
-  - name: vkd3d
+# vkd3d
+  - name: vkd3d-64bit
     config-opts: 
       - --disable-static
       - --enable-shared  
