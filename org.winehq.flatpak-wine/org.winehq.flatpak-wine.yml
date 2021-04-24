@@ -13,7 +13,7 @@ separate-locales: false
 add-extensions:
   org.freedesktop.LinuxAudio.Plugins:
     directory: extensions/Plugins
-    versions: '20.08;19.08'
+    versions: '20.08'
     add-ld-path: lib
     merge-dirs: lxvst;vst3
     subdirectories: true
@@ -75,7 +75,9 @@ modules:
   - name: compat
     buildsystem: simple
     build-commands:
-      - mkdir -p /app/lib/i386-linux-gnu /app/lib/debug/lib/i386-linux-gnu
+      - mkdir -p /app/lib/i386-linux-gnu 
+                 /app/lib/debug/lib/i386-linux-gnu 
+                 /app/extensions/Plugins
       
 # EUDEV udev      
   - name: eudev-64bit
