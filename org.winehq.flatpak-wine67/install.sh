@@ -50,10 +50,10 @@ flatpak-builder --user --install --force-clean build-dir/ org.winehq.flatpak-win
 echo "Creating flatpak bundle [x]"
 flatpak --user remote-add --no-gpg-verify "org.winehq.flatpak-wine67" "repo" 2>/dev/null
 #flatpak build-bundle "repo" "org.winehq.flatpak-wine67_$date.flatpak" org.winehq.flatpak-wine67 stable --runtime-repo="https://flathub.org/repo/flathub.flatpakrepo"
-flatpak build-bundle "repo" "org.winehq.flatpak-wine67.flatpak" org.winehq.flatpak-wine67 stable
+flatpak build-bundle "repo" "org.winehq.flatpak-wine67-6.7-20210425.flatpak" org.winehq.flatpak-wine67 stable
 
 echo "Installing flatpak-wine67 [x]"
 # Install
-flatpak --user install org.winehq.flatpak-wine67.flatpak -y
+flatpak --user install org.winehq.flatpak-wine67-6.7-20210425.flatpak -y
 
 echo "Congratulations!!! [x]"

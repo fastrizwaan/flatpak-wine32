@@ -8,11 +8,12 @@ default-branch: stable
 separate-locales: false
 
 #rename-desktop-file: wine.desktop
+
 # Support 32-bit at runtime
 add-extensions:
   org.freedesktop.LinuxAudio.Plugins:
     directory: extensions/Plugins
-    versions: '20.08'
+    versions: '20.08;19.08'
     add-ld-path: lib
     merge-dirs: lxvst;vst3
     subdirectories: true
@@ -66,7 +67,7 @@ finish-args:
   - --persist=~/.local/share/flatpak-wine67/
   # Support 32-bit runtime
   # Testing for Driver San andreas- --env=LD_LIBRARY_PATH=/app/lib:/app/lib:/app/lib32:/app/lib64:/app/lib/i386-linux-gnu:/app/lib/wine:/app/lib64/wine:$(pwd)
-  - --env=LD_LIBRARY_PATH=/app/lib:/app/lib:/app/lib32:/app/lib64:/app/lib/i386-linux-gnu:/app/lib/wine:/app/lib64/wine
+  - --env=LD_LIBRARY_PATH=/app/lib:/app/lib:/app/lib32:/app/lib64
 
 modules:
 
@@ -75,22 +76,21 @@ modules:
     buildsystem: simple
     build-commands:
       - mkdir -p /app/lib/i386-linux-gnu 
-      - mkdir -p /app/lib/debug/lib/i386-linux-gnu
-      - mkdir -p /app/lib/udev/rules.d
-      - mkdir -p /app/extensions/Plugins
-      - mkdir -p /app/lib64
-      - mkdir -p /app/lib32
+                 /app/lib/debug/lib/i386-linux-gnu 
+                 /app/lib/udev/rules.d/
+                 /app/extensions/Plugins
+                 /app/lib64
+                 /app/lib32
 
-
-# vkd3d
-  - name: vkd3d-64bit
-    build-options:
-
-      strip: true
-      no-debuginfo: true  
+ 
+# 64 bit
+  - name: vkd3d
     config-opts: 
       - --disable-static
-      - --enable-shared     
+      - --enable-shared  
+    build-options:
+      strip: true
+      no-debuginfo: true      
     sources: 
       - type: archive
         url: "https://dl.winehq.org/vkd3d/source/vkd3d-1.2.tar.xz"
@@ -114,7 +114,7 @@ modules:
       ldflags: -L/app/lib32
       prepend-path: /usr/lib/sdk/toolchain-i386/bin
       env:
-        CC:  i686-unknown-linux-gnu-gcc
+        CC: i686-unknown-linux-gnu-gcc
         CXX: i686-unknown-linux-gnu-g++
       libdir: /app/lib32
       strip: true
@@ -132,7 +132,7 @@ modules:
           ldflags: -L/app/lib32
           prepend-path: /usr/lib/sdk/toolchain-i386/bin
           env:
-            CC:  i686-unknown-linux-gnu-gcc
+            CC: i686-unknown-linux-gnu-gcc
             CXX: i686-unknown-linux-gnu-g++
           libdir: /app/lib32
           strip: true
@@ -143,15 +143,20 @@ modules:
             sha256: fc026b6566167f6db03dc48779f0f986f9ff8c93ed651a557f28cfbe2dff4ede
 
 # GLU
-
   - name: glu-64bit
     build-options:
-
+      prepend-pkg-config-path: /app/lib64/pkgconfig
+      ldflags: -L/app/lib64 -L/app/lib
+      prepend-path: /usr/lib/sdk/toolchain-i386/bin
+      env:
+        CC: x86_64-unknown-linux-gnu-gcc
+        CXX: x86_64-unknown-linux-gnu-g++
+      libdir: /app/lib64   
       strip: true
-      no-debuginfo: true  
-    config-opts: 
+      no-debuginfo: true
+  
+    config-opts:
       - --disable-static
-      - --enable-shared  
     sources: 
       - type: archive
         url: "https://mesa.freedesktop.org/archive/glu/glu-9.0.1.tar.xz"
@@ -163,7 +168,7 @@ modules:
       ldflags: -L/app/lib32
       prepend-path: /usr/lib/sdk/toolchain-i386/bin
       env:
-        CC:  i686-unknown-linux-gnu-gcc
+        CC: i686-unknown-linux-gnu-gcc
         CXX: i686-unknown-linux-gnu-g++
       libdir: /app/lib32
       strip: true
@@ -185,7 +190,7 @@ modules:
       ldflags: -L/app/lib32
       prepend-path: /usr/lib/sdk/toolchain-i386/bin
       env:
-        CC:  i686-unknown-linux-gnu-gcc
+        CC: i686-unknown-linux-gnu-gcc
         CXX: i686-unknown-linux-gnu-g++
       libdir: /app/lib32
       strip: true
@@ -202,8 +207,15 @@ modules:
   - name: faudio-64bit
     buildsystem: cmake-ninja
     build-options:
+      prepend-pkg-config-path: /app/lib64/pkgconfig
+      ldflags: -L/app/lib64 -L/app/lib
+      prepend-path: /usr/lib/sdk/toolchain-i386/bin
+      env:
+        CC: x86_64-unknown-linux-gnu-gcc
+        CXX: x86_64-unknown-linux-gnu-g++
+      libdir: /app/lib64   
       strip: true
-      no-debuginfo: true  
+      no-debuginfo: true
     config-opts:
       - -DGSTREAMER=ON
     sources:
@@ -211,7 +223,9 @@ modules:
         url: https://github.com/FNA-XNA/FAudio/archive/21.03.05.tar.gz 
         sha256: c396c7c196e47bcb054cdc94cd3f7f39751fe27774de7eb9749a9608883ad5eb
         
-              
+
+
+                
 # build wow64              
   - name: org.winehq.wine_64bit
     builddir: true
