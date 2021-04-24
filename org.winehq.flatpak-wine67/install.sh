@@ -16,7 +16,6 @@ echo -n "Installing SDKs for build "
                     org.freedesktop.Platform.VAAPI.Intel/x86_64/20.08 \
                     org.freedesktop.Platform.ffmpeg_full.i386/x86_64/20.08 \
                     org.freedesktop.Platform.ffmpeg-full/x86_64/20.08      
-                     
 
     # If nvidia drivers are installed 
     if [ -f /proc/driver/nvidia/version ]; then
