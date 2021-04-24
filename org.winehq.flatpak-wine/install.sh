@@ -5,26 +5,26 @@ echo -n "Installing SDKs for build "
     sudo flatpak update -y
     sudo flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
     sudo flatpak -y --user install flathub \
-	                org.freedesktop.Sdk/x86_64/20.08 \
+                    org.freedesktop.Sdk/x86_64/20.08 \
                     org.freedesktop.Platform/x86_64/20.08 \
                     org.freedesktop.Sdk.Compat.i386/x86_64/20.08 \
                     org.freedesktop.Sdk.Extension.toolchain-i386/x86_64/20.08 \
                     org.freedesktop.Platform.Compat.i386/x86_64/20.08 \
                     org.freedesktop.Platform.GL32.default/x86_64/20.08 \
-					org.freedesktop.Platform.GL.default/x86_64/20.08 \
-					org.freedesktop.Platform.VAAPI.Intel.i386/x86_64/20.08 \
-					org.freedesktop.Platform.VAAPI.Intel/x86_64/20.08 \
-					org.freedesktop.Platform.ffmpeg_full.i386/x86_64/20.08 \
-					org.freedesktop.Platform.ffmpeg-full/x86_64/20.08      
-					 
+                    org.freedesktop.Platform.GL.default/x86_64/20.08 \
+                    org.freedesktop.Platform.VAAPI.Intel.i386/x86_64/20.08 \
+                    org.freedesktop.Platform.VAAPI.Intel/x86_64/20.08 \
+                    org.freedesktop.Platform.ffmpeg_full.i386/x86_64/20.08 \
+                    org.freedesktop.Platform.ffmpeg-full/x86_64/20.08      
+                     
 
     # If nvidia drivers are installed 
-	if [ -f /proc/driver/nvidia/version ]; then
-		ver=$(nvidia-settings -q all |grep OpenGLVersion|grep NVIDIA|sed 's/.*NVIDIA \(.*\) /nvidia-\1/g'|sed 's/\./-/g')
-		flatpak -y --user install flathub    \
-			org.freedesktop.Platform.GL.$ver   \
-			org.freedesktop.Platform.GL32.$ver
-	fi           
+    if [ -f /proc/driver/nvidia/version ]; then
+        ver=$(nvidia-settings -q all |grep OpenGLVersion|grep NVIDIA|sed 's/.*NVIDIA \(.*\) /nvidia-\1/g'|sed 's/\./-/g')
+        flatpak -y --user install flathub    \
+            org.freedesktop.Platform.GL.$ver   \
+            org.freedesktop.Platform.GL32.$ver
+    fi           
 
 fi 
 
