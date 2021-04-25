@@ -25,7 +25,7 @@ mkdir -p ~/.local/share/applications/flatpak-wine67/
 echo '
 [Desktop Entry]
 Exec=flatpak kill org.winehq.flatpak-wine67
-Name=flatpak-wine kill (6.6)
+Name=flatpak-wine kill (6.7)
 Type=Application
 Categories=Application;;
 Icon=org.winehq.flatpak-wine67-kill

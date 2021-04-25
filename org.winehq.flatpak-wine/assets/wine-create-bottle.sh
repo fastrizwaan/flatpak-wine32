@@ -93,7 +93,9 @@ if [ "\$choice" = "Run Winetricks..." ]; then
     mydlls=( \$mydlls ) ; #convert string to array
     fi
 size=\${#mydlls[*]}
+size=\$(expr \$size + 1) ;# add +1 for progress
 step=\$(expr 100 / \$size)
+step=\$(expr \$step + 1)
 prog=\$(echo \$step)
 
 	( for i in \${mydlls[*]};

@@ -66,6 +66,8 @@ if [ $# -eq 0 ];  then
     fi
     
 size=${#mydlls[*]}
+size=$(expr $size + 1) ;# add +1 for progress
+
 step=$(expr 100 / $size)
 prog=$(echo $step)
 echo $size $step ${mydlls[*]}
