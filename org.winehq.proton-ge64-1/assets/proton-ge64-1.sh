@@ -1,5 +1,5 @@
 #!/bin/bash
-export WINEPREFIX=~/.local/share/flatpak-wine/default
+export WINEPREFIX=~/.local/share/proton-ge64-1/default
 export WINEARCH=win64
 #export WINEDLLOVERRIDES="mscoree,mshtml="
 export LD_LIBRARY_PATH=/app/lib:/app/lib32:/app/lib64:/app/lib/i386-linux-gnu:/app/lib/wine:/app/lib64/wine:/app/$NAME:$(pwd)
@@ -16,16 +16,16 @@ export dire=$(dirname $1)
 #echo $base >> ~/Documents/debug.txt
 #echo $dire >> ~/Documents/debug.txt
 # Create kill shortcut for convenience
-mkdir -p ~/.local/share/applications/flatpak-wine/
+mkdir -p ~/.local/share/applications/proton-ge64-1/
 echo '
 [Desktop Entry]
-Exec=flatpak kill org.winehq.flatpak-wine
-Name=flatpak-wine kill (5.0.5)
+Exec=flatpak kill org.winehq.proton-ge64-1
+Name=Proton-GE-6.4-1 kill (6.4)
 Type=Application
 Categories=Application;;
-Icon=org.winehq.flatpak-wine-kill
-Keywords=flatpak; wine; kill;
-' > ~/.local/share/applications/flatpak-wine/killall_wine-5.0.5.desktop
+Icon=org.winehq.proton-ge64-1-kill
+Keywords=flatpak; proton; wine; kill;
+' > ~/.local/share/applications/proton-ge64-1/killall_proton-ge64-1.desktop
 
 # if no argument passed then show a dialog with choices
 if [ $# -eq 0 ];  then
@@ -51,12 +51,12 @@ elif [ "$1" == "explorer" ]; then
      $WINEEXE /app/explorer++/Explorer++.exe
 	 
 elif [ "$1" == "--help" ] || [ "$1" == "help" ]; then
-    echo "flatpak-wine - run wine applicatins/games"
+    echo "proton-ge64-1 - run wine applicatins/games"
 	echo " "
-	echo "flatpak run org.winehq.flatpak-wine <argument>"
+	echo "flatpak run org.winehq.proton-ge64-1 <argument>"
 	echo " "
 	echo "Arguments can be:"
-	echo "bash      : open flatpak-wine sandbox in shell"
+	echo "bash      : open proton-ge64-1 sandbox in shell"
 	echo "explorer  : runs explorer++"
 	echo "winetricks: runs winetricks gui, can pass arguments to winetricks"
 	echo "regedit   : run registry editor"

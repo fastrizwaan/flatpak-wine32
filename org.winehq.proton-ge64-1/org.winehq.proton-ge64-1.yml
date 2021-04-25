@@ -217,8 +217,8 @@ modules:
     buildsystem: simple
     build-commands:
       - mkdir -p /app/bin /app/lib /app/lib64 /app/share
-#      - rm -rf dist/share/wine/gecko
-#      - rm -rf dist/share/wine/mono
+      - rm -rf dist/share/wine/gecko
+      - rm -rf dist/share/wine/mono
       - cp -rdvf dist/* /app
 
     sources:
