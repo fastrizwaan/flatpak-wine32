@@ -60,6 +60,7 @@ finish-args:
   - --allow=devel
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.gnome.Mutter.DisplayConfig
+  - --talk-name=org.freedesktop.Flatpak
   - --filesystem=host
   - --filesystem=~/.local/share/flatpak-wine/:create
   - --device=all

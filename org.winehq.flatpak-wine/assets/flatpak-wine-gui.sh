@@ -46,6 +46,7 @@ if [ $# -eq 0 ];  then
 							  0 "Install Custom DLLs..." \
 							  0 "Launch Winecfg..." \
 						   TRUE "Open Explorer++" \
+                              0 "Kill all Instances" \
 							  0 "Delete Bottle" \
 					 --text "Select Action for ~/.local/share/flatpak-wine/default " )
 
@@ -87,6 +88,9 @@ echo $size $step ${mydlls[*]}
 	# winecfg
 	elif [ "$choice" = "Launch Winecfg..." ]; then
 	   WINEPREFIX=~/.local/share/flatpak-wine/default winecfg
+       
+    elif [ "$choice" = "Kill all Instances" ]; then
+	   flatpak-spawn --host flatpak kill flatpak-wine
 
 	elif [ "$choice" = "Delete Bottle" ]; then
 	   rm -rfv ~/.local/share/flatpak-wine/default; 

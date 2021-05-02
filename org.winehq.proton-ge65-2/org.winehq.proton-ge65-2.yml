@@ -214,17 +214,22 @@ modules:
         
         
   - name: Proton-6.5-GE-2
-    buildsystem: simple
-    build-commands:
-      - mkdir -p /app/bin /app/lib /app/lib64 /app/share
-      - rm -rf dist/share/wine/gecko
-      - rm -rf dist/share/wine/mono
-      - cp -rdvf dist/* /app
+    build-options:
+      strip: true
+      no-debuginfo: true  
+    config-opts:
+      - -DGSTREAMER=ON  
+#    buildsystem: simple
+#    build-commands:
+#      - mkdir -p /app/bin /app/lib /app/lib64 /app/share
+#      - rm -rf dist/share/wine/gecko
+#      - rm -rf dist/share/wine/mono
+#      - cp -rdvf dist/* /app
 
     sources:
       - type: archive
-        url: https://github.com/GloriousEggroll/proton-ge-custom/releases/download/6.5-GE-2/Proton-6.5-GE-2.tar.gz
-        sha512: 5dda3a8d1fe0dcee347e2cb819d51f439a4024fdb19952a6f844b94484086ef601dd82ec06f17b85316e7bf91bea294fe09506018417cf32a92903755be847f6
+        url: https://github.com/GloriousEggroll/proton-ge-custom/archive/refs/tags/6.5-GE-2.tar.gz
+        md5: 4b65d33df7a751fdeb3fc2bcea39de15
        
 
                 

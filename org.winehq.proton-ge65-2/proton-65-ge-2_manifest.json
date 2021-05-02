@@ -1,0 +1,3833 @@
+{
+  "app-id" : "Proton-GE65-1",
+  "branch" : "stable",
+  "runtime" : "org.freedesktop.Platform",
+  "runtime-version": "20.08",
+  "command" : "wine",
+  "sdk" : "org.freedesktop.Sdk//20.08",
+  "build-options" : {
+    "cflags" : "-O2 -pipe -march=nocona -mtune=core-avx2 -mfpmath=sse -fwrapv -fno-strict-aliasing",
+    "cflags-override" : true,
+    "cxxflags" : "-O2 -pipe -march=nocona -mtune=core-avx2 -mfpmath=sse -fwrapv -fno-strict-aliasing",
+    "cxxflags-override" : true,
+    "ldflags" : "-L/app/share/steam/compatibilitytools.d/Proton-GE/lib",
+    "prefix" : "/app/share/steam/compatibilitytools.d/Proton-GE",
+    "env" : {
+      "C_INCLUDE_PATH" : "/app/share/steam/compatibilitytools.d/Proton-GE/include:/app/include",
+      "CPLUS_INCLUDE_PATH" : "/app/share/steam/compatibilitytools.d/Proton-GE/include:/app/include",
+      "PKG_CONFIG_PATH" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib/pkgconfig:/app/lib/pkgconfig:/app/share/pkgconfig:/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/share/pkgconfig",
+      "LD_RUN_PATH" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib",
+      "PYTHONPATH" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib/python3.8/site-packages"
+    },
+    "append-path" : "/usr/lib/sdk/mingw-w64/bin:/app/share/steam/compatibilitytools.d/Proton-GE/bin"
+  },
+  "modules" : [
+    {
+      "name" : "gst-orc",
+      "subdir" : "gst-orc",
+      "buildsystem" : "meson",
+      "builddir" : true,
+      "config-opts" : [
+        "-Dorc-test=disabled",
+        "-Dexamples=disabled",
+        "-Dtests=disabled",
+        "-Dgtk_doc=disabled",
+        "-Dintrospection=disabled",
+        "-Dgobject-cast-checks=disabled",
+        "-Dglib-asserts=disabled",
+        "-Dglib-checks=disabled",
+        "-Dnls=disabled",
+        "-Dbenchmarks=disabled"
+      ],
+      "sources" : [
+        {
+          "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+          "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+          "strip-components" : 0,
+          "type" : "archive"
+        }
+      ]
+    },
+    {
+      "name" : "gst-orc-32bit",
+      "subdir" : "gst-orc",
+      "buildsystem" : "meson",
+      "builddir" : true,
+      "config-opts" : [
+        "-Dorc-test=disabled",
+        "-Dexamples=disabled",
+        "-Dtests=disabled",
+        "-Dgtk_doc=disabled",
+        "-Dintrospection=disabled",
+        "-Dgobject-cast-checks=disabled",
+        "-Dglib-asserts=disabled",
+        "-Dglib-checks=disabled",
+        "-Dnls=disabled",
+        "-Dbenchmarks=disabled"
+      ],
+      "only-arches" : [
+        "x86_64"
+      ],
+      "sources" : [
+        {
+          "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+          "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+          "strip-components" : 0,
+          "type" : "archive"
+        }
+      ],
+      "build-options" : {
+        "arch" : {
+          "x86_64" : {
+            "ldflags" : "-L/app/share/steam/compatibilitytools.d/Proton-GE/lib32 -L/app/lib32",
+            "libdir" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32",
+            "env" : {
+              "CC" : "ccache i686-unknown-linux-gnu-gcc",
+              "CXX" : "ccache i686-unknown-linux-gnu-g++",
+              "PKG_CONFIG_PATH" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32/pkgconfig:/app/lib32/pkgconfig:/app/share/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig:/usr/share/pkgconfig",
+              "LD_RUN_PATH" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32"
+            },
+            "append-path" : "/usr/lib/sdk/toolchain-i386/bin",
+            "prepend-path" : "/app/share/steam/compatibilitytools.d/Proton-GE/bin32"
+          }
+        }
+      }
+    },
+    {
+      "name" : "gstreamer",
+      "subdir" : "gstreamer",
+      "buildsystem" : "meson",
+      "builddir" : true,
+      "config-opts" : [
+        "-Dgst_parse=false",
+        "-Dbenchmarks=disabled",
+        "-Dtools=disabled",
+        "-Dbash-completion=disabled",
+        "-Dexamples=disabled",
+        "-Dtests=disabled",
+        "-Dgtk_doc=disabled",
+        "-Dintrospection=disabled",
+        "-Dgobject-cast-checks=disabled",
+        "-Dglib-asserts=disabled",
+        "-Dglib-checks=disabled",
+        "-Dnls=disabled",
+        "-Dbenchmarks=disabled"
+      ],
+      "sources" : [
+        {
+          "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+          "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+          "strip-components" : 0,
+          "type" : "archive"
+        }
+      ]
+    },
+    {
+      "name" : "gstreamer-32bit",
+      "subdir" : "gstreamer",
+      "buildsystem" : "meson",
+      "builddir" : true,
+      "config-opts" : [
+        "-Dgst_parse=false",
+        "-Dbenchmarks=disabled",
+        "-Dtools=disabled",
+        "-Dbash-completion=disabled",
+        "-Dexamples=disabled",
+        "-Dtests=disabled",
+        "-Dgtk_doc=disabled",
+        "-Dintrospection=disabled",
+        "-Dgobject-cast-checks=disabled",
+        "-Dglib-asserts=disabled",
+        "-Dglib-checks=disabled",
+        "-Dnls=disabled",
+        "-Dbenchmarks=disabled"
+      ],
+      "only-arches" : [
+        "x86_64"
+      ],
+      "sources" : [
+        {
+          "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+          "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+          "strip-components" : 0,
+          "type" : "archive"
+        }
+      ],
+      "build-options" : {
+        "arch" : {
+          "x86_64" : {
+            "ldflags" : "-L/app/share/steam/compatibilitytools.d/Proton-GE/lib32 -L/app/lib32",
+            "libdir" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32",
+            "env" : {
+              "CC" : "ccache i686-unknown-linux-gnu-gcc",
+              "CXX" : "ccache i686-unknown-linux-gnu-g++",
+              "PKG_CONFIG_PATH" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32/pkgconfig:/app/lib32/pkgconfig:/app/share/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig:/usr/share/pkgconfig",
+              "LD_RUN_PATH" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32"
+            },
+            "append-path" : "/usr/lib/sdk/toolchain-i386/bin",
+            "prepend-path" : "/app/share/steam/compatibilitytools.d/Proton-GE/bin32"
+          }
+        }
+      }
+    },
+    {
+      "name" : "gst-plugins-base",
+      "subdir" : "gst-plugins-base",
+      "buildsystem" : "meson",
+      "builddir" : true,
+      "config-opts" : [
+        "-Daddr=disabled",
+        "-Dalsa=disabled",
+        "-Daudiomixer=disabled",
+        "-Daudiorate=disabled",
+        "-Daudiotestsrc=disabled",
+        "-Dcdparanoia=disabled",
+        "-Dcompositor=disabled",
+        "-Dencoding=disabled",
+        "-Dgio=disabled",
+        "-Dgl=disabled",
+        "-Dlibvisual=disabled",
+        "-Doverlaycomposition=disabled",
+        "-Dpango=disabled",
+        "-Drawparse=disabled",
+        "-Dsubparse=disabled",
+        "-Dtcp=disabled",
+        "-Dtremor=disabled",
+        "-Dvideorate=disabled",
+        "-Dvideotestsrc=disabled",
+        "-Dvolume=disabled",
+        "-Dx11=disabled",
+        "-Dxshm=disabled",
+        "-Dxvideo=disabled",
+        "-Dexamples=disabled",
+        "-Dtests=disabled",
+        "-Dgtk_doc=disabled",
+        "-Dintrospection=disabled",
+        "-Dgobject-cast-checks=disabled",
+        "-Dglib-asserts=disabled",
+        "-Dglib-checks=disabled",
+        "-Dnls=disabled",
+        "-Dbenchmarks=disabled"
+      ],
+      "sources" : [
+        {
+          "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+          "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+          "strip-components" : 0,
+          "type" : "archive"
+        }
+      ]
+    },
+    {
+      "name" : "gst-plugins-base-32bit",
+      "subdir" : "gst-plugins-base",
+      "buildsystem" : "meson",
+      "builddir" : true,
+      "config-opts" : [
+        "-Daddr=disabled",
+        "-Dalsa=disabled",
+        "-Daudiomixer=disabled",
+        "-Daudiorate=disabled",
+        "-Daudiotestsrc=disabled",
+        "-Dcdparanoia=disabled",
+        "-Dcompositor=disabled",
+        "-Dencoding=disabled",
+        "-Dgio=disabled",
+        "-Dgl=disabled",
+        "-Dlibvisual=disabled",
+        "-Doverlaycomposition=disabled",
+        "-Dpango=disabled",
+        "-Drawparse=disabled",
+        "-Dsubparse=disabled",
+        "-Dtcp=disabled",
+        "-Dtremor=disabled",
+        "-Dvideorate=disabled",
+        "-Dvideotestsrc=disabled",
+        "-Dvolume=disabled",
+        "-Dx11=disabled",
+        "-Dxshm=disabled",
+        "-Dxvideo=disabled",
+        "-Dexamples=disabled",
+        "-Dtests=disabled",
+        "-Dgtk_doc=disabled",
+        "-Dintrospection=disabled",
+        "-Dgobject-cast-checks=disabled",
+        "-Dglib-asserts=disabled",
+        "-Dglib-checks=disabled",
+        "-Dnls=disabled",
+        "-Dbenchmarks=disabled"
+      ],
+      "only-arches" : [
+        "x86_64"
+      ],
+      "sources" : [
+        {
+          "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+          "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+          "strip-components" : 0,
+          "type" : "archive"
+        }
+      ],
+      "build-options" : {
+        "arch" : {
+          "x86_64" : {
+            "ldflags" : "-L/app/share/steam/compatibilitytools.d/Proton-GE/lib32 -L/app/lib32",
+            "libdir" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32",
+            "env" : {
+              "CC" : "ccache i686-unknown-linux-gnu-gcc",
+              "CXX" : "ccache i686-unknown-linux-gnu-g++",
+              "PKG_CONFIG_PATH" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32/pkgconfig:/app/lib32/pkgconfig:/app/share/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig:/usr/share/pkgconfig",
+              "LD_RUN_PATH" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32"
+            },
+            "append-path" : "/usr/lib/sdk/toolchain-i386/bin",
+            "prepend-path" : "/app/share/steam/compatibilitytools.d/Proton-GE/bin32"
+          }
+        }
+      }
+    },
+    {
+      "name" : "gst-plugins-good",
+      "subdir" : "gst-plugins-good",
+      "buildsystem" : "meson",
+      "builddir" : true,
+      "config-opts" : [
+        "-Daalib=disabled",
+        "-Dalpha=disabled",
+        "-Dapetag=disabled",
+        "-Daudiofx=disabled",
+        "-Dauparse=disabled",
+        "-Dcairo=disabled",
+        "-Dcutter=disabled",
+        "-Ddtmf=disabled",
+        "-Deffectv=disabled",
+        "-Dequalizer=disabled",
+        "-Dgdk-pixbuf=disabled",
+        "-Dgtk3=disabled",
+        "-Dgoom=disabled",
+        "-Dgoom2k1=disabled",
+        "-Dicydemux=disabled",
+        "-Dimagefreeze=disabled",
+        "-Dinterleave=disabled",
+        "-Djack=disabled",
+        "-Dlaw=disabled",
+        "-Dlevel=disabled",
+        "-Dlibcaca=disabled",
+        "-Dmonoscope=disabled",
+        "-Dmultifile=disabled",
+        "-Dmultipart=disabled",
+        "-Disomp4=enabled",
+        "-Dmatroska=enabled",
+        "-Ddirectsound=enabled",
+        "-Doss=disabled",
+        "-Doss4=disabled",
+        "-Dpng=disabled",
+        "-Dpulse=disabled",
+        "-Dqt5=disabled",
+        "-Dreplaygain=disabled",
+        "-Drtp=disabled",
+        "-Drtpmanager=disabled",
+        "-Drtsp=disabled",
+        "-Dshapewipe=disabled",
+        "-Dshout2=disabled",
+        "-Dsmpte=disabled",
+        "-Dsoup=disabled",
+        "-Dspectrum=disabled",
+        "-Dtaglib=disabled",
+        "-Dudp=disabled",
+        "-Dv4l2=disabled",
+        "-Dvideocrop=disabled",
+        "-Dvideomixer=disabled",
+        "-Dwavenc=disabled",
+        "-Dximagesrc=disabled",
+        "-Dy4m=disabled",
+        "-Dexamples=disabled",
+        "-Dtests=disabled",
+        "-Dgtk_doc=disabled",
+        "-Dintrospection=disabled",
+        "-Dgobject-cast-checks=disabled",
+        "-Dglib-asserts=disabled",
+        "-Dglib-checks=disabled",
+        "-Dnls=disabled",
+        "-Dbenchmarks=disabled"
+      ],
+      "sources" : [
+        {
+          "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+          "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+          "strip-components" : 0,
+          "type" : "archive"
+        }
+      ]
+    },
+    {
+      "name" : "gst-plugins-good-32bit",
+      "subdir" : "gst-plugins-good",
+      "buildsystem" : "meson",
+      "builddir" : true,
+      "config-opts" : [
+        "-Daalib=disabled",
+        "-Dalpha=disabled",
+        "-Dapetag=disabled",
+        "-Daudiofx=disabled",
+        "-Dauparse=disabled",
+        "-Dcairo=disabled",
+        "-Dcutter=disabled",
+        "-Ddtmf=disabled",
+        "-Deffectv=disabled",
+        "-Dequalizer=disabled",
+        "-Dgdk-pixbuf=disabled",
+        "-Dgtk3=disabled",
+        "-Dgoom=disabled",
+        "-Dgoom2k1=disabled",
+        "-Dicydemux=disabled",
+        "-Dimagefreeze=disabled",
+        "-Dinterleave=disabled",
+        "-Djack=disabled",
+        "-Dlaw=disabled",
+        "-Dlevel=disabled",
+        "-Dlibcaca=disabled",
+        "-Dmonoscope=disabled",
+        "-Dmultifile=disabled",
+        "-Dmultipart=disabled",
+        "-Disomp4=enabled",
+        "-Dmatroska=enabled",
+        "-Ddirectsound=enabled",
+        "-Doss=disabled",
+        "-Doss4=disabled",
+        "-Dpng=disabled",
+        "-Dpulse=disabled",
+        "-Dqt5=disabled",
+        "-Dreplaygain=disabled",
+        "-Drtp=disabled",
+        "-Drtpmanager=disabled",
+        "-Drtsp=disabled",
+        "-Dshapewipe=disabled",
+        "-Dshout2=disabled",
+        "-Dsmpte=disabled",
+        "-Dsoup=disabled",
+        "-Dspectrum=disabled",
+        "-Dtaglib=disabled",
+        "-Dudp=disabled",
+        "-Dv4l2=disabled",
+        "-Dvideocrop=disabled",
+        "-Dvideomixer=disabled",
+        "-Dwavenc=disabled",
+        "-Dximagesrc=disabled",
+        "-Dy4m=disabled",
+        "-Dexamples=disabled",
+        "-Dtests=disabled",
+        "-Dgtk_doc=disabled",
+        "-Dintrospection=disabled",
+        "-Dgobject-cast-checks=disabled",
+        "-Dglib-asserts=disabled",
+        "-Dglib-checks=disabled",
+        "-Dnls=disabled",
+        "-Dbenchmarks=disabled"
+      ],
+      "only-arches" : [
+        "x86_64"
+      ],
+      "sources" : [
+        {
+          "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+          "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+          "strip-components" : 0,
+          "type" : "archive"
+        }
+      ],
+      "build-options" : {
+        "arch" : {
+          "x86_64" : {
+            "ldflags" : "-L/app/share/steam/compatibilitytools.d/Proton-GE/lib32 -L/app/lib32",
+            "libdir" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32",
+            "env" : {
+              "CC" : "ccache i686-unknown-linux-gnu-gcc",
+              "CXX" : "ccache i686-unknown-linux-gnu-g++",
+              "PKG_CONFIG_PATH" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32/pkgconfig:/app/lib32/pkgconfig:/app/share/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig:/usr/share/pkgconfig",
+              "LD_RUN_PATH" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32"
+            },
+            "append-path" : "/usr/lib/sdk/toolchain-i386/bin",
+            "prepend-path" : "/app/share/steam/compatibilitytools.d/Proton-GE/bin32"
+          }
+        }
+      }
+    },
+    {
+      "name" : "gst-plugins-bad",
+      "subdir" : "gst-plugins-bad",
+      "buildsystem" : "meson",
+      "builddir" : true,
+      "config-opts" : [
+        "-Dfbdev=disabled",
+        "-Ddecklink=disabled",
+        "-Dlinksys=disabled",
+        "-Dstatic=disabled",
+        "-Ddts=disabled",
+        "-Dfaac=disabled",
+        "-Dfaad=disabled",
+        "-Dlibmms=disabled",
+        "-Dmpeg2enc=disabled",
+        "-Dmplex=disabled",
+        "-Dneon=disabled",
+        "-Drtmp=disabled",
+        "-Dflite=disabled",
+        "-Dvulkan=disabled",
+        "-Dsbc=disabled",
+        "-Dopencv=disabled",
+        "-Dvoamrwbenc=disabled",
+        "-Dx265=disabled",
+        "-Dexamples=disabled",
+        "-Dtests=disabled",
+        "-Dgtk_doc=disabled",
+        "-Dintrospection=disabled",
+        "-Dgobject-cast-checks=disabled",
+        "-Dglib-asserts=disabled",
+        "-Dglib-checks=disabled",
+        "-Dnls=disabled",
+        "-Dbenchmarks=disabled"
+      ],
+      "sources" : [
+        {
+          "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+          "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+          "strip-components" : 0,
+          "type" : "archive"
+        }
+      ]
+    },
+    {
+      "name" : "gst-plugins-bad-32bit",
+      "subdir" : "gst-plugins-bad",
+      "buildsystem" : "meson",
+      "builddir" : true,
+      "config-opts" : [
+        "-Dfbdev=disabled",
+        "-Ddecklink=disabled",
+        "-Dlinksys=disabled",
+        "-Dstatic=disabled",
+        "-Ddts=disabled",
+        "-Dfaac=disabled",
+        "-Dfaad=disabled",
+        "-Dlibmms=disabled",
+        "-Dmpeg2enc=disabled",
+        "-Dmplex=disabled",
+        "-Dneon=disabled",
+        "-Drtmp=disabled",
+        "-Dflite=disabled",
+        "-Dvulkan=disabled",
+        "-Dsbc=disabled",
+        "-Dopencv=disabled",
+        "-Dvoamrwbenc=disabled",
+        "-Dx265=disabled",
+        "-Dexamples=disabled",
+        "-Dtests=disabled",
+        "-Dgtk_doc=disabled",
+        "-Dintrospection=disabled",
+        "-Dgobject-cast-checks=disabled",
+        "-Dglib-asserts=disabled",
+        "-Dglib-checks=disabled",
+        "-Dnls=disabled",
+        "-Dbenchmarks=disabled"
+      ],
+      "only-arches" : [
+        "x86_64"
+      ],
+      "sources" : [
+        {
+          "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+          "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+          "strip-components" : 0,
+          "type" : "archive"
+        }
+      ],
+      "build-options" : {
+        "arch" : {
+          "x86_64" : {
+            "ldflags" : "-L/app/share/steam/compatibilitytools.d/Proton-GE/lib32 -L/app/lib32",
+            "libdir" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32",
+            "env" : {
+              "CC" : "ccache i686-unknown-linux-gnu-gcc",
+              "CXX" : "ccache i686-unknown-linux-gnu-g++",
+              "PKG_CONFIG_PATH" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32/pkgconfig:/app/lib32/pkgconfig:/app/share/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig:/usr/share/pkgconfig",
+              "LD_RUN_PATH" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32"
+            },
+            "append-path" : "/usr/lib/sdk/toolchain-i386/bin",
+            "prepend-path" : "/app/share/steam/compatibilitytools.d/Proton-GE/bin32"
+          }
+        }
+      }
+    },
+    {
+      "name" : "gst-plugins-ugly",
+      "subdir" : "gst-plugins-ugly",
+      "buildsystem" : "meson",
+      "builddir" : true,
+      "config-opts" : [
+        "-Dgobject-cast-checks=disabled",
+        "-Dglib-asserts=disabled",
+        "-Dglib-checks=disabled",
+        "-Dglib-checks=disabled",
+        "-Ddoc=disabled",
+        "-Dexamples=disabled",
+        "-Dtests=disabled",
+        "-Dgtk_doc=disabled",
+        "-Dintrospection=disabled",
+        "-Dgobject-cast-checks=disabled",
+        "-Dglib-asserts=disabled",
+        "-Dglib-checks=disabled",
+        "-Dnls=disabled",
+        "-Dbenchmarks=disabled"
+      ],
+      "sources" : [
+        {
+          "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+          "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+          "strip-components" : 0,
+          "type" : "archive"
+        }
+      ]
+    },
+    {
+      "name" : "gst-plugins-ugly-32bit",
+      "subdir" : "gst-plugins-ugly",
+      "buildsystem" : "meson",
+      "builddir" : true,
+      "config-opts" : [
+        "-Dgobject-cast-checks=disabled",
+        "-Dglib-asserts=disabled",
+        "-Dglib-checks=disabled",
+        "-Dglib-checks=disabled",
+        "-Ddoc=disabled",
+        "-Dexamples=disabled",
+        "-Dtests=disabled",
+        "-Dgtk_doc=disabled",
+        "-Dintrospection=disabled",
+        "-Dgobject-cast-checks=disabled",
+        "-Dglib-asserts=disabled",
+        "-Dglib-checks=disabled",
+        "-Dnls=disabled",
+        "-Dbenchmarks=disabled"
+      ],
+      "only-arches" : [
+        "x86_64"
+      ],
+      "sources" : [
+        {
+          "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+          "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+          "strip-components" : 0,
+          "type" : "archive"
+        }
+      ],
+      "build-options" : {
+        "arch" : {
+          "x86_64" : {
+            "ldflags" : "-L/app/share/steam/compatibilitytools.d/Proton-GE/lib32 -L/app/lib32",
+            "libdir" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32",
+            "env" : {
+              "CC" : "ccache i686-unknown-linux-gnu-gcc",
+              "CXX" : "ccache i686-unknown-linux-gnu-g++",
+              "PKG_CONFIG_PATH" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32/pkgconfig:/app/lib32/pkgconfig:/app/share/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig:/usr/share/pkgconfig",
+              "LD_RUN_PATH" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32"
+            },
+            "append-path" : "/usr/lib/sdk/toolchain-i386/bin",
+            "prepend-path" : "/app/share/steam/compatibilitytools.d/Proton-GE/bin32"
+          }
+        }
+      }
+    },
+    {
+      "name" : "gst-libav",
+      "subdir" : "gst-libav",
+      "buildsystem" : "meson",
+      "builddir" : true,
+      "config-opts" : [
+        "-Ddoc=disabled",
+        "-Dexamples=disabled",
+        "-Dtests=disabled",
+        "-Dgtk_doc=disabled",
+        "-Dintrospection=disabled",
+        "-Dgobject-cast-checks=disabled",
+        "-Dglib-asserts=disabled",
+        "-Dglib-checks=disabled",
+        "-Dnls=disabled",
+        "-Dbenchmarks=disabled"
+      ],
+      "sources" : [
+        {
+          "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+          "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+          "strip-components" : 0,
+          "type" : "archive"
+        }
+      ]
+    },
+    {
+      "name" : "gst-libav-32bit",
+      "subdir" : "gst-libav",
+      "buildsystem" : "meson",
+      "builddir" : true,
+      "config-opts" : [
+        "-Ddoc=disabled",
+        "-Dexamples=disabled",
+        "-Dtests=disabled",
+        "-Dgtk_doc=disabled",
+        "-Dintrospection=disabled",
+        "-Dgobject-cast-checks=disabled",
+        "-Dglib-asserts=disabled",
+        "-Dglib-checks=disabled",
+        "-Dnls=disabled",
+        "-Dbenchmarks=disabled"
+      ],
+      "only-arches" : [
+        "x86_64"
+      ],
+      "sources" : [
+        {
+          "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+          "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+          "strip-components" : 0,
+          "type" : "archive"
+        }
+      ],
+      "build-options" : {
+        "arch" : {
+          "x86_64" : {
+            "ldflags" : "-L/app/share/steam/compatibilitytools.d/Proton-GE/lib32 -L/app/lib32",
+            "libdir" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32",
+            "env" : {
+              "CC" : "ccache i686-unknown-linux-gnu-gcc",
+              "CXX" : "ccache i686-unknown-linux-gnu-g++",
+              "PKG_CONFIG_PATH" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32/pkgconfig:/app/lib32/pkgconfig:/app/share/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig:/usr/share/pkgconfig",
+              "LD_RUN_PATH" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32"
+            },
+            "append-path" : "/usr/lib/sdk/toolchain-i386/bin",
+            "prepend-path" : "/app/share/steam/compatibilitytools.d/Proton-GE/bin32"
+          }
+        }
+      }
+    },
+    {
+      "name" : "FAudio",
+      "subdir" : "FAudio",
+      "buildsystem" : "cmake-ninja",
+      "builddir" : true,
+      "config-opts" : [
+        "-DGSTREAMER=ON"
+      ],
+      "sources" : [
+        {
+          "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+          "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+          "strip-components" : 0,
+          "type" : "archive"
+        }
+      ]
+    },
+    {
+      "name" : "FAudio-32bit",
+      "subdir" : "FAudio",
+      "buildsystem" : "cmake-ninja",
+      "builddir" : true,
+      "config-opts" : [
+        "-DGSTREAMER=ON"
+      ],
+      "only-arches" : [
+        "x86_64"
+      ],
+      "sources" : [
+        {
+          "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+          "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+          "strip-components" : 0,
+          "type" : "archive"
+        }
+      ],
+      "build-options" : {
+        "arch" : {
+          "x86_64" : {
+            "ldflags" : "-L/app/share/steam/compatibilitytools.d/Proton-GE/lib32 -L/app/lib32",
+            "libdir" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32",
+            "env" : {
+              "CC" : "ccache i686-unknown-linux-gnu-gcc",
+              "CXX" : "ccache i686-unknown-linux-gnu-g++",
+              "PKG_CONFIG_PATH" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32/pkgconfig:/app/lib32/pkgconfig:/app/share/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig:/usr/share/pkgconfig",
+              "LD_RUN_PATH" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32"
+            },
+            "append-path" : "/usr/lib/sdk/toolchain-i386/bin",
+            "prepend-path" : "/app/share/steam/compatibilitytools.d/Proton-GE/bin32"
+          }
+        }
+      }
+    },
+    {
+      "name" : "jxrlib",
+      "subdir" : "jxrlib",
+      "buildsystem" : "cmake-ninja",
+      "builddir" : true,
+      "config-opts" : [
+        "-DCMAKE_INSTALL_RPATH=$ORIGIN"
+      ],
+      "sources" : [
+        {
+          "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+          "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+          "strip-components" : 0,
+          "type" : "archive"
+        }
+      ],
+      "build-options" : {
+        "config-opts" : [
+          "-DJXRLIB_INSTALL_LIB_DIR=lib"
+        ]
+      },
+      "cleanup" : [
+        "/bin"
+      ]
+    },
+    {
+      "name" : "jxrlib-32bit",
+      "subdir" : "jxrlib",
+      "buildsystem" : "cmake-ninja",
+      "builddir" : true,
+      "config-opts" : [
+        "-DCMAKE_INSTALL_RPATH=$ORIGIN"
+      ],
+      "only-arches" : [
+        "x86_64"
+      ],
+      "sources" : [
+        {
+          "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+          "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+          "strip-components" : 0,
+          "type" : "archive"
+        }
+      ],
+      "build-options" : {
+        "arch" : {
+          "x86_64" : {
+            "ldflags" : "-L/app/share/steam/compatibilitytools.d/Proton-GE/lib32 -L/app/lib32",
+            "libdir" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32",
+            "env" : {
+              "CC" : "ccache i686-unknown-linux-gnu-gcc",
+              "CXX" : "ccache i686-unknown-linux-gnu-g++",
+              "PKG_CONFIG_PATH" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32/pkgconfig:/app/lib32/pkgconfig:/app/share/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig:/usr/share/pkgconfig",
+              "LD_RUN_PATH" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32"
+            },
+            "append-path" : "/usr/lib/sdk/toolchain-i386/bin",
+            "prepend-path" : "/app/share/steam/compatibilitytools.d/Proton-GE/bin32"
+          }
+        },
+        "config-opts" : [
+          "-DJXRLIB_INSTALL_LIB_DIR=lib32"
+        ]
+      },
+      "cleanup" : [
+        "/bin"
+      ]
+    },
+    {
+      "name" : "wine",
+      "subdir" : "wine",
+      "config-opts" : [
+        "--disable-win16",
+        "--disable-tests",
+        "--with-x",
+        "--with-pulse",
+        "--with-dbus",
+        "--without-hal",
+        "--without-oss",
+        "--without-vkd3d",
+        "--with-jxrlib",
+        "JXRLIB_CFLAGS=-I/app/share/steam/compatibilitytools.d/Proton-GE/include/jxrlib"
+      ],
+      "make-install-args" : [
+        "LDCONFIG=/bin/true",
+        "UPDATE_DESKTOP_DATABASE=/bin/true",
+        "INSTALL_PROGRAM_FLAGS=-s"
+      ],
+      "sources" : [
+        {
+          "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+          "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+          "strip-components" : 0,
+          "type" : "archive"
+        },
+        {
+          "dest" : "wine",
+          "commands" : [
+            "autoreconf -fiv",
+            "tools/make_requests"
+          ],
+          "type" : "shell"
+        }
+      ],
+      "build-options" : {
+        "arch" : {
+          "x86_64" : {
+            "libdir" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib",
+            "config-opts" : [
+              "--enable-win64",
+              "--with-mingw=ccache x86_64-w64-mingw32-gcc"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name" : "wine-32bit",
+      "subdir" : "wine",
+      "config-opts" : [
+        "--disable-win16",
+        "--disable-tests",
+        "--with-x",
+        "--with-pulse",
+        "--with-dbus",
+        "--without-hal",
+        "--without-oss",
+        "--without-vkd3d",
+        "--with-jxrlib",
+        "JXRLIB_CFLAGS=-I/app/share/steam/compatibilitytools.d/Proton-GE/include/jxrlib"
+      ],
+      "make-install-args" : [
+        "LDCONFIG=/bin/true",
+        "UPDATE_DESKTOP_DATABASE=/bin/true",
+        "INSTALL_PROGRAM_FLAGS=-s"
+      ],
+      "only-arches" : [
+        "x86_64"
+      ],
+      "sources" : [
+        {
+          "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+          "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+          "strip-components" : 0,
+          "type" : "archive"
+        },
+        {
+          "dest" : "wine",
+          "commands" : [
+            "autoreconf -fiv",
+            "tools/make_requests"
+          ],
+          "type" : "shell"
+        }
+      ],
+      "build-options" : {
+        "arch" : {
+          "x86_64" : {
+            "ldflags" : "-L/app/share/steam/compatibilitytools.d/Proton-GE/lib32 -L/app/lib32",
+            "libdir" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32",
+            "env" : {
+              "CC" : "ccache i686-unknown-linux-gnu-gcc",
+              "CXX" : "ccache i686-unknown-linux-gnu-g++",
+              "PKG_CONFIG_PATH" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32/pkgconfig:/app/lib32/pkgconfig:/app/share/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig:/usr/share/pkgconfig",
+              "LD_RUN_PATH" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32"
+            },
+            "append-path" : "/usr/lib/sdk/toolchain-i386/bin",
+            "prepend-path" : "/app/share/steam/compatibilitytools.d/Proton-GE/bin32"
+          }
+        },
+        "config-opts" : [
+          "--bindir=/app/share/steam/compatibilitytools.d/Proton-GE/bin32",
+          "--with-mingw=ccache i686-w64-mingw32-gcc"
+        ]
+      },
+      "cleanup" : [
+        "/bin32"
+      ],
+      "post-install" : [
+        "mv $FLATPAK_DEST/bin32/{wine,wine-preloader} $FLATPAK_DEST/bin/"
+      ]
+    },
+    {
+      "name" : "media-converter",
+      "subdir" : "media-converter",
+      "buildsystem" : "simple",
+      "sources" : [
+        {
+          "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+          "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+          "strip-components" : 0,
+          "type" : "archive"
+        },
+        {
+          "dest" : "media-converter/.cargo",
+          "path" : "files/media-converter/config.toml",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/anyhow/anyhow-1.0.40.crate",
+          "sha256" : "28b2cd92db5cbd74e8e5028f7e27dd7aa3090e89e4f2a197cc7c8dfb69c7063b",
+          "dest-filename" : "anyhow-1.0.40.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/anyhow-1.0.40",
+          "url" : "data:%7B%22package%22%3A%20%2228b2cd92db5cbd74e8e5028f7e27dd7aa3090e89e4f2a197cc7c8dfb69c7063b%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/array-init/array-init-1.0.0.crate",
+          "sha256" : "a51c983d65b6691893a791e55aa8bda43bbd9b11f947e5a9581710362277cc95",
+          "dest-filename" : "array-init-1.0.0.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/array-init-1.0.0",
+          "url" : "data:%7B%22package%22%3A%20%22a51c983d65b6691893a791e55aa8bda43bbd9b11f947e5a9581710362277cc95%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/autocfg/autocfg-1.0.1.crate",
+          "sha256" : "cdb031dd78e28731d87d56cc8ffef4a8f36ca26c38fe2de700543e627f8a464a",
+          "dest-filename" : "autocfg-1.0.1.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/autocfg-1.0.1",
+          "url" : "data:%7B%22package%22%3A%20%22cdb031dd78e28731d87d56cc8ffef4a8f36ca26c38fe2de700543e627f8a464a%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/bitflags/bitflags-1.2.1.crate",
+          "sha256" : "cf1de2fe8c75bc145a2f577add951f8134889b4795d47466a54a5c846d691693",
+          "dest-filename" : "bitflags-1.2.1.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/bitflags-1.2.1",
+          "url" : "data:%7B%22package%22%3A%20%22cf1de2fe8c75bc145a2f577add951f8134889b4795d47466a54a5c846d691693%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/cfg-if/cfg-if-1.0.0.crate",
+          "sha256" : "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd",
+          "dest-filename" : "cfg-if-1.0.0.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/cfg-if-1.0.0",
+          "url" : "data:%7B%22package%22%3A%20%22baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/chrono/chrono-0.4.19.crate",
+          "sha256" : "670ad68c9088c2a963aaa298cb369688cf3f9465ce5e2d4ca10e6e0098a1ce73",
+          "dest-filename" : "chrono-0.4.19.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/chrono-0.4.19",
+          "url" : "data:%7B%22package%22%3A%20%22670ad68c9088c2a963aaa298cb369688cf3f9465ce5e2d4ca10e6e0098a1ce73%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/crc32fast/crc32fast-1.2.1.crate",
+          "sha256" : "81156fece84ab6a9f2afdb109ce3ae577e42b1228441eded99bd77f627953b1a",
+          "dest-filename" : "crc32fast-1.2.1.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/crc32fast-1.2.1",
+          "url" : "data:%7B%22package%22%3A%20%2281156fece84ab6a9f2afdb109ce3ae577e42b1228441eded99bd77f627953b1a%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/either/either-1.6.1.crate",
+          "sha256" : "e78d4f1cc4ae33bbfc157ed5d5a5ef3bc29227303d595861deb238fcec4e9457",
+          "dest-filename" : "either-1.6.1.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/either-1.6.1",
+          "url" : "data:%7B%22package%22%3A%20%22e78d4f1cc4ae33bbfc157ed5d5a5ef3bc29227303d595861deb238fcec4e9457%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/futures-channel/futures-channel-0.3.13.crate",
+          "sha256" : "8c2dd2df839b57db9ab69c2c9d8f3e8c81984781937fe2807dc6dcf3b2ad2939",
+          "dest-filename" : "futures-channel-0.3.13.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/futures-channel-0.3.13",
+          "url" : "data:%7B%22package%22%3A%20%228c2dd2df839b57db9ab69c2c9d8f3e8c81984781937fe2807dc6dcf3b2ad2939%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/futures-core/futures-core-0.3.13.crate",
+          "sha256" : "15496a72fabf0e62bdc3df11a59a3787429221dd0710ba8ef163d6f7a9112c94",
+          "dest-filename" : "futures-core-0.3.13.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/futures-core-0.3.13",
+          "url" : "data:%7B%22package%22%3A%20%2215496a72fabf0e62bdc3df11a59a3787429221dd0710ba8ef163d6f7a9112c94%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/futures-executor/futures-executor-0.3.13.crate",
+          "sha256" : "891a4b7b96d84d5940084b2a37632dd65deeae662c114ceaa2c879629c9c0ad1",
+          "dest-filename" : "futures-executor-0.3.13.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/futures-executor-0.3.13",
+          "url" : "data:%7B%22package%22%3A%20%22891a4b7b96d84d5940084b2a37632dd65deeae662c114ceaa2c879629c9c0ad1%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/futures-macro/futures-macro-0.3.13.crate",
+          "sha256" : "ea405816a5139fb39af82c2beb921d52143f556038378d6db21183a5c37fbfb7",
+          "dest-filename" : "futures-macro-0.3.13.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/futures-macro-0.3.13",
+          "url" : "data:%7B%22package%22%3A%20%22ea405816a5139fb39af82c2beb921d52143f556038378d6db21183a5c37fbfb7%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/futures-task/futures-task-0.3.13.crate",
+          "sha256" : "fa189ef211c15ee602667a6fcfe1c1fd9e07d42250d2156382820fba33c9df80",
+          "dest-filename" : "futures-task-0.3.13.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/futures-task-0.3.13",
+          "url" : "data:%7B%22package%22%3A%20%22fa189ef211c15ee602667a6fcfe1c1fd9e07d42250d2156382820fba33c9df80%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/futures-util/futures-util-0.3.13.crate",
+          "sha256" : "1812c7ab8aedf8d6f2701a43e1243acdbcc2b36ab26e2ad421eb99ac963d96d1",
+          "dest-filename" : "futures-util-0.3.13.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/futures-util-0.3.13",
+          "url" : "data:%7B%22package%22%3A%20%221812c7ab8aedf8d6f2701a43e1243acdbcc2b36ab26e2ad421eb99ac963d96d1%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/glib/glib-0.10.3.crate",
+          "sha256" : "0c685013b7515e668f1b57a165b009d4d28cb139a8a989bbd699c10dad29d0c5",
+          "dest-filename" : "glib-0.10.3.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/glib-0.10.3",
+          "url" : "data:%7B%22package%22%3A%20%220c685013b7515e668f1b57a165b009d4d28cb139a8a989bbd699c10dad29d0c5%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/glib-macros/glib-macros-0.10.1.crate",
+          "sha256" : "41486a26d1366a8032b160b59065a59fb528530a46a49f627e7048fb8c064039",
+          "dest-filename" : "glib-macros-0.10.1.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/glib-macros-0.10.1",
+          "url" : "data:%7B%22package%22%3A%20%2241486a26d1366a8032b160b59065a59fb528530a46a49f627e7048fb8c064039%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/glib-sys/glib-sys-0.10.1.crate",
+          "sha256" : "c7e9b997a66e9a23d073f2b1abb4dbfc3925e0b8952f67efd8d9b6e168e4cdc1",
+          "dest-filename" : "glib-sys-0.10.1.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/glib-sys-0.10.1",
+          "url" : "data:%7B%22package%22%3A%20%22c7e9b997a66e9a23d073f2b1abb4dbfc3925e0b8952f67efd8d9b6e168e4cdc1%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/gobject-sys/gobject-sys-0.10.0.crate",
+          "sha256" : "952133b60c318a62bf82ee75b93acc7e84028a093e06b9e27981c2b6fe68218c",
+          "dest-filename" : "gobject-sys-0.10.0.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/gobject-sys-0.10.0",
+          "url" : "data:%7B%22package%22%3A%20%22952133b60c318a62bf82ee75b93acc7e84028a093e06b9e27981c2b6fe68218c%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/gst-plugin-version-helper",
+          "url" : "https://gitlab.freedesktop.org/gstreamer/gst-plugins-rs/repository/archive.tar.gz?ref=634d231269ab9b68c722c5037d1c94bed97ba45c",
+          "sha256" : "c00f41987694771ddd83f8c56b0739cb7816a641b1c5f46016b6c86255466d5d",
+          "archive-type" : "tar-gzip",
+          "type" : "archive"
+        },
+        {
+          "commands" : [
+            "mv media-converter/cargo/vendor/gst-plugin-version-helper media-converter/cargo/vendor/gst-plugin-version-helper.repo",
+            "mv media-converter/cargo/vendor/gst-plugin-version-helper.repo/version-helper media-converter/cargo/vendor/gst-plugin-version-helper",
+            "rm -rf media-converter/cargo/vendor/gst-plugin-version-helper.repo"
+          ],
+          "type" : "shell"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/gst-plugin-version-helper",
+          "url" : "data:%7B%22package%22%3A%20null%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/gstreamer",
+          "url" : "https://gitlab.freedesktop.org/gstreamer/gstreamer-rs/repository/archive.tar.gz?ref=30a323e24cd6020c872e5d5acf02b880497ff102",
+          "sha256" : "e5da6dfd31918d07849e4b67777d593725b0d79d7fa38feb7ff1740e9e2c03b2",
+          "archive-type" : "tar-gzip",
+          "type" : "archive"
+        },
+        {
+          "commands" : [
+            "mv media-converter/cargo/vendor/gstreamer media-converter/cargo/vendor/gstreamer.repo",
+            "mv media-converter/cargo/vendor/gstreamer.repo/gstreamer media-converter/cargo/vendor/gstreamer",
+            "rm -rf media-converter/cargo/vendor/gstreamer.repo"
+          ],
+          "type" : "shell"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/gstreamer",
+          "url" : "data:%7B%22package%22%3A%20null%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/gstreamer-audio",
+          "url" : "https://gitlab.freedesktop.org/gstreamer/gstreamer-rs/repository/archive.tar.gz?ref=30a323e24cd6020c872e5d5acf02b880497ff102",
+          "sha256" : "e5da6dfd31918d07849e4b67777d593725b0d79d7fa38feb7ff1740e9e2c03b2",
+          "archive-type" : "tar-gzip",
+          "type" : "archive"
+        },
+        {
+          "commands" : [
+            "mv media-converter/cargo/vendor/gstreamer-audio media-converter/cargo/vendor/gstreamer-audio.repo",
+            "mv media-converter/cargo/vendor/gstreamer-audio.repo/gstreamer-audio media-converter/cargo/vendor/gstreamer-audio",
+            "rm -rf media-converter/cargo/vendor/gstreamer-audio.repo"
+          ],
+          "type" : "shell"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/gstreamer-audio",
+          "url" : "data:%7B%22package%22%3A%20null%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/gstreamer-audio-sys",
+          "url" : "https://gitlab.freedesktop.org/gstreamer/gstreamer-rs-sys/repository/archive.tar.gz?ref=a20aae85e1bc976a97d1c942ff56f346fb2f8d4c",
+          "sha256" : "c3713c5b0a50f8f694dda31fda1426ec064c3121cb368a2fa0f414749882886e",
+          "archive-type" : "tar-gzip",
+          "type" : "archive"
+        },
+        {
+          "commands" : [
+            "mv media-converter/cargo/vendor/gstreamer-audio-sys media-converter/cargo/vendor/gstreamer-audio-sys.repo",
+            "mv media-converter/cargo/vendor/gstreamer-audio-sys.repo/gstreamer-audio-sys media-converter/cargo/vendor/gstreamer-audio-sys",
+            "rm -rf media-converter/cargo/vendor/gstreamer-audio-sys.repo"
+          ],
+          "type" : "shell"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/gstreamer-audio-sys",
+          "url" : "data:%7B%22package%22%3A%20null%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/gstreamer-base",
+          "url" : "https://gitlab.freedesktop.org/gstreamer/gstreamer-rs/repository/archive.tar.gz?ref=30a323e24cd6020c872e5d5acf02b880497ff102",
+          "sha256" : "e5da6dfd31918d07849e4b67777d593725b0d79d7fa38feb7ff1740e9e2c03b2",
+          "archive-type" : "tar-gzip",
+          "type" : "archive"
+        },
+        {
+          "commands" : [
+            "mv media-converter/cargo/vendor/gstreamer-base media-converter/cargo/vendor/gstreamer-base.repo",
+            "mv media-converter/cargo/vendor/gstreamer-base.repo/gstreamer-base media-converter/cargo/vendor/gstreamer-base",
+            "rm -rf media-converter/cargo/vendor/gstreamer-base.repo"
+          ],
+          "type" : "shell"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/gstreamer-base",
+          "url" : "data:%7B%22package%22%3A%20null%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/gstreamer-base-sys",
+          "url" : "https://gitlab.freedesktop.org/gstreamer/gstreamer-rs-sys/repository/archive.tar.gz?ref=a20aae85e1bc976a97d1c942ff56f346fb2f8d4c",
+          "sha256" : "c3713c5b0a50f8f694dda31fda1426ec064c3121cb368a2fa0f414749882886e",
+          "archive-type" : "tar-gzip",
+          "type" : "archive"
+        },
+        {
+          "commands" : [
+            "mv media-converter/cargo/vendor/gstreamer-base-sys media-converter/cargo/vendor/gstreamer-base-sys.repo",
+            "mv media-converter/cargo/vendor/gstreamer-base-sys.repo/gstreamer-base-sys media-converter/cargo/vendor/gstreamer-base-sys",
+            "rm -rf media-converter/cargo/vendor/gstreamer-base-sys.repo"
+          ],
+          "type" : "shell"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/gstreamer-base-sys",
+          "url" : "data:%7B%22package%22%3A%20null%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/gstreamer-sys",
+          "url" : "https://gitlab.freedesktop.org/gstreamer/gstreamer-rs-sys/repository/archive.tar.gz?ref=a20aae85e1bc976a97d1c942ff56f346fb2f8d4c",
+          "sha256" : "c3713c5b0a50f8f694dda31fda1426ec064c3121cb368a2fa0f414749882886e",
+          "archive-type" : "tar-gzip",
+          "type" : "archive"
+        },
+        {
+          "commands" : [
+            "mv media-converter/cargo/vendor/gstreamer-sys media-converter/cargo/vendor/gstreamer-sys.repo",
+            "mv media-converter/cargo/vendor/gstreamer-sys.repo/gstreamer-sys media-converter/cargo/vendor/gstreamer-sys",
+            "rm -rf media-converter/cargo/vendor/gstreamer-sys.repo"
+          ],
+          "type" : "shell"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/gstreamer-sys",
+          "url" : "data:%7B%22package%22%3A%20null%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/gstreamer-video",
+          "url" : "https://gitlab.freedesktop.org/gstreamer/gstreamer-rs/repository/archive.tar.gz?ref=30a323e24cd6020c872e5d5acf02b880497ff102",
+          "sha256" : "e5da6dfd31918d07849e4b67777d593725b0d79d7fa38feb7ff1740e9e2c03b2",
+          "archive-type" : "tar-gzip",
+          "type" : "archive"
+        },
+        {
+          "commands" : [
+            "mv media-converter/cargo/vendor/gstreamer-video media-converter/cargo/vendor/gstreamer-video.repo",
+            "mv media-converter/cargo/vendor/gstreamer-video.repo/gstreamer-video media-converter/cargo/vendor/gstreamer-video",
+            "rm -rf media-converter/cargo/vendor/gstreamer-video.repo"
+          ],
+          "type" : "shell"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/gstreamer-video",
+          "url" : "data:%7B%22package%22%3A%20null%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/gstreamer-video-sys",
+          "url" : "https://gitlab.freedesktop.org/gstreamer/gstreamer-rs-sys/repository/archive.tar.gz?ref=a20aae85e1bc976a97d1c942ff56f346fb2f8d4c",
+          "sha256" : "c3713c5b0a50f8f694dda31fda1426ec064c3121cb368a2fa0f414749882886e",
+          "archive-type" : "tar-gzip",
+          "type" : "archive"
+        },
+        {
+          "commands" : [
+            "mv media-converter/cargo/vendor/gstreamer-video-sys media-converter/cargo/vendor/gstreamer-video-sys.repo",
+            "mv media-converter/cargo/vendor/gstreamer-video-sys.repo/gstreamer-video-sys media-converter/cargo/vendor/gstreamer-video-sys",
+            "rm -rf media-converter/cargo/vendor/gstreamer-video-sys.repo"
+          ],
+          "type" : "shell"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/gstreamer-video-sys",
+          "url" : "data:%7B%22package%22%3A%20null%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/heck/heck-0.3.2.crate",
+          "sha256" : "87cbf45460356b7deeb5e3415b5563308c0a9b057c85e12b06ad551f98d0a6ac",
+          "dest-filename" : "heck-0.3.2.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/heck-0.3.2",
+          "url" : "data:%7B%22package%22%3A%20%2287cbf45460356b7deeb5e3415b5563308c0a9b057c85e12b06ad551f98d0a6ac%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/itertools/itertools-0.9.0.crate",
+          "sha256" : "284f18f85651fe11e8a991b2adb42cb078325c996ed026d994719efcfca1d54b",
+          "dest-filename" : "itertools-0.9.0.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/itertools-0.9.0",
+          "url" : "data:%7B%22package%22%3A%20%22284f18f85651fe11e8a991b2adb42cb078325c996ed026d994719efcfca1d54b%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/libc/libc-0.2.91.crate",
+          "sha256" : "8916b1f6ca17130ec6568feccee27c156ad12037880833a3b842a823236502e7",
+          "dest-filename" : "libc-0.2.91.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/libc-0.2.91",
+          "url" : "data:%7B%22package%22%3A%20%228916b1f6ca17130ec6568feccee27c156ad12037880833a3b842a823236502e7%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/muldiv/muldiv-0.2.1.crate",
+          "sha256" : "0419348c027fa7be448d2ae7ea0e4e04c2334c31dc4e74ab29f00a2a7ca69204",
+          "dest-filename" : "muldiv-0.2.1.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/muldiv-0.2.1",
+          "url" : "data:%7B%22package%22%3A%20%220419348c027fa7be448d2ae7ea0e4e04c2334c31dc4e74ab29f00a2a7ca69204%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/num-integer/num-integer-0.1.44.crate",
+          "sha256" : "d2cc698a63b549a70bc047073d2949cce27cd1c7b0a4a862d08a8031bc2801db",
+          "dest-filename" : "num-integer-0.1.44.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/num-integer-0.1.44",
+          "url" : "data:%7B%22package%22%3A%20%22d2cc698a63b549a70bc047073d2949cce27cd1c7b0a4a862d08a8031bc2801db%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/num-rational/num-rational-0.3.2.crate",
+          "sha256" : "12ac428b1cb17fce6f731001d307d351ec70a6d202fc2e60f7d4c5e42d8f4f07",
+          "dest-filename" : "num-rational-0.3.2.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/num-rational-0.3.2",
+          "url" : "data:%7B%22package%22%3A%20%2212ac428b1cb17fce6f731001d307d351ec70a6d202fc2e60f7d4c5e42d8f4f07%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/num-traits/num-traits-0.2.14.crate",
+          "sha256" : "9a64b1ec5cda2586e284722486d802acf1f7dbdc623e2bfc57e65ca1cd099290",
+          "dest-filename" : "num-traits-0.2.14.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/num-traits-0.2.14",
+          "url" : "data:%7B%22package%22%3A%20%229a64b1ec5cda2586e284722486d802acf1f7dbdc623e2bfc57e65ca1cd099290%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/once_cell/once_cell-1.7.2.crate",
+          "sha256" : "af8b08b04175473088b46763e51ee54da5f9a164bc162f615b91bc179dbf15a3",
+          "dest-filename" : "once_cell-1.7.2.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/once_cell-1.7.2",
+          "url" : "data:%7B%22package%22%3A%20%22af8b08b04175473088b46763e51ee54da5f9a164bc162f615b91bc179dbf15a3%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/paste/paste-1.0.5.crate",
+          "sha256" : "acbf547ad0c65e31259204bd90935776d1c693cec2f4ff7abb7a1bbbd40dfe58",
+          "dest-filename" : "paste-1.0.5.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/paste-1.0.5",
+          "url" : "data:%7B%22package%22%3A%20%22acbf547ad0c65e31259204bd90935776d1c693cec2f4ff7abb7a1bbbd40dfe58%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/pin-project-lite/pin-project-lite-0.2.6.crate",
+          "sha256" : "dc0e1f259c92177c30a4c9d177246edd0a3568b25756a977d0632cf8fa37e905",
+          "dest-filename" : "pin-project-lite-0.2.6.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/pin-project-lite-0.2.6",
+          "url" : "data:%7B%22package%22%3A%20%22dc0e1f259c92177c30a4c9d177246edd0a3568b25756a977d0632cf8fa37e905%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/pin-utils/pin-utils-0.1.0.crate",
+          "sha256" : "8b870d8c151b6f2fb93e84a13146138f05d02ed11c7e7c54f8826aaaf7c9f184",
+          "dest-filename" : "pin-utils-0.1.0.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/pin-utils-0.1.0",
+          "url" : "data:%7B%22package%22%3A%20%228b870d8c151b6f2fb93e84a13146138f05d02ed11c7e7c54f8826aaaf7c9f184%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/pkg-config/pkg-config-0.3.19.crate",
+          "sha256" : "3831453b3449ceb48b6d9c7ad7c96d5ea673e9b470a1dc578c2ce6521230884c",
+          "dest-filename" : "pkg-config-0.3.19.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/pkg-config-0.3.19",
+          "url" : "data:%7B%22package%22%3A%20%223831453b3449ceb48b6d9c7ad7c96d5ea673e9b470a1dc578c2ce6521230884c%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/pretty-hex/pretty-hex-0.2.1.crate",
+          "sha256" : "bc5c99d529f0d30937f6f4b8a86d988047327bb88d04d2c4afc356de74722131",
+          "dest-filename" : "pretty-hex-0.2.1.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/pretty-hex-0.2.1",
+          "url" : "data:%7B%22package%22%3A%20%22bc5c99d529f0d30937f6f4b8a86d988047327bb88d04d2c4afc356de74722131%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/proc-macro-crate/proc-macro-crate-0.1.5.crate",
+          "sha256" : "1d6ea3c4595b96363c13943497db34af4460fb474a95c43f4446ad341b8c9785",
+          "dest-filename" : "proc-macro-crate-0.1.5.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/proc-macro-crate-0.1.5",
+          "url" : "data:%7B%22package%22%3A%20%221d6ea3c4595b96363c13943497db34af4460fb474a95c43f4446ad341b8c9785%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/proc-macro-error/proc-macro-error-1.0.4.crate",
+          "sha256" : "da25490ff9892aab3fcf7c36f08cfb902dd3e71ca0f9f9517bea02a73a5ce38c",
+          "dest-filename" : "proc-macro-error-1.0.4.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/proc-macro-error-1.0.4",
+          "url" : "data:%7B%22package%22%3A%20%22da25490ff9892aab3fcf7c36f08cfb902dd3e71ca0f9f9517bea02a73a5ce38c%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/proc-macro-error-attr/proc-macro-error-attr-1.0.4.crate",
+          "sha256" : "a1be40180e52ecc98ad80b184934baf3d0d29f979574e439af5a55274b35f869",
+          "dest-filename" : "proc-macro-error-attr-1.0.4.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/proc-macro-error-attr-1.0.4",
+          "url" : "data:%7B%22package%22%3A%20%22a1be40180e52ecc98ad80b184934baf3d0d29f979574e439af5a55274b35f869%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/proc-macro-hack/proc-macro-hack-0.5.19.crate",
+          "sha256" : "dbf0c48bc1d91375ae5c3cd81e3722dff1abcf81a30960240640d223f59fe0e5",
+          "dest-filename" : "proc-macro-hack-0.5.19.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/proc-macro-hack-0.5.19",
+          "url" : "data:%7B%22package%22%3A%20%22dbf0c48bc1d91375ae5c3cd81e3722dff1abcf81a30960240640d223f59fe0e5%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/proc-macro-nested/proc-macro-nested-0.1.7.crate",
+          "sha256" : "bc881b2c22681370c6a780e47af9840ef841837bc98118431d4e1868bd0c1086",
+          "dest-filename" : "proc-macro-nested-0.1.7.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/proc-macro-nested-0.1.7",
+          "url" : "data:%7B%22package%22%3A%20%22bc881b2c22681370c6a780e47af9840ef841837bc98118431d4e1868bd0c1086%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/proc-macro2/proc-macro2-1.0.24.crate",
+          "sha256" : "1e0704ee1a7e00d7bb417d0770ea303c1bccbabf0ef1667dae92b5967f5f8a71",
+          "dest-filename" : "proc-macro2-1.0.24.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/proc-macro2-1.0.24",
+          "url" : "data:%7B%22package%22%3A%20%221e0704ee1a7e00d7bb417d0770ea303c1bccbabf0ef1667dae92b5967f5f8a71%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/quote/quote-1.0.9.crate",
+          "sha256" : "c3d0b9745dc2debf507c8422de05d7226cc1f0644216dfdfead988f9b1ab32a7",
+          "dest-filename" : "quote-1.0.9.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/quote-1.0.9",
+          "url" : "data:%7B%22package%22%3A%20%22c3d0b9745dc2debf507c8422de05d7226cc1f0644216dfdfead988f9b1ab32a7%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/serde/serde-1.0.125.crate",
+          "sha256" : "558dc50e1a5a5fa7112ca2ce4effcb321b0300c0d4ccf0776a9f60cd89031171",
+          "dest-filename" : "serde-1.0.125.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/serde-1.0.125",
+          "url" : "data:%7B%22package%22%3A%20%22558dc50e1a5a5fa7112ca2ce4effcb321b0300c0d4ccf0776a9f60cd89031171%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/slab/slab-0.4.2.crate",
+          "sha256" : "c111b5bd5695e56cffe5129854aa230b39c93a305372fdbb2668ca2394eea9f8",
+          "dest-filename" : "slab-0.4.2.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/slab-0.4.2",
+          "url" : "data:%7B%22package%22%3A%20%22c111b5bd5695e56cffe5129854aa230b39c93a305372fdbb2668ca2394eea9f8%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/strum/strum-0.18.0.crate",
+          "sha256" : "57bd81eb48f4c437cadc685403cad539345bf703d78e63707418431cecd4522b",
+          "dest-filename" : "strum-0.18.0.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/strum-0.18.0",
+          "url" : "data:%7B%22package%22%3A%20%2257bd81eb48f4c437cadc685403cad539345bf703d78e63707418431cecd4522b%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/strum_macros/strum_macros-0.18.0.crate",
+          "sha256" : "87c85aa3f8ea653bfd3ddf25f7ee357ee4d204731f6aa9ad04002306f6e2774c",
+          "dest-filename" : "strum_macros-0.18.0.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/strum_macros-0.18.0",
+          "url" : "data:%7B%22package%22%3A%20%2287c85aa3f8ea653bfd3ddf25f7ee357ee4d204731f6aa9ad04002306f6e2774c%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/syn/syn-1.0.67.crate",
+          "sha256" : "6498a9efc342871f91cc2d0d694c674368b4ceb40f62b65a7a08c3792935e702",
+          "dest-filename" : "syn-1.0.67.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/syn-1.0.67",
+          "url" : "data:%7B%22package%22%3A%20%226498a9efc342871f91cc2d0d694c674368b4ceb40f62b65a7a08c3792935e702%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/system-deps/system-deps-1.3.2.crate",
+          "sha256" : "0f3ecc17269a19353b3558b313bba738b25d82993e30d62a18406a24aba4649b",
+          "dest-filename" : "system-deps-1.3.2.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/system-deps-1.3.2",
+          "url" : "data:%7B%22package%22%3A%20%220f3ecc17269a19353b3558b313bba738b25d82993e30d62a18406a24aba4649b%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/thiserror/thiserror-1.0.24.crate",
+          "sha256" : "e0f4a65597094d4483ddaed134f409b2cb7c1beccf25201a9f73c719254fa98e",
+          "dest-filename" : "thiserror-1.0.24.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/thiserror-1.0.24",
+          "url" : "data:%7B%22package%22%3A%20%22e0f4a65597094d4483ddaed134f409b2cb7c1beccf25201a9f73c719254fa98e%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/thiserror-impl/thiserror-impl-1.0.24.crate",
+          "sha256" : "7765189610d8241a44529806d6fd1f2e0a08734313a35d5b3a556f92b381f3c0",
+          "dest-filename" : "thiserror-impl-1.0.24.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/thiserror-impl-1.0.24",
+          "url" : "data:%7B%22package%22%3A%20%227765189610d8241a44529806d6fd1f2e0a08734313a35d5b3a556f92b381f3c0%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/time/time-0.1.44.crate",
+          "sha256" : "6db9e6914ab8b1ae1c260a4ae7a49b6c5611b40328a735b21862567685e73255",
+          "dest-filename" : "time-0.1.44.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/time-0.1.44",
+          "url" : "data:%7B%22package%22%3A%20%226db9e6914ab8b1ae1c260a4ae7a49b6c5611b40328a735b21862567685e73255%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/toml/toml-0.5.8.crate",
+          "sha256" : "a31142970826733df8241ef35dc040ef98c679ab14d7c3e54d827099b3acecaa",
+          "dest-filename" : "toml-0.5.8.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/toml-0.5.8",
+          "url" : "data:%7B%22package%22%3A%20%22a31142970826733df8241ef35dc040ef98c679ab14d7c3e54d827099b3acecaa%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/unicode-segmentation/unicode-segmentation-1.7.1.crate",
+          "sha256" : "bb0d2e7be6ae3a5fa87eed5fb451aff96f2573d2694942e40543ae0bbe19c796",
+          "dest-filename" : "unicode-segmentation-1.7.1.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/unicode-segmentation-1.7.1",
+          "url" : "data:%7B%22package%22%3A%20%22bb0d2e7be6ae3a5fa87eed5fb451aff96f2573d2694942e40543ae0bbe19c796%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/unicode-xid/unicode-xid-0.2.1.crate",
+          "sha256" : "f7fe0bb3479651439c9112f72b6c505038574c9fbb575ed1bf3b797fa39dd564",
+          "dest-filename" : "unicode-xid-0.2.1.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/unicode-xid-0.2.1",
+          "url" : "data:%7B%22package%22%3A%20%22f7fe0bb3479651439c9112f72b6c505038574c9fbb575ed1bf3b797fa39dd564%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/version-compare/version-compare-0.0.10.crate",
+          "sha256" : "d63556a25bae6ea31b52e640d7c41d1ab27faba4ccb600013837a3d0b3994ca1",
+          "dest-filename" : "version-compare-0.0.10.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/version-compare-0.0.10",
+          "url" : "data:%7B%22package%22%3A%20%22d63556a25bae6ea31b52e640d7c41d1ab27faba4ccb600013837a3d0b3994ca1%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/version_check/version_check-0.9.3.crate",
+          "sha256" : "5fecdca9a5291cc2b8dcf7dc02453fee791a280f3743cb0905f8822ae463b3fe",
+          "dest-filename" : "version_check-0.9.3.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/version_check-0.9.3",
+          "url" : "data:%7B%22package%22%3A%20%225fecdca9a5291cc2b8dcf7dc02453fee791a280f3743cb0905f8822ae463b3fe%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/wasi/wasi-0.10.0+wasi-snapshot-preview1.crate",
+          "sha256" : "1a143597ca7c7793eff794def352d41792a93c481eb1042423ff7ff72ba2c31f",
+          "dest-filename" : "wasi-0.10.0+wasi-snapshot-preview1.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/wasi-0.10.0+wasi-snapshot-preview1",
+          "url" : "data:%7B%22package%22%3A%20%221a143597ca7c7793eff794def352d41792a93c481eb1042423ff7ff72ba2c31f%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/winapi/winapi-0.3.9.crate",
+          "sha256" : "5c839a674fcd7a98952e593242ea400abe93992746761e38641405d28b00f419",
+          "dest-filename" : "winapi-0.3.9.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/winapi-0.3.9",
+          "url" : "data:%7B%22package%22%3A%20%225c839a674fcd7a98952e593242ea400abe93992746761e38641405d28b00f419%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/winapi-i686-pc-windows-gnu/winapi-i686-pc-windows-gnu-0.4.0.crate",
+          "sha256" : "ac3b87c63620426dd9b991e5ce0329eff545bccbbb34f3be09ff6fb6ab51b7b6",
+          "dest-filename" : "winapi-i686-pc-windows-gnu-0.4.0.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/winapi-i686-pc-windows-gnu-0.4.0",
+          "url" : "data:%7B%22package%22%3A%20%22ac3b87c63620426dd9b991e5ce0329eff545bccbbb34f3be09ff6fb6ab51b7b6%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/winapi-x86_64-pc-windows-gnu/winapi-x86_64-pc-windows-gnu-0.4.0.crate",
+          "sha256" : "712e227841d057c1ee1cd2fb22fa7e5a5461ae8e48fa2ca79ec42cfc1931183f",
+          "dest-filename" : "winapi-x86_64-pc-windows-gnu-0.4.0.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/winapi-x86_64-pc-windows-gnu-0.4.0",
+          "url" : "data:%7B%22package%22%3A%20%22712e227841d057c1ee1cd2fb22fa7e5a5461ae8e48fa2ca79ec42cfc1931183f%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "commands" : [
+            "for c in *.crate; do tar -xf $c; done"
+          ],
+          "type" : "shell"
+        },
+        {
+          "dest" : "media-converter/cargo",
+          "url" : "data:%5Bsource.vendored-sources%5D%0Adirectory%20%3D%20%22cargo/vendor%22%0A%0A%5Bsource.crates-io%5D%0Areplace-with%20%3D%20%22vendored-sources%22%0A%0A%5Bsource.%22https%3A//gitlab.freedesktop.org/gstreamer/gst-plugins-rs%22%5D%0Agit%20%3D%20%22https%3A//gitlab.freedesktop.org/gstreamer/gst-plugins-rs%22%0Areplace-with%20%3D%20%22vendored-sources%22%0Atag%20%3D%20%220.6.0%22%0A%0A%5Bsource.%22https%3A//gitlab.freedesktop.org/gstreamer/gstreamer-rs%22%5D%0Agit%20%3D%20%22https%3A//gitlab.freedesktop.org/gstreamer/gstreamer-rs%22%0Areplace-with%20%3D%20%22vendored-sources%22%0Atag%20%3D%20%220.16.7%22%0A%0A%5Bsource.%22https%3A//gitlab.freedesktop.org/gstreamer/gstreamer-rs-sys%22%5D%0Agit%20%3D%20%22https%3A//gitlab.freedesktop.org/gstreamer/gstreamer-rs-sys%22%0Areplace-with%20%3D%20%22vendored-sources%22%0Abranch%20%3D%20%220.9%22%0A",
+          "dest-filename" : "config",
+          "type" : "file"
+        }
+      ],
+      "build-options" : {
+        "env" : {
+          "CARGO_HOME" : "/run/build/media-converter/media-converter/cargo",
+          "RUST_TARGET" : "x86_64-unknown-linux-gnu",
+          "LIBDIR" : "lib"
+        },
+        "append-path" : "/usr/lib/sdk/rust-stable/bin"
+      },
+      "build-commands" : [
+        "cargo --offline fetch --manifest-path Cargo.toml",
+        "cargo --offline build --target ${RUST_TARGET} --release",
+        "install -Dm755 -t ${FLATPAK_DEST}/$LIBDIR/gstreamer-1.0 target/${RUST_TARGET}/release/libprotonmediaconverter.so"
+      ]
+    },
+    {
+      "name" : "media-converter-32bit",
+      "subdir" : "media-converter",
+      "buildsystem" : "simple",
+      "sources" : [
+        {
+          "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+          "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+          "strip-components" : 0,
+          "type" : "archive"
+        },
+        {
+          "dest" : "media-converter/.cargo",
+          "path" : "files/media-converter/config.toml",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/anyhow/anyhow-1.0.40.crate",
+          "sha256" : "28b2cd92db5cbd74e8e5028f7e27dd7aa3090e89e4f2a197cc7c8dfb69c7063b",
+          "dest-filename" : "anyhow-1.0.40.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/anyhow-1.0.40",
+          "url" : "data:%7B%22package%22%3A%20%2228b2cd92db5cbd74e8e5028f7e27dd7aa3090e89e4f2a197cc7c8dfb69c7063b%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/array-init/array-init-1.0.0.crate",
+          "sha256" : "a51c983d65b6691893a791e55aa8bda43bbd9b11f947e5a9581710362277cc95",
+          "dest-filename" : "array-init-1.0.0.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/array-init-1.0.0",
+          "url" : "data:%7B%22package%22%3A%20%22a51c983d65b6691893a791e55aa8bda43bbd9b11f947e5a9581710362277cc95%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/autocfg/autocfg-1.0.1.crate",
+          "sha256" : "cdb031dd78e28731d87d56cc8ffef4a8f36ca26c38fe2de700543e627f8a464a",
+          "dest-filename" : "autocfg-1.0.1.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/autocfg-1.0.1",
+          "url" : "data:%7B%22package%22%3A%20%22cdb031dd78e28731d87d56cc8ffef4a8f36ca26c38fe2de700543e627f8a464a%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/bitflags/bitflags-1.2.1.crate",
+          "sha256" : "cf1de2fe8c75bc145a2f577add951f8134889b4795d47466a54a5c846d691693",
+          "dest-filename" : "bitflags-1.2.1.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/bitflags-1.2.1",
+          "url" : "data:%7B%22package%22%3A%20%22cf1de2fe8c75bc145a2f577add951f8134889b4795d47466a54a5c846d691693%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/cfg-if/cfg-if-1.0.0.crate",
+          "sha256" : "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd",
+          "dest-filename" : "cfg-if-1.0.0.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/cfg-if-1.0.0",
+          "url" : "data:%7B%22package%22%3A%20%22baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/chrono/chrono-0.4.19.crate",
+          "sha256" : "670ad68c9088c2a963aaa298cb369688cf3f9465ce5e2d4ca10e6e0098a1ce73",
+          "dest-filename" : "chrono-0.4.19.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/chrono-0.4.19",
+          "url" : "data:%7B%22package%22%3A%20%22670ad68c9088c2a963aaa298cb369688cf3f9465ce5e2d4ca10e6e0098a1ce73%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/crc32fast/crc32fast-1.2.1.crate",
+          "sha256" : "81156fece84ab6a9f2afdb109ce3ae577e42b1228441eded99bd77f627953b1a",
+          "dest-filename" : "crc32fast-1.2.1.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/crc32fast-1.2.1",
+          "url" : "data:%7B%22package%22%3A%20%2281156fece84ab6a9f2afdb109ce3ae577e42b1228441eded99bd77f627953b1a%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/either/either-1.6.1.crate",
+          "sha256" : "e78d4f1cc4ae33bbfc157ed5d5a5ef3bc29227303d595861deb238fcec4e9457",
+          "dest-filename" : "either-1.6.1.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/either-1.6.1",
+          "url" : "data:%7B%22package%22%3A%20%22e78d4f1cc4ae33bbfc157ed5d5a5ef3bc29227303d595861deb238fcec4e9457%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/futures-channel/futures-channel-0.3.13.crate",
+          "sha256" : "8c2dd2df839b57db9ab69c2c9d8f3e8c81984781937fe2807dc6dcf3b2ad2939",
+          "dest-filename" : "futures-channel-0.3.13.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/futures-channel-0.3.13",
+          "url" : "data:%7B%22package%22%3A%20%228c2dd2df839b57db9ab69c2c9d8f3e8c81984781937fe2807dc6dcf3b2ad2939%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/futures-core/futures-core-0.3.13.crate",
+          "sha256" : "15496a72fabf0e62bdc3df11a59a3787429221dd0710ba8ef163d6f7a9112c94",
+          "dest-filename" : "futures-core-0.3.13.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/futures-core-0.3.13",
+          "url" : "data:%7B%22package%22%3A%20%2215496a72fabf0e62bdc3df11a59a3787429221dd0710ba8ef163d6f7a9112c94%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/futures-executor/futures-executor-0.3.13.crate",
+          "sha256" : "891a4b7b96d84d5940084b2a37632dd65deeae662c114ceaa2c879629c9c0ad1",
+          "dest-filename" : "futures-executor-0.3.13.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/futures-executor-0.3.13",
+          "url" : "data:%7B%22package%22%3A%20%22891a4b7b96d84d5940084b2a37632dd65deeae662c114ceaa2c879629c9c0ad1%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/futures-macro/futures-macro-0.3.13.crate",
+          "sha256" : "ea405816a5139fb39af82c2beb921d52143f556038378d6db21183a5c37fbfb7",
+          "dest-filename" : "futures-macro-0.3.13.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/futures-macro-0.3.13",
+          "url" : "data:%7B%22package%22%3A%20%22ea405816a5139fb39af82c2beb921d52143f556038378d6db21183a5c37fbfb7%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/futures-task/futures-task-0.3.13.crate",
+          "sha256" : "fa189ef211c15ee602667a6fcfe1c1fd9e07d42250d2156382820fba33c9df80",
+          "dest-filename" : "futures-task-0.3.13.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/futures-task-0.3.13",
+          "url" : "data:%7B%22package%22%3A%20%22fa189ef211c15ee602667a6fcfe1c1fd9e07d42250d2156382820fba33c9df80%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/futures-util/futures-util-0.3.13.crate",
+          "sha256" : "1812c7ab8aedf8d6f2701a43e1243acdbcc2b36ab26e2ad421eb99ac963d96d1",
+          "dest-filename" : "futures-util-0.3.13.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/futures-util-0.3.13",
+          "url" : "data:%7B%22package%22%3A%20%221812c7ab8aedf8d6f2701a43e1243acdbcc2b36ab26e2ad421eb99ac963d96d1%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/glib/glib-0.10.3.crate",
+          "sha256" : "0c685013b7515e668f1b57a165b009d4d28cb139a8a989bbd699c10dad29d0c5",
+          "dest-filename" : "glib-0.10.3.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/glib-0.10.3",
+          "url" : "data:%7B%22package%22%3A%20%220c685013b7515e668f1b57a165b009d4d28cb139a8a989bbd699c10dad29d0c5%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/glib-macros/glib-macros-0.10.1.crate",
+          "sha256" : "41486a26d1366a8032b160b59065a59fb528530a46a49f627e7048fb8c064039",
+          "dest-filename" : "glib-macros-0.10.1.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/glib-macros-0.10.1",
+          "url" : "data:%7B%22package%22%3A%20%2241486a26d1366a8032b160b59065a59fb528530a46a49f627e7048fb8c064039%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/glib-sys/glib-sys-0.10.1.crate",
+          "sha256" : "c7e9b997a66e9a23d073f2b1abb4dbfc3925e0b8952f67efd8d9b6e168e4cdc1",
+          "dest-filename" : "glib-sys-0.10.1.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/glib-sys-0.10.1",
+          "url" : "data:%7B%22package%22%3A%20%22c7e9b997a66e9a23d073f2b1abb4dbfc3925e0b8952f67efd8d9b6e168e4cdc1%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/gobject-sys/gobject-sys-0.10.0.crate",
+          "sha256" : "952133b60c318a62bf82ee75b93acc7e84028a093e06b9e27981c2b6fe68218c",
+          "dest-filename" : "gobject-sys-0.10.0.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/gobject-sys-0.10.0",
+          "url" : "data:%7B%22package%22%3A%20%22952133b60c318a62bf82ee75b93acc7e84028a093e06b9e27981c2b6fe68218c%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/gst-plugin-version-helper",
+          "url" : "https://gitlab.freedesktop.org/gstreamer/gst-plugins-rs/repository/archive.tar.gz?ref=634d231269ab9b68c722c5037d1c94bed97ba45c",
+          "sha256" : "c00f41987694771ddd83f8c56b0739cb7816a641b1c5f46016b6c86255466d5d",
+          "archive-type" : "tar-gzip",
+          "type" : "archive"
+        },
+        {
+          "commands" : [
+            "mv media-converter/cargo/vendor/gst-plugin-version-helper media-converter/cargo/vendor/gst-plugin-version-helper.repo",
+            "mv media-converter/cargo/vendor/gst-plugin-version-helper.repo/version-helper media-converter/cargo/vendor/gst-plugin-version-helper",
+            "rm -rf media-converter/cargo/vendor/gst-plugin-version-helper.repo"
+          ],
+          "type" : "shell"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/gst-plugin-version-helper",
+          "url" : "data:%7B%22package%22%3A%20null%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/gstreamer",
+          "url" : "https://gitlab.freedesktop.org/gstreamer/gstreamer-rs/repository/archive.tar.gz?ref=30a323e24cd6020c872e5d5acf02b880497ff102",
+          "sha256" : "e5da6dfd31918d07849e4b67777d593725b0d79d7fa38feb7ff1740e9e2c03b2",
+          "archive-type" : "tar-gzip",
+          "type" : "archive"
+        },
+        {
+          "commands" : [
+            "mv media-converter/cargo/vendor/gstreamer media-converter/cargo/vendor/gstreamer.repo",
+            "mv media-converter/cargo/vendor/gstreamer.repo/gstreamer media-converter/cargo/vendor/gstreamer",
+            "rm -rf media-converter/cargo/vendor/gstreamer.repo"
+          ],
+          "type" : "shell"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/gstreamer",
+          "url" : "data:%7B%22package%22%3A%20null%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/gstreamer-audio",
+          "url" : "https://gitlab.freedesktop.org/gstreamer/gstreamer-rs/repository/archive.tar.gz?ref=30a323e24cd6020c872e5d5acf02b880497ff102",
+          "sha256" : "e5da6dfd31918d07849e4b67777d593725b0d79d7fa38feb7ff1740e9e2c03b2",
+          "archive-type" : "tar-gzip",
+          "type" : "archive"
+        },
+        {
+          "commands" : [
+            "mv media-converter/cargo/vendor/gstreamer-audio media-converter/cargo/vendor/gstreamer-audio.repo",
+            "mv media-converter/cargo/vendor/gstreamer-audio.repo/gstreamer-audio media-converter/cargo/vendor/gstreamer-audio",
+            "rm -rf media-converter/cargo/vendor/gstreamer-audio.repo"
+          ],
+          "type" : "shell"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/gstreamer-audio",
+          "url" : "data:%7B%22package%22%3A%20null%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/gstreamer-audio-sys",
+          "url" : "https://gitlab.freedesktop.org/gstreamer/gstreamer-rs-sys/repository/archive.tar.gz?ref=a20aae85e1bc976a97d1c942ff56f346fb2f8d4c",
+          "sha256" : "c3713c5b0a50f8f694dda31fda1426ec064c3121cb368a2fa0f414749882886e",
+          "archive-type" : "tar-gzip",
+          "type" : "archive"
+        },
+        {
+          "commands" : [
+            "mv media-converter/cargo/vendor/gstreamer-audio-sys media-converter/cargo/vendor/gstreamer-audio-sys.repo",
+            "mv media-converter/cargo/vendor/gstreamer-audio-sys.repo/gstreamer-audio-sys media-converter/cargo/vendor/gstreamer-audio-sys",
+            "rm -rf media-converter/cargo/vendor/gstreamer-audio-sys.repo"
+          ],
+          "type" : "shell"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/gstreamer-audio-sys",
+          "url" : "data:%7B%22package%22%3A%20null%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/gstreamer-base",
+          "url" : "https://gitlab.freedesktop.org/gstreamer/gstreamer-rs/repository/archive.tar.gz?ref=30a323e24cd6020c872e5d5acf02b880497ff102",
+          "sha256" : "e5da6dfd31918d07849e4b67777d593725b0d79d7fa38feb7ff1740e9e2c03b2",
+          "archive-type" : "tar-gzip",
+          "type" : "archive"
+        },
+        {
+          "commands" : [
+            "mv media-converter/cargo/vendor/gstreamer-base media-converter/cargo/vendor/gstreamer-base.repo",
+            "mv media-converter/cargo/vendor/gstreamer-base.repo/gstreamer-base media-converter/cargo/vendor/gstreamer-base",
+            "rm -rf media-converter/cargo/vendor/gstreamer-base.repo"
+          ],
+          "type" : "shell"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/gstreamer-base",
+          "url" : "data:%7B%22package%22%3A%20null%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/gstreamer-base-sys",
+          "url" : "https://gitlab.freedesktop.org/gstreamer/gstreamer-rs-sys/repository/archive.tar.gz?ref=a20aae85e1bc976a97d1c942ff56f346fb2f8d4c",
+          "sha256" : "c3713c5b0a50f8f694dda31fda1426ec064c3121cb368a2fa0f414749882886e",
+          "archive-type" : "tar-gzip",
+          "type" : "archive"
+        },
+        {
+          "commands" : [
+            "mv media-converter/cargo/vendor/gstreamer-base-sys media-converter/cargo/vendor/gstreamer-base-sys.repo",
+            "mv media-converter/cargo/vendor/gstreamer-base-sys.repo/gstreamer-base-sys media-converter/cargo/vendor/gstreamer-base-sys",
+            "rm -rf media-converter/cargo/vendor/gstreamer-base-sys.repo"
+          ],
+          "type" : "shell"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/gstreamer-base-sys",
+          "url" : "data:%7B%22package%22%3A%20null%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/gstreamer-sys",
+          "url" : "https://gitlab.freedesktop.org/gstreamer/gstreamer-rs-sys/repository/archive.tar.gz?ref=a20aae85e1bc976a97d1c942ff56f346fb2f8d4c",
+          "sha256" : "c3713c5b0a50f8f694dda31fda1426ec064c3121cb368a2fa0f414749882886e",
+          "archive-type" : "tar-gzip",
+          "type" : "archive"
+        },
+        {
+          "commands" : [
+            "mv media-converter/cargo/vendor/gstreamer-sys media-converter/cargo/vendor/gstreamer-sys.repo",
+            "mv media-converter/cargo/vendor/gstreamer-sys.repo/gstreamer-sys media-converter/cargo/vendor/gstreamer-sys",
+            "rm -rf media-converter/cargo/vendor/gstreamer-sys.repo"
+          ],
+          "type" : "shell"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/gstreamer-sys",
+          "url" : "data:%7B%22package%22%3A%20null%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/gstreamer-video",
+          "url" : "https://gitlab.freedesktop.org/gstreamer/gstreamer-rs/repository/archive.tar.gz?ref=30a323e24cd6020c872e5d5acf02b880497ff102",
+          "sha256" : "e5da6dfd31918d07849e4b67777d593725b0d79d7fa38feb7ff1740e9e2c03b2",
+          "archive-type" : "tar-gzip",
+          "type" : "archive"
+        },
+        {
+          "commands" : [
+            "mv media-converter/cargo/vendor/gstreamer-video media-converter/cargo/vendor/gstreamer-video.repo",
+            "mv media-converter/cargo/vendor/gstreamer-video.repo/gstreamer-video media-converter/cargo/vendor/gstreamer-video",
+            "rm -rf media-converter/cargo/vendor/gstreamer-video.repo"
+          ],
+          "type" : "shell"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/gstreamer-video",
+          "url" : "data:%7B%22package%22%3A%20null%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/gstreamer-video-sys",
+          "url" : "https://gitlab.freedesktop.org/gstreamer/gstreamer-rs-sys/repository/archive.tar.gz?ref=a20aae85e1bc976a97d1c942ff56f346fb2f8d4c",
+          "sha256" : "c3713c5b0a50f8f694dda31fda1426ec064c3121cb368a2fa0f414749882886e",
+          "archive-type" : "tar-gzip",
+          "type" : "archive"
+        },
+        {
+          "commands" : [
+            "mv media-converter/cargo/vendor/gstreamer-video-sys media-converter/cargo/vendor/gstreamer-video-sys.repo",
+            "mv media-converter/cargo/vendor/gstreamer-video-sys.repo/gstreamer-video-sys media-converter/cargo/vendor/gstreamer-video-sys",
+            "rm -rf media-converter/cargo/vendor/gstreamer-video-sys.repo"
+          ],
+          "type" : "shell"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/gstreamer-video-sys",
+          "url" : "data:%7B%22package%22%3A%20null%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/heck/heck-0.3.2.crate",
+          "sha256" : "87cbf45460356b7deeb5e3415b5563308c0a9b057c85e12b06ad551f98d0a6ac",
+          "dest-filename" : "heck-0.3.2.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/heck-0.3.2",
+          "url" : "data:%7B%22package%22%3A%20%2287cbf45460356b7deeb5e3415b5563308c0a9b057c85e12b06ad551f98d0a6ac%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/itertools/itertools-0.9.0.crate",
+          "sha256" : "284f18f85651fe11e8a991b2adb42cb078325c996ed026d994719efcfca1d54b",
+          "dest-filename" : "itertools-0.9.0.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/itertools-0.9.0",
+          "url" : "data:%7B%22package%22%3A%20%22284f18f85651fe11e8a991b2adb42cb078325c996ed026d994719efcfca1d54b%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/libc/libc-0.2.91.crate",
+          "sha256" : "8916b1f6ca17130ec6568feccee27c156ad12037880833a3b842a823236502e7",
+          "dest-filename" : "libc-0.2.91.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/libc-0.2.91",
+          "url" : "data:%7B%22package%22%3A%20%228916b1f6ca17130ec6568feccee27c156ad12037880833a3b842a823236502e7%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/muldiv/muldiv-0.2.1.crate",
+          "sha256" : "0419348c027fa7be448d2ae7ea0e4e04c2334c31dc4e74ab29f00a2a7ca69204",
+          "dest-filename" : "muldiv-0.2.1.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/muldiv-0.2.1",
+          "url" : "data:%7B%22package%22%3A%20%220419348c027fa7be448d2ae7ea0e4e04c2334c31dc4e74ab29f00a2a7ca69204%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/num-integer/num-integer-0.1.44.crate",
+          "sha256" : "d2cc698a63b549a70bc047073d2949cce27cd1c7b0a4a862d08a8031bc2801db",
+          "dest-filename" : "num-integer-0.1.44.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/num-integer-0.1.44",
+          "url" : "data:%7B%22package%22%3A%20%22d2cc698a63b549a70bc047073d2949cce27cd1c7b0a4a862d08a8031bc2801db%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/num-rational/num-rational-0.3.2.crate",
+          "sha256" : "12ac428b1cb17fce6f731001d307d351ec70a6d202fc2e60f7d4c5e42d8f4f07",
+          "dest-filename" : "num-rational-0.3.2.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/num-rational-0.3.2",
+          "url" : "data:%7B%22package%22%3A%20%2212ac428b1cb17fce6f731001d307d351ec70a6d202fc2e60f7d4c5e42d8f4f07%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/num-traits/num-traits-0.2.14.crate",
+          "sha256" : "9a64b1ec5cda2586e284722486d802acf1f7dbdc623e2bfc57e65ca1cd099290",
+          "dest-filename" : "num-traits-0.2.14.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/num-traits-0.2.14",
+          "url" : "data:%7B%22package%22%3A%20%229a64b1ec5cda2586e284722486d802acf1f7dbdc623e2bfc57e65ca1cd099290%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/once_cell/once_cell-1.7.2.crate",
+          "sha256" : "af8b08b04175473088b46763e51ee54da5f9a164bc162f615b91bc179dbf15a3",
+          "dest-filename" : "once_cell-1.7.2.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/once_cell-1.7.2",
+          "url" : "data:%7B%22package%22%3A%20%22af8b08b04175473088b46763e51ee54da5f9a164bc162f615b91bc179dbf15a3%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/paste/paste-1.0.5.crate",
+          "sha256" : "acbf547ad0c65e31259204bd90935776d1c693cec2f4ff7abb7a1bbbd40dfe58",
+          "dest-filename" : "paste-1.0.5.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/paste-1.0.5",
+          "url" : "data:%7B%22package%22%3A%20%22acbf547ad0c65e31259204bd90935776d1c693cec2f4ff7abb7a1bbbd40dfe58%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/pin-project-lite/pin-project-lite-0.2.6.crate",
+          "sha256" : "dc0e1f259c92177c30a4c9d177246edd0a3568b25756a977d0632cf8fa37e905",
+          "dest-filename" : "pin-project-lite-0.2.6.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/pin-project-lite-0.2.6",
+          "url" : "data:%7B%22package%22%3A%20%22dc0e1f259c92177c30a4c9d177246edd0a3568b25756a977d0632cf8fa37e905%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/pin-utils/pin-utils-0.1.0.crate",
+          "sha256" : "8b870d8c151b6f2fb93e84a13146138f05d02ed11c7e7c54f8826aaaf7c9f184",
+          "dest-filename" : "pin-utils-0.1.0.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/pin-utils-0.1.0",
+          "url" : "data:%7B%22package%22%3A%20%228b870d8c151b6f2fb93e84a13146138f05d02ed11c7e7c54f8826aaaf7c9f184%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/pkg-config/pkg-config-0.3.19.crate",
+          "sha256" : "3831453b3449ceb48b6d9c7ad7c96d5ea673e9b470a1dc578c2ce6521230884c",
+          "dest-filename" : "pkg-config-0.3.19.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/pkg-config-0.3.19",
+          "url" : "data:%7B%22package%22%3A%20%223831453b3449ceb48b6d9c7ad7c96d5ea673e9b470a1dc578c2ce6521230884c%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/pretty-hex/pretty-hex-0.2.1.crate",
+          "sha256" : "bc5c99d529f0d30937f6f4b8a86d988047327bb88d04d2c4afc356de74722131",
+          "dest-filename" : "pretty-hex-0.2.1.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/pretty-hex-0.2.1",
+          "url" : "data:%7B%22package%22%3A%20%22bc5c99d529f0d30937f6f4b8a86d988047327bb88d04d2c4afc356de74722131%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/proc-macro-crate/proc-macro-crate-0.1.5.crate",
+          "sha256" : "1d6ea3c4595b96363c13943497db34af4460fb474a95c43f4446ad341b8c9785",
+          "dest-filename" : "proc-macro-crate-0.1.5.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/proc-macro-crate-0.1.5",
+          "url" : "data:%7B%22package%22%3A%20%221d6ea3c4595b96363c13943497db34af4460fb474a95c43f4446ad341b8c9785%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/proc-macro-error/proc-macro-error-1.0.4.crate",
+          "sha256" : "da25490ff9892aab3fcf7c36f08cfb902dd3e71ca0f9f9517bea02a73a5ce38c",
+          "dest-filename" : "proc-macro-error-1.0.4.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/proc-macro-error-1.0.4",
+          "url" : "data:%7B%22package%22%3A%20%22da25490ff9892aab3fcf7c36f08cfb902dd3e71ca0f9f9517bea02a73a5ce38c%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/proc-macro-error-attr/proc-macro-error-attr-1.0.4.crate",
+          "sha256" : "a1be40180e52ecc98ad80b184934baf3d0d29f979574e439af5a55274b35f869",
+          "dest-filename" : "proc-macro-error-attr-1.0.4.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/proc-macro-error-attr-1.0.4",
+          "url" : "data:%7B%22package%22%3A%20%22a1be40180e52ecc98ad80b184934baf3d0d29f979574e439af5a55274b35f869%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/proc-macro-hack/proc-macro-hack-0.5.19.crate",
+          "sha256" : "dbf0c48bc1d91375ae5c3cd81e3722dff1abcf81a30960240640d223f59fe0e5",
+          "dest-filename" : "proc-macro-hack-0.5.19.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/proc-macro-hack-0.5.19",
+          "url" : "data:%7B%22package%22%3A%20%22dbf0c48bc1d91375ae5c3cd81e3722dff1abcf81a30960240640d223f59fe0e5%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/proc-macro-nested/proc-macro-nested-0.1.7.crate",
+          "sha256" : "bc881b2c22681370c6a780e47af9840ef841837bc98118431d4e1868bd0c1086",
+          "dest-filename" : "proc-macro-nested-0.1.7.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/proc-macro-nested-0.1.7",
+          "url" : "data:%7B%22package%22%3A%20%22bc881b2c22681370c6a780e47af9840ef841837bc98118431d4e1868bd0c1086%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/proc-macro2/proc-macro2-1.0.24.crate",
+          "sha256" : "1e0704ee1a7e00d7bb417d0770ea303c1bccbabf0ef1667dae92b5967f5f8a71",
+          "dest-filename" : "proc-macro2-1.0.24.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/proc-macro2-1.0.24",
+          "url" : "data:%7B%22package%22%3A%20%221e0704ee1a7e00d7bb417d0770ea303c1bccbabf0ef1667dae92b5967f5f8a71%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/quote/quote-1.0.9.crate",
+          "sha256" : "c3d0b9745dc2debf507c8422de05d7226cc1f0644216dfdfead988f9b1ab32a7",
+          "dest-filename" : "quote-1.0.9.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/quote-1.0.9",
+          "url" : "data:%7B%22package%22%3A%20%22c3d0b9745dc2debf507c8422de05d7226cc1f0644216dfdfead988f9b1ab32a7%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/serde/serde-1.0.125.crate",
+          "sha256" : "558dc50e1a5a5fa7112ca2ce4effcb321b0300c0d4ccf0776a9f60cd89031171",
+          "dest-filename" : "serde-1.0.125.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/serde-1.0.125",
+          "url" : "data:%7B%22package%22%3A%20%22558dc50e1a5a5fa7112ca2ce4effcb321b0300c0d4ccf0776a9f60cd89031171%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/slab/slab-0.4.2.crate",
+          "sha256" : "c111b5bd5695e56cffe5129854aa230b39c93a305372fdbb2668ca2394eea9f8",
+          "dest-filename" : "slab-0.4.2.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/slab-0.4.2",
+          "url" : "data:%7B%22package%22%3A%20%22c111b5bd5695e56cffe5129854aa230b39c93a305372fdbb2668ca2394eea9f8%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/strum/strum-0.18.0.crate",
+          "sha256" : "57bd81eb48f4c437cadc685403cad539345bf703d78e63707418431cecd4522b",
+          "dest-filename" : "strum-0.18.0.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/strum-0.18.0",
+          "url" : "data:%7B%22package%22%3A%20%2257bd81eb48f4c437cadc685403cad539345bf703d78e63707418431cecd4522b%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/strum_macros/strum_macros-0.18.0.crate",
+          "sha256" : "87c85aa3f8ea653bfd3ddf25f7ee357ee4d204731f6aa9ad04002306f6e2774c",
+          "dest-filename" : "strum_macros-0.18.0.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/strum_macros-0.18.0",
+          "url" : "data:%7B%22package%22%3A%20%2287c85aa3f8ea653bfd3ddf25f7ee357ee4d204731f6aa9ad04002306f6e2774c%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/syn/syn-1.0.67.crate",
+          "sha256" : "6498a9efc342871f91cc2d0d694c674368b4ceb40f62b65a7a08c3792935e702",
+          "dest-filename" : "syn-1.0.67.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/syn-1.0.67",
+          "url" : "data:%7B%22package%22%3A%20%226498a9efc342871f91cc2d0d694c674368b4ceb40f62b65a7a08c3792935e702%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/system-deps/system-deps-1.3.2.crate",
+          "sha256" : "0f3ecc17269a19353b3558b313bba738b25d82993e30d62a18406a24aba4649b",
+          "dest-filename" : "system-deps-1.3.2.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/system-deps-1.3.2",
+          "url" : "data:%7B%22package%22%3A%20%220f3ecc17269a19353b3558b313bba738b25d82993e30d62a18406a24aba4649b%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/thiserror/thiserror-1.0.24.crate",
+          "sha256" : "e0f4a65597094d4483ddaed134f409b2cb7c1beccf25201a9f73c719254fa98e",
+          "dest-filename" : "thiserror-1.0.24.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/thiserror-1.0.24",
+          "url" : "data:%7B%22package%22%3A%20%22e0f4a65597094d4483ddaed134f409b2cb7c1beccf25201a9f73c719254fa98e%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/thiserror-impl/thiserror-impl-1.0.24.crate",
+          "sha256" : "7765189610d8241a44529806d6fd1f2e0a08734313a35d5b3a556f92b381f3c0",
+          "dest-filename" : "thiserror-impl-1.0.24.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/thiserror-impl-1.0.24",
+          "url" : "data:%7B%22package%22%3A%20%227765189610d8241a44529806d6fd1f2e0a08734313a35d5b3a556f92b381f3c0%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/time/time-0.1.44.crate",
+          "sha256" : "6db9e6914ab8b1ae1c260a4ae7a49b6c5611b40328a735b21862567685e73255",
+          "dest-filename" : "time-0.1.44.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/time-0.1.44",
+          "url" : "data:%7B%22package%22%3A%20%226db9e6914ab8b1ae1c260a4ae7a49b6c5611b40328a735b21862567685e73255%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/toml/toml-0.5.8.crate",
+          "sha256" : "a31142970826733df8241ef35dc040ef98c679ab14d7c3e54d827099b3acecaa",
+          "dest-filename" : "toml-0.5.8.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/toml-0.5.8",
+          "url" : "data:%7B%22package%22%3A%20%22a31142970826733df8241ef35dc040ef98c679ab14d7c3e54d827099b3acecaa%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/unicode-segmentation/unicode-segmentation-1.7.1.crate",
+          "sha256" : "bb0d2e7be6ae3a5fa87eed5fb451aff96f2573d2694942e40543ae0bbe19c796",
+          "dest-filename" : "unicode-segmentation-1.7.1.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/unicode-segmentation-1.7.1",
+          "url" : "data:%7B%22package%22%3A%20%22bb0d2e7be6ae3a5fa87eed5fb451aff96f2573d2694942e40543ae0bbe19c796%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/unicode-xid/unicode-xid-0.2.1.crate",
+          "sha256" : "f7fe0bb3479651439c9112f72b6c505038574c9fbb575ed1bf3b797fa39dd564",
+          "dest-filename" : "unicode-xid-0.2.1.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/unicode-xid-0.2.1",
+          "url" : "data:%7B%22package%22%3A%20%22f7fe0bb3479651439c9112f72b6c505038574c9fbb575ed1bf3b797fa39dd564%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/version-compare/version-compare-0.0.10.crate",
+          "sha256" : "d63556a25bae6ea31b52e640d7c41d1ab27faba4ccb600013837a3d0b3994ca1",
+          "dest-filename" : "version-compare-0.0.10.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/version-compare-0.0.10",
+          "url" : "data:%7B%22package%22%3A%20%22d63556a25bae6ea31b52e640d7c41d1ab27faba4ccb600013837a3d0b3994ca1%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/version_check/version_check-0.9.3.crate",
+          "sha256" : "5fecdca9a5291cc2b8dcf7dc02453fee791a280f3743cb0905f8822ae463b3fe",
+          "dest-filename" : "version_check-0.9.3.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/version_check-0.9.3",
+          "url" : "data:%7B%22package%22%3A%20%225fecdca9a5291cc2b8dcf7dc02453fee791a280f3743cb0905f8822ae463b3fe%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/wasi/wasi-0.10.0+wasi-snapshot-preview1.crate",
+          "sha256" : "1a143597ca7c7793eff794def352d41792a93c481eb1042423ff7ff72ba2c31f",
+          "dest-filename" : "wasi-0.10.0+wasi-snapshot-preview1.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/wasi-0.10.0+wasi-snapshot-preview1",
+          "url" : "data:%7B%22package%22%3A%20%221a143597ca7c7793eff794def352d41792a93c481eb1042423ff7ff72ba2c31f%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/winapi/winapi-0.3.9.crate",
+          "sha256" : "5c839a674fcd7a98952e593242ea400abe93992746761e38641405d28b00f419",
+          "dest-filename" : "winapi-0.3.9.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/winapi-0.3.9",
+          "url" : "data:%7B%22package%22%3A%20%225c839a674fcd7a98952e593242ea400abe93992746761e38641405d28b00f419%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/winapi-i686-pc-windows-gnu/winapi-i686-pc-windows-gnu-0.4.0.crate",
+          "sha256" : "ac3b87c63620426dd9b991e5ce0329eff545bccbbb34f3be09ff6fb6ab51b7b6",
+          "dest-filename" : "winapi-i686-pc-windows-gnu-0.4.0.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/winapi-i686-pc-windows-gnu-0.4.0",
+          "url" : "data:%7B%22package%22%3A%20%22ac3b87c63620426dd9b991e5ce0329eff545bccbbb34f3be09ff6fb6ab51b7b6%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "url" : "https://static.crates.io/crates/winapi-x86_64-pc-windows-gnu/winapi-x86_64-pc-windows-gnu-0.4.0.crate",
+          "sha256" : "712e227841d057c1ee1cd2fb22fa7e5a5461ae8e48fa2ca79ec42cfc1931183f",
+          "dest-filename" : "winapi-x86_64-pc-windows-gnu-0.4.0.crate",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor/winapi-x86_64-pc-windows-gnu-0.4.0",
+          "url" : "data:%7B%22package%22%3A%20%22712e227841d057c1ee1cd2fb22fa7e5a5461ae8e48fa2ca79ec42cfc1931183f%22%2C%20%22files%22%3A%20%7B%7D%7D",
+          "dest-filename" : ".cargo-checksum.json",
+          "type" : "file"
+        },
+        {
+          "dest" : "media-converter/cargo/vendor",
+          "commands" : [
+            "for c in *.crate; do tar -xf $c; done"
+          ],
+          "type" : "shell"
+        },
+        {
+          "dest" : "media-converter/cargo",
+          "url" : "data:%5Bsource.vendored-sources%5D%0Adirectory%20%3D%20%22cargo/vendor%22%0A%0A%5Bsource.crates-io%5D%0Areplace-with%20%3D%20%22vendored-sources%22%0A%0A%5Bsource.%22https%3A//gitlab.freedesktop.org/gstreamer/gst-plugins-rs%22%5D%0Agit%20%3D%20%22https%3A//gitlab.freedesktop.org/gstreamer/gst-plugins-rs%22%0Areplace-with%20%3D%20%22vendored-sources%22%0Atag%20%3D%20%220.6.0%22%0A%0A%5Bsource.%22https%3A//gitlab.freedesktop.org/gstreamer/gstreamer-rs%22%5D%0Agit%20%3D%20%22https%3A//gitlab.freedesktop.org/gstreamer/gstreamer-rs%22%0Areplace-with%20%3D%20%22vendored-sources%22%0Atag%20%3D%20%220.16.7%22%0A%0A%5Bsource.%22https%3A//gitlab.freedesktop.org/gstreamer/gstreamer-rs-sys%22%5D%0Agit%20%3D%20%22https%3A//gitlab.freedesktop.org/gstreamer/gstreamer-rs-sys%22%0Areplace-with%20%3D%20%22vendored-sources%22%0Abranch%20%3D%20%220.9%22%0A",
+          "dest-filename" : "config",
+          "type" : "file"
+        }
+      ],
+      "build-options" : {
+        "env" : {
+          "CARGO_HOME" : "/run/build/media-converter-32bit/media-converter/cargo",
+          "PKG_CONFIG_ALLOW_CROSS" : "1",
+          "RUST_TARGET" : "i686-unknown-linux-gnu",
+          "LIBDIR" : "lib32"
+        },
+        "arch" : {
+          "x86_64" : {
+            "ldflags" : "-L/app/share/steam/compatibilitytools.d/Proton-GE/lib32 -L/app/lib32",
+            "libdir" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32",
+            "env" : {
+              "CC" : "ccache i686-unknown-linux-gnu-gcc",
+              "CXX" : "ccache i686-unknown-linux-gnu-g++",
+              "PKG_CONFIG_PATH" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32/pkgconfig:/app/lib32/pkgconfig:/app/share/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig:/usr/share/pkgconfig",
+              "LD_RUN_PATH" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32"
+            },
+            "append-path" : "/usr/lib/sdk/toolchain-i386/bin",
+            "prepend-path" : "/app/share/steam/compatibilitytools.d/Proton-GE/bin32"
+          }
+        },
+        "append-path" : "/usr/lib/sdk/rust-stable/bin"
+      },
+      "build-commands" : [
+        "cargo --offline fetch --manifest-path Cargo.toml",
+        "cargo --offline build --target ${RUST_TARGET} --release",
+        "install -Dm755 -t ${FLATPAK_DEST}/$LIBDIR/gstreamer-1.0 target/${RUST_TARGET}/release/libprotonmediaconverter.so"
+      ]
+    },
+    {
+      "name" : "lsteamclient",
+      "subdir" : "lsteamclient",
+      "no-make-install" : true,
+      "config-opts" : [
+        "--nosource-fix",
+        "--nolower-include",
+        "--nodlls",
+        "--nomsvcrt",
+        "-I${FLATPAK_DEST}/include",
+        "-I${FLATPAK_DEST}/include/wine",
+        "-I${FLATPAK_DEST}/include/wine/windows",
+        "-I../wine/include",
+        "-DSTEAM_API_EXPORTS",
+        "-Dprivate=public",
+        "-Dprotected=public",
+        "--dll",
+        "."
+      ],
+      "make-args" : [
+        "LIBRARIES=-ldl"
+      ],
+      "sources" : [
+        {
+          "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+          "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+          "strip-components" : 0,
+          "type" : "archive"
+        },
+        {
+          "dest" : "lsteamclient",
+          "path" : "winemaker-configure.sh",
+          "dest-filename" : "configure",
+          "type" : "file"
+        }
+      ],
+      "build-options" : {
+        "cxxflags" : "-Wno-attributes",
+        "config-opts" : [
+          "-L${FLATPAK_DEST}/lib",
+          "-L${FLATPAK_DEST}/lib/wine"
+        ]
+      },
+      "post-install" : [
+        "install -Dm755 lsteamclient.dll.so -t ${FLATPAK_DEST}/lib/wine/"
+      ]
+    },
+    {
+      "name" : "lsteamclient-32bit",
+      "subdir" : "lsteamclient",
+      "no-make-install" : true,
+      "config-opts" : [
+        "--nosource-fix",
+        "--nolower-include",
+        "--nodlls",
+        "--nomsvcrt",
+        "-I${FLATPAK_DEST}/include",
+        "-I${FLATPAK_DEST}/include/wine",
+        "-I${FLATPAK_DEST}/include/wine/windows",
+        "-I../wine/include",
+        "-DSTEAM_API_EXPORTS",
+        "-Dprivate=public",
+        "-Dprotected=public",
+        "--dll",
+        "."
+      ],
+      "make-args" : [
+        "LIBRARIES=-ldl"
+      ],
+      "only-arches" : [
+        "x86_64"
+      ],
+      "sources" : [
+        {
+          "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+          "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+          "strip-components" : 0,
+          "type" : "archive"
+        },
+        {
+          "dest" : "lsteamclient",
+          "path" : "winemaker-configure.sh",
+          "dest-filename" : "configure",
+          "type" : "file"
+        }
+      ],
+      "build-options" : {
+        "cxxflags" : "-Wno-attributes",
+        "arch" : {
+          "x86_64" : {
+            "ldflags" : "-L/app/share/steam/compatibilitytools.d/Proton-GE/lib32 -L/app/lib32",
+            "libdir" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32",
+            "env" : {
+              "CC" : "ccache i686-unknown-linux-gnu-gcc",
+              "CXX" : "ccache i686-unknown-linux-gnu-g++",
+              "PKG_CONFIG_PATH" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32/pkgconfig:/app/lib32/pkgconfig:/app/share/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig:/usr/share/pkgconfig",
+              "LD_RUN_PATH" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32"
+            },
+            "append-path" : "/usr/lib/sdk/toolchain-i386/bin",
+            "prepend-path" : "/app/share/steam/compatibilitytools.d/Proton-GE/bin32"
+          }
+        },
+        "config-opts" : [
+          "-L${FLATPAK_DEST}/lib32",
+          "-L${FLATPAK_DEST}/lib32/wine",
+          "--wine32"
+        ],
+        "make-args" : [
+          "CC=winegcc -m32",
+          "CXX=wineg++ -m32"
+        ]
+      },
+      "post-install" : [
+        "install -Dm755 lsteamclient.dll.so -t ${FLATPAK_DEST}/lib32/wine/"
+      ]
+    },
+    {
+      "name" : "libsteam_api-bin-32bit",
+      "subdir" : "steam_helper",
+      "buildsystem" : "simple",
+      "sources" : [
+        {
+          "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+          "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+          "strip-components" : 0,
+          "type" : "archive"
+        }
+      ],
+      "build-options" : {
+        "no-debuginfo" : true
+      },
+      "build-commands" : [
+        "install -Dm755 libsteam_api.so -t ${FLATPAK_DEST}/lib32/"
+      ]
+    },
+    {
+      "name" : "steam_helper-32bit",
+      "subdir" : "steam_helper",
+      "no-make-install" : true,
+      "config-opts" : [
+        "--nosource-fix",
+        "--nolower-include",
+        "--nodlls",
+        "--nomsvcrt",
+        "--wine32",
+        "-I${FLATPAK_DEST}/include",
+        "-I${FLATPAK_DEST}/include/wine",
+        "-I${FLATPAK_DEST}/include/wine/windows",
+        "-I../lsteamclient/steamworks_sdk_142",
+        "-I../wine/include",
+        "-I../openvr/headers",
+        "-L${FLATPAK_DEST}/lib32",
+        "-L${FLATPAK_DEST}/lib32/wine",
+        "-lsteam_api",
+        "-lole32",
+        "-ldl",
+        "--guiexe",
+        "."
+      ],
+      "make-args" : [
+        "CC=winegcc -m32",
+        "CXX=wineg++ -m32"
+      ],
+      "only-arches" : [
+        "x86_64"
+      ],
+      "sources" : [
+        {
+          "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+          "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+          "strip-components" : 0,
+          "type" : "archive"
+        },
+        {
+          "dest" : "steam_helper",
+          "path" : "winemaker-configure.sh",
+          "dest-filename" : "configure",
+          "type" : "file"
+        }
+      ],
+      "build-options" : {
+        "arch" : {
+          "x86_64" : {
+            "ldflags" : "-L/app/share/steam/compatibilitytools.d/Proton-GE/lib32 -L/app/lib32",
+            "libdir" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32",
+            "env" : {
+              "CC" : "ccache i686-unknown-linux-gnu-gcc",
+              "CXX" : "ccache i686-unknown-linux-gnu-g++",
+              "PKG_CONFIG_PATH" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32/pkgconfig:/app/lib32/pkgconfig:/app/share/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig:/usr/share/pkgconfig",
+              "LD_RUN_PATH" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32"
+            },
+            "append-path" : "/usr/lib/sdk/toolchain-i386/bin",
+            "prepend-path" : "/app/share/steam/compatibilitytools.d/Proton-GE/bin32"
+          }
+        }
+      },
+      "post-install" : [
+        "install -Dm755 steam_helper.exe.so ${FLATPAK_DEST}/lib32/wine/steam.exe.so"
+      ]
+    },
+    {
+      "name" : "openvr",
+      "subdir" : "openvr",
+      "buildsystem" : "simple",
+      "sources" : [
+        {
+          "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+          "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+          "strip-components" : 0,
+          "type" : "archive"
+        }
+      ],
+      "build-commands" : [
+        "install -Dm755 bin/win64/openvr_api.dll ${FLATPAK_DEST}/lib/wine/dxvk/openvr_api_dxvk.dll",
+        "install -Dm755 bin/win32/openvr_api.dll ${FLATPAK_DEST}/lib32/wine/dxvk/openvr_api_dxvk.dll"
+      ]
+    },
+    {
+      "name" : "vrclient",
+      "subdir" : "vrclient_x64/vrclient_x64",
+      "no-make-install" : true,
+      "config-opts" : [
+        "--nosource-fix",
+        "--nolower-include",
+        "--nodlls",
+        "--nomsvcrt",
+        "-I${FLATPAK_DEST}/include",
+        "-I${FLATPAK_DEST}/include/wine",
+        "-I${FLATPAK_DEST}/include/wine/windows",
+        "-I.",
+        "-I..",
+        "--dll",
+        "."
+      ],
+      "make-args" : [
+        "LIBRARIES=-ldl"
+      ],
+      "sources" : [
+        {
+          "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+          "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+          "strip-components" : 0,
+          "type" : "archive"
+        },
+        {
+          "dest" : "vrclient_x64/vrclient_x64",
+          "path" : "winemaker-configure.sh",
+          "dest-filename" : "configure",
+          "type" : "file"
+        }
+      ],
+      "build-options" : {
+        "config-opts" : [
+          "-L${FLATPAK_DEST}/lib",
+          "-L${FLATPAK_DEST}/lib/wine"
+        ]
+      },
+      "post-install" : [
+        "install -Dm755 vrclient_x64.dll.so ${FLATPAK_DEST}/lib/wine/vrclient_x64.dll.so",
+        "install -Dm755 vrclient_x64.dll.fake ${FLATPAK_DEST}/lib/wine/fakedlls/vrclient_x64.dll"
+      ],
+      "build-commands" : [
+        "winebuild --dll --fake-module -E vrclient_x64.spec -o vrclient_x64.dll.fake"
+      ]
+    },
+    {
+      "name" : "vrclient-32bit",
+      "subdir" : "vrclient_x64/vrclient_x64",
+      "no-make-install" : true,
+      "config-opts" : [
+        "--nosource-fix",
+        "--nolower-include",
+        "--nodlls",
+        "--nomsvcrt",
+        "-I${FLATPAK_DEST}/include",
+        "-I${FLATPAK_DEST}/include/wine",
+        "-I${FLATPAK_DEST}/include/wine/windows",
+        "-I.",
+        "-I..",
+        "--dll",
+        "."
+      ],
+      "make-args" : [
+        "LIBRARIES=-ldl"
+      ],
+      "only-arches" : [
+        "x86_64"
+      ],
+      "sources" : [
+        {
+          "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+          "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+          "strip-components" : 0,
+          "type" : "archive"
+        },
+        {
+          "dest" : "vrclient_x64/vrclient_x64",
+          "path" : "winemaker-configure.sh",
+          "dest-filename" : "configure",
+          "type" : "file"
+        }
+      ],
+      "build-options" : {
+        "arch" : {
+          "x86_64" : {
+            "ldflags" : "-L/app/share/steam/compatibilitytools.d/Proton-GE/lib32 -L/app/lib32",
+            "libdir" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32",
+            "env" : {
+              "CC" : "ccache i686-unknown-linux-gnu-gcc",
+              "CXX" : "ccache i686-unknown-linux-gnu-g++",
+              "PKG_CONFIG_PATH" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32/pkgconfig:/app/lib32/pkgconfig:/app/share/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig:/usr/share/pkgconfig",
+              "LD_RUN_PATH" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32"
+            },
+            "append-path" : "/usr/lib/sdk/toolchain-i386/bin",
+            "prepend-path" : "/app/share/steam/compatibilitytools.d/Proton-GE/bin32"
+          }
+        },
+        "config-opts" : [
+          "-L${FLATPAK_DEST}/lib32",
+          "-L${FLATPAK_DEST}/lib32/wine",
+          "--wine32"
+        ],
+        "make-args" : [
+          "CC=winegcc -m32",
+          "CXX=wineg++ -m32"
+        ]
+      },
+      "post-install" : [
+        "install -Dm755 vrclient_x64.dll.so ${FLATPAK_DEST}/lib32/wine/vrclient.dll.so",
+        "install -Dm755 vrclient_x64.dll.fake ${FLATPAK_DEST}/lib32/wine/fakedlls/vrclient.dll"
+      ],
+      "build-commands" : [
+        "winebuild --dll --fake-module -E vrclient_x64.spec -o vrclient_x64.dll.fake"
+      ]
+    },
+    {
+      "name" : "wineopenxr",
+      "subdir" : "wineopenxr",
+      "no-make-install" : true,
+      "config-opts" : [
+        "--nosource-fix",
+        "--nolower-include",
+        "--nodlls",
+        "--nomsvcrt",
+        "-I${FLATPAK_DEST}/include",
+        "-I${FLATPAK_DEST}/include/wine",
+        "-I${FLATPAK_DEST}/include/wine/windows",
+        "-I../wine/include",
+        "-lopenxr_loader",
+        "-ldxgi",
+        "-lvulkan",
+        "--dll",
+        "."
+      ],
+      "sources" : [
+        {
+          "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+          "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+          "strip-components" : 0,
+          "type" : "archive"
+        },
+        {
+          "dest" : "wineopenxr",
+          "path" : "winemaker-configure.sh",
+          "dest-filename" : "configure",
+          "type" : "file"
+        }
+      ],
+      "build-options" : {
+        "config-opts" : [
+          "-L${FLATPAK_DEST}/lib",
+          "-L${FLATPAK_DEST}/lib/wine"
+        ]
+      },
+      "post-install" : [
+        "install -Dm755 wineopenxr.dll.so -t ${FLATPAK_DEST}/lib/wine/",
+        "install -Dm755 wineopenxr.dll.fake ${FLATPAK_DEST}/lib/wine/fakedlls/wineopenxr.dll"
+      ],
+      "modules" : [
+        {
+          "name" : "openxr",
+          "subdir" : "OpenXR-SDK",
+          "buildsystem" : "cmake-ninja",
+          "sources" : [
+            {
+              "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+              "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+              "strip-components" : 0,
+              "type" : "archive"
+            }
+          ]
+        }
+      ],
+      "build-commands" : [
+        "winebuild --dll --fake-module -E wineopenxr.spec -o wineopenxr.dll.fake"
+      ]
+    },
+    {
+      "name" : "glslang",
+      "buildsystem" : "cmake-ninja",
+      "sources" : [
+        {
+          "url" : "https://github.com/KhronosGroup/glslang/archive/refs/tags/11.2.0.tar.gz",
+          "sha256" : "8ff2fcf9b054e4a4ef56fcd8a637322f827b2b176a592a618d63672ddb896e06",
+          "type" : "archive"
+        }
+      ],
+      "cleanup" : [
+        "*"
+      ]
+    },
+    {
+      "name" : "vkd3d-proton",
+      "subdir" : "vkd3d-proton",
+      "buildsystem" : "meson",
+      "config-opts" : [
+        "--buildtype=release",
+        "--strip",
+        "-Denable_standalone_d3d12=true"
+      ],
+      "sources" : [
+        {
+          "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+          "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+          "strip-components" : 0,
+          "type" : "archive"
+        },
+        {
+          "dest" : "vkd3d-proton",
+          "paths" : [
+            "patches/vkd3d-proton/build-number-no-git.patch"
+          ],
+          "type" : "patch"
+        },
+        {
+          "dest" : "vkd3d-proton",
+          "path" : "meson-ccache-mingw32.txt",
+          "type" : "file"
+        },
+        {
+          "dest" : "vkd3d-proton",
+          "path" : "meson-ccache-mingw64.txt",
+          "type" : "file"
+        }
+      ],
+      "build-options" : {
+        "ldflags" : "",
+        "ldflags-override" : true,
+        "config-opts" : [
+          "--cross-file=../build-win64.txt",
+          "--cross-file=../meson-ccache-mingw64.txt",
+          "--libdir=lib/wine/vkd3d-proton",
+          "--bindir=lib/wine/vkd3d-proton"
+        ],
+        "prepend-path" : "/usr/lib/sdk/mingw-w64/bin:/app/share/steam/compatibilitytools.d/Proton-GE/bin"
+      },
+      "post-install" : [
+        "cd ${FLATPAK_DEST}/lib/wine/vkd3d-proton\nsha1sum d3d12.dll > version\n"
+      ]
+    },
+    {
+      "name" : "vkd3d-proton-32bit",
+      "subdir" : "vkd3d-proton",
+      "buildsystem" : "meson",
+      "config-opts" : [
+        "--buildtype=release",
+        "--strip",
+        "-Denable_standalone_d3d12=true"
+      ],
+      "sources" : [
+        {
+          "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+          "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+          "strip-components" : 0,
+          "type" : "archive"
+        },
+        {
+          "dest" : "vkd3d-proton",
+          "paths" : [
+            "patches/vkd3d-proton/build-number-no-git.patch"
+          ],
+          "type" : "patch"
+        },
+        {
+          "dest" : "vkd3d-proton",
+          "path" : "meson-ccache-mingw32.txt",
+          "type" : "file"
+        },
+        {
+          "dest" : "vkd3d-proton",
+          "path" : "meson-ccache-mingw64.txt",
+          "type" : "file"
+        }
+      ],
+      "build-options" : {
+        "ldflags" : "",
+        "ldflags-override" : true,
+        "config-opts" : [
+          "--cross-file=../build-win32.txt",
+          "--cross-file=../meson-ccache-mingw32.txt",
+          "--libdir=lib32/wine/vkd3d-proton",
+          "--bindir=lib32/wine/vkd3d-proton"
+        ],
+        "prepend-path" : "/usr/lib/sdk/mingw-w64/bin:/app/share/steam/compatibilitytools.d/Proton-GE/bin"
+      },
+      "post-install" : [
+        "ln -sr ${FLATPAK_DEST}/lib{,32}/wine/vkd3d-proton/version"
+      ]
+    },
+    {
+      "name" : "dxvk",
+      "subdir" : "dxvk",
+      "buildsystem" : "meson",
+      "config-opts" : [
+        "--buildtype=release",
+        "--strip",
+        "-Denable_tests=false",
+        "-Denable_dxgi=true",
+        "-Denable_d3d9=true",
+        "-Denable_d3d10=true",
+        "-Denable_d3d11=true"
+      ],
+      "sources" : [
+        {
+          "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+          "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+          "strip-components" : 0,
+          "type" : "archive"
+        },
+        {
+          "dest" : "dxvk",
+          "path" : "meson-ccache-mingw32.txt",
+          "type" : "file"
+        },
+        {
+          "dest" : "dxvk",
+          "path" : "meson-ccache-mingw64.txt",
+          "type" : "file"
+        }
+      ],
+      "build-options" : {
+        "ldflags" : "",
+        "ldflags-override" : true,
+        "config-opts" : [
+          "--cross-file=../build-win64.txt",
+          "--cross-file=../meson-ccache-mingw64.txt",
+          "--libdir=lib/wine/dxvk",
+          "--bindir=lib/wine/dxvk"
+        ],
+        "prepend-path" : "/usr/lib/sdk/mingw-w64/bin:/app/share/steam/compatibilitytools.d/Proton-GE/bin"
+      },
+      "post-install" : [
+        "cd ${FLATPAK_DEST}/lib/wine/dxvk\nsha1sum d3d11.dll > version\n"
+      ]
+    },
+    {
+      "name" : "dxvk-32bit",
+      "subdir" : "dxvk",
+      "buildsystem" : "meson",
+      "config-opts" : [
+        "--buildtype=release",
+        "--strip",
+        "-Denable_tests=false",
+        "-Denable_dxgi=true",
+        "-Denable_d3d9=true",
+        "-Denable_d3d10=true",
+        "-Denable_d3d11=true"
+      ],
+      "sources" : [
+        {
+          "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+          "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+          "strip-components" : 0,
+          "type" : "archive"
+        },
+        {
+          "dest" : "dxvk",
+          "path" : "meson-ccache-mingw32.txt",
+          "type" : "file"
+        },
+        {
+          "dest" : "dxvk",
+          "path" : "meson-ccache-mingw64.txt",
+          "type" : "file"
+        }
+      ],
+      "build-options" : {
+        "ldflags" : "",
+        "ldflags-override" : true,
+        "config-opts" : [
+          "--cross-file=../build-win32.txt",
+          "--cross-file=../meson-ccache-mingw32.txt",
+          "--libdir=lib32/wine/dxvk",
+          "--bindir=lib32/wine/dxvk"
+        ],
+        "prepend-path" : "/usr/lib/sdk/mingw-w64/bin:/app/share/steam/compatibilitytools.d/Proton-GE/bin"
+      },
+      "post-install" : [
+        "ln -sr ${FLATPAK_DEST}/lib{,32}/wine/dxvk/version"
+      ]
+    },
+    {
+      "name" : "wine-mono-bin",
+      "buildsystem" : "simple",
+      "sources" : [
+        {
+          "url" : "https://github.com/madewokherd/wine-mono/releases/download/wine-mono-6.1.1/wine-mono-6.1.1-x86.tar.xz",
+          "sha256" : "c3bab46c3e69ecdda61532c28c6a94a78aef9c750cc18dbb60151e0697714d6d",
+          "type" : "archive"
+        }
+      ],
+      "build-commands" : [
+        "mkdir -p ${FLATPAK_DEST}/share/wine/mono",
+        "cp -a . ${FLATPAK_DEST}/share/wine/mono/wine-mono-6.1.1"
+      ]
+    },
+    {
+      "name" : "wine-gecko-bin",
+      "buildsystem" : "simple",
+      "sources" : [
+        {
+          "url" : "https://dl.winehq.org/wine/wine-gecko/2.47.2/wine-gecko-2.47.2-x86.tar.xz",
+          "sha256" : "8fab46ea2110b2b0beed414e3ebb4e038a3da04900e7a28492ca3c3ccf9fea94",
+          "type" : "file"
+        },
+        {
+          "url" : "https://dl.winehq.org/wine/wine-gecko/2.47.2/wine-gecko-2.47.2-x86_64.tar.xz",
+          "sha256" : "b4476706a4c3f23461da98bed34f355ff623c5d2bb2da1e2fa0c6a310bc33014",
+          "type" : "file"
+        }
+      ],
+      "build-commands" : [
+        "mkdir -p ${FLATPAK_DEST}/share/wine/gecko",
+        "for a in wine-gecko-*-x86{,_64}.tar.xz; do\n  tar -xf \"$a\" -C ${FLATPAK_DEST}/share/wine/gecko/\ndone\n"
+      ]
+    },
+    {
+      "name" : "fonts",
+      "no-autogen" : true,
+      "no-parallel-make" : true,
+      "no-make-install" : true,
+      "buildsystem" : "autotools",
+      "make-args" : [
+        "fonts"
+      ],
+      "sources" : [
+        {
+          "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+          "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+          "strip-components" : 0,
+          "type" : "archive"
+        },
+        {
+          "commands" : [
+            "./configure.sh --no-steam-runtime"
+          ],
+          "type" : "shell"
+        }
+      ],
+      "post-install" : [
+        "find obj-fonts/ -xtype f \\( -name \"*.otf\" -o -name \"*.ttf\" \\) -ls -exec install -Dm0644 -t ${FLATPAK_DEST}/share/fonts/ {} \\;"
+      ],
+      "modules" : [
+        {
+          "name" : "fontforge",
+          "buildsystem" : "cmake-ninja",
+          "builddir" : true,
+          "config-opts" : [
+            "-DCMAKE_BUILD_TYPE=Release",
+            "-DBUILD_SHARED_LIBS=OFF",
+            "-DENABLE_GUI=OFF",
+            "-DENABLE_NATIVE_SCRIPTING=ON",
+            "-DENABLE_PYTHON_SCRIPTING=OFF",
+            "-DENABLE_PYTHON_EXTENSION=OFF",
+            "-DENABLE_LIBSPIRO=OFF",
+            "-DENABLE_LIBUNINAMESLIST=OFF",
+            "-DENABLE_LIBGIF=OFF",
+            "-DENABLE_LIBJPEG=OFF",
+            "-DENABLE_LIBPNG=OFF",
+            "-DENABLE_LIBREADLINE=OFF",
+            "-DENABLE_LIBTIFF=OFF",
+            "-DENABLE_WOFF2=OFF",
+            "-DENABLE_DOCS=OFF"
+          ],
+          "sources" : [
+            {
+              "url" : "https://github.com/fontforge/fontforge/releases/download/20201107/fontforge-20201107.tar.xz",
+              "sha256" : "68bcba8f602819eddc29cd356ee13fafbad7a80d19b652d354c6791343476c78",
+              "type" : "archive"
+            }
+          ],
+          "cleanup" : [
+            "*"
+          ]
+        },
+        {
+          "name" : "python3-setuptools_scm",
+          "buildsystem" : "simple",
+          "sources" : [
+            {
+              "url" : "https://files.pythonhosted.org/packages/cd/66/fa77e809b7cb1c2e14b48c7fc8a8cd657a27f4f9abb848df0c967b6e4e11/setuptools_scm-4.1.2.tar.gz",
+              "sha256" : "a8994582e716ec690f33fec70cca0f85bd23ec974e3f783233e4879090a7faa8",
+              "type" : "file"
+            }
+          ],
+          "cleanup" : [
+            "*"
+          ],
+          "build-commands" : [
+            "pip3 install --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"setuptools_scm>=3.2.0\" --no-build-isolation"
+          ]
+        },
+        {
+          "name" : "python3-afdko",
+          "buildsystem" : "simple",
+          "sources" : [
+            {
+              "url" : "https://files.pythonhosted.org/packages/09/07/448a8887c7195450604dfc0305d80d74324c36ee18ed997664051d4bffe3/pytz-2020.4.tar.gz",
+              "sha256" : "3e6b7dd2d1e0a59084bcee14a17af60c5c562cdc16d828e8eba2e683d3a7e268",
+              "type" : "file"
+            },
+            {
+              "url" : "https://files.pythonhosted.org/packages/d7/d8/05696357e0311f5b5c316d7b95f46c669dd9c15aaeecbb48c7d0aeb88c40/appdirs-1.4.4.tar.gz",
+              "sha256" : "7d5d0167b2b1ba821647616af46a749d1c653740dd0d2415100fe26e27afdf41",
+              "type" : "file"
+            },
+            {
+              "url" : "https://files.pythonhosted.org/packages/b9/40/32cf94580974faf1635d8deca663b8e00492fe9e170e4d54e1d780a723e8/pyclipper-1.2.0.zip",
+              "sha256" : "7a9035ca6732dcef3ef33f98d9a844bb5f2be16bd659300c38ef366aac2e3a47",
+              "type" : "file"
+            },
+            {
+              "url" : "https://files.pythonhosted.org/packages/5f/a4/366a8a5af55f5189d8401462b2a715cef3388f6daeac8541ee5156e112ad/fontParts-0.9.6.zip",
+              "sha256" : "3fed62d7390735fcfe58fa75f559886b5bed2c4c06dbd045645ad5eb03a31161",
+              "type" : "file"
+            },
+            {
+              "url" : "https://files.pythonhosted.org/packages/e8/25/ad6b67e7c1e00798ceac95f0cb3abfb82f83f6373e553caf4976855c534f/fontPens-0.2.4.zip",
+              "sha256" : "a6d9a14573b3450f3313d69523f9006028c21fc7aef5d35333b87aab7f2b41fd",
+              "type" : "file"
+            },
+            {
+              "url" : "https://files.pythonhosted.org/packages/bf/c9/2a1a5a013b86649f08e3a0de7eca66b98b35559f67cbe4d3b057aa4f2cad/zopfli-0.1.7.zip",
+              "sha256" : "512892714f0e3dcc9a77222cb509ed519f41ce2b92467e47a4b406a23b48561a",
+              "type" : "file"
+            },
+            {
+              "url" : "https://files.pythonhosted.org/packages/2a/18/70c32fe9357f3eea18598b23aa9ed29b1711c3001835f7cf99a9818985d0/Brotli-1.0.9.zip",
+              "sha256" : "4d1b810aa0ed773f81dceda2cc7b403d01057458730e309856356d4ef4188438",
+              "type" : "file"
+            },
+            {
+              "url" : "https://files.pythonhosted.org/packages/b8/db/a5d9a7649c2eb2681c30850617b83e1295c3a5bebcdb05908e1da11ed8b7/unicodedata2-13.0.0.post2.tar.gz",
+              "sha256" : "a83e504fb0e8ed4757194e61c3f7b69fb3c914856057bea968d0950f80f947fa",
+              "type" : "file"
+            },
+            {
+              "url" : "https://files.pythonhosted.org/packages/1d/a1/8813629b38a8d97e8f1eceb6c7da03b37633c93104fbd8e30e09d195425a/fs-2.4.11.tar.gz",
+              "sha256" : "cc99d476b500f993df8ef697b96dc70928ca2946a455c396a566efe021126767",
+              "type" : "file"
+            },
+            {
+              "url" : "https://files.pythonhosted.org/packages/57/d9/9eae7bc4ba3a38ab7426522fb08e12df54aec27595d7bcd1bc0670aec873/booleanOperations-0.9.0.zip",
+              "sha256" : "8cfa821c32ad374fa120d6b2e0b444ebeac57c91e6631528645fa19ac2a281b8",
+              "type" : "file"
+            },
+            {
+              "url" : "https://files.pythonhosted.org/packages/2f/3c/7cc72dc22fcc5af362a15f7d8c04e6cfda6f730cacbbf8ba811bdda8e6a8/ufonormalizer-0.4.2.zip",
+              "sha256" : "f2739eaa8df3cd4e60894b22679a882505252b93f12657a0993894108122c6e6",
+              "type" : "file"
+            },
+            {
+              "url" : "https://files.pythonhosted.org/packages/44/02/d1ddbbc5698db8ad2a0d1f8a23d52305e66166b6fea5ada5e146dd3a709a/MutatorMath-3.0.1.zip",
+              "sha256" : "8127c1ffad1646f11a953752296c43f5d88cbd5293fff03f093d916b0bc13864",
+              "type" : "file"
+            },
+            {
+              "url" : "https://files.pythonhosted.org/packages/3a/76/467422c5a0157c92a8b8e1ffe14411443682e2951e6f6dde3748e47b31ba/tqdm-4.54.0.tar.gz",
+              "sha256" : "5c0d04e06ccc0da1bd3fa5ae4550effcce42fcad947b4a6cafa77bdc9b09ff22",
+              "type" : "file"
+            },
+            {
+              "url" : "https://files.pythonhosted.org/packages/b0/d6/a2b248adc2f26a97752bec3719bd5d33a788890b5546bff0839baeba1b4e/ufoProcessor-1.9.0.zip",
+              "sha256" : "baa8bd9bbbb11ce004647eb1906105f4d5bfdbc1b3388ca4d36fab57950a415b",
+              "type" : "file"
+            },
+            {
+              "url" : "https://files.pythonhosted.org/packages/db/f7/43fecb94d66959c1e23aa53d6161231dca0e93ec500224cf31b3c4073e37/lxml-4.6.2.tar.gz",
+              "sha256" : "cd11c7e8d21af997ee8079037fff88f16fda188a9776eb4b81c7e4c9c0a7d7fc",
+              "type" : "file"
+            },
+            {
+              "url" : "https://files.pythonhosted.org/packages/df/2c/4b4e3739eefb2a2d176ef42a45544e87f710cfcc164d4d9eb315616f7d49/defcon-0.7.2.zip",
+              "sha256" : "1967eaa23dcc8e1cbe3bd130aae4d9ddb72027b62d3e23eeb640065cfbd6d8d1",
+              "type" : "file"
+            },
+            {
+              "url" : "https://files.pythonhosted.org/packages/b6/37/d10ae4fd2252162de1b4b4e098aaebc432fab2392d01fc81adf8ff90a2fd/psautohint-2.1.2.zip",
+              "sha256" : "fb5761ad7e3fa6adf0266ea8b50de6afd04e95fdef32fa4e70a318889e3bbf44",
+              "type" : "file"
+            },
+            {
+              "url" : "https://files.pythonhosted.org/packages/80/0a/157b28f0cebebe1aba875eee92b4249785655bf3f8f5628fc23fba1f5861/fonttools-4.17.1.zip",
+              "sha256" : "7097b194babc05c8decfff6cbc81b184221fdcfbda568630fe441c63dadb3ab4",
+              "type" : "file"
+            },
+            {
+              "url" : "https://files.pythonhosted.org/packages/3e/08/1df5987085c63f1d87376c811baab7f6466ee2695d5e9f131898bafccacb/fontMath-0.6.0.zip",
+              "sha256" : "5a93002bfdcacd16b117b498f6e5ffa5d8fd263ccd8c587d9aa553e965c3ad27",
+              "type" : "file"
+            },
+            {
+              "url" : "https://files.pythonhosted.org/packages/79/ef/443672058647a36e967058c32e1a95ac469fbedc4bf61464c2c277eb4117/afdko-3.5.1.tar.gz",
+              "sha256" : "5cf200b5062da9898c72f3d60f44df3a7c855cdd0fce0bcad500fb80e86be7e1",
+              "type" : "file"
+            }
+          ],
+          "cleanup" : [
+            "*"
+          ],
+          "build-commands" : [
+            "pip3 install --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"afdko==3.5.1\" --no-build-isolation"
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "protonfixes",
+      "buildsystem" : "simple",
+      "sources" : [
+        {
+          "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+          "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+          "strip-components" : 0,
+          "type" : "archive"
+        }
+      ],
+      "build-commands" : [
+        "cp -a \\\n  protonfixes \\\n${FLATPAK_DEST}\n"
+      ]
+    },
+    {
+      "name" : "default-prefix",
+      "buildsystem" : "simple",
+      "sources" : [
+        {
+          "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+          "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+          "strip-components" : 0,
+          "type" : "archive"
+        }
+      ],
+      "build-options" : {
+        "env" : {
+          "WINEPREFIX" : "/app/share/steam/compatibilitytools.d/Proton-GE/share/default_pfx",
+          "LC_ALL" : "C"
+        }
+      },
+      "post-install" : [
+        "install -Dm644 wineopenxr/wineopenxr64.json ${WINEPREFIX}/drive_c/openxr/wineopenxr64.json"
+      ],
+      "build-commands" : [
+        "strace -e trace=none -f wine wineboot"
+      ]
+    },
+    {
+      "name" : "proton",
+      "buildsystem" : "simple",
+      "sources" : [
+        {
+          "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+          "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c",
+          "strip-components" : 0,
+          "type" : "archive"
+        },
+        {
+          "paths" : [
+            "patches/proton/flatpak.patch"
+          ],
+          "type" : "patch"
+        },
+        {
+          "path" : "compatibilitytool.vdf",
+          "type" : "file"
+        },
+        {
+          "path" : "com.valvesoftware.Steam.CompatibilityTool.Proton-GE.metainfo.xml",
+          "type" : "file"
+        }
+      ],
+      "build-commands" : [
+        "install -Dm755 -t ${FLATPAK_DEST}/ proton filelock.py user_settings.sample.py",
+        "install -Dm644 -t ${FLATPAK_DEST}/ compatibilitytool.vdf proton_3.7_tracked_files",
+        "install -Dm644 toolmanifest_noruntime.vdf ${FLATPAK_DEST}/toolmanifest.vdf",
+        "install -Dm644 dist.LICENSE ${FLATPAK_DEST}/LICENSE",
+        "set -e -o pipefail\nPROTON_VERSION=$(cat VERSION)\nPROTON_DATE=$(cat DATE)\nTIMESTAMP=$(date +%s)\necho ${TIMESTAMP} proton_flatpak-${PROTON_VERSION} > ${FLATPAK_DEST}/version\nsed \\\n  -e \"s/@VERSION@/${PROTON_VERSION}/g\" \\\n  -e \"s/@BUILD@/${TIMESTAMP}/g\" \\\n  -i ${FLATPAK_DEST}/compatibilitytool.vdf\nsed \\\n  -e \"s/@VERSION@/${PROTON_VERSION}/g\" \\\n  -e \"s/@DATE@/${PROTON_DATE}/g\" \\\n  -i ${FLATPAK_ID}.metainfo.xml\n",
+        "cd ${FLATPAK_DEST}\nmkdir dist\nln -s ../bin dist/bin\nln -s ../lib dist/lib64\nln -s ../lib32 dist/lib\nln -s ../share dist/share\nln -s ../version dist/version\n",
+        "install -Dm644 -t ${FLATPAK_DEST}/share/metainfo ${FLATPAK_ID}.metainfo.xml",
+        "appstream-compose --basename=${FLATPAK_ID} --prefix=${FLATPAK_DEST} --origin=flatpak ${FLATPAK_ID}"
+      ]
+    }
+  ],
+  "cleanup" : [
+    "*.a",
+    "*.la",
+    "/include",
+    "/lib/pkgconfig",
+    "/lib32/pkgconfig",
+    "/lib/cmake",
+    "/lib32/cmake",
+    "/share/man",
+    "/bin/function_grep.pl",
+    "/bin/widl",
+    "/bin/winebuild",
+    "/bin/winecpp",
+    "/bin/winedump",
+    "/bin/wineg++",
+    "/bin/winegcc",
+    "/bin/winemaker",
+    "/bin/wmc",
+    "/bin/wrc",
+    "/lib/wine/*.def",
+    "/lib32/wine/*.def"
+  ],
+  "build-extension" : true,
+  "appstream-compose" : false,
+  "sdk-extensions" : [
+    "org.freedesktop.Sdk.Compat.i386",
+    "org.freedesktop.Sdk.Extension.toolchain-i386",
+    "org.freedesktop.Sdk.Extension.mingw-w64",
+    "org.freedesktop.Sdk.Extension.rust-stable"
+  ],
+  "tags" : [
+  ],
+  "x-compat-i386-opts" : {
+    "ldflags" : "-L/app/share/steam/compatibilitytools.d/Proton-GE/lib32 -L/app/lib32",
+    "prepend-path" : "/app/share/steam/compatibilitytools.d/Proton-GE/bin32",
+    "append-path" : "/usr/lib/sdk/toolchain-i386/bin",
+    "env" : {
+      "CC" : "ccache i686-unknown-linux-gnu-gcc",
+      "CXX" : "ccache i686-unknown-linux-gnu-g++",
+      "PKG_CONFIG_PATH" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32/pkgconfig:/app/lib32/pkgconfig:/app/share/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig:/usr/share/pkgconfig",
+      "LD_RUN_PATH" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32"
+    },
+    "libdir" : "/app/share/steam/compatibilitytools.d/Proton-GE/lib32"
+  },
+  "x-proton-source" : {
+    "type" : "archive",
+    "url" : "https://github.com/Lctrs/proton-ge-custom-tarball-maker/releases/download/6.5-GE-3-1/proton-ge-custom-src.tar.xz",
+    "strip-components" : 0,
+    "sha256" : "22f797feb3a3ffd4549c01783cdbcf20ee6582eff093b68946b1dff1f5f41f8c"
+  }
+}
