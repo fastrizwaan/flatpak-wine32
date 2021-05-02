@@ -37,6 +37,9 @@ echo "Removed old repo/ dir   [x]"
 
 echo "Starting flatpak build  [x]"
 
+
+DATE=$(date +'%Y%m%d')
+
 # Build
 flatpak-builder --force-clean build-dir org.winehq.flatpak-wine.yml && \
 flatpak remove org.winehq.flatpak-wine -y && echo "Removed old flatpak     [x]"
@@ -50,11 +53,11 @@ echo "Installing flatpak-wine [x]"
 flatpak-builder --user --install --force-clean build-dir/ org.winehq.flatpak-wine.yml 
 echo "Creating flatpak bundle [x]"
 flatpak --user remote-add --no-gpg-verify "org.winehq.flatpak-wine" "repo" 2>/dev/null
-#flatpak build-bundle "repo" "org.winehq.flatpak-wine_$date.flatpak" org.winehq.flatpak-wine 5.0.5-20210425 --runtime-repo="https://flathub.org/repo/flathub.flatpakrepo"
-flatpak build-bundle "repo" "org.winehq.flatpak-wine-5.0.5-20210425.flatpak" org.winehq.flatpak-wine 5.0.5-20210425
+#flatpak build-bundle "repo" "org.winehq.flatpak-wine_$date.flatpak" org.winehq.flatpak-wine 5.0.5-$DATE --runtime-repo="https://flathub.org/repo/flathub.flatpakrepo"
+flatpak build-bundle "repo" "org.winehq.flatpak-wine-5.0.5-$DATE.flatpak" org.winehq.flatpak-wine 5.0.5-$DATE
 
 echo "Installing flatpak-wine [x]"
 # Install
-flatpak --user install "org.winehq.flatpak-wine-5.0.5-20210425.flatpak" -y
+flatpak --user install "org.winehq.flatpak-wine-5.0.5-$DATE.flatpak" -y
 
 echo "Congratulations!!! [x]"

@@ -90,7 +90,7 @@ echo $size $step ${mydlls[*]}
 	   WINEPREFIX=~/.local/share/flatpak-wine/default winecfg
        
     elif [ "$choice" = "Kill all Instances" ]; then
-	   flatpak-spawn --host flatpak kill flatpak-wine
+	   flatpak-spawn --host flatpak kill org.winehq.flatpak-wine
 
 	elif [ "$choice" = "Delete Bottle" ]; then
 	   rm -rfv ~/.local/share/flatpak-wine/default; 
