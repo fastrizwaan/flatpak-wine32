@@ -388,8 +388,6 @@ modules:
       /app/share/icons/hicolor/scalable/apps/winetricks.svg
       /app/share/icons/hicolor/scalable/apps/org.winehq.flatpak-wine-create-bottle.svg
 
-    - install -Dm644 kill.svg
-      /app/share/icons/hicolor/scalable/apps/org.winehq.flatpak-wine-kill.svg 
     
 
     # Desktop file
@@ -410,8 +408,7 @@ modules:
       path: assets/flatpak-wine-gui.sh      
     - type: file
       path: assets/wine.svg
-    - type: file
-      path: assets/kill.svg
+
             
   - name: xna31-fix-sha256sum
     buildsystem: simple

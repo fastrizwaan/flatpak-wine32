@@ -15,17 +15,7 @@ export dire=$(dirname $1)
 
 #echo $base >> ~/Documents/debug.txt
 #echo $dire >> ~/Documents/debug.txt
-# Create kill shortcut for convenience
-mkdir -p ~/.local/share/applications/flatpak-wine/
-echo '
-[Desktop Entry]
-Exec=flatpak kill org.winehq.flatpak-wine
-Name=flatpak-wine kill (5.0.5)
-Type=Application
-Categories=Application;;
-Icon=org.winehq.flatpak-wine-kill
-Keywords=flatpak; wine; kill;
-' > ~/.local/share/applications/flatpak-wine/killall_wine-5.0.5.desktop
+
 
 # if no argument passed then show a dialog with choices
 if [ $# -eq 0 ];  then
