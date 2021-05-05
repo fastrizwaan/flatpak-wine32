@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Proton-64-GE-1 Create EXE Shortcut (flatpak)
+Exec=proton-create-shortcut.sh %F
+MimeType=application/x-ms-dos-executable;
+Icon=org.winehq.Proton-64-GE-1
+NoDisplay=false
+StartupNotify=true
+X-Desktop-File-Install-Version=0.26
+

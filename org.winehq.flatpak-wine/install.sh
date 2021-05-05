@@ -2,9 +2,9 @@
 
 if [ "$1" == "sdk" ]; then
 echo -n "Installing SDKs for build "
-    sudo flatpak update -y
-    sudo flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-    sudo flatpak -y --user install flathub \
+     flatpak update -y
+     flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+     flatpak -y --user install flathub \
                     org.freedesktop.Sdk/x86_64/20.08 \
                     org.freedesktop.Platform/x86_64/20.08 \
                     org.freedesktop.Sdk.Compat.i386/x86_64/20.08 \
