@@ -2,9 +2,9 @@
 
 if [ "$1" == "sdk" ]; then
 echo -n "Installing SDKs for build "
-    sudo flatpak update -y
-    sudo flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-    sudo flatpak -y --user install flathub \
+     flatpak update -y
+     flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+     flatpak -y --user install flathub \
                     org.freedesktop.Sdk/x86_64/20.08 \
                     org.freedesktop.Platform/x86_64/20.08 \
                     org.freedesktop.Sdk.Compat.i386/x86_64/20.08 \
@@ -37,8 +37,10 @@ echo "Removed old repo/ dir   [x]"
 
 echo "Starting flatpak build  [x]"
 
-
+# we are using DATE as branch
 DATE=$(date +'%Y%m%d')
+WINE_VERSION="5.0.5"
+cat flatpak-wine-template.yml |sed "s/BRANCH/$WINE_VERSION-$DATE/g" > org.winehq.flatpak-wine.yml 
 
 # Build
 flatpak-builder --force-clean build-dir org.winehq.flatpak-wine.yml && \
@@ -52,8 +54,9 @@ flatpak-builder --repo="repo" --force-clean build-dir/ org.winehq.flatpak-wine.y
 echo "Installing flatpak-wine [x]"
 flatpak-builder --user --install --force-clean build-dir/ org.winehq.flatpak-wine.yml 
 echo "Creating flatpak bundle [x]"
-flatpak --user remote-add --no-gpg-verify "org.winehq.flatpak-wine" "repo" 2>/dev/null
-#flatpak build-bundle "repo" "org.winehq.flatpak-wine_$date.flatpak" org.winehq.flatpak-wine 5.0.5-$DATE --runtime-repo="https://flathub.org/repo/flathub.flatpakrepo"
+#flatpak --user remote-add --no-gpg-verify "org.winehq.flatpak-wine" "repo" 
+flatpak build-bundle "repo" "org.winehq.flatpak-wine_$date.flatpak" org.winehq.flatpak-wine 5.0.5-$DATE
+#--runtime-repo="https://flathub.org/repo/flathub.flatpakrepo"
 flatpak build-bundle "repo" "org.winehq.flatpak-wine-5.0.5-$DATE.flatpak" org.winehq.flatpak-wine 5.0.5-$DATE
 
 echo "Installing flatpak-wine [x]"

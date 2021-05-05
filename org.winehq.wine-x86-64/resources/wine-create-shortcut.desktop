@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name= wine-x86_64 Create EXE Shortcut (flatpak)
+Exec=wine-create-shortcut.sh %F
+MimeType=application/x-ms-dos-executable;
+Icon=org.winehq.wine-x86_64
+NoDisplay=false
+StartupNotify=true
+X-Desktop-File-Install-Version=0.26
+
