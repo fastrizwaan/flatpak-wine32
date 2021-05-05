@@ -27,7 +27,7 @@ echo -n "Installing SDKs for build "
     fi           
 
 fi 
-
+ 
 # Remove old flatpak of this, if installed
 
 rm *.flatpak repo/ -r 2>/dev/null
