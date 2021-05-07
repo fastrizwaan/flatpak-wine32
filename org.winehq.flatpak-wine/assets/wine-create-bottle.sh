@@ -67,6 +67,18 @@ export WINEARCH=win64
 export WINEDLLOVERRIDES="mscoree,mshtml="
 export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:/app/lib:/app/lib32:/app/lib/wine:/app/lib32/wine:/app/lib/i386-linux-gnu:/app/lib/debug/lib/i386-linux-gnu
 
+
+
+   # If wineprefix is not created, create without annoying dotnet and gecko dialogs
+   #WINEDLLOVERRIDES="mscoree,mshtml=" WINEPREFIX=~/.local/share/flatpak-wine/default wineboot -u
+   
+   # Remove ~/Documents ~/Downloads ~/Videos etc. symlinks
+   if [ ! -f ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix.symlinks-removed ]; then
+      WINEDLLOVERRIDES="mscoree,mshtml=" WINEPREFIX=~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix wineboot -u
+      rf -rf ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users
+	  touch ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix.symlinks-removed
+   fi
+   
 # Launch game from flatpak-wine-gui.sh - Run with bottle
 if [ "\$1" = "launch" ]; then
 export base=\$(basename "$myFile")
