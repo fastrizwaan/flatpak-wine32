@@ -27,7 +27,7 @@ mkdir -p ~/.local/share/applications/flatpak-wine/
    # Remove ~/Documents ~/Downloads ~/Videos etc. symlinks
    if [ ! -f ~/.local/share/flatpak-wine/default.symlinks-removed ]; then
       WINEDLLOVERRIDES="mscoree,mshtml=" WINEPREFIX=~/.local/share/flatpak-wine/default wineboot -u && \
-      rf -rf ~/.local/share/flatpak-wine/default/drive_c/users && \
+      rm -rf ~/.local/share/flatpak-wine/default/drive_c/users && \
 	  touch ~/.local/share/flatpak-wine/default.symlinks-removed
    fi
 
