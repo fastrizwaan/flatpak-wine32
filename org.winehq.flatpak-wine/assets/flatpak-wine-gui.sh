@@ -3,7 +3,7 @@
 #!/bin/bash
 export WINEPREFIX=~/.local/share/flatpak-wine/default
 export WINEARCH=win64
-#export WINEDLLOVERRIDES="mscoree,mshtml="
+export WINEDLLOVERRIDES="mscoree,mshtml="
 export LD_LIBRARY_PATH=/app/lib:/app/lib32:/app/lib64:/app/lib/i386-linux-gnu:/app/lib/wine:/app/lib64/wine:/app/$NAME:$(pwd)
 
 export ARGV="$@"
@@ -81,7 +81,7 @@ echo $size $step ${mydlls[*]}
     elif [ "$choice" = "Kill all Instances" ]; then
 	   flatpak-spawn --host flatpak kill org.winehq.flatpak-wine
     elif [ "$choice" = "Open Shell..." ]; then   
-       flatpak-spawn --host gnome-terminal -- bash -c "flatpak run --command=bash org.winehq.flatpak-wine"
+       flatpak-spawn --host gnome-terminal -- bash -c "flatpak run org.winehq.flatpak-wine bash"
 	elif [ "$choice" = "Delete Bottle" ]; then
 	   rm -rfv ~/.local/share/flatpak-wine/default; 
        rm ~/.local/share/applications/flatpak-wine/killall_wine-5.0.5.desktop
@@ -96,6 +96,9 @@ echo $size $step ${mydlls[*]}
     # /for GUI Dialog
 else
 
+
+   # If wineprefix is not created, create without annoying dotnet and gecko dialogs
+   #WINEDLLOVERRIDES="mscoree,mshtml=" WINEPREFIX=~/.local/share/flatpak-wine/default wineboot -u
    # Prompt to open with Bottle if already bottle is created
    basefilename=$(basename "$1")
    basefilename_underscore=$(echo $basefilename|tr ' ' '_')
