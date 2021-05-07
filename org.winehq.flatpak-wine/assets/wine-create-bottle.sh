@@ -153,7 +153,7 @@ elif [ "\$choice" = "Backup..." ]; then
 			~/.local/share/flatpak-wine/bottles/"$myBaseNamePrefix.sh"       \
 			~/.local/share/flatpak-wine/bottles/"$myBaseNamePrefix.desktop"  \
 			~/.local/share/flatpak-wine/bottles/"$myBaseNamePrefix.icon.png" \
-	     && zenity --info --title="Bottle backed up: $myBaseNamePrefix" --text="flatpak-wine-bottle-$myBaseNamePrefix-$DATE.tar.gz at \$HOME/flatpak-wine-backup"
+	     && zenity --info --title="Bottle backed up: $myBaseNamePrefix" --text="flatpak-wine-bottle-$myBaseNamePrefix-\$DATE.tar.gz at \$HOME/flatpak-wine-backup"
 
 
 
