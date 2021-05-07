@@ -64,6 +64,17 @@ export WINEPREFIX=~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix
 export WINEARCH=win64
 export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:/app/lib:/app/lib32:/app/lib/wine:/app/lib32/wine:/app/lib/i386-linux-gnu:/app/lib/debug/lib/i386-linux-gnu
 
+# Launch game from flatpak-wine-gui.sh - Run with bottle
+if [ "\$1" = "launch" ]; then
+export base=\$(basename "$myFile")
+export dire=\$(dirname "$myFile")
+cd "\$dire"
+WINEPREFIX=~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix flatpak run --command=wine org.winehq.flatpak-wine "\$base"
+exit 0;
+fi
+# /Launch game from flatpak-wine-gui.sh
+
+
 choice=\$(zenity --title "$myBaseNamePrefix: Choose!" --width=240 --height=300 \
                  --list \
                  --radiolist --column " " \

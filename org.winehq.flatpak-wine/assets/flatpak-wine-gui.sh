@@ -93,7 +93,51 @@ echo $size $step ${mydlls[*]}
 	fi
     # /for GUI Dialog
 else
-cd "$dire" 2>/dev/null;#go to the exe directory then run
-WINEPREFIX=~/.local/share/flatpak-wine/default $WINEEXE "$@"
+
+   # Prompt to open with Bottle if already bottle is created
+   basefilename=$(basename "$1")
+   basefilename_underscore=$(echo $basefilename|tr ' ' '_')
+   echo $basefilename
+   ls ~/.local/share/flatpak-wine/bottles/"$basefilename.sh"
+   
+   if [ -f  ~/.local/share/flatpak-wine/bottles/"$basefilename_underscore.sh" ]; then
+   
+      choice=$(zenity --title "flatpak-wine (5.0.5)" --width=500 --height=300 \
+	    				 --list \
+		    			 --radiolist --column " " \
+			    		 --column "Action" \
+						   0 "Run $basefilename using Default bottle" \
+						TRUE "Run $basefilename using existing $basename bottle" \
+						   0 "Run $basefilename configuration" \
+					 --text "Select Action for ~/.local/share/flatpak-wine/default " )
+   else
+   choice=$(zenity --title "flatpak-wine (5.0.5)" --width=500 --height=300 \
+					 --list \
+					 --radiolist --column " " \
+					 --column "Action" \
+						   TRUE "Run $basefilename using Default bottle" \
+							  0 "Create Bottle for $basefilename" \
+					 --text "Select Action for ~/.local/share/flatpak-wine/default " )
+    fi
+   # exit when Cancel is clicked
+   [[ -z "$choice" ]] && exit 1
+   
+	if [ "$choice" = "Run $basefilename using Default bottle" ]; then  
+	   cd "$dire" 2>/dev/null;#go to the exe directory then run
+       WINEPREFIX=~/.local/share/flatpak-wine/default $WINEEXE "$@"
+
+    # Create bottle
+	elif [ "$choice" = "Create Bottle for $basefilename" ]; then
+         /app/bin/wine-create-bottle.sh "$1"
+    elif [ "$choice" = "Run $basefilename using existing $basename bottle" ]; then
+	    # We are replace "name with space" as "name_with_space"
+	    basefilename_underscore=$(echo $basefilename|tr ' ' '_')
+	    flatpak-spawn --host ~/.local/share/flatpak-wine/bottles/"$basefilename_underscore.sh" "launch"
+	elif [ "$choice" = 	"Run $basefilename configuration" ]; then
+		basefilename_underscore=$(echo $basefilename|tr ' ' '_')
+	    flatpak-spawn --host ~/.local/share/flatpak-wine/bottles/"$basefilename_underscore.sh"
+	fi
+	
+
 fi
 
