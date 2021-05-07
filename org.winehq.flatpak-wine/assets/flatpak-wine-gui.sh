@@ -99,6 +99,13 @@ else
 
    # If wineprefix is not created, create without annoying dotnet and gecko dialogs
    #WINEDLLOVERRIDES="mscoree,mshtml=" WINEPREFIX=~/.local/share/flatpak-wine/default wineboot -u
+   
+   # Remove ~/Documents ~/Downloads ~/Videos etc. symlinks
+   if [ ! -f ~/.local/share/flatpak-wine/default.symlinks-removed ]; then
+      WINEDLLOVERRIDES="mscoree,mshtml=" WINEPREFIX=~/.local/share/flatpak-wine/default wineboot -u
+      rf -rf ~/.local/share/flatpak-wine/default/drive_c/users
+	  touch ~/.local/share/flatpak-wine/default.symlinks-removed
+   fi
    # Prompt to open with Bottle if already bottle is created
    basefilename=$(basename "$1")
    basefilename_underscore=$(echo $basefilename|tr ' ' '_')
