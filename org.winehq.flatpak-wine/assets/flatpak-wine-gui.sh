@@ -24,7 +24,7 @@ mkdir -p ~/.local/share/applications/flatpak-wine/
    # If wineprefix is not created, create without annoying dotnet and gecko dialogs
    #WINEDLLOVERRIDES="mscoree,mshtml=" WINEPREFIX=~/.local/share/flatpak-wine/default wineboot -u
    
-   # Remove sandboxify by rm links to ~/Documents ~/Downloads ~/Videos etc.
+   # sandboxify by rm links to user's ~/Documents ~/Downloads ~/Videos etc.
    if [ ! -f ~/.local/share/flatpak-wine/default.symlinks-removed ]; then
       WINEDLLOVERRIDES="mscoree,mshtml=" WINEPREFIX=~/.local/share/flatpak-wine/default wineboot -u && \
       rm -rf ~/.local/share/flatpak-wine/default/drive_c/users/$USER/Desktop

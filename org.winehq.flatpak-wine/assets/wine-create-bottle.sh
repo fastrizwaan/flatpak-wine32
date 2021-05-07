@@ -99,16 +99,6 @@ export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:/app/lib:/app/lib32:/app/lib/wine:/app/
 	  touch ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix.symlinks-removed 
    fi
 
-
-   # If wineprefix is not created, create without annoying dotnet and gecko dialogs
-   #WINEDLLOVERRIDES="mscoree,mshtml=" WINEPREFIX=~/.local/share/flatpak-wine/default wineboot -u
-   
-   # Remove ~/Documents ~/Downloads ~/Videos etc. symlinks
-   if [ ! -f ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix.symlinks-removed ]; then
-      WINEDLLOVERRIDES="mscoree,mshtml=" WINEPREFIX=~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix wineboot -u && \
-      rm -rf ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users && \
-	  touch ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix.symlinks-removed
-   fi
    
 # Launch game from flatpak-wine-gui.sh - Run with bottle
 if [ "\$1" = "launch" ]; then
@@ -121,7 +111,7 @@ fi
 # /Launch game from flatpak-wine-gui.sh
 
 
-choice=\$(zenity --title "$myBaseNamePrefix: Choose!" --width=340 --height=480 \
+choice=\$(zenity --title "$myBaseNamePrefix: Choose!" --width=340 --height=400 \
                  --list \
                  --radiolist --column " " \
                  --column "Action" \
