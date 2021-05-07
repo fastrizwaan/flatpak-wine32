@@ -26,12 +26,14 @@ if [ -f /proc/driver/nvidia/version ]; then
         org.freedesktop.Platform.GL32.$ver
 fi
 
-#Install flatpak-wine bundle
-wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/5.0.5r2/org.winehq.flatpak-wine.flatpak
-flatpak -y --user install org.winehq.flatpak-wine.flatpak
+#Install flatpak-wine bundle (Get latest releases from below link)
+wget -c https://github.com/fastrizwaan/flatpak-wine-releases/releases/download/5.0.5-20210507/org.winehq.flatpak-wine-5.0.5-20210507.flatpak
+flatpak -y --user install org.winehq.flatpak-wine-5.0.5-20210507.flatpak
 ```
+### Get Latest releases from flatpak-wine-release
+https://github.com/fastrizwaan/flatpak-wine-releases/releases/tag/5.0.5-20210507
 
-or if you don't have wget, download by clicking: https://github.com/fastrizwaan/flatpak-wine/releases/download/5.0.5r2/org.winehq.flatpak-wine.flatpak
+or if you don't have wget, download by clicking: https://github.com/fastrizwaan/flatpak-wine-releases/releases/download/5.0.5-20210507/org.winehq.flatpak-wine-5.0.5-20210507.flatpak
 
 some distros software app has flatpak support like gnome-software, that too can be used to install this flatpak. But dependencies have to be installed via commandline. yeah, that's bad, but flatpak developers are working on it.
 
@@ -143,6 +145,7 @@ this will create a flatpak and also install it (as --user)
 
 
 ### Proton GE 6.4 (works with many games)
+https://github.com/fastrizwaan/flatpak-wine-releases/releases/download/6.4-20210425/org.winehq.proton-ge64-1-6.4-20210425.flatpak
 ```
 git clone https://github.com/fastrizwaan/flatpak-wine.git
 cd flatpak-wine/Others/org.winehq.Proton-64-GE-1
