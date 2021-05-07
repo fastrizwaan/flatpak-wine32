@@ -75,7 +75,7 @@ export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:/app/lib:/app/lib32:/app/lib/wine:/app/
    if [ ! -f ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix.symlinks-removed  ]; then
    
    
-      WINEDLLOVERRIDES="mscoree,mshtml=" WINEPREFIX=~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix flatpak run --command=wineboot -u && \
+      WINEDLLOVERRIDES="mscoree,mshtml=" WINEPREFIX=~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix flatpak run --command=wineboot  && \
       rm -rf ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/Desktop
 	  rm -rf ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/Downloads
 	  rm -rf ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/'My Documents'
