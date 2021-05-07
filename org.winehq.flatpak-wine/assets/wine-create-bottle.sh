@@ -176,6 +176,7 @@ rm -f "$HOME/.local/share/applications/flatpak-wine/$myBaseName.desktop"
 rm -f "$bottles_dir.desktop" 
 rm -f "$bottles_dir.icon.png"
 rm -f ~/.local/share/flatpak-wine/bottles/"$myBaseNamePrefix.sh"
+rm -f ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix.symlinks-removed
 elif [ "\$choice" = "Launch $myBaseNamePrefix" ]; then
 export base=\$(basename "$myFile")
 export dire=\$(dirname "$myFile")

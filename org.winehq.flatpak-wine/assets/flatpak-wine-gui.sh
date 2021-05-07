@@ -95,7 +95,7 @@ echo $size $step ${mydlls[*]}
        flatpak-spawn --host gnome-terminal -- bash -c "flatpak run org.winehq.flatpak-wine bash"
 	elif [ "$choice" = "Delete Bottle" ]; then
 	   rm -rfv ~/.local/share/flatpak-wine/default; 
-       rm ~/.local/share/applications/flatpak-wine/killall_wine-5.0.5.desktop
+	   rm -f   ~/.local/share/flatpak-wine/default.symlinks-removed
 
 	elif [ "$choice" = "Open Explorer++" ]; then
 	   WINEPREFIX=~/.local/share/flatpak-wine/default $WINEEXE /app/explorer++/Explorer++.exe
