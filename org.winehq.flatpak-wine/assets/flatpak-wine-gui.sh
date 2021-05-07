@@ -80,7 +80,7 @@ echo $size $step ${mydlls[*]}
        
     elif [ "$choice" = "Kill all Instances" ]; then
 	   flatpak-spawn --host flatpak kill org.winehq.flatpak-wine
-    elif [ "\$choice" = "Open Shell..." ]; then   
+    elif [ "$choice" = "Open Shell..." ]; then   
        flatpak-spawn --host gnome-terminal -- bash -c "flatpak run --command=bash org.winehq.flatpak-wine"
 	elif [ "$choice" = "Delete Bottle" ]; then
 	   rm -rfv ~/.local/share/flatpak-wine/default; 
