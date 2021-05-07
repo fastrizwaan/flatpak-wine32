@@ -70,15 +70,12 @@ export WINEARCH=win64
 export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:/app/lib:/app/lib32:/app/lib/wine:/app/lib32/wine:/app/lib/i386-linux-gnu:/app/lib/debug/lib/i386-linux-gnu
 
 
-
-   # If wineprefix is not created, create without annoying dotnet and gecko dialogs
-   #WINEDLLOVERRIDES="mscoree,mshtml=" WINEPREFIX=~/.local/share/flatpak-wine/default wineboot -u
-   
+  
    # Remove sandboxify by rm links to ~/Documents ~/Downloads ~/Videos etc.
    if [ ! -f ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix.symlinks-removed  ]; then
    
    
-      WINEDLLOVERRIDES="mscoree,mshtml=" WINEPREFIX=~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix wineboot -u && \
+      WINEDLLOVERRIDES="mscoree,mshtml=" WINEPREFIX=~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix flatpak run --command=wineboot -u && \
       rm -rf ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/Desktop
 	  rm -rf ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/Downloads
 	  rm -rf ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/'My Documents'
