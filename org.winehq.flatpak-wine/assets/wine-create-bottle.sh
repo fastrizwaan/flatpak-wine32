@@ -99,7 +99,7 @@ if [ "\$choice" = "Run Winetricks..." ]; then
 	mydlls=\$(zenity --title "Install custom dlls" --text "paste winetricks (e.g. dv9k dxvk xna31 d3dx9 xinput faudio)" --entry)
     if [ -z \$mydlls ]; #if no dlls are given
        then         
-       mydlls=(xact xact_x64 xinput xna31 vcrun2003 vcrun2005 vcrun2008 vcrun2010 vcrun2012 d3dx9 faudio)
+       mydlls=(xact xact_x64 xinput xna31 vcrun2003 vcrun2005 vcrun2008 vcrun2010 vcrun2012 d3dx9 d9vk faudio)
     else
     mydlls=( \$mydlls ) ; #convert string to array
     fi

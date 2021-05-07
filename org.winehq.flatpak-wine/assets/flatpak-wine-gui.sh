@@ -34,6 +34,7 @@ if [ $# -eq 0 ];  then
 							  0 "Install Custom DLLs..." \
 							  0 "Launch Winecfg..." \
 						   TRUE "Open Explorer++" \
+						      0 "Open Shell..." \
                               0 "Kill all Instances" \
 							  0 "Delete Bottle" \
 					 --text "Select Action for ~/.local/share/flatpak-wine/default " )
@@ -49,7 +50,7 @@ if [ $# -eq 0 ];  then
 	mydlls=$(zenity --title "Install custom dlls - Paste your list " --text "or Press enter to install (xact xinput xna31 vcrun2003-2012 d3dx9 d9vk)" --entry)
     if [ -z $mydlls ]; #if no dlls are given
        then         
-       mydlls=(xact xact_x64 xinput xna31 vcrun2003 vcrun2005 vcrun2008 vcrun2010 vcrun2012 d3dx9 d9vk)
+       mydlls=(xact xact_x64 xinput xna31 vcrun2003 vcrun2005 vcrun2008 vcrun2010 vcrun2012 d3dx9 d9vk faudio)
     else   
     mydlls=( $mydlls ) ; #convert string to array
     fi
@@ -79,7 +80,8 @@ echo $size $step ${mydlls[*]}
        
     elif [ "$choice" = "Kill all Instances" ]; then
 	   flatpak-spawn --host flatpak kill org.winehq.flatpak-wine
-
+    elif [ "\$choice" = "Open Shell..." ]; then   
+       flatpak-spawn --host gnome-terminal -- bash -c "flatpak run --command=bash org.winehq.flatpak-wine"
 	elif [ "$choice" = "Delete Bottle" ]; then
 	   rm -rfv ~/.local/share/flatpak-wine/default; 
        rm ~/.local/share/applications/flatpak-wine/killall_wine-5.0.5.desktop

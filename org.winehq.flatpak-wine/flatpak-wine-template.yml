@@ -366,7 +366,7 @@ modules:
     buildsystem: simple
     build-commands:
     # icon
-    - install -Dm644 wine.svg
+    - install -Dm644 flatpak-wine.svg
       /app/share/icons/hicolor/scalable/apps/org.winehq.flatpak-wine.svg 
 
   #  - install -Dm644
@@ -393,7 +393,7 @@ modules:
     - type: file
       path: assets/wine-create-bottle.sh 
     - type: file
-      path: assets/wine.svg      
+      path: assets/flatpak-wine.svg      
             
   - name: xna31-fix-sha256sum
     buildsystem: simple
