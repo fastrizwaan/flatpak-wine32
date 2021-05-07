@@ -64,7 +64,7 @@ cat << EOF > ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix.sh
 #!/bin/bash
 export WINEPREFIX=~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix
 export WINEARCH=win64
-export WINEDLLOVERRIDES="mscoree,mshtml="
+#export WINEDLLOVERRIDES="mscoree,mshtml="
 export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:/app/lib:/app/lib32:/app/lib/wine:/app/lib32/wine:/app/lib/i386-linux-gnu:/app/lib/debug/lib/i386-linux-gnu
 
 
