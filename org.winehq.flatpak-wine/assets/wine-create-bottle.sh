@@ -18,8 +18,10 @@ if [[ $(file --mime-type -b "$1") = application/* ]]; then
     myPath=$(dirname "$myFile")
 	myBaseNamePrefix=$(echo $myBaseName|tr ' ' '_');
     bottles_dir="$HOME/.local/share/flatpak-wine/bottles/$myBaseNamePrefix"    
+	
+	# application shortcut folder
     mkdir -p "$HOME/.local/share/applications/flatpak-wine/$myBaseNamePrefix"
-
+    mkdir -p  "$bottles_dir"
     # Function to verify if required program is installed.
     VerInst () {
 	if [ $? -eq 127 ]; then
@@ -67,6 +69,35 @@ export WINEARCH=win64
 #export WINEDLLOVERRIDES="mscoree,mshtml="
 export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:/app/lib:/app/lib32:/app/lib/wine:/app/lib32/wine:/app/lib/i386-linux-gnu:/app/lib/debug/lib/i386-linux-gnu
 
+
+
+   # If wineprefix is not created, create without annoying dotnet and gecko dialogs
+   #WINEDLLOVERRIDES="mscoree,mshtml=" WINEPREFIX=~/.local/share/flatpak-wine/default wineboot -u
+   
+   # Remove sandboxify by rm links to ~/Documents ~/Downloads ~/Videos etc.
+   if [ ! -f ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix.symlinks-removed  ]; then
+   
+   
+      WINEDLLOVERRIDES="mscoree,mshtml=" WINEPREFIX=~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix wineboot -u && \
+      rm -rf ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/Desktop
+	  rm -rf ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/Downloads
+	  rm -rf ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/'My Documents'
+	  rm -rf ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/'My Music'
+	  rm -rf ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/'My Pictures'
+	  rm -rf ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/'My Videos' 
+	  rm -rf ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/Templates
+
+	  #Create normal folders for the deleted symlinks
+	  mkdir -p ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/Desktop
+	  mkdir -p ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/Downloads
+	  mkdir -p ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/'My Documents'
+	  mkdir -p ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/'My Music'
+	  mkdir -p ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/'My Pictures'
+	  mkdir -p ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/'My Videos' 
+	  mkdir -p ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/Templates
+
+	  touch ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix.symlinks-removed 
+   fi
 
 
    # If wineprefix is not created, create without annoying dotnet and gecko dialogs

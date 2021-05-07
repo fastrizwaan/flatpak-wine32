@@ -24,10 +24,26 @@ mkdir -p ~/.local/share/applications/flatpak-wine/
    # If wineprefix is not created, create without annoying dotnet and gecko dialogs
    #WINEDLLOVERRIDES="mscoree,mshtml=" WINEPREFIX=~/.local/share/flatpak-wine/default wineboot -u
    
-   # Remove ~/Documents ~/Downloads ~/Videos etc. symlinks
+   # Remove sandboxify by rm links to ~/Documents ~/Downloads ~/Videos etc.
    if [ ! -f ~/.local/share/flatpak-wine/default.symlinks-removed ]; then
       WINEDLLOVERRIDES="mscoree,mshtml=" WINEPREFIX=~/.local/share/flatpak-wine/default wineboot -u && \
-      rm -rf ~/.local/share/flatpak-wine/default/drive_c/users && \
+      rm -rf ~/.local/share/flatpak-wine/default/drive_c/users/$USER/Desktop
+	  rm -rf ~/.local/share/flatpak-wine/default/drive_c/users/$USER/Downloads
+	  rm -rf ~/.local/share/flatpak-wine/default/drive_c/users/$USER/'My Documents'
+	  rm -rf ~/.local/share/flatpak-wine/default/drive_c/users/$USER/'My Music'
+	  rm -rf ~/.local/share/flatpak-wine/default/drive_c/users/$USER/'My Pictures'
+	  rm -rf ~/.local/share/flatpak-wine/default/drive_c/users/$USER/'My Videos' 
+	  rm -rf ~/.local/share/flatpak-wine/default/drive_c/users/$USER/Templates
+
+	  #Create normal folders for the deleted symlinks
+	  mkdir -p ~/.local/share/flatpak-wine/default/drive_c/users/$USER/Desktop
+	  mkdir -p ~/.local/share/flatpak-wine/default/drive_c/users/$USER/Downloads
+	  mkdir -p ~/.local/share/flatpak-wine/default/drive_c/users/$USER/'My Documents'
+	  mkdir -p ~/.local/share/flatpak-wine/default/drive_c/users/$USER/'My Music'
+	  mkdir -p ~/.local/share/flatpak-wine/default/drive_c/users/$USER/'My Pictures'
+	  mkdir -p ~/.local/share/flatpak-wine/default/drive_c/users/$USER/'My Videos' 
+	  mkdir -p ~/.local/share/flatpak-wine/default/drive_c/users/$USER/Templates
+
 	  touch ~/.local/share/flatpak-wine/default.symlinks-removed
    fi
 
