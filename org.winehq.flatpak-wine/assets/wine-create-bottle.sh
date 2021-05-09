@@ -76,13 +76,13 @@ export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:/app/lib:/app/lib32:/app/lib/wine:/app/
    
    
       WINEDLLOVERRIDES="mscoree,mshtml=" WINEPREFIX=~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix flatpak run --command=wineboot org.winehq.flatpak-wine && \
-      rm -rf ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/Desktop
-	  rm -rf ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/Downloads
-	  rm -rf ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/'My Documents'
-	  rm -rf ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/'My Music'
-	  rm -rf ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/'My Pictures'
-	  rm -rf ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/'My Videos' 
-	  rm -rf ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/Templates
+      rm ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/Desktop
+	  rm ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/Downloads
+	  rm ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/'My Documents'
+	  rm ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/'My Music'
+	  rm ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/'My Pictures'
+	  rm ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/'My Videos' 
+	  rm ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/Templates
 
 	  #Create normal folders for the deleted symlinks
 	  mkdir -p ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/Desktop
