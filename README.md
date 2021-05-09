@@ -160,7 +160,7 @@ sh ./install.sh ; #builds in 10 minutes (depends on internet speed)
 - [x] Delete bottle
 - [x] Open flatpak sandbox Shell
 - [x] GUI to install winetricks DLLs
-- [ ] Allow changing of Icon the the menu
+- [x] Allow changing of Icon the the menu
 - [ ] Create Separate Folder in Menu
 - [ ] Create Gnome-shell App Folder to group all Flatpak-wine games/shortcuts 
 - [ ] Create Installer Handler, Installed application to be made into bottle

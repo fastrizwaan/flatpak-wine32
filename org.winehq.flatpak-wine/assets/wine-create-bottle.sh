@@ -119,6 +119,7 @@ choice=\$(zenity --title "$myBaseNamePrefix: Choose!" --width=340 --height=400 \
                           0 "Open Explorer++..." \
                           0 "Open Shell..." \
 						  0 "Rename..." \
+						  0 "Change Icon..." \
 						  0 "Backup..." \
                           0 "Delete Bottle: $myBaseNamePrefix" \
                  --text "Select Action..." )
@@ -174,7 +175,21 @@ shortcut" --entry)
        exit;
     fi
     desktop-file-edit --set-name="\$appName" \$HOME/.local/share/applications/flatpak-wine/"$myBaseName".desktop 
-	zenity --info --title="Shortcut renamed sucessfuly: \$appname " --text="$myBaseName.desktop"
+	update-desktop-database ~/.local/share/applications/
+	zenity --info --title="$myBaseName.desktop" --text="Shortcut renamed sucessfuly: \$appname"
+
+elif [ "\$choice" = "Change Icon..." ]; then
+     get_icon=\$(zenity --file-selection --file-filter=""*.png" "*.jpg" "*.svg"")
+     if [ ! \$get_icon ]; #if no icon is choosen
+       then 
+       zenity --info --title="Icon... " --text="no Change"        
+       exit;
+     fi
+     desktop-file-edit --set-icon="\$get_icon" \$HOME/.local/share/applications/flatpak-wine/"$myBaseName".desktop 
+	 update-desktop-database ~/.local/share/applications/
+	 zenity --info --title="$myBaseName.desktop" --text="Icon Changed sucessfuly: \$get_icon"
+
+
 
 elif [ "\$choice" = "Backup..." ]; then
      DATE=\$(date +'%Y%m%d')
@@ -222,9 +237,8 @@ $category;"\\n"Icon="$bottles_dir.icon.png""
     # Test if the app link was created sucessfully on applications menu 
     if [ $? -eq 0 ]; then
         gtk-update-icon-cache 
-        update-desktop-database $HOME/.local/share/applications 
-        update-desktop-database "$myPath"
-    	echo "Shortcut created sucessfuly on applications menu."
+        flatpak-spawn --host update-desktop-database ~/.local/share/applications/
+        echo "Shortcut created sucessfuly on applications menu."
     	zenity --info --title="Shortcut created sucessfuly " --text="$myBaseName.desktop"
     fi
 
