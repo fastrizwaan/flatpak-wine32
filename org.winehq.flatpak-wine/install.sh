@@ -40,7 +40,24 @@ echo "Starting flatpak build  [x]"
 # we are using DATE as branch
 DATE=$(date +'%Y%m%d')
 WINE_VERSION="5.0.5"
-cat flatpak-wine-template.yml |sed "s/BRANCH/$WINE_VERSION-$DATE/g" > org.winehq.flatpak-wine.yml 
+WINE_SOURCE_URL="https://dl.winehq.org/wine/source/5.0/wine-5.0.5.tar.xz"
+WINE_SOURCE_SUM="3cf0ccb2eac0868f700296a62aeea9b856522ac63861beb49deed50136a334c450f2d1172f9d0195b4fe0bbf8f808f7350a79122726da1cbf5d21161f6dfca36"
+
+# Using template create flatpak-builder flatpak manifest
+cp flatpak-wine-template.yml org.winehq.flatpak-wine.yml
+
+sed "s/BRANCH/$WINE_VERSION-$DATE/g"       -i org.winehq.flatpak-wine.yml
+sed "s/WINE_VERSION/$WINE_VERSION/g"       -i org.winehq.flatpak-wine.yml
+sed "s#WINE_SOURCE_URL#$WINE_SOURCE_URL#g" -i org.winehq.flatpak-wine.yml
+sed "s/WINE_SOURCE_SUM/$WINE_SOURCE_SUM/g" -i org.winehq.flatpak-wine.yml
+
+# Scripts and desktop file update wine version
+cp assets/flatpak-wine-gui.sh.template        assets/flatpak-wine-gui.sh
+sed "s/WINE_VERSION/$WINE_VERSION/g"       -i assets/flatpak-wine-gui.sh
+
+cp assets/org.winehq.flatpak-wine.desktop.template assets/org.winehq.flatpak-wine.desktop
+sed "s/WINE_VERSION/$WINE_VERSION/g"       -i assets/org.winehq.flatpak-wine.desktop
+
 
 # Build
 flatpak-builder --force-clean build-dir org.winehq.flatpak-wine.yml && \
@@ -51,16 +68,19 @@ flatpak remove org.winehq.flatpak-wine -y && echo "Removed old flatpak     [x]"
 echo "Creating flatpak repo   [x]"
 flatpak-builder --repo="repo" --force-clean build-dir/ org.winehq.flatpak-wine.yml 
 
+
 echo "Installing flatpak-wine [x]"
 flatpak-builder --user --install --force-clean build-dir/ org.winehq.flatpak-wine.yml 
+
 echo "Creating flatpak bundle [x]"
 #flatpak --user remote-add --no-gpg-verify "org.winehq.flatpak-wine" "repo" 
-flatpak build-bundle "repo" "org.winehq.flatpak-wine_$date.flatpak" org.winehq.flatpak-wine 5.0.5-$DATE
+#flatpak build-bundle "repo" "org.winehq.flatpak-wine_$date.flatpak" org.winehq.flatpak-wine $WINE_VERSION-$DATE
 #--runtime-repo="https://flathub.org/repo/flathub.flatpakrepo"
-flatpak build-bundle "repo" "org.winehq.flatpak-wine-5.0.5-$DATE.flatpak" org.winehq.flatpak-wine 5.0.5-$DATE
+flatpak build-bundle "repo" "org.winehq.flatpak-wine-$WINE_VERSION-$DATE.flatpak" org.winehq.flatpak-wine $WINE_VERSION-$DATE
 
-echo "Installing flatpak-wine [x]"
+if [ "$1" == "install" ]; then
+echo "Installing flatpak-wine flatpak [x]"
 # Install
-flatpak --user install "org.winehq.flatpak-wine-5.0.5-$DATE.flatpak" -y
-
+flatpak --user install "org.winehq.flatpak-wine-$WINE_VERSION-$DATE.flatpak" -y
+fi
 echo "Congratulations!!! [x]"

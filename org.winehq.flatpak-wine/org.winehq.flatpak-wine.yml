@@ -4,7 +4,7 @@ runtime: org.freedesktop.Platform
 runtime-version: '20.08'
 sdk: org.freedesktop.Sdk
 command: flatpak-wine.sh
-branch: "5.0.5-20210507" 
+branch: "5.0.5-20210509" 
 separate-locales: false
 
 #rename-desktop-file: wine.desktop
@@ -217,7 +217,7 @@ modules:
 
                 
 # build wow64              
-  - name: org.winehq.wine_64bit
+  - name: org.winehq.wine_64bit-5.0.5
     builddir: true
     build-options:
       make-args: -j8

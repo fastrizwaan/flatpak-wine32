@@ -217,7 +217,7 @@ modules:
 
                 
 # build wow64              
-  - name: org.winehq.wine_64bit
+  - name: org.winehq.wine_64bit-WINE_VERSION
     builddir: true
     build-options:
       make-args: -j8
@@ -304,8 +304,8 @@ modules:
 
     sources:
       - type: archive
-        url: https://dl.winehq.org/wine/source/5.0/wine-5.0.5.tar.xz
-        sha512: 3cf0ccb2eac0868f700296a62aeea9b856522ac63861beb49deed50136a334c450f2d1172f9d0195b4fe0bbf8f808f7350a79122726da1cbf5d21161f6dfca36
+        url: WINE_SOURCE_URL
+        sha512: WINE_SOURCE_SUM
         
   - name: winetricks
     buildsystem: simple
