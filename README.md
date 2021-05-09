@@ -31,9 +31,9 @@ wget -c https://github.com/fastrizwaan/flatpak-wine-releases/releases/download/5
 flatpak -y --user install org.winehq.flatpak-wine-5.0.5-20210507.flatpak
 ```
 ### Get Latest releases from flatpak-wine-release
-https://github.com/fastrizwaan/flatpak-wine-releases/releases/tag/5.0.5-20210507
+Latest: https://github.com/fastrizwaan/flatpak-wine-releases/releases/latest
 
-or if you don't have wget, download by clicking: https://github.com/fastrizwaan/flatpak-wine-releases/releases/download/5.0.5-20210507/org.winehq.flatpak-wine-5.0.5-20210507.flatpak
+for other releases: https://github.com/fastrizwaan/flatpak-wine-releases/releases
 
 some distros software app has flatpak support like gnome-software, that too can be used to install this flatpak. But dependencies have to be installed via commandline. yeah, that's bad, but flatpak developers are working on it.
 
