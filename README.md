@@ -154,10 +154,19 @@ sh ./install.sh ; #builds in 10 minutes (depends on internet speed)
 
 ### Future plans
 
-- [ ] Include clean default wine prefix as tar.xz to stop install mono and gecko dialog
+- [x] Include clean default wine prefix as tar.xz to stop install mono and gecko dialog
+- [x] Backup wine prefix/bottle at ~/flatpak-wine-backup directory (without game binaries)
+- [x] Menu Short can be renamed.
+- [x] Delete bottle
+- [x] Open flatpak sandbox Shell
+- [x] GUI to install winetricks DLLs
+- [ ] Allow changing of Icon the the menu
+- [ ] Create Separate Folder in Menu
+- [ ] Create Gnome-shell App Folder to group all Flatpak-wine games/shortcuts 
 - [ ] Create Installer Handler, Installed application to be made into bottle
 - [ ] Install Game dependencies by reading file winetricks-install.txt in the game directory 
 - [ ] Bundle the Game bottle as game flatpak (like winepak-x86_64)
+
 - [ ] flatpak-wine should support runners? like proton, 2.17, 6.0, 6.x
       download runners and put it in ~/.local/share/flatpak-wine/runners
 - [ ] gamedb.csv - Create Game database, and install game in a bottle using that info. so that the wine gaming community benefits. Required dlls for wine 5.0.x
