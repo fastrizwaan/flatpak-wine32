@@ -154,9 +154,9 @@ sh ./install.sh ; #builds in 10 minutes (depends on internet speed)
 
 ### Future plans
 
-- [x] Include clean default wine prefix as tar.xz to stop install mono and gecko dialog
+- [x] Stop annoying install mono and gecko dialog on 1st launch in bottle and default
 - [x] Backup wine prefix/bottle at ~/flatpak-wine-backup directory (without game binaries)
-- [x] Menu Short can be renamed.
+- [x] Rename Game/App name in Menu.
 - [x] Delete bottle
 - [x] Open flatpak sandbox Shell
 - [x] GUI to install winetricks DLLs
