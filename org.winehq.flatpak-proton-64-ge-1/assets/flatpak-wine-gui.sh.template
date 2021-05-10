@@ -1,0 +1,172 @@
+#!/bin/bash
+
+#!/bin/bash
+export WINEPREFIX=~/.local/share/APP_ID/default
+export WINEARCH=win64
+#export WINEDLLOVERRIDES="mscoree,mshtml="
+export WINE_RESOLUTION=1920x1080
+
+export LD_LIBRARY_PATH=/app/lib:/app/lib32:/app/lib64:/app/lib/i386-linux-gnu:/app/lib/wine:/app/lib64/wine:/app/$NAME:$(pwd)
+
+export ARGV="$@"
+export WINEEXE="/app/bin/wine"
+export WINETRICKS="/app/bin/winetricks"
+
+
+# some games need to cd to the dir to work
+export base=$(basename "$1")
+export dire=$(dirname  "$1")
+
+#echo $base >> ~/Documents/debug.txt
+#echo $dire >> ~/Documents/debug.txt
+# Create kill shortcut for convenience
+mkdir -p ~/.local/share/applications/APP_ID/
+
+
+   # sandboxify by rm links to user's ~/Documents ~/Downloads ~/Videos etc.
+   if [ ! -f ~/.local/share/APP_ID/default.symlinks-removed ]; then
+      WINEDLLOVERRIDES="mscoree,mshtml=" WINEPREFIX=~/.local/share/APP_ID/default wineboot -u && \
+      rm ~/.local/share/APP_ID/default/drive_c/users/$USER/Desktop
+	  rm ~/.local/share/APP_ID/default/drive_c/users/$USER/Downloads
+	  rm ~/.local/share/APP_ID/default/drive_c/users/$USER/'My Documents'
+	  rm ~/.local/share/APP_ID/default/drive_c/users/$USER/'My Music'
+	  rm ~/.local/share/APP_ID/default/drive_c/users/$USER/'My Pictures'
+	  rm ~/.local/share/APP_ID/default/drive_c/users/$USER/'My Videos' 
+	  rm ~/.local/share/APP_ID/default/drive_c/users/$USER/Templates
+
+	  #Create normal folders for the deleted symlinks
+	  mkdir -p ~/.local/share/APP_ID/default/drive_c/users/$USER/Desktop
+	  mkdir -p ~/.local/share/APP_ID/default/drive_c/users/$USER/Downloads
+	  mkdir -p ~/.local/share/APP_ID/default/drive_c/users/$USER/'My Documents'
+	  mkdir -p ~/.local/share/APP_ID/default/drive_c/users/$USER/'My Music'
+	  mkdir -p ~/.local/share/APP_ID/default/drive_c/users/$USER/'My Pictures'
+	  mkdir -p ~/.local/share/APP_ID/default/drive_c/users/$USER/'My Videos' 
+	  mkdir -p ~/.local/share/APP_ID/default/drive_c/users/$USER/Templates
+
+	  touch ~/.local/share/APP_ID/default.symlinks-removed
+   fi
+
+
+# APP_ID-gui.sh
+# for GUI Dialog
+if [ $# -eq 0 ];  then
+   echo "No arguments supplied; use --help"
+ 
+   choice=$(zenity --title "APP_ID (WINE_VERSION)" --width=240 --height=300 \
+					 --list \
+					 --radiolist --column " " \
+					 --column "Action" \
+							  0 "Run Winetricks..." \
+							  0 "Install Custom DLLs..." \
+							  0 "Launch Winecfg..." \
+						   TRUE "Open Explorer++" \
+						      0 "Open Shell..." \
+                              0 "Kill all Instances" \
+							  0 "Delete Bottle" \
+					 --text "Select Action for ~/.local/share/APP_ID/default " )
+
+   # exit when Cancel is clicked
+   [[ -z "$choice" ]] && exit 1
+   
+	if [ "$choice" = "Run Winetricks..." ]; then  
+	   WINEPREFIX=~/.local/share/APP_ID/default $WINETRICKS --gui
+
+    # mydlls
+	elif [ "$choice" = "Install Custom DLLs..." ]; then
+	mydlls=$(zenity --title "Install custom dlls - Paste your list " --text "or Press enter to install (xact xinput xna31 vcrun2003-2012 d3dx9 d9vk)" --entry)
+    if [ -z $mydlls ]; #if no dlls are given
+       then         
+       mydlls=(xact xact_x64 xinput xna31 vcrun2003 vcrun2005 vcrun2008 vcrun2010 vcrun2012 d3dx9 d9vk faudio)
+    else   
+    mydlls=( $mydlls ) ; #convert string to array
+    fi
+    
+size=${#mydlls[*]}
+size=$(expr $size + 1) ;# add +1 for progress
+
+step=$(expr 100 / $size)
+prog=$(echo $step)
+echo $size $step ${mydlls[*]}
+
+	( for i in ${mydlls[*]};
+	  do
+    	echo $prog
+	    echo "# Installing $i..."
+	    WINEPREFIX=~/.local/share/APP_ID/default $WINETRICKS --unattended  $i
+      
+        prog=$(expr $prog + $step)
+	  done
+	  echo 100
+	  echo "# Done!"
+	) | zenity --width=340 --title "Installing Custom DLLs with Winetricks" --progress --auto-kill
+	
+	# winecfg
+	elif [ "$choice" = "Launch Winecfg..." ]; then
+	   WINEPREFIX=~/.local/share/APP_ID/default winecfg
+       
+    elif [ "$choice" = "Kill all Instances" ]; then
+	   flatpak-spawn --host flatpak kill org.winehq.APP_ID
+    elif [ "$choice" = "Open Shell..." ]; then   
+       flatpak-spawn --host gnome-terminal -- bash -c "flatpak run org.winehq.APP_ID bash"
+	elif [ "$choice" = "Delete Bottle" ]; then
+	   rm -rfv ~/.local/share/APP_ID/default; 
+	   rm -f   ~/.local/share/APP_ID/default.symlinks-removed
+
+	elif [ "$choice" = "Open Explorer++" ]; then
+	   WINEPREFIX=~/.local/share/APP_ID/default $WINEEXE /app/explorer++/Explorer++.exe
+	   
+	else
+	   WINEPREFIX=~/.local/share/APP_ID/default $WINEEXE /app/explorer++/Explorer++.exe
+
+	fi
+    # /for GUI Dialog
+else
+
+
+   # Prompt to open with Bottle if already bottle is created
+   basefilename=$(basename "$1")
+   basefilename_underscore=$(echo $basefilename|tr ' ' '_')
+   echo $basefilename
+   ls ~/.local/share/APP_ID/bottles/"$basefilename.sh"
+   
+   if [ -f  ~/.local/share/APP_ID/bottles/"$basefilename_underscore.sh" ]; then
+   
+      choice=$(zenity --title "APP_ID (WINE_VERSION)" --width=500 --height=300 \
+	    				 --list \
+		    			 --radiolist --column " " \
+			    		 --column "Action" \
+						   0 "Run $basefilename using Default bottle" \
+						TRUE "Run $basefilename using existing $basename bottle" \
+						   0 "Run $basefilename configuration" \
+					 --text "Select Action for ~/.local/share/APP_ID/default " )
+   else
+   choice=$(zenity --title "APP_ID (WINE_VERSION)" --width=500 --height=300 \
+					 --list \
+					 --radiolist --column " " \
+					 --column "Action" \
+						   TRUE "Run $basefilename using Default bottle" \
+							  0 "Create Bottle for $basefilename" \
+					 --text "Select Action for ~/.local/share/APP_ID/default " )
+    fi
+   # exit when Cancel is clicked
+   [[ -z "$choice" ]] && exit 1
+   
+	if [ "$choice" = "Run $basefilename using Default bottle" ]; then  
+	   cd "$dire" 2>/dev/null;#go to the exe directory then run
+       WINEPREFIX=~/.local/share/APP_ID/default $WINEEXE "$@"
+
+    # Create bottle
+	elif [ "$choice" = "Create Bottle for $basefilename" ]; then
+         /app/bin/wine-create-bottle.sh "$1"
+    elif [ "$choice" = "Run $basefilename using existing $basename bottle" ]; then
+	    # We are replace "name with space" as "name_with_space"
+	    basefilename_underscore=$(echo $basefilename|tr ' ' '_')
+	    flatpak-spawn --host ~/.local/share/APP_ID/bottles/"$basefilename_underscore.sh" "launch"
+	elif [ "$choice" = 	"Run $basefilename configuration" ]; then
+		basefilename_underscore=$(echo $basefilename|tr ' ' '_')
+	    flatpak-spawn --host ~/.local/share/APP_ID/bottles/"$basefilename_underscore.sh"
+	fi
+	
+
+fi
+
