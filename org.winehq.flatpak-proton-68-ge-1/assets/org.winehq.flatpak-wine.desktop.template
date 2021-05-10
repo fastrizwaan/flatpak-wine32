@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=APP_ID (WINE_VERSION)
+Exec=APP_ID-gui.sh %F
+MimeType=application/x-ms-dos-executable;
+Icon=org.winehq.APP_ID
+NoDisplay=false
+StartupNotify=true
+X-Desktop-File-Install-Version=0.26
+Categories=Emulator;
+X-Flatpak-RenamedFrom=wine.desktop;
+X-Flatpak=org.winehq.APP_ID

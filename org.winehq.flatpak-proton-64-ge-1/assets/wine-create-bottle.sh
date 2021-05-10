@@ -53,9 +53,9 @@ shortcut" --entry)
 
     if [ ! $appName ]; #if no name is given use filename
        then         
-       appName=$(echo "$myBaseName (Proton-6.4");     
+       appName=$(echo "$myBaseName (flatpak-proton-64-ge-1-6.4)");     
     else 
-       appName=$(echo "$appName (Proton-6.4)");   
+       appName=$(echo "$appName (flatpak-proton-64-ge-1-6.4)");   
     fi
 
 
@@ -69,8 +69,6 @@ cat << EOF > ~/.local/share/flatpak-proton-64-ge-1/bottles/$myBaseNamePrefix.sh
 export WINEPREFIX=~/.local/share/flatpak-proton-64-ge-1/bottles/$myBaseNamePrefix
 export WINEARCH=win64
 #export WINEDLLOVERRIDES="mscoree,mshtml="
-export WINE_RESOLUTION=1920x1080
-
 export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:/app/lib:/app/lib32:/app/lib/wine:/app/lib32/wine:/app/lib/i386-linux-gnu:/app/lib/debug/lib/i386-linux-gnu
 
 
