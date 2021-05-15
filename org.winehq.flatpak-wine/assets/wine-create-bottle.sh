@@ -69,6 +69,8 @@ export WINEARCH=win64
 #export WINEDLLOVERRIDES="mscoree,mshtml="
 export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:/app/lib:/app/lib32:/app/lib/wine:/app/lib32/wine:/app/lib/i386-linux-gnu:/app/lib/debug/lib/i386-linux-gnu
 
+# Remove wine shortcuts before creating new bottles
+rm -rfv ~/.var/app/org.winehq.flatpak-wine/data/applications/wine*
 
   
    # Remove sandboxify by rm links to ~/Documents ~/Downloads ~/Videos etc.

@@ -314,9 +314,9 @@ modules:
     - make PREFIX=/app install
     - chmod +x /app/bin/winetricks
     sources:
-    - type: archive
-      url: https://github.com/Winetricks/winetricks/releases/download/20210206/20210206.tar.gz
-      sha256: 705421798b28696f577104ebdf03b068b9343ab096754150f47a6ec06fa8ae65
+    - type: git
+      url: https://github.com/Winetricks/winetricks.git
+      commit: aafcf5fad9345e4c416249ea3acda39b4ca33c1a
   - name: cabextract
     buildsystem: autotools
     sources:
