@@ -21,7 +21,7 @@ if [[ $(file --mime-type -b "$1") = application/* ]]; then
 	
 	# application shortcut folder
     mkdir -p "$HOME/.local/share/applications/flatpak-wine/$myBaseNamePrefix"
-    mkdir -p  "$bottles_dir"
+    mkdir -p "$bottles_dir"
     # Function to verify if required program is installed.
     VerInst () {
 	if [ $? -eq 127 ]; then
@@ -66,20 +66,19 @@ cat << EOF > ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix.sh
 #!/bin/bash
 export WINEPREFIX=~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix
 export WINEARCH=win64
-#export WINEDLLOVERRIDES="mscoree,mshtml="
-export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:/app/lib:/app/lib32:/app/lib/wine:/app/lib32/wine:/app/lib/i386-linux-gnu:/app/lib/debug/lib/i386-linux-gnu
+export WINEDLLOVERRIDES="mscoree,mshtml="
+export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:/app/lib:/app/lib32:/app/lib64:/app/lib/i386-linux-gnu:/app/lib/wine:/app/lib64/wine:/app/\$NAME:\$(pwd)
 
 # Remove wine shortcuts before creating new bottles
-rm -rfv ~/.var/app/org.winehq.flatpak-wine/data/applications/wine*
+# rm -rfv ~/.var/app/org.winehq.flatpak-wine/data/applications/wine*
 
   
    # Remove sandboxify by rm links to ~/Documents ~/Downloads ~/Videos etc.
    if [ ! -f ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix.symlinks-removed  ]; then
    
    
-      WINEDLLOVERRIDES="mscoree,mshtml=" WINEPREFIX=~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix flatpak run --command=wineboot org.winehq.flatpak-wine && \
-      rm ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/Desktop
-	  rm ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/Downloads
+     rm ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/Desktop   
+     rm ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/Downloads
 	  rm ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/'My Documents'
 	  rm ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/'My Music'
 	  rm ~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix/drive_c/users/\$USER/'My Pictures'
@@ -104,7 +103,7 @@ if [ "\$1" = "launch" ]; then
 export base=\$(basename "$myFile")
 export dire=\$(dirname "$myFile")
 cd "\$dire"
-WINEPREFIX=~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix flatpak run org.winehq.flatpak-wine "\$base"
+flatpak run --command=wine org.winehq.flatpak-wine "\$base"
 exit 0;
 fi
 # /Launch game from flatpak-wine-gui.sh
@@ -130,14 +129,14 @@ choice=\$(zenity --title "$myBaseNamePrefix: Choose!" --width=340 --height=400 \
 [[ -z "\$choice" ]] && exit 1
 
 if [ "\$choice" = "Run Winetricks..." ]; then  
-   WINEPREFIX=~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --gui
+flatpak run --command=winetricks org.winehq.flatpak-wine --gui
 
     # My_Dlls_install
 	elif [ "\$choice" = "Install Custom DLLs..." ]; then
 	mydlls=\$(zenity --title "Install custom dlls" --text "paste winetricks (e.g. dv9k dxvk xna31 d3dx9 xinput faudio)" --entry)
     if [ -z \$mydlls ]; #if no dlls are given
        then         
-       mydlls=(xact xact_x64 xinput xna31 vcrun2003 vcrun2005 vcrun2008 vcrun2010 vcrun2012 d3dx9 d9vk faudio)
+       mydlls=(xact xact_x64 xinput xna31 vcrun2003 vcrun2005 vcrun2008 vcrun2010 vcrun2012 vcrun2015 vcrun2019 d3dx9 d9vk faudio quartz dotnet48)
     else
     mydlls=( \$mydlls ) ; #convert string to array
     fi
@@ -151,7 +150,7 @@ prog=\$(echo \$step)
 	  do
     	echo \$prog
 	    echo "# Installing \$i..."
-	    WINEPREFIX=~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix flatpak run --command=winetricks org.winehq.flatpak-wine --unattended \$i
+	    flatpak run --command=winetricks org.winehq.flatpak-wine --unattended \$i
       
         prog=\$(expr \$prog + \$step)
 	  done
@@ -161,9 +160,9 @@ prog=\$(echo \$step)
 
 
 elif [ "\$choice" = "Launch Winecfg..." ]; then
-   WINEPREFIX=~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix flatpak run --command=winecfg org.winehq.flatpak-wine
+flatpak run --command=winecfg org.winehq.flatpak-wine
 elif [ "\$choice" = "Open Explorer++..." ]; then
-   WINEPREFIX=~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix flatpak run --command=wine org.winehq.flatpak-wine /app/explorer++/Explorer++.exe
+flatpak run --command=wine org.winehq.flatpak-wine /app/explorer++/Explorer++.exe
 elif [ "\$choice" = "Open Shell..." ]; then   
  gnome-terminal -- bash -c "flatpak run --command=bash org.winehq.flatpak-wine"
  
@@ -216,7 +215,7 @@ elif [ "\$choice" = "Launch $myBaseNamePrefix" ]; then
 export base=\$(basename "$myFile")
 export dire=\$(dirname "$myFile")
 cd "\$dire"
-WINEPREFIX=~/.local/share/flatpak-wine/bottles/$myBaseNamePrefix flatpak run org.winehq.flatpak-wine "\$base"
+flatpak run --command=wine org.winehq.flatpak-wine "\$base"
 fi
 EOF
 
