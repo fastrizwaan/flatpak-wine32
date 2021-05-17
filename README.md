@@ -27,11 +27,13 @@ if [ -f /proc/driver/nvidia/version ]; then
 fi
 
 #Install flatpak-wine bundle (Get latest releases from below link)
-wget -c https://github.com/fastrizwaan/flatpak-wine-releases/releases/download/5.0.5-20210509/org.winehq.flatpak-wine-5.0.5-20210509.flatpak
-flatpak -y --user install org.winehq.flatpak-wine-5.0.5-20210509.flatpak
+wget -c https://github.com/fastrizwaan/flatpak-wine-releases/releases/download/5.0.5-20210517/org.winehq.flatpak-wine-5.0.5-20210517.flatpak
+flatpak -y --user install org.winehq.flatpak-wine-5.0.5-20210517.flatpak
 ```
 ### Get Latest releases from flatpak-wine-release
 Latest: https://github.com/fastrizwaan/flatpak-wine-releases/releases/latest
+
+https://github.com/fastrizwaan/flatpak-wine-releases/releases/download/5.0.5-20210517/org.winehq.flatpak-wine-5.0.5-20210517.flatpak
 
 for other releases: https://github.com/fastrizwaan/flatpak-wine-releases/releases
 
