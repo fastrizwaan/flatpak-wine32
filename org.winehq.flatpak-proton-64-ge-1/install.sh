@@ -89,7 +89,7 @@ echo "Installing flatpak-wine [x]"
 flatpak-builder --user --install --force-clean build-dir/ org.winehq.$APP_ID.yml 
 
 echo "Creating flatpak bundle [x]"
-flatpak build-bundle "repo" "org.winehq.flatpak-wine-$WINE_VERSION-$DATE.flatpak" org.winehq.$APP_ID $WINE_VERSION-$DATE
+flatpak build-bundle "repo" "org.winehq.$APP_ID-$WINE_VERSION-$DATE.flatpak" org.winehq.$APP_ID $WINE_VERSION-$DATE
 
 if [ "$1" == "install" ]; then
 echo "Installing flatpak-wine flatpak [x]"
