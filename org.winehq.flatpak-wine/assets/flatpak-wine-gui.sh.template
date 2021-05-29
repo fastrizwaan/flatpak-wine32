@@ -90,7 +90,7 @@ echo $size $step ${mydlls[*]}
 	  do
     	echo $prog
 	    echo "# Installing $i..."
-	    WINEPREFIX=~/.local/share/flatpak-wine/default $WINETRICKS --unattended  $i
+	    WINEPREFIX=~/.local/share/flatpak-wine/default $WINETRICKS --force --unattended  $i
       
         prog=$(expr $prog + $step)
 	  done

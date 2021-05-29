@@ -31,7 +31,7 @@ elif [ "$1" == "regedit" ] ; then
 
 elif [ "$1" == "winetricks" ] ; then
 	ARGV=$(echo $ARGV|sed 's/winetricks//g')
-	$WINETRICKS $ARGV
+	$WINETRICKS --force $ARGV
 	
 elif [ "$1" == "bash" ] ; then
 	bash 

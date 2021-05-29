@@ -150,7 +150,7 @@ prog=\$(echo \$step)
 	  do
     	echo \$prog
 	    echo "# Installing \$i..."
-	    flatpak run --command=winetricks org.winehq.flatpak-wine --unattended \$i
+	    flatpak run --command=winetricks org.winehq.flatpak-wine --force --unattended \$i
       
         prog=\$(expr \$prog + \$step)
 	  done
