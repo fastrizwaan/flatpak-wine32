@@ -1,8 +1,9 @@
 #!/bin/bash
 
+#!/bin/bash
 export WINEPREFIX=~/.local/share/flatpak-wine/default
 export WINEARCH=win64
-export WINEDLLOVERRIDES="mscoree,mshtml="
+#export WINEDLLOVERRIDES="mscoree,mshtml="
 export LD_LIBRARY_PATH=/app/lib:/app/lib32:/app/lib64:/app/lib/i386-linux-gnu:/app/lib/wine:/app/lib64/wine:/app/$NAME:$(pwd)
 
 export ARGV="$@"
@@ -22,7 +23,7 @@ mkdir -p ~/.local/share/applications/flatpak-wine/
 
    # sandboxify by rm links to user's ~/Documents ~/Downloads ~/Videos etc.
    if [ ! -f ~/.local/share/flatpak-wine/default.symlinks-removed ]; then
-     
+      WINEDLLOVERRIDES="mscoree,mshtml=" WINEPREFIX=~/.local/share/flatpak-wine/default wineboot -u && \
       rm -rf ~/.local/share/flatpak-wine/default/drive_c/users/$USER/Desktop
 	  rm -rf ~/.local/share/flatpak-wine/default/drive_c/users/$USER/Downloads
 	  rm -rf ~/.local/share/flatpak-wine/default/drive_c/users/$USER/'My Documents'
@@ -66,7 +67,7 @@ if [ $# -eq 0 ];  then
    [[ -z "$choice" ]] && exit 1
    
 	if [ "$choice" = "Run Winetricks..." ]; then  
-	    $WINETRICKS --gui
+	   WINEPREFIX=~/.local/share/flatpak-wine/default $WINETRICKS --gui
 
     # mydlls
 	elif [ "$choice" = "Install Custom DLLs..." ]; then
@@ -89,7 +90,7 @@ echo $size $step ${mydlls[*]}
 	  do
     	echo $prog
 	    echo "# Installing $i..."
-	     $WINETRICKS --unattended  $i
+	    WINEPREFIX=~/.local/share/flatpak-wine/default $WINETRICKS --unattended  $i
       
         prog=$(expr $prog + $step)
 	  done
@@ -99,7 +100,7 @@ echo $size $step ${mydlls[*]}
 	
 	# winecfg
 	elif [ "$choice" = "Launch Winecfg..." ]; then
-	    winecfg
+	   WINEPREFIX=~/.local/share/flatpak-wine/default winecfg
        
     elif [ "$choice" = "Kill all Instances" ]; then
 	   flatpak-spawn --host flatpak kill org.winehq.flatpak-wine
@@ -110,10 +111,10 @@ echo $size $step ${mydlls[*]}
 	   rm -f   ~/.local/share/flatpak-wine/default.symlinks-removed
 
 	elif [ "$choice" = "Open Explorer++" ]; then
-	    $WINEEXE /app/explorer++/Explorer++.exe
+	   WINEPREFIX=~/.local/share/flatpak-wine/default $WINEEXE /app/explorer++/Explorer++.exe
 	   
 	else
-	    $WINEEXE /app/explorer++/Explorer++.exe
+	   WINEPREFIX=~/.local/share/flatpak-wine/default $WINEEXE /app/explorer++/Explorer++.exe
 
 	fi
     # /for GUI Dialog
@@ -150,7 +151,7 @@ else
    
 	if [ "$choice" = "Run $basefilename using Default bottle" ]; then  
 	   cd "$dire" 2>/dev/null;#go to the exe directory then run
-        $WINEEXE "$@"
+       WINEPREFIX=~/.local/share/flatpak-wine/default $WINEEXE "$@"
 
     # Create bottle
 	elif [ "$choice" = "Create Bottle for $basefilename" ]; then
