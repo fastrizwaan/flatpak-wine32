@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Create Bottle: flatpak-wine (WINE_VERSION)
+Exec=wine-create-bottle.sh %F
+MimeType=application/x-ms-dos-executable;
+Icon=org.winehq.flatpak-wine-create-bottle
+Categories=Emulator;
+NoDisplay=false
+StartupNotify=true
+X-Desktop-File-Install-Version=0.26
+
